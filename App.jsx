@@ -42,7 +42,7 @@ export default function App() {
       }
 
       const locationSubscription = await Location.watchPositionAsync(
-        {accuracy:Location.Accuracy.BestForNavigation},
+        {accuracy:Location.Accuracy.BestForNavigation, distanceInterval: 1},
         (loc) => {
           console.log(loc)
           setCurrentLocation(loc.coords)
