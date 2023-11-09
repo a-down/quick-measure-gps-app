@@ -31,6 +31,8 @@ export default function App() {
   const [ initialRegion, setInitialRegion ] = useState(null);
   const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
 
+
+
   useEffect(() => {
     const getInitialLocation = async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -39,24 +41,38 @@ export default function App() {
         return;
       }
 
-      let location = await Location.getCurrentPositionAsync({});
-      setCurrentLocation(location.coords);
-      console.log(location)
+      const locationSubscription = await Location.watchPositionAsync(
+        {accuracy:Location.Accuracy.BestForNavigation},
+        (loc) => {
+          console.log(loc)
+          setCurrentLocation(loc.coords)
+          setInitialRegion({
+            latitude: loc.coords.latitude,
+            longitude: loc.coords.longitude,
+            latitudeDelta: 0.005,
+            longitudeDelta: 0.005,
+          });
+        }
+      );
 
-      setInitialRegion({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-        latitudeDelta: 0.005,
-        longitudeDelta: 0.005,
-      });
+      // let location = await Location.getCurrentPositionAsync({});
+      // setCurrentLocation(location.coords);
+      // console.log(location)
+
+      // setInitialRegion({
+      //   latitude: location.coords.latitude,
+      //   longitude: location.coords.longitude,
+      //   latitudeDelta: 0.005,
+      //   longitudeDelta: 0.005,
+      // });
     };
 
     getInitialLocation();
   }, []);
 
-  useEffect(() => {
-    updateLocation();
-  }, [currentLocation]);
+  // useEffect(() => {
+  //   updateLocation();
+  // }, [currentLocation]);
 
   const updateLocation = async () => {
     const location = getCurrentLocation();
