@@ -21,6 +21,7 @@ export default function App() {
 
       let location = await Location.getCurrentPositionAsync({});
       setCurrentLocation(location.coords);
+      console.log(location)
 
       setInitialRegion({
         latitude: location.coords.latitude,
@@ -42,18 +43,19 @@ export default function App() {
           <Text style={{color: '#000', fontSize: 24}}>Map</Text>
         </View>
       </View>
+      {initialRegion && (
       <MapView 
         style={{flex: 1, width: '100%'}}
         initialRegion={{
-          latitude: currentLocation.latitude,
-          longitude: currentLocation.longitude,
+          latitude: initialRegion.latitude,
+          longitude: initialRegion.longitude,
           latitudeDelta: 0.01,
           longitudeDelta: 0.01
         }}>
           {currentLocation && (
             <Marker
               coordinate={{
-                latitude: currentLocation ? currentLocation.latitude : 0,
+                latitude: currentLocation.latitude,
                 longitude: currentLocation.longitude,
               }}
               title="Your Location"
@@ -82,6 +84,7 @@ export default function App() {
           ]}
         />
       </MapView>
+      )}
     </View>
   );
 }
