@@ -12,7 +12,7 @@ export default function App() {
   const { width, height } = useWindowDimensions();
 
   return (
-    <ScrollView className="h-full flex p-4">
+    <ScrollView className="h-full flex p-4 mb-8">
       <Pressable className="flex w-full mb-4 shadow-sm" onPress={() => router.push('/auto-measure')}>
         <View className="aspect-video w-full bg-gray-300 rounded-t-md">
 
@@ -43,7 +43,7 @@ export default function App() {
         </View>
       </Pressable>
 
-      <View className="flex-row w-full mb-16" style={{gap: 16}}>
+      <View className="flex-row w-full" style={{gap: 16}}>
         {/* <View className="p-2 flex-1 bg-white rounded-md items-center shadow-sm" style={{gap: 8}}>
           <Text className="text-center text-lg font-semibold">Saved</Text>
           <View className="h-12 w-12 bg-gray-400"></View>
@@ -54,7 +54,7 @@ export default function App() {
           <View className="h-12 w-12 bg-gray-400"></View>
         </View> */}
 
-      <Pressable className="flex-1 w-full mb-4 shadow-sm" onPress={() => router.push('/auto-measure')}>
+      <Pressable className="flex-1 w-full mb-4 shadow-sm" onPress={() => router.push('/saved-measurements')}>
         <View className="aspect-video w-full bg-gray-300 rounded-t-md">
 
         </View>
