@@ -41,7 +41,6 @@ export default function App() {
 
       let location = await Location.getCurrentPositionAsync({});
       setCurrentLocation(location.coords);
-      console.log(location)
 
       setInitialRegion({
         latitude: location.coords.latitude,
@@ -49,17 +48,25 @@ export default function App() {
         latitudeDelta: 0.005,
         longitudeDelta: 0.005,
       });
+
+      const locationSubscription = await Location.watchPositionAsync(
+        {accuracy:Location.Accuracy.BestForNavigation, distanceInterval: 1},
+        (loc) => {
+          console.log(loc)
+          setCurrentLocation(loc.coords)
+        }
+      );
     };
 
     getInitialLocation();
   }, []);
 
-  const addLocationToPolygon = async () => {
-    let location = await Location.getCurrentPositionAsync({});
-    await setCurrentLocation(location.coords);
-    const newLocation = location.coords
+  const addLocationToPolygon = async (newLocation) => {
+    // let location = await Location.getCurrentPositionAsync({});
+    // await setCurrentLocation(location.coords);
+    // const newLocation = location.coords
     await setPolygonCoordinates([{ latitude: newLocation.latitude, longitude: newLocation.longitude}, ...polygonCoordinates])
-    console.log(location.coords.latitude, location.coords.longitude)
+    // console.log(location.coords.latitude, location.coords.longitude)
     console.log(polygonCoordinates)
   }
 
@@ -105,7 +112,7 @@ export default function App() {
         </MapView>
       )}
 
-      <Pressable onPress={addLocationToPolygon} style={{backgroundColor: '#92e1c0', padding: 8, position: 'absolute', bottom: 20}}>
+      <Pressable onPress={() => addLocationToPolygon(currentLocation)} style={{backgroundColor: '#92e1c0', padding: 8, position: 'absolute', bottom: 20}}>
         <Text>
           Add Location
         </Text>
