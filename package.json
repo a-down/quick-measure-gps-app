@@ -14,6 +14,7 @@
     "expo-location": "^16.3.0",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
+    "geolib": "^3.3.4",
     "hermes-engine": "^0.11.0",
     "nativewind": "^2.0.11",
     "react": "18.2.0",
