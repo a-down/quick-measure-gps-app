@@ -29,7 +29,7 @@ const demoCoordinates = [
 export default function App() {
   const [ currentLocation, setCurrentLocation ] = useState(null);
   const [ initialRegion, setInitialRegion ] = useState(null);
-  const [ polygonCoordinates, setPolygonCoordinates ] = useState(demoCoordinates)
+  const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
 
   useEffect(() => {
     const getInitialLocation = async () => {
@@ -58,7 +58,7 @@ export default function App() {
     let location = await Location.getCurrentPositionAsync({});
     await setCurrentLocation(location.coords);
     const newLocation = location.coords
-    await setPolygonCoordinates([newLocation, ...polygonCoordinates])
+    await setPolygonCoordinates([{ latitude: newLocation.latitude, longitude: newLocation.longitude}, ...polygonCoordinates])
     console.log(location.coords.latitude, location.coords.longitude)
     console.log(polygonCoordinates)
   }
