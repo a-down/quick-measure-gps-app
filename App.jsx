@@ -29,9 +29,7 @@ const demoCoordinates = [
 export default function App() {
   const [ currentLocation, setCurrentLocation ] = useState(null);
   const [ initialRegion, setInitialRegion ] = useState(null);
-  const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
-
-
+  const [ polygonCoordinates, setPolygonCoordinates ] = useState(demoCoordinates)
 
   useEffect(() => {
     const getInitialLocation = async () => {
@@ -41,52 +39,27 @@ export default function App() {
         return;
       }
 
-      const locationSubscription = await Location.watchPositionAsync(
-        {accuracy:Location.Accuracy.BestForNavigation, distanceInterval: 1},
-        (loc) => {
-          console.log(loc)
-          setCurrentLocation(loc.coords)
-          setInitialRegion({
-            latitude: loc.coords.latitude,
-            longitude: loc.coords.longitude,
-            latitudeDelta: 0.005,
-            longitudeDelta: 0.005,
-          });
-        }
-      );
+      let location = await Location.getCurrentPositionAsync({});
+      setCurrentLocation(location.coords);
+      console.log(location)
 
-      // let location = await Location.getCurrentPositionAsync({});
-      // setCurrentLocation(location.coords);
-      // console.log(location)
-
-      // setInitialRegion({
-      //   latitude: location.coords.latitude,
-      //   longitude: location.coords.longitude,
-      //   latitudeDelta: 0.005,
-      //   longitudeDelta: 0.005,
-      // });
+      setInitialRegion({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        latitudeDelta: 0.005,
+        longitudeDelta: 0.005,
+      });
     };
 
     getInitialLocation();
   }, []);
 
-  // useEffect(() => {
-  //   updateLocation();
-  // }, [currentLocation]);
-
-  const updateLocation = async () => {
-    const location = getCurrentLocation();
-    addLocationToPolygon(location)
-    setCurrentLocation(location)
-  }
-
-  const getCurrentLocation = async () => {
+  const addLocationToPolygon = async () => {
     let location = await Location.getCurrentPositionAsync({});
-    return location.coords
-  }
-
-  const addLocationToPolygon = async (location) => {
-    await setPolygonCoordinates([location, ...polygonCoordinates])
+    await setCurrentLocation(location.coords);
+    const newLocation = location.coords
+    await setPolygonCoordinates([newLocation, ...polygonCoordinates])
+    console.log(location.coords.latitude, location.coords.longitude)
     console.log(polygonCoordinates)
   }
 
