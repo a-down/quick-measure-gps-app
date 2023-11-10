@@ -1,7 +1,7 @@
 {
   "name": "gps-app",
   "version": "1.0.0",
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
     "android": "expo run:android",
@@ -10,17 +10,28 @@
   },
   "dependencies": {
     "@react-native-community/geolocation": "^3.1.0",
+    "@react-navigation/native": "^6.1.9",
+    "@react-navigation/native-stack": "^6.9.17",
     "expo": "~49.0.15",
+    "expo-constants": "~14.4.2",
+    "expo-linking": "~5.0.2",
     "expo-location": "^16.3.0",
+    "expo-router": "^2.0.0",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
     "geolib": "^3.3.4",
     "hermes-engine": "^0.11.0",
     "nativewind": "^2.0.11",
     "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-native": "0.72.6",
+    "react-native-gesture-handler": "~2.12.0",
     "react-native-location": "^2.5.0",
-    "react-native-maps": "1.7.1"
+    "react-native-maps": "1.7.1",
+    "react-native-reanimated": "^3.5.4",
+    "react-native-safe-area-context": "4.6.3",
+    "react-native-screens": "~3.22.0",
+    "react-native-web": "~0.19.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
