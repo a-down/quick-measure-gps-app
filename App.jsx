@@ -25,11 +25,13 @@ const demoCoordinates = [
   },
 ]
 
+const walkToMailbox = [{latitude: 44.00719339068559, longitude: -92.39045458757248}, {latitude: 44.00720777521759, longitude: -92.39044857257788}, {latitude: 44.00722463996818, longitude: -92.39044552876923}, {latitude: 44.00723910893775, longitude: -92.39043884259915}, {latitude: 44.007253440055344, longitude: -92.3904339617919}, {latitude: 44.00726996411364, longitude: -92.39043368123015}, {latitude: 44.00728242210206, longitude: -92.39042937761312}, {latitude: 44.00729738115168, longitude: -92.39042271172833}, {latitude: 44.00730698411163, longitude: -92.39041823226454}, {latitude: 44.00731678282986, longitude: -92.39041522381036}, {latitude: 44.007331483445654, longitude: -92.39041748500719}, {latitude: 44.00734617151441, longitude: -92.3904142248112}, {latitude: 44.00735833376541, longitude: -92.39039820105242}, {latitude: 44.007364923916036, longitude: -92.39038508187748}, {latitude: 44.007367904436194, longitude: -92.39036323363482}, {latitude: 44.00737559615935, longitude: -92.39032280977409}, {latitude: 44.007378468563495, longitude: -92.39030045648173}, {latitude: 44.007364136986915, longitude: -92.39028344733238}, {latitude: 44.00734465621704, longitude: -92.39027301229494}, {latitude: 44.00733953882428, longitude: -92.39026151148018}, {latitude: 44.00732452117864, longitude: -92.39025160479204}, {latitude: 44.007319364866696, longitude: -92.3902394959468}, {latitude: 44.007319364866696, longitude: -92.3902394959468}]
+
 
 export default function App() {
   const [ currentLocation, setCurrentLocation ] = useState(null);
   const [ initialRegion, setInitialRegion ] = useState(null);
-  const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
+  const [ polygonCoordinates, setPolygonCoordinates ] = useState(walkToMailbox)
 
   useEffect(() => {
     const getInitialLocation = async () => {
