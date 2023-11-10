@@ -54,12 +54,19 @@ export default function App() {
         (loc) => {
           console.log(loc)
           setCurrentLocation(loc.coords)
+          addLocationToPolygon(loc.coords)
         }
       );
     };
 
     getInitialLocation();
   }, []);
+
+  useEffect(() => {
+    if (currentLocation) {
+      addLocationToPolygon(currentLocation)
+    }
+  }, [currentLocation])
 
   const addLocationToPolygon = async (newLocation) => {
     // let location = await Location.getCurrentPositionAsync({});
