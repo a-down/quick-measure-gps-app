@@ -55,6 +55,7 @@ export default function AutoMeasure() {
     getInitialLocation();
   }, []);
 
+  // when location changes and the user is measuring, add the new location to the polygon and generate measurements for the polygon
   useEffect(() => {
     if (currentLocation && isMeasuring) {
       addLocationToPolygon(currentLocation)
@@ -65,46 +66,48 @@ export default function AutoMeasure() {
     }
   }, [currentLocation])
 
+  // add a new location to the polygon
   const addLocationToPolygon = async (newLocation) => {
     await setPolygonCoordinates([{ latitude: newLocation.latitude, longitude: newLocation.longitude}, ...polygonCoordinates])
     console.log(polygonCoordinates)
   }
 
+  // reset the polygon coordinates and measurements
   const resetMeasurements = () => {
     setPolygonCoordinates([])
     setPolygonArea(null)
     setPolygonDistance(null)
   }
 
-  const updateAreaMeasurements = () => {
+  const stopMeasuringAlert = () => {
+    isMeasuring 
+      ? Alert.alert(
+        "Stop Measuring",
+        "Are you sure you want to stop measuring?",
+        [
+          {
+            text: "Cancel",
+            style: "cancel"
+          },
+          { text: "Stop Measuring", onPress: () => setIsMeasuring(false) }
+        ]
+      )
+      : setIsMeasuring(true)
+  }
+
+  const resetMeasurementsAlert = () => {
     Alert.alert(
-      "Area Unit of Measurement",
-      "What unit of measurement would you like to use for area?",
+      "Reset Measurements",
+      "Are you sure you want to reset your measurements?",
       [
-        { text: "Sq Feet", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'sq feet', areaShort: 'sqm'}) },
-        { text: "Sq Meters", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'sq meters', areaShort: 'sqm'}) },
-        { text: "Sq Feet", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'sq feet', areaShort: 'sqm'}) },
-        { text: "Sq Meters", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'sq meters', areaShort: 'sqm'}) },
-        { text: "Cancel", style: "cancel"}
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        { text: "Reset", onPress: () => resetMeasurements() }
       ]
     );
   }
-
-  const updateDistanceMeasurements = () => {
-    Alert.alert(
-      "Area Unit of Measurement",
-      "What unit of measurement would you like to use for area?",
-      [
-        { text: "Feet", onPress: () => setMeasurementPreferences({...measurementPreferences, distance: 'feet', distanceShort: 'ft'}) },
-        { text: "Meters", onPress: () => setMeasurementPreferences({...measurementPreferences, distance: 'meters', distanceShort: 'm'}) },
-        { text: "Feet", onPress: () => setMeasurementPreferences({...measurementPreferences, distance: 'feet', distanceShort: 'ft'}) },
-        { text: "Meters", onPress: () => setMeasurementPreferences({...measurementPreferences, distance: 'meters', distanceShort: 'm'}) },
-        { text: "Cancel", style: "cancel"}
-      ]
-    );
-  }
-
-  
 
   return (
     <View className="flex-1 items-center justify-center">
@@ -136,69 +139,24 @@ export default function AutoMeasure() {
         </MapView>
       )}
 
-      {/* <View className="bg-white p-4 absolute top-2 rounded-sm shadow-sm" style={{width: width-16}}>
-        <View className="flex-row justify-between flex-wrap">
-          <Text className="text-lg mb-4">
-            <Text className="text-3xl">{ polygonArea || 0}</Text>
-            {` `}{ measurementPreferences.area }
-          </Text>
-          <Text className="text-lg mb-4">
-            <Text className="text-3xl">{ polygonDistance || 0 }</Text>
-            {` `}{ measurementPreferences.distance }
-          </Text>
-        </View>
-
-        <View className="flex-row justify-between">
-          <Pressable onPress={updateAreaMeasurements}>
-            <Text className="text-center text-gray-700">Change Area Units</Text>
-          </Pressable>
-          <Pressable onPress={updateDistanceMeasurements}>
-            <Text className="text-center text-gray-700">Change Distance Units</Text>
-          </Pressable>
-        </View>
-      </View> */}
-
-      <MeasurementDisplay polygonArea={polygonArea} polygonDistance={polygonDistance} measurementPreferences={measurementPreferences} setMeasurementPreferences={setMeasurementPreferences} />
+      <MeasurementDisplay 
+        polygonArea={polygonArea} 
+        polygonDistance={polygonDistance} 
+        measurementPreferences={measurementPreferences} 
+        setMeasurementPreferences={setMeasurementPreferences} />
 
       <View className="absolute bottom-8" style={{width: width-32}}>
         <Pressable 
           className=" p-4 rounded-md shadow-sm" 
           style={{backgroundColor: isMeasuring ? '#ddd' : '#fff'}}
-          onPress={() => {
-            isMeasuring 
-              ? Alert.alert(
-                "Stop Measuring",
-                "Are you sure you want to stop measuring?",
-                [
-                  {
-                    text: "Cancel",
-                    style: "cancel"
-                  },
-                  { text: "Stop Measuring", onPress: () => setIsMeasuring(false) }
-                ]
-              )
-              : setIsMeasuring(true)
-          }}
-        >
+          onPress={stopMeasuringAlert}>
           <Text className="text-center text-xl">
             { isMeasuring ? "Stop Measuring" : "Start Measuring" }
           </Text>
         </Pressable>
 
         <View className="w-full flex-row justify-between">
-          <Pressable className="flex-grow p-4" onPress={() => {
-            Alert.alert(
-              "Reset Measurements",
-              "Are you sure you want to reset your measurements?",
-              [
-                {
-                  text: "Cancel",
-                  style: "cancel"
-                },
-                { text: "Reset", onPress: () => resetMeasurements() }
-              ]
-            );
-          }}>
+          <Pressable className="flex-grow p-4" onPress={resetMeasurementsAlert}>
             <Text className="text-center text-lg">Reset</Text>
           </Pressable>
           <Pressable className="flex-grow p-4">
@@ -206,6 +164,7 @@ export default function AutoMeasure() {
           </Pressable>
         </View>
       </View>
+      
     </View>
   );
 }
