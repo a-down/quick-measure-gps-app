@@ -34,7 +34,7 @@ export default function AutoMeasure() {
   const [ initialRegion, setInitialRegion ] = useState(null);
   const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
   const [ polygonArea, setPolygonArea ] = useState()
-  const [ polygonAreaMeasurement, setPolygonAreaMeasurement ] = useState('sqft')
+  const [ measurementPreferences, setMeasurementPreferences ] = useState({area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm'})
   const [ polygonDistance, setPolygonDistance ] = useState()
   const [ isMeasuring, setIsMeasuring ] = useState(true)
 
@@ -90,6 +90,36 @@ export default function AutoMeasure() {
     setPolygonDistance(null)
   }
 
+  const updateAreaMeasurements = () => {
+    Alert.alert(
+      "Area Unit of Measurement",
+      "What unit of measurement would you like to use for area?",
+      [
+        { text: "Sq Feet", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'sq feet', areaShort: 'sqm'}) },
+        { text: "Sq Meters", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'sq meters', areaShort: 'sqm'}) },
+        { text: "Sq Feet", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'sq feet', areaShort: 'sqm'}) },
+        { text: "Sq Meters", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'sq meters', areaShort: 'sqm'}) },
+        { text: "Cancel", style: "cancel"}
+      ]
+    );
+  }
+
+  const updateDistanceMeasurements = () => {
+    Alert.alert(
+      "Area Unit of Measurement",
+      "What unit of measurement would you like to use for area?",
+      [
+        { text: "Feet", onPress: () => setMeasurementPreferences({...measurementPreferences, distance: 'feet', distanceShort: 'ft'}) },
+        { text: "Meters", onPress: () => setMeasurementPreferences({...measurementPreferences, distance: 'meters', distanceShort: 'm'}) },
+        { text: "Feet", onPress: () => setMeasurementPreferences({...measurementPreferences, distance: 'feet', distanceShort: 'ft'}) },
+        { text: "Meters", onPress: () => setMeasurementPreferences({...measurementPreferences, distance: 'meters', distanceShort: 'm'}) },
+        { text: "Cancel", style: "cancel"}
+      ]
+    );
+  }
+
+  
+
   return (
     <View className="flex-1 items-center justify-center">
       {initialRegion && (
@@ -124,17 +154,22 @@ export default function AutoMeasure() {
         <View className="flex-row justify-between flex-wrap">
           <Text className="text-lg mb-4">
             <Text className="text-3xl">{ polygonArea || 0}</Text>
-            {` `}sq meters
+            {` `}{ measurementPreferences.area }
           </Text>
           <Text className="text-lg mb-4">
             <Text className="text-3xl">{ polygonDistance || 0 }</Text>
-            {` `}meters
+            {` `}{ measurementPreferences.distance }
           </Text>
         </View>
 
-        <Pressable className="w-full" onPress={() => Alert.alert("You changed them!")}>
-          <Text className="text-center text-gray-700">Change Units of Measurement</Text>
-        </Pressable>
+        <View className="flex-row justify-between">
+          <Pressable onPress={updateAreaMeasurements}>
+            <Text className="text-center text-gray-700">Change Area Units</Text>
+          </Pressable>
+          <Pressable onPress={updateDistanceMeasurements}>
+            <Text className="text-center text-gray-700">Change Distance Units</Text>
+          </Pressable>
+        </View>
       </View>
 
       <View className="absolute bottom-8" style={{width: width-32}}>
