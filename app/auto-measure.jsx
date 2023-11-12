@@ -5,6 +5,8 @@ import * as Location from "expo-location";
 import { getAreaOfPolygon, convertArea, getPathLength } from 'geolib';
 import { useRouter, Link } from 'expo-router';
 import MeasurementDisplay from '../components/MeasurementDisplay';
+import ResetMeasurementsButton from '../components/ResetMeasurementsButton';
+import StopMeasuringButton from '../components/StopMeasuringButton';
 
 const walkToMailbox = [{latitude: 44.00719339068559, longitude: -92.39045458757248}, {latitude: 44.00720777521759, longitude: -92.39044857257788}, {latitude: 44.00722463996818, longitude: -92.39044552876923}, {latitude: 44.00723910893775, longitude: -92.39043884259915}, {latitude: 44.007253440055344, longitude: -92.3904339617919}, {latitude: 44.00726996411364, longitude: -92.39043368123015}, {latitude: 44.00728242210206, longitude: -92.39042937761312}, {latitude: 44.00729738115168, longitude: -92.39042271172833}, {latitude: 44.00730698411163, longitude: -92.39041823226454}, {latitude: 44.00731678282986, longitude: -92.39041522381036}, {latitude: 44.007331483445654, longitude: -92.39041748500719}, {latitude: 44.00734617151441, longitude: -92.3904142248112}, {latitude: 44.00735833376541, longitude: -92.39039820105242}, {latitude: 44.007364923916036, longitude: -92.39038508187748}, {latitude: 44.007367904436194, longitude: -92.39036323363482}, {latitude: 44.00737559615935, longitude: -92.39032280977409}, {latitude: 44.007378468563495, longitude: -92.39030045648173}]
 
@@ -79,36 +81,6 @@ export default function AutoMeasure() {
     setPolygonDistance(null)
   }
 
-  const stopMeasuringAlert = () => {
-    isMeasuring 
-      ? Alert.alert(
-        "Stop Measuring",
-        "Are you sure you want to stop measuring?",
-        [
-          {
-            text: "Cancel",
-            style: "cancel"
-          },
-          { text: "Stop Measuring", onPress: () => setIsMeasuring(false) }
-        ]
-      )
-      : setIsMeasuring(true)
-  }
-
-  const resetMeasurementsAlert = () => {
-    Alert.alert(
-      "Reset Measurements",
-      "Are you sure you want to reset your measurements?",
-      [
-        {
-          text: "Cancel",
-          style: "cancel"
-        },
-        { text: "Reset", onPress: () => resetMeasurements() }
-      ]
-    );
-  }
-
   return (
     <View className="flex-1 items-center justify-center">
       {initialRegion && (
@@ -146,19 +118,10 @@ export default function AutoMeasure() {
         setMeasurementPreferences={setMeasurementPreferences} />
 
       <View className="absolute bottom-8" style={{width: width-32}}>
-        <Pressable 
-          className=" p-4 rounded-md shadow-sm" 
-          style={{backgroundColor: isMeasuring ? '#ddd' : '#fff'}}
-          onPress={stopMeasuringAlert}>
-          <Text className="text-center text-xl">
-            { isMeasuring ? "Stop Measuring" : "Start Measuring" }
-          </Text>
-        </Pressable>
+        <StopMeasuringButton isMeasuring={isMeasuring} setIsMeasuring={setIsMeasuring} />
 
         <View className="w-full flex-row justify-between">
-          <Pressable className="flex-grow p-4" onPress={resetMeasurementsAlert}>
-            <Text className="text-center text-lg">Reset</Text>
-          </Pressable>
+          <ResetMeasurementsButton resetMeasurements={resetMeasurements} />
           <Pressable className="flex-grow p-4">
             <Text className="text-center text-lg">Save</Text>
           </Pressable>
