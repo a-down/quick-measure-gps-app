@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import * as Location from "expo-location";
 import { getAreaOfPolygon, convertArea, getPathLength } from 'geolib';
 import { useRouter, Link } from 'expo-router';
-
+import MeasurementDisplay from '../components/MeasurementDisplay';
 
 const walkToMailbox = [{latitude: 44.00719339068559, longitude: -92.39045458757248}, {latitude: 44.00720777521759, longitude: -92.39044857257788}, {latitude: 44.00722463996818, longitude: -92.39044552876923}, {latitude: 44.00723910893775, longitude: -92.39043884259915}, {latitude: 44.007253440055344, longitude: -92.3904339617919}, {latitude: 44.00726996411364, longitude: -92.39043368123015}, {latitude: 44.00728242210206, longitude: -92.39042937761312}, {latitude: 44.00729738115168, longitude: -92.39042271172833}, {latitude: 44.00730698411163, longitude: -92.39041823226454}, {latitude: 44.00731678282986, longitude: -92.39041522381036}, {latitude: 44.007331483445654, longitude: -92.39041748500719}, {latitude: 44.00734617151441, longitude: -92.3904142248112}, {latitude: 44.00735833376541, longitude: -92.39039820105242}, {latitude: 44.007364923916036, longitude: -92.39038508187748}, {latitude: 44.007367904436194, longitude: -92.39036323363482}, {latitude: 44.00737559615935, longitude: -92.39032280977409}, {latitude: 44.007378468563495, longitude: -92.39030045648173}]
 
@@ -136,7 +136,7 @@ export default function AutoMeasure() {
         </MapView>
       )}
 
-      <View className="bg-white p-4 absolute top-2 rounded-sm shadow-sm" style={{width: width-16}}>
+      {/* <View className="bg-white p-4 absolute top-2 rounded-sm shadow-sm" style={{width: width-16}}>
         <View className="flex-row justify-between flex-wrap">
           <Text className="text-lg mb-4">
             <Text className="text-3xl">{ polygonArea || 0}</Text>
@@ -156,7 +156,9 @@ export default function AutoMeasure() {
             <Text className="text-center text-gray-700">Change Distance Units</Text>
           </Pressable>
         </View>
-      </View>
+      </View> */}
+
+      <MeasurementDisplay polygonArea={polygonArea} polygonDistance={polygonDistance} measurementPreferences={measurementPreferences} setMeasurementPreferences={setMeasurementPreferences} />
 
       <View className="absolute bottom-8" style={{width: width-32}}>
         <Pressable 
