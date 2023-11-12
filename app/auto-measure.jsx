@@ -60,7 +60,6 @@ export default function AutoMeasure() {
         (loc) => {
           console.log(loc)
           setCurrentLocation(loc.coords)
-          // addLocationToPolygon(loc.coords)
         }
       );
     };
@@ -79,29 +78,18 @@ export default function AutoMeasure() {
   }, [currentLocation])
 
   const addLocationToPolygon = async (newLocation) => {
-    // let location = await Location.getCurrentPositionAsync({});
-    // await setCurrentLocation(location.coords);
-    // const newLocation = location.coords
     await setPolygonCoordinates([{ latitude: newLocation.latitude, longitude: newLocation.longitude}, ...polygonCoordinates])
-    // console.log(location.coords.latitude, location.coords.longitude)
     console.log(polygonCoordinates)
   }
 
-  return (
-    <View className="flex-1 items-center justify-center"
-    >
-      {/* <View style={{flex: 0.2, justifyContent: 'flex-end', alignItems: 'center'}}>
-        <View style={{flex: 1, justifyContent: 'center'}}>
-          {currentLocation && (
-            <>
-              <Text style={{color: '#000', fontSize: 24}}>{`lat: ${currentLocation.latitude}`}</Text>
-              <Text style={{color: '#000', fontSize: 24}}>{`long: ${currentLocation.longitude}`}</Text>
-              <Text style={{color: '#000', fontSize: 24}}>{`area: ${convertArea(polygonArea, polygonAreaMeasurement) || '0'}`}</Text>
-            </>
-          )}
-        </View>
-      </View> */}
+  const resetMeasurements = () => {
+    setPolygonCoordinates([])
+    setPolygonArea(null)
+    setPolygonDistance(null)
+  }
 
+  return (
+    <View className="flex-1 items-center justify-center">
       {initialRegion && (
         <MapView 
           style={{flex: 1, width: '100%'}}
@@ -147,28 +135,21 @@ export default function AutoMeasure() {
         </Pressable>
       </View>
 
-      <Pressable onPress={() => addLocationToPolygon(currentLocation)} style={{backgroundColor: '#92e1c0', padding: 8, position: 'absolute', bottom: 20}}>
-        <Text>
-          Add Location
-        </Text>
-      </Pressable>
+      <View className="absolute bottom-8" style={{width: width-32}}>
+        <Pressable className="bg-white p-4 rounded-md shadow-sm">
+          <Text className="text-center text-xl">
+            Stop GPS
+          </Text>
+        </Pressable>
 
-      <View style={{position: 'absolute', bottom: 60, flexDirection: 'row', gap: 8}}>
-        <Pressable onPress={() => setPolygonAreaMeasurement('a')} style={{backgroundColor: '#92e1c0', padding: 8}}>
-          <Text>
-            Acres
-          </Text>
-        </Pressable>
-        <Pressable onPress={() => setPolygonAreaMeasurement('ft2')} style={{backgroundColor: '#92e1c0', padding: 8}}>
-          <Text>
-            Feet^2
-          </Text>
-        </Pressable>
-        <Pressable onPress={() => setPolygonAreaMeasurement('yd2')} style={{backgroundColor: '#92e1c0', padding: 8}}>
-          <Text>
-            Yards^2
-          </Text>
-        </Pressable>
+        <View className="w-full flex-row justify-between">
+          <Pressable className="flex-grow p-4" onPress={resetMeasurements}>
+            <Text className="text-center text-lg">Reset</Text>
+          </Pressable>
+          <Pressable className="flex-grow p-4">
+            <Text className="text-center text-lg">Save</Text>
+          </Pressable>
+        </View>
       </View>
     </View>
   );
