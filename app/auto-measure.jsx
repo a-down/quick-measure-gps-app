@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Pressable, useWindowDimensions } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import MapView, { Polygon, Marker } from 'react-native-maps';
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import * as Location from "expo-location";
 import { getAreaOfPolygon, convertArea } from 'geolib';
 
@@ -29,9 +29,10 @@ const walkToMailbox = [{latitude: 44.00719339068559, longitude: -92.390454587572
 
 
 export default function AutoMeasure() {
+  const { height, width } = useWindowDimensions();
   const [ currentLocation, setCurrentLocation ] = useState(null);
   const [ initialRegion, setInitialRegion ] = useState(null);
-  const [ polygonCoordinates, setPolygonCoordinates ] = useState(walkToMailbox)
+  const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
   const [ polygonArea, setPolygonArea ] = useState()
   const [ polygonAreaMeasurement, setPolygonAreaMeasurement ] = useState('a')
 
@@ -54,7 +55,7 @@ export default function AutoMeasure() {
       });
 
       const locationSubscription = await Location.watchPositionAsync(
-        {accuracy:Location.Accuracy.BestForNavigation, distanceInterval: 2},
+        {accuracy:Location.Accuracy.BestForNavigation, distanceInterval: 3},
         (loc) => {
           console.log(loc)
           setCurrentLocation(loc.coords)
@@ -85,19 +86,19 @@ export default function AutoMeasure() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={{flex: 0.2, justifyContent: 'flex-end', alignItems: 'center'}}>
+    <View className="flex-1 items-center justify-center"
+    >
+      {/* <View style={{flex: 0.2, justifyContent: 'flex-end', alignItems: 'center'}}>
         <View style={{flex: 1, justifyContent: 'center'}}>
           {currentLocation && (
             <>
               <Text style={{color: '#000', fontSize: 24}}>{`lat: ${currentLocation.latitude}`}</Text>
               <Text style={{color: '#000', fontSize: 24}}>{`long: ${currentLocation.longitude}`}</Text>
-              <Text style={{color: '#000', fontSize: 24}}>{`area: ${convertArea(polygonArea, polygonAreaMeasurement)}`}</Text>
+              <Text style={{color: '#000', fontSize: 24}}>{`area: ${convertArea(polygonArea, polygonAreaMeasurement) || '0'}`}</Text>
             </>
           )}
-
         </View>
-      </View>
+      </View> */}
 
       {initialRegion && (
         <MapView 
@@ -127,6 +128,12 @@ export default function AutoMeasure() {
         </MapView>
       )}
 
+      <View className="bg-white p-2 absolute top-4 rounded-sm shadow-sm" style={{gap: 8, width: width-32}}>
+        <Text>Testing</Text>
+        <Text>Testing</Text>
+        <Text>Testing</Text>
+      </View>
+
       <Pressable onPress={() => addLocationToPolygon(currentLocation)} style={{backgroundColor: '#92e1c0', padding: 8, position: 'absolute', bottom: 20}}>
         <Text>
           Add Location
@@ -153,12 +160,3 @@ export default function AutoMeasure() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
