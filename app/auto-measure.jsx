@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Pressable, useWindowDimensions } from 'react-native';
+import { StyleSheet, Text, View, Pressable, useWindowDimensions, Alert } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import MapView, { Polygon, Marker } from 'react-native-maps';
 import { useEffect, useState } from 'react';
 import * as Location from "expo-location";
-import { getAreaOfPolygon, convertArea } from 'geolib';
+import { getAreaOfPolygon, convertArea, getPathLength } from 'geolib';
 
 const demoCoordinates = [
   {
@@ -32,9 +32,10 @@ export default function AutoMeasure() {
   const { height, width } = useWindowDimensions();
   const [ currentLocation, setCurrentLocation ] = useState(null);
   const [ initialRegion, setInitialRegion ] = useState(null);
-  const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
+  const [ polygonCoordinates, setPolygonCoordinates ] = useState(walkToMailbox)
   const [ polygonArea, setPolygonArea ] = useState()
-  const [ polygonAreaMeasurement, setPolygonAreaMeasurement ] = useState('a')
+  const [ polygonAreaMeasurement, setPolygonAreaMeasurement ] = useState('sqft')
+  const [ polygonDistance, setPolygonDistance ] = useState()
 
   useEffect(() => {
     const getInitialLocation = async () => {
@@ -72,7 +73,8 @@ export default function AutoMeasure() {
       addLocationToPolygon(currentLocation)
     }
     if (polygonCoordinates.length > 1) {
-      setPolygonArea(getAreaOfPolygon(polygonCoordinates))
+      setPolygonDistance(getPathLength(polygonCoordinates).toFixed(2))
+      setPolygonArea(getAreaOfPolygon(polygonCoordinates).toFixed(2))
     }
   }, [currentLocation])
 
@@ -128,10 +130,21 @@ export default function AutoMeasure() {
         </MapView>
       )}
 
-      <View className="bg-white p-2 absolute top-4 rounded-sm shadow-sm" style={{gap: 8, width: width-32}}>
-        <Text>Testing</Text>
-        <Text>Testing</Text>
-        <Text>Testing</Text>
+      <View className="bg-white p-4 absolute top-2 rounded-sm shadow-sm" style={{width: width-16}}>
+        <View className="flex-row justify-between flex-wrap">
+          <Text className="text-lg mb-4">
+            <Text className="text-3xl">{ polygonArea || 0}</Text>
+            {` `}sq meters
+          </Text>
+          <Text className="text-lg mb-4">
+            <Text className="text-3xl">{ polygonDistance || 0 }</Text>
+            {` `}meters
+          </Text>
+        </View>
+
+        <Pressable className="w-full" onPress={() => Alert.alert("You changed them!")}>
+          <Text className="text-center text-gray-700">Change Units of Measurement</Text>
+        </Pressable>
       </View>
 
       <Pressable onPress={() => addLocationToPolygon(currentLocation)} style={{backgroundColor: '#92e1c0', padding: 8, position: 'absolute', bottom: 20}}>
