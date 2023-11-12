@@ -143,7 +143,19 @@ export default function AutoMeasure() {
         </Pressable>
 
         <View className="w-full flex-row justify-between">
-          <Pressable className="flex-grow p-4" onPress={resetMeasurements}>
+          <Pressable className="flex-grow p-4" onPress={() => {
+            Alert.alert(
+              "Reset Measurements",
+              "Are you sure you want to reset your measurements?",
+              [
+                {
+                  text: "Cancel",
+                  style: "cancel"
+                },
+                { text: "Reset", onPress: () => resetMeasurements() }
+              ]
+            );
+          }}>
             <Text className="text-center text-lg">Reset</Text>
           </Pressable>
           <Pressable className="flex-grow p-4">
