@@ -32,10 +32,13 @@ export default function AutoMeasure() {
   const { height, width } = useWindowDimensions();
   const [ currentLocation, setCurrentLocation ] = useState(null);
   const [ initialRegion, setInitialRegion ] = useState(null);
-  const [ polygonCoordinates, setPolygonCoordinates ] = useState(walkToMailbox)
+  const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
   const [ polygonArea, setPolygonArea ] = useState()
   const [ polygonAreaMeasurement, setPolygonAreaMeasurement ] = useState('sqft')
   const [ polygonDistance, setPolygonDistance ] = useState()
+  const [ isMeasuring, setIsMeasuring ] = useState(true)
+
+  let locationSubscription = null
 
   useEffect(() => {
     const getInitialLocation = async () => {
@@ -55,10 +58,9 @@ export default function AutoMeasure() {
         longitudeDelta: 0.005,
       });
 
-      const locationSubscription = await Location.watchPositionAsync(
-        {accuracy:Location.Accuracy.BestForNavigation, distanceInterval: 3},
+      locationSubscription = await Location.watchPositionAsync(
+        {accuracy:Location.Accuracy.BestForNavigation, distanceInterval: 1},
         (loc) => {
-          console.log(loc)
           setCurrentLocation(loc.coords)
         }
       );
@@ -68,10 +70,10 @@ export default function AutoMeasure() {
   }, []);
 
   useEffect(() => {
-    if (currentLocation) {
+    if (currentLocation && isMeasuring) {
       addLocationToPolygon(currentLocation)
     }
-    if (polygonCoordinates.length > 1) {
+    if (polygonCoordinates.length > 1 && isMeasuring) {
       setPolygonDistance(getPathLength(polygonCoordinates).toFixed(2))
       setPolygonArea(getAreaOfPolygon(polygonCoordinates).toFixed(2))
     }
@@ -136,9 +138,27 @@ export default function AutoMeasure() {
       </View>
 
       <View className="absolute bottom-8" style={{width: width-32}}>
-        <Pressable className="bg-white p-4 rounded-md shadow-sm">
+        <Pressable 
+          className=" p-4 rounded-md shadow-sm" 
+          style={{backgroundColor: isMeasuring ? '#ddd' : '#fff'}}
+          onPress={() => {
+            isMeasuring 
+              ? Alert.alert(
+                "Stop Measuring",
+                "Are you sure you want to stop measuring?",
+                [
+                  {
+                    text: "Cancel",
+                    style: "cancel"
+                  },
+                  { text: "Stop Measuring", onPress: () => setIsMeasuring(false) }
+                ]
+              )
+              : setIsMeasuring(true)
+          }}
+        >
           <Text className="text-center text-xl">
-            Stop GPS
+            { isMeasuring ? "Stop Measuring" : "Start Measuring" }
           </Text>
         </Pressable>
 
