@@ -2,7 +2,7 @@ import { Text, View, Pressable, useWindowDimensions, Alert } from 'react-native'
 import MapView, { Polygon, Marker } from 'react-native-maps';
 import { useEffect, useState } from 'react';
 import * as Location from "expo-location";
-import { getAreaOfPolygon, convertArea, getPathLength } from 'geolib';
+import { getAreaOfPolygon, getPathLength } from 'geolib';
 import { useRouter, Link } from 'expo-router';
 import { MeasurementDisplay, StopMeasuringButton, ResetMeasurementsButton } from '../components';
 
@@ -17,7 +17,6 @@ export default function AutoMeasure() {
   const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
   const [ polygonArea, setPolygonArea ] = useState()
   const [ polygonDistance, setPolygonDistance ] = useState()
-  const [ measurementPreferences, setMeasurementPreferences ] = useState({area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm'})
   const [ isMeasuring, setIsMeasuring ] = useState(true)
 
   // check if location permission is granted
@@ -61,8 +60,8 @@ export default function AutoMeasure() {
       addLocationToPolygon(currentLocation)
     }
     if (polygonCoordinates.length > 1 && isMeasuring) {
-      setPolygonDistance(getPathLength(polygonCoordinates).toFixed(2))
-      setPolygonArea(getAreaOfPolygon(polygonCoordinates).toFixed(2))
+      setPolygonDistance(getPathLength(polygonCoordinates))
+      setPolygonArea(getAreaOfPolygon(polygonCoordinates))
     }
   }, [currentLocation])
 
@@ -111,9 +110,7 @@ export default function AutoMeasure() {
 
       <MeasurementDisplay 
         polygonArea={polygonArea} 
-        polygonDistance={polygonDistance}
-        measurementPreferences={measurementPreferences}
-        setMeasurementPreferences={setMeasurementPreferences} />
+        polygonDistance={polygonDistance} />
 
       <View className="absolute bottom-8" style={{width: width-32}}>
         <StopMeasuringButton isMeasuring={isMeasuring} setIsMeasuring={setIsMeasuring} />
