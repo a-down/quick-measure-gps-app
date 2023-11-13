@@ -20,6 +20,8 @@ export default function AutoMeasure() {
   const [ isMeasuring, setIsMeasuring ] = useState(true)
 
   // check if location permission is granted
+    // if so, set initial region as current location
+    // if so, start locationSubscription
   useEffect(() => {
     const getInitialLocation = async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();

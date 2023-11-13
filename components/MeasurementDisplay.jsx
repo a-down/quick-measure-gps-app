@@ -3,16 +3,19 @@ import { useState, useEffect } from 'react';
 import { convertArea, convertDistance } from 'geolib';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// preferences default to sq meters and meters
 const defaultPreferences = { area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm' }
 
 const MeasurementDisplay = ({ polygonArea, polygonDistance }) => {
   const { width } = useWindowDimensions();
   const [ measurementPreferences, setMeasurementPreferences ] = useState(defaultPreferences)
 
+  // set preferences
   useEffect(() => {
     getPreferences()
   }, [])
 
+  // save and get preferences with AsyncStorage
   const storePreferences = async (data) => {
     try {
       setMeasurementPreferences(data)
@@ -36,6 +39,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance }) => {
     }
   }
 
+  // Alert prompts used to update preferences
   const updateAreaMeasurements = () => {
     Alert.alert(
       "Area Unit of Measurement",
