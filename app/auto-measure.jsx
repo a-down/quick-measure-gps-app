@@ -14,7 +14,7 @@ export default function AutoMeasure() {
   const { height, width } = useWindowDimensions();
   const [ currentLocation, setCurrentLocation ] = useState(null);
   const [ initialRegion, setInitialRegion ] = useState(null);
-  const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
+  const [ polygonCoordinates, setPolygonCoordinates ] = useState(walkToMailbox)
   const [ polygonArea, setPolygonArea ] = useState()
   const [ polygonDistance, setPolygonDistance ] = useState()
   const [ isMeasuring, setIsMeasuring ] = useState(true)

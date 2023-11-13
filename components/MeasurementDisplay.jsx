@@ -42,9 +42,10 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance }) => {
       "What unit of measurement would you like to use for area?",
       [
         { text: "Sq Feet", onPress: () => storePreferences({...measurementPreferences, area: 'sq feet', areaShort: 'sqft'}) },
+        { text: "Sq Yards", onPress: () => storePreferences({...measurementPreferences, area: 'sq yards', areaShort: 'sqyd'}) },
+        { text: "Acres", onPress: () => storePreferences({...measurementPreferences, area: 'acres', areaShort: 'a'}) },
         { text: "Sq Meters", onPress: () => storePreferences({...measurementPreferences, area: 'sq meters', areaShort: 'sqm'}) },
-        { text: "Sq Feet", onPress: () => storePreferences({...measurementPreferences, area: 'sq feet', areaShort: 'sqft'}) },
-        { text: "Sq Meters", onPress: () => storePreferences({...measurementPreferences, area: 'sq meters', areaShort: 'sqm'}) },
+        { text: "Sq Kilometers", onPress: () => storePreferences({...measurementPreferences, area: 'sq km', areaShort: 'sqkm'}) },
         { text: "Cancel", style: "cancel"}
       ]
     );
@@ -56,9 +57,10 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance }) => {
       "What unit of measurement would you like to use for area?",
       [
         { text: "Feet", onPress: () => storePreferences({...measurementPreferences, distance: 'feet', distanceShort: 'ft'}) },
+        { text: "Yards", onPress: () => storePreferences({...measurementPreferences, distance: 'yards', distanceShort: 'yd'}) },
         { text: "Meters", onPress: () => storePreferences({...measurementPreferences, distance: 'meters', distanceShort: 'm'}) },
-        { text: "Feet", onPress: () => storePreferences({...measurementPreferences, distance: 'feet', distanceShort: 'ft'}) },
-        { text: "Meters", onPress: () => storePreferences({...measurementPreferences, distance: 'meters', distanceShort: 'm'}) },
+        { text: "Kilometers", onPress: () => storePreferences({...measurementPreferences, distance: 'km', distanceShort: 'km'}) },
+        { text: "Miles", onPress: () => storePreferences({...measurementPreferences, distance: 'miles', distanceShort: 'mi'}) },
         { text: "Cancel", style: "cancel"}
       ]
     );
@@ -69,13 +71,17 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance }) => {
       <View className="flex-row justify-between flex-wrap">
         <Text className="text-lg mb-4">
           <Text className="text-3xl">
-            { convertArea(polygonArea, measurementPreferences.areaShort).toFixed(2) || 0}
+            { polygonArea 
+              ? convertArea(polygonArea, measurementPreferences.areaShort).toFixed(2)
+              : 0}
           </Text>
           {` `}{ measurementPreferences.area }
         </Text>
         <Text className="text-lg mb-4">
           <Text className="text-3xl">
-            { convertDistance(polygonDistance, measurementPreferences.distanceShort).toFixed(2) || 0 }
+            { polygonDistance
+              ? convertDistance(polygonDistance, measurementPreferences.distanceShort).toFixed(2)
+              : 0 }
           </Text>
           {` `}{ measurementPreferences.distance }
         </Text>
