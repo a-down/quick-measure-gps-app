@@ -1,7 +1,50 @@
-import { Text, View, Pressable, useWindowDimensions, Alert } from 'react-native';
+import { Text, View, Pressable, useWindowDimensions, Alert, AsyncStorage } from 'react-native';
+import { useState } from 'react';
 
-const MeasurementDisplay = ({ polygonArea, polygonDistance, measurementPreferences, setMeasurementPreferences }) => {
+const defaultPreferences = { area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm' }
+
+const MeasurementDisplay = ({ polygonArea, polygonDistance }) => {
   const { width } = useWindowDimensions();
+
+  const [ measurementPreferences, setMeasurementPreferences ] = useState(getPreferences || defaultPreferences)
+
+  // const updateAreaMeasurements = () => {
+  //   Alert.alert(
+  //     "Area Unit of Measurement",
+  //     "What unit of measurement would you like to use for area?",
+  //     [
+  //       { text: "Sq Feet", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'sq feet', areaShort: 'sqm'}) },
+  //       { text: "Sq Meters", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'sq meters', areaShort: 'sqm'}) },
+  //       { text: "Sq Feet", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'sq feet', areaShort: 'sqm'}) },
+  //       { text: "Sq Meters", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'sq meters', areaShort: 'sqm'}) },
+  //       { text: "Cancel", style: "cancel"}
+  //     ]
+  //   );
+  // }
+
+  const storePreferences = async (data) => {
+    try {
+      await AsyncStorage.setItem(
+        'measurementPreferences',
+        JSON.stringify(data)
+      );
+    } catch (error) {
+        Alert.alert('Cannot save preferences', 'Please try again')
+    }
+  }
+
+  const getPreferences = async () => {
+    try {
+      const value = await AsyncStorage.getItem('measurementPreferences');
+      if (value !== null) {
+        return JSON.parse(value)
+      } else {
+        return null;
+      }
+    } catch (error) {
+        return null;
+    }
+  }
 
   const updateAreaMeasurements = () => {
     Alert.alert(
