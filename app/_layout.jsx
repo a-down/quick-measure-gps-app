@@ -1,17 +1,11 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
-import { createContext, useState } from 'react';
 
-// const PreferencesContext = createContext(null);
-
-// const defaultPref = {measurement: {area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm'}}
 
 export default function Layout() {
-  // const [ preferences, setPreferences ] = useState(defaultPref);
   const params = useLocalSearchParams();
 
   return (
       <Stack>
-        {/* <PreferencesContext.Provider value={{ preferences, setPreferences }}> */}
         <Stack.Screen name="index" options={{
           title: 'Quick Measure',
           headerBackTitleVisible: false
@@ -32,7 +26,6 @@ export default function Layout() {
           title: params.name,
           headerBackTitleVisible: false
         }} />
-        {/* </PreferencesContext.Provider> */}
       </Stack>
   )
 }
