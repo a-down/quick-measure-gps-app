@@ -1,6 +1,8 @@
 import { Text, View, Pressable, useWindowDimensions, Alert } from 'react-native';
+import { useContext } from 'react';
 
-const MeasurementDisplay = ({ polygonArea, polygonDistance, measurementPreferences, setMeasurementPreferences }) => {
+const MeasurementDisplay = ({ polygonArea, polygonDistance }) => {
+  const { preferences, setPreferences } = useContext(PreferencesContext);
   const { width } = useWindowDimensions();
 
   const updateAreaMeasurements = () => {
@@ -22,10 +24,10 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, measurementPreferenc
       "Area Unit of Measurement",
       "What unit of measurement would you like to use for area?",
       [
-        { text: "Feet", onPress: () => setMeasurementPreferences({...measurementPreferences, distance: 'feet', distanceShort: 'ft'}) },
-        { text: "Meters", onPress: () => setMeasurementPreferences({...measurementPreferences, distance: 'meters', distanceShort: 'm'}) },
-        { text: "Feet", onPress: () => setMeasurementPreferences({...measurementPreferences, distance: 'feet', distanceShort: 'ft'}) },
-        { text: "Meters", onPress: () => setMeasurementPreferences({...measurementPreferences, distance: 'meters', distanceShort: 'm'}) },
+        { text: "Feet", onPress: () => setPreferences({...preferences, measurement: {...preferences, distance: 'feet', distanceShort: 'ft'} }) },
+        { text: "Meters", onPress: () => setPreferences({...preferences, distance: 'meters', distanceShort: 'm'}) },
+        { text: "Feet", onPress: () => setPreferences({...preferences, distance: 'feet', distanceShort: 'ft'}) },
+        { text: "Meters", onPress: () => setPreferences({...preferences, distance: 'meters', distanceShort: 'm'}) },
         { text: "Cancel", style: "cancel"}
       ]
     );
@@ -36,11 +38,11 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, measurementPreferenc
       <View className="flex-row justify-between flex-wrap">
         <Text className="text-lg mb-4">
           <Text className="text-3xl">{ polygonArea || 0}</Text>
-          {` `}{ measurementPreferences.area }
+          {` `}{ preferences.measurement.area }
         </Text>
         <Text className="text-lg mb-4">
           <Text className="text-3xl">{ polygonDistance || 0 }</Text>
-          {` `}{ measurementPreferences.distance }
+          {` `}{ preferences.measurement.distance }
         </Text>
       </View>
 
