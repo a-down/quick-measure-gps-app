@@ -1,48 +1,37 @@
-import { Text, View, Pressable, useWindowDimensions, Alert, AsyncStorage } from 'react-native';
-import { useState } from 'react';
+import { Text, View, Pressable, useWindowDimensions, Alert } from 'react-native';
+import { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const defaultPreferences = { area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm' }
 
 const MeasurementDisplay = ({ polygonArea, polygonDistance }) => {
   const { width } = useWindowDimensions();
+  const [ measurementPreferences, setMeasurementPreferences ] = useState(defaultPreferences)
 
-  const [ measurementPreferences, setMeasurementPreferences ] = useState(getPreferences || defaultPreferences)
-
-  // const updateAreaMeasurements = () => {
-  //   Alert.alert(
-  //     "Area Unit of Measurement",
-  //     "What unit of measurement would you like to use for area?",
-  //     [
-  //       { text: "Sq Feet", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'sq feet', areaShort: 'sqm'}) },
-  //       { text: "Sq Meters", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'sq meters', areaShort: 'sqm'}) },
-  //       { text: "Sq Feet", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'sq feet', areaShort: 'sqm'}) },
-  //       { text: "Sq Meters", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'sq meters', areaShort: 'sqm'}) },
-  //       { text: "Cancel", style: "cancel"}
-  //     ]
-  //   );
-  // }
+  useEffect(() => {
+    getPreferences()
+  }, [])
 
   const storePreferences = async (data) => {
     try {
+      setMeasurementPreferences(data)
       await AsyncStorage.setItem(
         'measurementPreferences',
         JSON.stringify(data)
       );
     } catch (error) {
-        Alert.alert('Cannot save preferences', 'Please try again')
+        console.log(error)
     }
   }
-
+  
   const getPreferences = async () => {
     try {
       const value = await AsyncStorage.getItem('measurementPreferences');
       if (value !== null) {
-        return JSON.parse(value)
-      } else {
-        return null;
-      }
+        setMeasurementPreferences(JSON.parse(value))
+      } 
     } catch (error) {
-        return null;
+        console.log(error)
     }
   }
 
@@ -51,10 +40,10 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance }) => {
       "Area Unit of Measurement",
       "What unit of measurement would you like to use for area?",
       [
-        { text: "Sq Feet", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'sq feet', areaShort: 'sqm'}) },
-        { text: "Sq Meters", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'sq meters', areaShort: 'sqm'}) },
-        { text: "Sq Feet", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'sq feet', areaShort: 'sqm'}) },
-        { text: "Sq Meters", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'sq meters', areaShort: 'sqm'}) },
+        { text: "Sq Feet", onPress: () => storePreferences({...measurementPreferences, area: 'sq feet', areaShort: 'sqm'}) },
+        { text: "Sq Meters", onPress: () => storePreferences({...measurementPreferences, area: 'sq meters', areaShort: 'sqm'}) },
+        { text: "Sq Feet", onPress: () => storePreferences({...measurementPreferences, area: 'sq feet', areaShort: 'sqm'}) },
+        { text: "Sq Meters", onPress: () => storePreferences({...measurementPreferences, area: 'sq meters', areaShort: 'sqm'}) },
         { text: "Cancel", style: "cancel"}
       ]
     );
@@ -65,10 +54,10 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance }) => {
       "Area Unit of Measurement",
       "What unit of measurement would you like to use for area?",
       [
-        { text: "Feet", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'feet', areaShort: 'ft'}) },
-        { text: "Meters", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'meters', areaShort: 'm'}) },
-        { text: "Feet", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'feet', areaShort: 'ft'}) },
-        { text: "Meters", onPress: () => setMeasurementPreferences({...measurementPreferences, area: 'meters', areaShort: 'm'}) },
+        { text: "Feet", onPress: () => storePreferences({...measurementPreferences, distance: 'feet', distanceShort: 'ft'}) },
+        { text: "Meters", onPress: () => storePreferences({...measurementPreferences, distance: 'meters', distanceShort: 'm'}) },
+        { text: "Feet", onPress: () => storePreferences({...measurementPreferences, distance: 'feet', distanceShort: 'ft'}) },
+        { text: "Meters", onPress: () => storePreferences({...measurementPreferences, distance: 'meters', distanceShort: 'm'}) },
         { text: "Cancel", style: "cancel"}
       ]
     );
