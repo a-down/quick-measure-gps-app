@@ -50,7 +50,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance }) => {
         { text: "Acres", onPress: () => storePreferences({...measurementPreferences, area: 'acres', areaShort: 'a'}) },
         { text: "Sq Meters", onPress: () => storePreferences({...measurementPreferences, area: 'sq meters', areaShort: 'sqm'}) },
         { text: "Sq Kilometers", onPress: () => storePreferences({...measurementPreferences, area: 'sq km', areaShort: 'sqkm'}) },
-        { text: "Cancel", style: "cancel"}
+        { text: "Cancel", style: "cancel" }
       ]
     );
   }
@@ -65,7 +65,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance }) => {
         { text: "Meters", onPress: () => storePreferences({...measurementPreferences, distance: 'meters', distanceShort: 'm'}) },
         { text: "Kilometers", onPress: () => storePreferences({...measurementPreferences, distance: 'km', distanceShort: 'km'}) },
         { text: "Miles", onPress: () => storePreferences({...measurementPreferences, distance: 'miles', distanceShort: 'mi'}) },
-        { text: "Cancel", style: "cancel"}
+        { text: "Cancel", style: "cancel" }
       ]
     );
   }
