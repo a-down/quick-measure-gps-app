@@ -1,5 +1,5 @@
 import { Text, View, Pressable, useWindowDimensions, Alert } from 'react-native';
-import MapView, { Polygon, Marker } from 'react-native-maps';
+import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
 import { useEffect, useState } from 'react';
 import * as Location from "expo-location";
 import { getAreaOfPolygon, getPathLength } from 'geolib';
@@ -90,21 +90,34 @@ export default function AutoMeasure() {
             longitudeDelta: 0.01
           }}>
 
-            {currentLocation && (
-              <Marker
-                coordinate={{
-                  latitude: currentLocation.latitude,
-                  longitude: currentLocation.longitude,
-                }}
-                title="Your Location"
+            {polygonCoordinates && (
+              (polygonCoordinates.map((coordinate, index) => (
+                <Marker
+                  key={index}
+                  coordinate={{
+                    latitude: coordinate.latitude,
+                    longitude: coordinate.longitude,
+                  }}
+                  title="Location"
+                  />
+              )))
+            )}
+
+            {polygonCoordinates.length < 3 && (
+              <Polyline
+                strokeColor="red"
+                strokeWidth={2}
+                coordinates={polygonCoordinates}
               />
             )}
 
-            <Polygon 
-              strokeColor="red"
-              strokeWidth={2}
-              coordinates={polygonCoordinates}
-            />
+            {polygonCoordinates.length > 2 && (
+              <Polygon 
+                strokeColor="red"
+                strokeWidth={2}
+                coordinates={polygonCoordinates}
+              />
+            )}
         </MapView>
       )}
 
