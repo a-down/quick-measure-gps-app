@@ -70,7 +70,7 @@ export default function AutoMeasure() {
   // add a new location to the polygon
   const addLocationToPolygon = async (newLocation) => {
     await setPolygonCoordinates([{ latitude: newLocation.latitude, longitude: newLocation.longitude}, ...polygonCoordinates])
-    console.log(polygonCoordinates)
+    // console.log(polygonCoordinates)
   }
 
   // reset the polygon coordinates and measurements

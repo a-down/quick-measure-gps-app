@@ -60,25 +60,24 @@ export default function AutoMeasure() {
     polygonCoordinates.length === 1
       ? await setPolygonCoordinates([currentLocation.coords])
       : await setPolygonCoordinates(polygonCoordinates.slice(0, -1).push(currentLocation.coords))
-    console.log(polygonCoordinates)
+    // console.log(polygonCoordinates)
   }
 
-  // // when location changes and the user is measuring, add the new location to the polygon and generate measurements for the polygon
-  // useEffect(() => {
-  //   if (currentLocation && isMeasuring) {
-  //     addLocationToPolygon(currentLocation)
-  //   }
-  //   if (polygonCoordinates.length > 1) {
-  //     setPolygonDistance(getPathLength(polygonCoordinates))
-  //     setPolygonArea(getAreaOfPolygon(polygonCoordinates))
-  //   }
-  // }, [currentLocation])
+  // when location changes and the user is measuring, add the new location to the polygon and generate measurements for the polygon
+  useEffect(() => {
+    if (currentLocation && isMeasuring) {
+      addLocationToPolygon(currentLocation)
+    }
+    if (polygonCoordinates.length > 1) {
+      setPolygonDistance(getPathLength(polygonCoordinates))
+      setPolygonArea(getAreaOfPolygon(polygonCoordinates))
+    }
+  }, [currentLocation])
 
   // add a new location to the polygon
   const addLocationToPolygon = async () => {
-    await updateLocation()
     await setPolygonCoordinates([{ latitude: currentLocation.latitude, longitude: currentLocation.longitude}, ...polygonCoordinates])
-    console.log(polygonCoordinates)
+    // console.log(polygonCoordinates)
   }
 
   // reset the polygon coordinates and measurements
@@ -136,7 +135,7 @@ export default function AutoMeasure() {
         polygonDistance={polygonDistance} />
 
       <View className="absolute bottom-8" style={{width: width-32}}>
-        <AddMarkerButton addLocationToPolygon={addLocationToPolygon} />
+        <AddMarkerButton updateLocation={updateLocation} />
         {/* <RedoMarkerButton redoPreviousMarker={redoPreviousMarker} /> */}
 
         <View className="w-full flex-row justify-between">
