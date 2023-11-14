@@ -91,9 +91,10 @@ export default function AutoMeasure() {
             latitudeDelta: 0.01,
             longitudeDelta: 0.01
           }}
-          showsUserLocation={true}>
+          // showsUserLocation={true}
+          >
 
-            {/* {currentLocation && (
+            {currentLocation && (
               <Marker
                 coordinate={{
                   latitude: currentLocation.latitude,
@@ -101,7 +102,7 @@ export default function AutoMeasure() {
                 }}
                 title="Your Location"
               />
-            )} */}
+            )}
 
             <Polygon 
               strokeColor="red"
