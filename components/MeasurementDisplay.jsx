@@ -40,7 +40,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType }) => {
   }
 
   // Alert prompts used to update preferences
-  const updateAreaMeasurements = () => {
+  const updateAreaAlert = () => {
     Alert.alert(
       "Area Unit of Measurement",
       "What unit of measurement would you like to use for area?",
@@ -55,7 +55,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType }) => {
     );
   }
   
-  const updateDistanceMeasurements = () => {
+  const updateDistanceAlert = () => {
     Alert.alert(
       "Area Unit of Measurement",
       "What unit of measurement would you like to use for area?",
@@ -98,9 +98,9 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType }) => {
   }
 
   return (
-    <View className="bg-white p-4 absolute top-2 rounded-sm shadow-sm" style={{width: width-16}}>
-      <View className="flex-row justify-between flex-wrap">
-        <Text className="text-lg mb-4">
+    <View className="bg-white p-4 pb-2 absolute top-2 rounded-sm shadow-sm" style={{width: width-16, gap: 8}}>
+      <View className="flex-row justify-between flex-wrap" style={{gapY: 8}}>
+        <Text className="text-lg">
           <Text className="text-3xl">
             { polygonArea 
               ? convertArea(polygonArea, measurementPreferences.areaShort).toFixed(2)
@@ -108,7 +108,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType }) => {
           </Text>
           {` `}{ measurementPreferences.area }
         </Text>
-        <Text className="text-lg mb-4">
+        <Text className="text-lg">
           <Text className="text-3xl">
             { polygonDistance
               ? convertDistance(polygonDistance, measurementPreferences.distanceShort).toFixed(2)
@@ -118,20 +118,22 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType }) => {
         </Text>
       </View>
 
-      <View className="flex-row justify-between">
-        <Pressable onPress={updateAreaMeasurements}>
-          <Text className="text-center text-gray-700">Change Area Units</Text>
-        </Pressable>
-        <Pressable onPress={updateDistanceMeasurements}>
-          <Text className="text-center text-gray-700">Change Distance Units</Text>
-        </Pressable>
-      </View>
-
       <Button 
-        className="w-full"
-        title="Map Type"
+        title="Map Settings"
         color="#888"
-        onPress={mapTypeAlert}/>
+        onPress={() => {
+          Alert.alert(
+            "Map Settings",
+            "What would you like to change?",
+            [
+              { text: "Map Type", onPress: () => mapTypeAlert() },
+              { text: "Area Units", onPress: () => updateAreaAlert() },
+              { text: "Distance Units", onPress: () => updateDistanceAlert() },
+              { text: "Cancel", style: "cancel" }
+            ]
+          )
+        }}/>
+
     </View>
   )
 }
