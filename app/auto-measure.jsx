@@ -138,9 +138,9 @@ export default function AutoMeasure() {
         <StopMeasuringButton isMeasuring={isMeasuring} setIsMeasuring={setIsMeasuring} polygonCoordinates={polygonCoordinates} />
 
         <View className="w-full flex-row justify-between">
-          <ResetMeasurementsButton resetMeasurements={resetMeasurements} />
+          <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
           <Pressable className="flex-grow p-4">
-            <Text className="text-center text-lg">Save</Text>
+            <Text className="text-center text-lg" style={{color: mapType === "satellite" ? "#fff" : "#000"}}>Save</Text>
           </Pressable>
         </View>
       </View>
