@@ -1,6 +1,6 @@
 import { Text, Pressable, Alert } from 'react-native';
 
-const ResetMeasurementsButton = ({ resetMeasurement, mapType }) => {
+const ResetMeasurementsButton = ({ resetMeasurements, mapType }) => {
   const resetMeasurementsAlert = () => {
     Alert.alert(
       "Reset Measurements",
