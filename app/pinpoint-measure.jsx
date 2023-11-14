@@ -97,7 +97,8 @@ export default function AutoMeasure() {
             longitude: initialRegion.longitude,
             latitudeDelta: 0.01,
             longitudeDelta: 0.01
-          }}>
+          }}
+          showsUserLocation={true}>
 
             {polygonCoordinates.length > 0 && (
               (polygonCoordinates.map((coordinate, index) => (
