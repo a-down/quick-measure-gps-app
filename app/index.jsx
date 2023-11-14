@@ -59,10 +59,11 @@ export default function App() {
 
         </View>
         <View className="bg-white w-full p-2 rounded-b-md">
-          <Text className="text-lg font-semibold">Saved</Text>
+          <Text className="text-lg font-semibold">Saved Measurements</Text>
+          <Text className="text-base">View your saved maps and measurements</Text>
         </View>
       </Pressable>
-
+{/* 
       <Pressable className="flex-1 w-full mb-4 shadow-sm" onPress={() => router.push('/settings')}>
         <View className="aspect-video w-full bg-gray-300 rounded-t-md">
 
@@ -70,7 +71,7 @@ export default function App() {
         <View className="bg-white w-full p-2 rounded-b-md">
           <Text className="text-lg font-semibold">Settings</Text>
         </View>
-      </Pressable>
+      </Pressable> */}
 
       </View>
 
