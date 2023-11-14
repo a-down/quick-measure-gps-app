@@ -26,6 +26,10 @@ export default function Layout() {
           title: params.name,
           headerBackTitleVisible: false
         }} />
+        <Stack.Screen name="settings" options={{
+          title: 'Settings',
+          headerBackTitleVisible: false
+        }} />
       </Stack>
   )
 }
