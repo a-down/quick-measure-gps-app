@@ -15,6 +15,17 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType }) => {
     getPreferences()
   }, [])
 
+  const getPreferences = async () => {
+    try {
+      const value = await AsyncStorage.getItem('measurementPreferences');
+      if (value !== null) {
+        setMeasurementPreferences(JSON.parse(value))
+      } 
+    } catch (error) {
+        console.log(error)
+    }
+  }
+
   // save and get preferences with AsyncStorage
   const storePreferences = async (data) => {
     try {
@@ -23,17 +34,6 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType }) => {
         'measurementPreferences',
         JSON.stringify(data)
       );
-    } catch (error) {
-        console.log(error)
-    }
-  }
-  
-  const getPreferences = async () => {
-    try {
-      const value = await AsyncStorage.getItem('measurementPreferences');
-      if (value !== null) {
-        setMeasurementPreferences(JSON.parse(value))
-      } 
     } catch (error) {
         console.log(error)
     }
@@ -70,8 +70,6 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType }) => {
     );
   }
 
-
-
   const storeMapPreferences = async (data) => {
     try {
       setMapType(data)
@@ -83,7 +81,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType }) => {
         console.log(error)
     }
   }
-  
+
   const mapTypeAlert = async () => {
     Alert.alert(
       "Map Type",
@@ -96,6 +94,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType }) => {
       ]
     );
   }
+  
 
   return (
     <View className="bg-white p-4 pb-2 absolute top-2 rounded-sm shadow-sm" style={{width: width-16, gap: 8}}>
