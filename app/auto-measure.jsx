@@ -115,7 +115,7 @@ export default function AutoMeasure() {
         polygonDistance={polygonDistance} />
 
       <View className="absolute bottom-8" style={{width: width-32}}>
-        <StopMeasuringButton isMeasuring={isMeasuring} setIsMeasuring={setIsMeasuring} />
+        <StopMeasuringButton isMeasuring={isMeasuring} setIsMeasuring={setIsMeasuring} polygonCoordinates={polygonCoordinates} />
 
         <View className="w-full flex-row justify-between">
           <ResetMeasurementsButton resetMeasurements={resetMeasurements} />
