@@ -13,7 +13,7 @@ export default function AutoMeasure() {
 
   const { height, width } = useWindowDimensions();
   const [ currentLocation, setCurrentLocation ] = useState(null);
-  const [ initialRegion, setInitialRegion ] = useState(null);
+  // const [ region, setRegion ] = useState(null);
   const [ polygonCoordinates, setPolygonCoordinates ] = useState(walkToMailbox)
   const [ polygonArea, setPolygonArea ] = useState()
   const [ polygonDistance, setPolygonDistance ] = useState()
@@ -39,12 +39,12 @@ export default function AutoMeasure() {
       let location = await Location.getCurrentPositionAsync({});
       setCurrentLocation(location.coords);
 
-      setInitialRegion({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-        latitudeDelta: 0.005,
-        longitudeDelta: 0.005,
-      });
+      // setRegion({
+      //   latitude: location.coords.latitude,
+      //   longitude: location.coords.longitude,
+      //   latitudeDelta: 0.005,
+      //   longitudeDelta: 0.005,
+      // });
 
       const locationSubscription = await Location.watchPositionAsync(
         {accuracy:Location.Accuracy.BestForNavigation, distanceInterval: 1},
@@ -82,14 +82,14 @@ export default function AutoMeasure() {
 
   return (
     <View className="flex-1 items-center justify-center">
-      {initialRegion && (
+      {currentLocation && (
         <MapView 
           style={{flex: 1, width: '100%'}}
-          initialRegion={{
-            latitude: initialRegion.latitude,
-            longitude: initialRegion.longitude,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01
+          region={{
+            latitude: currentLocation.latitude,
+            longitude: currentLocation.longitude,
+            latitudeDelta: 0.001,
+            longitudeDelta: 0.001
           }}
           // showsUserLocation={true}
           >
@@ -101,6 +101,7 @@ export default function AutoMeasure() {
                   longitude: currentLocation.longitude,
                 }}
                 title="Your Location"
+                mapPadding={'0px'}
               />
             )}
 

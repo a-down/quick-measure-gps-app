@@ -13,7 +13,7 @@ export default function AutoMeasure() {
 
   const { height, width } = useWindowDimensions();
   const [ currentLocation, setCurrentLocation ] = useState(null);
-  const [ initialRegion, setInitialRegion ] = useState(null);
+  const [ region, setRegion ] = useState(null);
   const [ polygonCoordinates, setPolygonCoordinates ] = useState(walkToMailbox)
   const [ polygonArea, setPolygonArea ] = useState()
   const [ polygonDistance, setPolygonDistance ] = useState()
@@ -38,7 +38,7 @@ export default function AutoMeasure() {
       let location = await Location.getCurrentPositionAsync({});
       setCurrentLocation(location.coords);
 
-      setInitialRegion({
+      setRegion({
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
         latitudeDelta: 0.005,
@@ -67,6 +67,7 @@ export default function AutoMeasure() {
   useEffect(() => {
     if (currentLocation && isMeasuring) {
       addLocationToPolygon(currentLocation)
+      setRegion(currentLocation)
     }
     if (polygonCoordinates.length > 1) {
       setPolygonDistance(getPathLength(polygonCoordinates))
@@ -89,14 +90,14 @@ export default function AutoMeasure() {
 
   return (
     <View className="flex-1 items-center justify-center">
-      {initialRegion && (
+      {region && (
         <MapView 
           style={{flex: 1, width: '100%'}}
-          initialRegion={{
-            latitude: initialRegion.latitude,
-            longitude: initialRegion.longitude,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01
+          region={{
+            latitude: region.latitude,
+            longitude: region.longitude,
+            latitudeDelta: 0.001,
+            longitudeDelta: 0.001
           }}
           // showsUserLocation={true}
           >
