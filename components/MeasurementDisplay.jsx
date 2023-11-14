@@ -1,4 +1,4 @@
-import { Text, View, Pressable, useWindowDimensions, Alert } from 'react-native';
+import { Text, View, Pressable, useWindowDimensions, Alert, Button } from 'react-native';
 import { useState, useEffect } from 'react';
 import { convertArea, convertDistance } from 'geolib';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // preferences default to sq meters and meters
 const defaultPreferences = { area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm' }
 
-const MeasurementDisplay = ({ polygonArea, polygonDistance }) => {
+const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType }) => {
   const { width } = useWindowDimensions();
   const [ measurementPreferences, setMeasurementPreferences ] = useState(defaultPreferences)
 
@@ -70,6 +70,33 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance }) => {
     );
   }
 
+
+
+  const storeMapPreferences = async (data) => {
+    try {
+      setMapType(data)
+      await AsyncStorage.setItem(
+        'mapPreferences',
+        JSON.stringify(data)
+      );
+    } catch (error) {
+        console.log(error)
+    }
+  }
+  
+  const mapTypeAlert = async () => {
+    Alert.alert(
+      "Map Type",
+      "What type of map would you like to use?",
+      [
+        { text: "Standard", onPress: () => storeMapPreferences("standard") },
+        { text: "Satellite", onPress: () => storeMapPreferences("satellite") },
+        { text: "Hybrid", onPress: () => storeMapPreferences("hybrid") },
+        { text: "Cancel", style: "cancel" }
+      ]
+    );
+  }
+
   return (
     <View className="bg-white p-4 absolute top-2 rounded-sm shadow-sm" style={{width: width-16}}>
       <View className="flex-row justify-between flex-wrap">
@@ -99,6 +126,12 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance }) => {
           <Text className="text-center text-gray-700">Change Distance Units</Text>
         </Pressable>
       </View>
+
+      <Button 
+        className="w-full"
+        title="Map Type"
+        color="#888"
+        onPress={mapTypeAlert}/>
     </View>
   )
 }

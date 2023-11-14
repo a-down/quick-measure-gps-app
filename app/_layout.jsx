@@ -1,5 +1,6 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
-
+import { Button } from 'react-native';
+import { MapTypeAlert } from '../components';
 
 export default function Layout() {
   const params = useLocalSearchParams();
@@ -12,7 +13,13 @@ export default function Layout() {
         }} />
         <Stack.Screen name="auto-measure" options={{
           title: 'Auto Measure',
-          headerBackTitleVisible: false
+          headerBackTitleVisible: false,
+          // headerRight: () => (
+          //   <Button 
+          //     title="Map Type"
+          //     color="#888"
+          //     onPress={MapTypeAlert}/>
+          // )
         }} />
         <Stack.Screen name="pinpoint-measure" options={{
           title: 'Pinpoint Measure',

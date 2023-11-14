@@ -1,6 +1,6 @@
 import { Text, Pressable, Alert } from 'react-native';
 
-const ResetMeasurementsButton = ({ resetMeasurements }) => {
+const ResetMeasurementsButton = ({ resetMeasurement, mapType }) => {
   const resetMeasurementsAlert = () => {
     Alert.alert(
       "Reset Measurements",
@@ -17,7 +17,7 @@ const ResetMeasurementsButton = ({ resetMeasurements }) => {
 
   return (
     <Pressable className="flex-grow p-4" onPress={resetMeasurementsAlert}>
-      <Text className="text-center text-lg">Reset</Text>
+      <Text className="text-center text-lg" style={{color: mapType === "satellite" ? "#fff" : "#000"}}>Reset</Text>
     </Pressable>
   )
 }
