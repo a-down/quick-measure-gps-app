@@ -113,7 +113,7 @@ export default function AutoMeasure() {
             latitudeDelta: 0.001,
             longitudeDelta: 0.001
           }}
-          mapType={mapType}
+          mapType={mapType || "standard"}
           // showsUserLocation={true}
           >
 

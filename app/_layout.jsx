@@ -1,15 +1,31 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
-import { Button } from 'react-native';
+import { Button, View, Text } from 'react-native';
 import { MapTypeAlert } from '../components';
 
 export default function Layout() {
   const params = useLocalSearchParams();
 
+  // const homeHeader = () = {
+  //   return (
+
+  //   )
+  // }
+
   return (
       <Stack>
         <Stack.Screen name="index" options={{
           title: 'Quick Measure',
-          headerBackTitleVisible: false
+          headerBackTitleVisible: false,
+          headerStyle: {
+            backgroundColor: '#6DAB64',
+          },
+          headerTitleStyle: {
+            color: '#fff',
+          },
+          headerTitleAlign: "left",
+          headerRight: () => (
+            <View style={{width: 24, height: 24, backgroundColor: "#fff"}}></View>
+          ),
         }} />
         <Stack.Screen name="auto-measure" options={{
           title: 'Auto Measure',

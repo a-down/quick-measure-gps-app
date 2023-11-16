@@ -1,47 +1,46 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Pressable, useWindowDimensions, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Pressable, useWindowDimensions, ScrollView, Image } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import MapView, { Polygon, Marker } from 'react-native-maps';
 import { useEffect, useState} from 'react';
 import * as Location from "expo-location";
 import { getAreaOfPolygon, convertArea } from 'geolib';
 import { useRouter, Link } from 'expo-router';
+import mapScreenshot from "../assets/map-screenshot.png";
 
 export default function App() {
   const router = useRouter();
   const { width, height } = useWindowDimensions();
 
   return (
-    <ScrollView className="h-full flex p-4 mb-8">
-      <Pressable className="flex w-full mb-4 shadow-sm" onPress={() => router.push('/auto-measure')}>
-        <View className="aspect-video w-full bg-gray-300 rounded-t-md">
+    <ScrollView className="h-full flex mb-8">
+      <Text className="font-semibold text-xl m-4">Tools</Text>
 
-        </View>
-        <View className="bg-white w-full p-2 rounded-b-md">
-          <Text className="text-lg font-semibold">Auto Measure</Text>
-          <Text className="text-base">Track your location with GPS</Text>
+      <Pressable className="flex w-full mb-4 shadow-sm relative" onPress={() => router.push('/auto-measure')}>
+        <Image className="w-full aspect-video" source={mapScreenshot}/>
+        <View className="bg-white w-full p-2 absolute bottom-0">
+          <Text className="text-lg text-green-10">Auto Measure</Text>
+          <Text className="text-base text-gray-7">Track your location with GPS</Text>
         </View>
       </Pressable>
 
-      <Pressable className="flex w-full mb-4 shadow-sm" onPress={() => router.push('/pinpoint-measure')}>
-        <View className="aspect-video w-full bg-gray-300 rounded-t-md">
-
-        </View>
-        <View className="bg-white w-full p-2 rounded-b-md">
-          <Text className="text-lg font-semibold">Pinpoint Measure</Text>
-          <Text className="text-base">Manually log points with GPS</Text>
+      <Pressable className="flex w-full mb-4 shadow-sm relative" onPress={() => router.push('/pinpoint-measure')}>
+        <Image className="w-full aspect-video" source={mapScreenshot}/>
+        <View className="bg-white w-full p-2 absolute bottom-0">
+          <Text className="text-lg text-green-10">Pinpoint Measure</Text>
+          <Text className="text-base text-gray-7">Manually log points with GPS</Text>
         </View>
       </Pressable>
 
-      <Pressable className="flex w-full mb-4 shadow-sm" onPress={() => router.push('/pinpoint-measure')}>
-        <View className="aspect-video w-full bg-gray-300 rounded-t-md">
-
-        </View>
-        <View className="bg-white w-full p-2 rounded-b-md">
-          <Text className="text-lg font-semibold">Tap To Measure</Text>
-          <Text className="text-base">Add points manually by tapping the map</Text>
+      <Pressable className="flex w-full mb-4 shadow-sm relative" onPress={() => router.push('/pinpoint-measure')}>
+        <Image className="w-full aspect-video" source={mapScreenshot}/>
+        <View className="bg-white w-full p-2 absolute bottom-0">
+          <Text className="text-lg text-green-10">Tap to Measure</Text>
+          <Text className="text-base text-gray-7">Add points manually by tapping the map</Text>
         </View>
       </Pressable>
+
+    
 
       <View className="flex-row w-full" style={{gap: 16}}>
         {/* <View className="p-2 flex-1 bg-white rounded-md items-center shadow-sm" style={{gap: 8}}>
