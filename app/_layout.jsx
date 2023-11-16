@@ -16,7 +16,7 @@ export default function Layout() {
         <Stack.Screen name="(tabs)" options={{
           headerShown: false
         }} />
-        <Stack.Screen name="index" options={{
+        {/* <Stack.Screen name="(tabs)/index" options={{
           title: 'Quick Measure',
           headerBackTitleVisible: false,
           headerStyle: {
@@ -29,7 +29,7 @@ export default function Layout() {
           headerRight: () => (
             <View style={{width: 24, height: 24, backgroundColor: "#fff"}}></View>
           ),
-        }} />
+        }} /> */}
         <Stack.Screen name="auto-measure" options={{
           title: 'Auto Measure',
           headerBackTitleVisible: false,

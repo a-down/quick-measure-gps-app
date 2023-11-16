@@ -6,18 +6,21 @@ import { useEffect, useState} from 'react';
 import * as Location from "expo-location";
 import { getAreaOfPolygon, convertArea } from 'geolib';
 import { useRouter, Link } from 'expo-router';
-import mapScreenshot from "../assets/map-screenshot.png";
+import mapScreenshot from "../../assets/map-screenshot.png";
 
 export default function App() {
   const router = useRouter();
   const { width, height } = useWindowDimensions();
 
   return (
-    <ScrollView className="h-full flex mb-8">
-      <Link href={"/(tabs)/saved"} replace asChild>
+    <ScrollView className="h-full flex">
+      {/* <Link href={"/(tabs)/saved"} replace asChild>
         <Button title="Go to Saved" />
-      </Link>
-      <Text className="font-semibold text-xl m-4">Tools</Text>
+      </Link> */}
+      <View className="bg-white w-full">
+        <Text className="font-semibold text-xl m-4">Tools</Text>
+      </View>
+      
 
       <Pressable className="flex w-full mb-4 shadow-sm relative" onPress={() => router.push('/auto-measure')}>
         <Image className="w-full aspect-video" source={mapScreenshot}/>

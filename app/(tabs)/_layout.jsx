@@ -3,7 +3,15 @@ import { Tabs } from 'expo-router';
 
 const Layout = () => {
   return (
-    <Tabs />
+    <Tabs>
+      <Tabs.Screen 
+        name="index"
+        options={{
+          tabBarLabel: "Tools"
+        }}
+      />
+      
+    </Tabs>
   )
 }
 
