@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Pressable, useWindowDimensions, ScrollView, Image } from 'react-native';
+import { StyleSheet, Text, View, Pressable, useWindowDimensions, ScrollView, Image, Button } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import MapView, { Polygon, Marker } from 'react-native-maps';
 import { useEffect, useState} from 'react';
@@ -14,6 +14,9 @@ export default function App() {
 
   return (
     <ScrollView className="h-full flex mb-8">
+      <Link href={"/(tabs)/saved"} replace asChild>
+        <Button title="Go to Saved" />
+      </Link>
       <Text className="font-semibold text-xl m-4">Tools</Text>
 
       <Pressable className="flex w-full mb-4 shadow-sm relative" onPress={() => router.push('/auto-measure')}>
