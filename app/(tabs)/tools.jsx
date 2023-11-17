@@ -22,7 +22,7 @@ export default function App() {
       </View>
       
 
-      <Pressable className="flex w-full mb-4 shadow-sm relative" onPress={() => router.push('/auto-measure')}>
+      <Pressable className="flex w-full mb-4 bg-white shadow-sm relative" onPress={() => router.push('/auto-measure')}>
         <Image className="w-full aspect-video" source={mapScreenshot}/>
         <View className="bg-white w-full p-2 absolute bottom-0">
           <Text className="text-lg font-semibold text-green-10">Auto Measure</Text>
@@ -30,7 +30,7 @@ export default function App() {
         </View>
       </Pressable>
 
-      <Pressable className="flex w-full mb-4 shadow-sm relative" onPress={() => router.push('/pinpoint-measure')}>
+      <Pressable className="flex w-full mb-4 bg-white shadow-sm relative" onPress={() => router.push('/pinpoint-measure')}>
         <Image className="w-full aspect-video" source={mapScreenshot}/>
         <View className="bg-white w-full p-2 absolute bottom-0">
           <Text className="text-lg font-semibold text-green-10">Pinpoint Measure</Text>
@@ -38,7 +38,7 @@ export default function App() {
         </View>
       </Pressable>
 
-      <Pressable className="flex w-full mb-4 shadow-sm relative" onPress={() => router.push('/pinpoint-measure')}>
+      <Pressable className="flex w-full mb-4 bg-white shadow-sm relative" onPress={() => router.push('/pinpoint-measure')}>
         <Image className="w-full aspect-video" source={mapScreenshot}/>
         <View className="bg-white w-full p-2 absolute bottom-0">
           <Text className="text-lg font-semibold text-green-10">Tap to Measure</Text>
@@ -59,7 +59,7 @@ export default function App() {
           <View className="h-12 w-12 bg-gray-400"></View>
         </View> */}
 
-      <Pressable className="flex-1 w-full mb-4 shadow-sm" onPress={() => router.push('/saved-measurements')}>
+      <Pressable className="flex-1 w-full mb-4 bg-white shadow-sm" onPress={() => router.push('/saved-measurements')}>
         <View className="aspect-video w-full bg-gray-300 rounded-t-md">
 
         </View>

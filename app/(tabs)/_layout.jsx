@@ -1,5 +1,6 @@
 import { View, Text } from 'react-native';
 import { Tabs } from 'expo-router';
+import { Feather } from '@expo/vector-icons';
 
 const headerOptions = {
   
@@ -20,9 +21,15 @@ const Layout = () => {
           headerTitleStyle: {
             color: '#fff',
           },
-          headerRight: () => (
-            <View style={{width: 24, height: 24, backgroundColor: "#fff", marginRight: 16}}></View>
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="map-pin" size={size} color={color} />
           ),
+          tabBarInactiveTintColor: "#9F9F9F",
+          tabBarActiveTintColor: "#6DAB64",
+          tabBarLabelStyle: {
+            fontWeight: "bold",
+            fontSize: 13
+          }
         }}
       />
       <Tabs.Screen 
@@ -37,9 +44,15 @@ const Layout = () => {
           headerTitleStyle: {
             color: '#fff',
           },
-          headerRight: () => (
-            <View style={{width: 24, height: 24, backgroundColor: "#fff", marginRight: 16}}></View>
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="folder" size={size} color={color} className="mt-4"/>
           ),
+          tabBarInactiveTintColor: "#9F9F9F",
+          tabBarActiveTintColor: "#6DAB64",
+          tabBarLabelStyle: {
+            fontWeight: "bold",
+            fontSize: 13
+          }
         }}
       />
       <Tabs.Screen 
@@ -54,9 +67,15 @@ const Layout = () => {
           headerTitleStyle: {
             color: '#fff',
           },
-          headerRight: () => (
-            <View style={{width: 24, height: 24, backgroundColor: "#fff", marginRight: 16}}></View>
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="settings" size={size} color={color} />
           ),
+          tabBarInactiveTintColor: "#9F9F9F",
+          tabBarActiveTintColor: "#6DAB64",
+          tabBarLabelStyle: {
+            fontWeight: "bold",
+            fontSize: 13
+          }
         }}
       />
       
