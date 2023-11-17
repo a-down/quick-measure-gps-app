@@ -97,7 +97,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType }) => {
   
 
   return (
-    <View className="bg-white p-4 pb-2 absolute top-2 rounded-sm shadow-sm" style={{width: width-16, gap: 8}}>
+    <View className="bg-white p-4 pb-2 absolute top-2 rounded-lg shadow-sm" style={{width: width-16, gap: 8}}>
       <View className="flex-row justify-between flex-wrap" style={{gapY: 8}}>
         <Text className="text-lg">
           <Text className="text-3xl">

@@ -18,14 +18,14 @@ export default function App() {
         <Button title="Go to Saved" />
       </Link> */}
       <View className="bg-white w-full">
-        <Text className="font-semibold text-xl m-4">Tools</Text>
+        <Text className=" text-xl m-4">Tools</Text>
       </View>
       
 
       <Pressable className="flex w-full mb-4 shadow-sm relative" onPress={() => router.push('/auto-measure')}>
         <Image className="w-full aspect-video" source={mapScreenshot}/>
         <View className="bg-white w-full p-2 absolute bottom-0">
-          <Text className="text-lg text-green-10">Auto Measure</Text>
+          <Text className="text-lg font-semibold text-green-10">Auto Measure</Text>
           <Text className="text-base text-gray-7">Track your location with GPS</Text>
         </View>
       </Pressable>
@@ -33,7 +33,7 @@ export default function App() {
       <Pressable className="flex w-full mb-4 shadow-sm relative" onPress={() => router.push('/pinpoint-measure')}>
         <Image className="w-full aspect-video" source={mapScreenshot}/>
         <View className="bg-white w-full p-2 absolute bottom-0">
-          <Text className="text-lg text-green-10">Pinpoint Measure</Text>
+          <Text className="text-lg font-semibold text-green-10">Pinpoint Measure</Text>
           <Text className="text-base text-gray-7">Manually log points with GPS</Text>
         </View>
       </Pressable>
@@ -41,7 +41,7 @@ export default function App() {
       <Pressable className="flex w-full mb-4 shadow-sm relative" onPress={() => router.push('/pinpoint-measure')}>
         <Image className="w-full aspect-video" source={mapScreenshot}/>
         <View className="bg-white w-full p-2 absolute bottom-0">
-          <Text className="text-lg text-green-10">Tap to Measure</Text>
+          <Text className="text-lg font-semibold text-green-10">Tap to Measure</Text>
           <Text className="text-base text-gray-7">Add points manually by tapping the map</Text>
         </View>
       </Pressable>

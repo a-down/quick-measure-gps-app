@@ -134,13 +134,13 @@ export default function AutoMeasure() {
         polygonDistance={polygonDistance}
         setMapType={setMapType} />
 
-      <View className="absolute bottom-8" style={{width: width-32}}>
+      <View className="absolute bottom-0 bg-white p-4 w-full rounded-t-3xl" style={{gap: 8}}>
         <StopMeasuringButton isMeasuring={isMeasuring} setIsMeasuring={setIsMeasuring} polygonCoordinates={polygonCoordinates} />
 
         <View className="w-full flex-row justify-between">
           <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
-          <Pressable className="flex-grow p-4">
-            <Text className="text-center text-lg" style={{color: mapType === "satellite" ? "#fff" : "#000"}}>Save</Text>
+          <Pressable className="flex-grow">
+            <Text className="text-center text-lg p-4" style={{color: mapType === "satellite" ? "#fff" : "#000"}}>Save</Text>
           </Pressable>
         </View>
       </View>

@@ -33,6 +33,13 @@ export default function Layout() {
         <Stack.Screen name="auto-measure" options={{
           title: 'Auto Measure',
           headerBackTitleVisible: false,
+          headerTintColor: '#6DAB64',
+          // headerStyle: {
+          //   backgroundColor: '#1D3F13',
+          // },
+          headerTitleStyle: {
+            color: '#1D3F13',
+          },
           // headerRight: () => (
           //   <Button 
           //     title="Map Type"
