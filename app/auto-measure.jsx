@@ -140,7 +140,7 @@ export default function AutoMeasure() {
         <View className="w-full flex-row justify-between">
           <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
           <Pressable className="flex-grow">
-            <Text className="text-center text-lg p-4" style={{color: mapType === "satellite" ? "#fff" : "#000"}}>Save</Text>
+            <Text className="text-center text-lg p-4 text-[#222222] font-medium">Save</Text>
           </Pressable>
         </View>
       </View>

@@ -4,10 +4,10 @@ const StopMeasuringButton = ({ updateLocation }) => {
 
   return (
     <Pressable 
-      className=" p-4 rounded-md shadow-sm" 
-      style={{backgroundColor: '#fff'}}
+      className=" p-4 rounded-2xl shadow-sm" 
+      style={{backgroundColor: '#6DAB64'}}
       onPress={updateLocation}>
-      <Text className="text-center text-xl">
+      <Text className="text-center text-xl text-white font-semibold">
         Add Marker
       </Text>
     </Pressable>

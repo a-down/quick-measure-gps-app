@@ -10,14 +10,17 @@ const ResetMeasurementsButton = ({ resetMeasurements, mapType }) => {
           text: "Cancel",
           style: "cancel"
         },
-        { text: "Reset", onPress: () => resetMeasurements() }
+        { text: "Reset", 
+          style: "destructive",
+          onPress: () => resetMeasurements() 
+        }
       ]
     );
   }
 
   return (
     <Pressable className="flex-grow p-4" onPress={resetMeasurementsAlert}>
-      <Text className="text-center text-lg" style={{color: mapType === "satellite" ? "#fff" : "#000"}}>Reset</Text>
+      <Text className="text-center text-lg text-[#515151]">Reset</Text>
     </Pressable>
   )
 }

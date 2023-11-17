@@ -49,19 +49,27 @@ export default function Layout() {
         }} />
         <Stack.Screen name="pinpoint-measure" options={{
           title: 'Pinpoint Measure',
-          headerBackTitleVisible: false
+          headerBackTitleVisible: false,
+          headerTintColor: '#6DAB64',
+          headerTitleStyle: {
+            color: '#1D3F13',
+          },
         }} />
         <Stack.Screen name="saved-measurements" options={{
           title: 'Saved Measurements',
-          headerBackTitleVisible: false
+          headerBackTitleVisible: false,
+          headerTintColor: '#6DAB64',
+          headerTitleStyle: {
+            color: '#1D3F13',
+          },
         }} />
         <Stack.Screen name="saved-map" options={{
           title: params.name,
-          headerBackTitleVisible: false
-        }} />
-        <Stack.Screen name="settings" options={{
-          title: 'Settings',
-          headerBackTitleVisible: false
+          headerBackTitleVisible: false,
+          headerTintColor: '#6DAB64',
+          headerTitleStyle: {
+            color: '#1D3F13',
+          },
         }} />
       </Stack>
   )

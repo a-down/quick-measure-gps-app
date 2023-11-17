@@ -153,17 +153,17 @@ export default function AutoMeasure() {
         polygonDistance={polygonDistance}
         setMapType={setMapType} />
 
-      <View className="absolute bottom-8" style={{width: width-32}}>
-        <AddMarkerButton updateLocation={updateLocation} />
-        {/* <RedoMarkerButton redoPreviousMarker={redoPreviousMarker} /> */}
+        <View className="absolute bottom-0 bg-white p-4 w-full rounded-t-3xl" style={{gap: 8}}>
+          <AddMarkerButton updateLocation={updateLocation} />
 
-        <View className="w-full flex-row justify-between">
-          <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
-          <Pressable className="flex-grow p-4">
-            <Text className="text-center text-lg" style={{color: mapType === "satellite" ? "#fff" : "#000"}}>Save</Text>
-          </Pressable>
+          <View className="w-full flex-row justify-between">
+            <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
+            <Pressable className="flex-grow">
+              <Text className="text-center text-lg p-4 text-[#222222] font-medium">Save</Text>
+            </Pressable>
+          </View>
         </View>
-      </View>
+
       
     </View>
   );
