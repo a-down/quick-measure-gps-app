@@ -139,9 +139,16 @@ export default function AutoMeasure() {
 
         <View className="w-full flex-row justify-between">
           <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
-          <Pressable className="flex-grow">
+          {/* <Pressable className="flex-grow">
             <Text className="text-center text-lg p-4 text-[#222222] font-medium">Save</Text>
-          </Pressable>
+          </Pressable> */}
+          <View className="flex-grow p-2">
+            <Button 
+              style={{fontWeight: 'bold'}}
+              color="#000"
+              title="Save" 
+              onPress={() => Alert.alert("saved")} />
+          </View>
         </View>
       </View>
       
