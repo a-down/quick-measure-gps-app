@@ -45,7 +45,7 @@ const Layout = () => {
             color: '#fff',
           },
           tabBarIcon: ({ color, size }) => (
-            <Feather name="folder" size={size} color={color} className="mt-4"/>
+            <Feather name="bookmark" size={size} color={color} className="mt-4"/>
           ),
           tabBarInactiveTintColor: "#9F9F9F",
           tabBarActiveTintColor: "#6DAB64",
