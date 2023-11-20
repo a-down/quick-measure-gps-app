@@ -2,15 +2,18 @@ import { View, Text, TextInput, Pressable, Alert } from 'react-native'
 import { useState, useEffect } from 'react'
 import React from 'react'
 import { MeasurementDisplay } from '../components'
-import { useLocalSearchParams } from 'expo-router'
+import { useLocalSearchParams, useRouter } from 'expo-router'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const SaveMapForm = () => {
+  const router = useRouter();
   const [ mapName, setMapName ] = useState('')
   const { mapType, polygonCoordinates } = useLocalSearchParams();
 
   // save and get preferences with AsyncStorage
   const saveMap = async () => {
+    if (!mapName) return Alert.alert("Please enter a name for the map")
+
     try {
       const value = await AsyncStorage.getItem('savedMaps')
       let data
@@ -19,6 +22,8 @@ const SaveMapForm = () => {
         data = [
           ...JSON.parse(value),
           {
+            dateCreated: new Date(),
+            mapName,
             polygonCoordinates,
             mapType
           }
@@ -33,6 +38,10 @@ const SaveMapForm = () => {
         'savedMaps',
         JSON.stringify(data)
       );
+
+      Alert.alert(`${mapName} saved!`)
+
+      router.back()
 
     } catch (error) {
         console.log(error)
@@ -51,7 +60,7 @@ const SaveMapForm = () => {
       <Pressable 
         className=" p-4 rounded-2xl shadow-sm mt-4" 
         style={{backgroundColor: '#6DAB64'}}
-        onPress={() => Alert.alert(mapName)}>
+        onPress={saveMap}>
         <Text className="text-center text-xl text-white font-semibold">
           Save Map
         </Text>
