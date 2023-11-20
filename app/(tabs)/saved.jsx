@@ -19,6 +19,11 @@ const Saved = () => {
 
   useEffect(() => {
     getMaps()
+      // try {
+      //     AsyncStorage.removeItem('savedMaps');
+      // }
+      // catch(exception) {
+      // }
   }, [])
   if(savedMaps) console.log(savedMaps[0])
 
