@@ -4,6 +4,7 @@ import React from 'react'
 import { MeasurementDisplay } from '../components'
 import { useLocalSearchParams, useRouter } from 'expo-router'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import uuid from 'react-native-uuid';
 
 const SaveMapForm = () => {
   const router = useRouter();
@@ -23,7 +24,7 @@ const SaveMapForm = () => {
         data = [
           ...JSON.parse(value),
           {
-            id: JSON.parse(value).length + 1,
+            id: uuid.v4(),
             dateCreated: new Date(),
             mapName,
             mapType,
@@ -33,7 +34,7 @@ const SaveMapForm = () => {
         ] 
       } else {
         data = [{
-          id: 1,
+          id: uuid.v4(),
           dateCreated: new Date(),
           mapName,
           mapType,
