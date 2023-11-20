@@ -9,31 +9,34 @@ const SaveMapForm = () => {
   const router = useRouter();
   const [ mapName, setMapName ] = useState('')
   const { mapType, polygonCoordinates } = useLocalSearchParams();
+  console.log(polygonCoordinates)
 
   // save and get preferences with AsyncStorage
   const saveMap = async () => {
     if (!mapName) return Alert.alert("Please enter a name for the map")
 
     try {
+      const measurements = await AsyncStorage.getItem('measurementPreferences');
       const value = await AsyncStorage.getItem('savedMaps')
       let data
-      console.log(value)
       if (value !== null) {
         data = [
           ...JSON.parse(value),
           {
             dateCreated: new Date(),
             mapName,
-            polygonCoordinates,
-            mapType
+            mapType,
+            polygonCoordinates: JSON.parse(polygonCoordinates),
+            measurements: JSON.parse(measurements),
           }
         ] 
       } else {
         data = [{
           dateCreated: new Date(),
           mapName,
-          polygonCoordinates,
-          mapType
+          mapType,
+          polygonCoordinates: JSON.parse(polygonCoordinates),
+          measurements: JSON.parse(measurements),
         }]
       }
       await AsyncStorage.setItem(

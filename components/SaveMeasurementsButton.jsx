@@ -13,7 +13,7 @@ const SaveMeasurementsButton = ({ polygonCoordinates, polygonArea, polygonDistan
         style={{fontWeight: 'bold'}}
         color="#000"
         title="Save" 
-        onPress={() => router.push({pathname: "/save-map-form", params: { polygonCoordinates, mapType }})} />  
+        onPress={() => router.push({pathname: "/save-map-form", params: { polygonCoordinates: JSON.stringify(polygonCoordinates), mapType }})} />  
     </View>
   )
 }
