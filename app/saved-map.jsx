@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const SavedMap = () => {
   const router = useRouter();
   const [ mapData, setMapData ] = useState(null)
+  const [ polygonCenter, setPolygonCenter ] = useState(null)
 
   const { map } = useLocalSearchParams();
 
@@ -16,6 +17,7 @@ const SavedMap = () => {
     useCallback(() => {
       console.log(JSON.parse(map))
       setMapData(JSON.parse(map))
+      setPolygonCenter(getCenterOfBounds(JSON.parse(map).polygonCoordinates))
     }, [])
   );
 
@@ -36,9 +38,9 @@ const SavedMap = () => {
           <>
             <MapView 
               style={{flex: 1, width: '100%'}}
-              region={{
-                latitude: mapData.polygonCoordinates[0].latitude,
-                longitude: mapData.polygonCoordinates[0].latitude,
+              initialRegion={{
+                latitude: polygonCenter.latitude,
+                longitude: polygonCenter.longitude,
                 latitudeDelta: 0.001,
                 longitudeDelta: 0.001
               }}
