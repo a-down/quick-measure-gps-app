@@ -19,8 +19,8 @@ export default function App() {
   ]
 
   const Card = ({item}) => (
-    <View className="bg-gray-1">
-      <Pressable className="flex w-full bg-white shadow-sm mb-4 relative" onPress={() => router.push(item.link)}>
+    <View className="bg-gray-2 shadow-sm">
+      <Pressable className="flex w-full bg-white relative" onPress={() => router.push(item.link)}>
         <Image className="w-full aspect-video" source={item.image}/>
         <View className="bg-white w-full p-2 absolute bottom-0">
           <Text className="text-lg font-semibold text-green-10">{item.title}</Text>
@@ -31,18 +31,19 @@ export default function App() {
   )
 
   const ListHeader = () => (
-    <View className="bg-green-5 w-full">
+    <View className="bg-green-4 w-full">
       <Text className=" text-lg m-4 text-white font-medium">Measure</Text>
     </View>
   )
 
   return (
-    <View className="bg-green-5">
+    <View className="bg-gray-2">
       <FlatList
         data={data}
         renderItem={({item}) => <Card item={item} />}
         keyExtractor={item => item.title}
         ListHeaderComponent={() => <ListHeader />}
+        ItemSeparatorComponent={() => <View className="h-4 bg-gray-1"></View>}
         />
     </View>
 
