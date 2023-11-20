@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Saved = () => {
-  const [ savedMaps, setSavedMaps ] = useState({})
+  const [ savedMaps, setSavedMaps ] = useState([])
 
   const getMaps = async () => {
     try {
@@ -26,13 +26,14 @@ const Saved = () => {
     <>
       {savedMaps && (
         savedMaps.map((map, index) => (
-          <>
+          <View key={index}>
             <Text>{map.mapType}</Text>
             <Text>{map.polygonArea}</Text>
             <Text>{map.polygonDistance}</Text>
-          </>
+          </View>
         ))
       )}
+      <Text>Saved Maps</Text>
     </>
   )
 }
