@@ -72,7 +72,7 @@ export default function Layout() {
           },
         }} />
         <Stack.Screen name="save-map-form" options={{
-          title: "Save Map",
+          title: "",
           headerStyle: {
             backgroundColor: '#6DAB64',
           },
