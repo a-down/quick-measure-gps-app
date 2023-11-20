@@ -30,6 +30,8 @@ const SaveMapForm = () => {
         ] 
       } else {
         data = [{
+          dateCreated: new Date(),
+          mapName,
           polygonCoordinates,
           mapType
         }]

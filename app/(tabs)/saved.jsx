@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, Pressable, FlatList, Button } from 'react-native';
 import { useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -25,21 +25,45 @@ const Saved = () => {
       // catch(exception) {
       // }
   }, [])
-  if(savedMaps) console.log(savedMaps[0])
+
+//   <View className="bg-gray-2 shadow-sm">
+//   <Pressable className="flex w-full bg-white" onPress={() => router.push("/")}>
+//     <View className="bg-white w-full p-2 absolute bottom-0">
+//       <Text className="text-lg font-semibold text-green-10">{map.mapName}</Text>
+//       <Text className="text-base text-gray-7">{map.dateCreated}</Text>
+//     </View>
+//   </Pressable>
+// </View>
+
+const Card = ({ item }) => (
+  <View className="bg-gray-2 shadow-sm">
+    <Pressable className="flex w-full bg-white relative" onPress={() => router.push("/")}>
+      <View className="bg-white w-full p-2">
+        <Text className="text-lg font-semibold text-green-10">{item.mapName}</Text>
+        <Text className="text-base text-gray-7">{item.dateCreated.split("T")[0]}</Text>
+      </View>
+    </Pressable>
+  </View>
+)
 
   return (
-    <>
+    <View className=" bg-gray-1 flex-1">
       {savedMaps && (
-        savedMaps.map((map, index) => (
-          <View key={index}>
-            <Text>{map.mapType}</Text>
-            <Text>{map.polygonArea}</Text>
-            <Text>{map.polygonDistance}</Text>
-          </View>
-        ))
+        <FlatList
+          data={savedMaps}
+          renderItem={({item}) => <Card item={item} />}
+          keyExtractor={(item, index) => `${item.mapName}-${index}`}
+          ItemSeparatorComponent={() => <View className="h-4 bg-gray-1"></View>}
+          />
       )}
-      <Text>Saved Maps</Text>
-    </>
+      <Button
+        title="Clear Saved Maps"
+        onPress={() => AsyncStorage.removeItem('savedMaps')} />
+      <Button
+        title="Refresh Maps"
+        onPress={() => setSavedMaps(AsyncStorage.getItem('savedMaps'))} />
+
+    </View>
   )
 }
 

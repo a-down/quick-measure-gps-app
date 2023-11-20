@@ -9,7 +9,7 @@ const SaveMeasurementsButton = ({ polygonCoordinates, polygonArea, polygonDistan
   return (
     <View className="flex-grow p-2">
 
-              <Button 
+      <Button 
         style={{fontWeight: 'bold'}}
         color="#000"
         title="Save" 
