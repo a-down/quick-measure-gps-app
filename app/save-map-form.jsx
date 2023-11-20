@@ -23,6 +23,7 @@ const SaveMapForm = () => {
         data = [
           ...JSON.parse(value),
           {
+            id: JSON.parse(value).length + 1,
             dateCreated: new Date(),
             mapName,
             mapType,
@@ -32,6 +33,7 @@ const SaveMapForm = () => {
         ] 
       } else {
         data = [{
+          id: 1,
           dateCreated: new Date(),
           mapName,
           mapType,
