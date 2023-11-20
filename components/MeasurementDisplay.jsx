@@ -98,7 +98,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType }) => {
 
   return (
     <View className="bg-white p-4 pb-2 top-2 rounded-lg shadow-lg absolute" style={{width: width-16, gap: 8}}>
-      <View className="flex-row justify-between flex-wrap" style={{gapY: 8}}>
+      <View className="flex-row justify-between flex-wrap" style={{gapY: 8, marginBottom: setMapType ? "" : 8}}>
         <Text className="text-lg">
           <Text className="text-3xl">
             { polygonArea 
@@ -117,22 +117,23 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType }) => {
         </Text>
       </View>
 
-              
-      <Button 
-        title="Map Settings"
-        color="#888"
-        onPress={() => {
-          Alert.alert(
-            "Map Settings",
-            "What would you like to change?",
-            [
-              { text: "Map Type", onPress: () => mapTypeAlert() },
-              { text: "Area Units", onPress: () => updateAreaAlert() },
-              { text: "Distance Units", onPress: () => updateDistanceAlert() },
-              { text: "Cancel", style: "cancel" }
-            ]
-          )
-        }}/>
+      {setMapType && (      
+        <Button 
+          title="Map Settings"
+          color="#888"
+          onPress={() => {
+            Alert.alert(
+              "Map Settings",
+              "What would you like to change?",
+              [
+                { text: "Map Type", onPress: () => mapTypeAlert() },
+                { text: "Area Units", onPress: () => updateAreaAlert() },
+                { text: "Distance Units", onPress: () => updateDistanceAlert() },
+                { text: "Cancel", style: "cancel" }
+              ]
+            )
+          }}/>
+      )}
 
     </View>
   )
