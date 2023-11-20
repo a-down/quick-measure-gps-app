@@ -64,7 +64,6 @@ export default function Layout() {
           },
         }} />
         <Stack.Screen name="saved-map" options={{
-          title: params.name,
           headerBackTitleVisible: false,
           headerTintColor: '#6DAB64',
           headerTitleStyle: {

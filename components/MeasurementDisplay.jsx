@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // preferences default to sq meters and meters
 const defaultPreferences = { area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm' }
 
-const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, absolute }) => {
+const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType }) => {
   const { width } = useWindowDimensions();
   const [ measurementPreferences, setMeasurementPreferences ] = useState(defaultPreferences)
 
@@ -97,7 +97,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, absolute
   
 
   return (
-    <View className="bg-white p-4 pb-2 top-2 rounded-lg shadow-lg" style={{width: width-16, gap: 8, position: absolute ? "absolute" : "static"}}>
+    <View className="bg-white p-4 pb-2 top-2 rounded-lg shadow-lg absolute" style={{width: width-16, gap: 8}}>
       <View className="flex-row justify-between flex-wrap" style={{gapY: 8}}>
         <Text className="text-lg">
           <Text className="text-3xl">
@@ -117,6 +117,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, absolute
         </Text>
       </View>
 
+              
       <Button 
         title="Map Settings"
         color="#888"

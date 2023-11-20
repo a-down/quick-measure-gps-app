@@ -87,7 +87,7 @@ const Saved = () => {
         </View>  
 
         <View className=" flex-row w-full" style={{gap: 8}}>
-          <Pressable className="bg-green-5 p-2 rounded-md flex-grow">
+          <Pressable className="bg-green-5 p-2 rounded-md flex-grow" onPress={() => router.push({ pathname: "/saved-map", params: { map: JSON.stringify(item) }})}>
             <Text className="text-white font-semibold text-lg text-center">View Map</Text>
           </Pressable>
           <Pressable className="bg-[#C7504B] opacity-60 w-11 h-full rounded-md" onPress={() => deleteMapAlert({id: item.id, mapName: item.mapName})}></Pressable>
