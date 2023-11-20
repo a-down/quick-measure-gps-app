@@ -2,7 +2,7 @@ import { View, Text, Pressable, FlatList, Button, Alert } from 'react-native';
 import { useEffect, useState, useCallback } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getAreaOfPolygon, getPathLength, convertArea, convertDistance } from 'geolib';
-import { useRouter, useFocusEffect } from 'expo-router';
+import { useRouter, useFocusEffect, Stack } from 'expo-router';
 
 
 const Saved = () => {

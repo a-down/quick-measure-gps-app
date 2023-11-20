@@ -63,13 +63,13 @@ export default function Layout() {
             color: '#1D3F13',
           },
         }} />
-        <Stack.Screen name="saved-map" options={{
+        {/* <Stack.Screen name="saved-map" options={{
           headerBackTitleVisible: false,
           headerTintColor: '#6DAB64',
           headerTitleStyle: {
             color: '#1D3F13',
           },
-        }} />
+        }} /> */}
         <Stack.Screen name="save-map-form" options={{
           title: "",
           headerStyle: {

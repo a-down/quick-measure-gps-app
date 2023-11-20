@@ -1,5 +1,5 @@
 import { View, Text, Alert } from 'react-native';
-import { useLocalSearchParams, useRouter, useFocusEffect } from 'expo-router';
+import { useLocalSearchParams, useRouter, useFocusEffect, Stack } from 'expo-router';
 import { MeasurementDisplay } from '../components';
 import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
 import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from 'geolib';
@@ -33,6 +33,16 @@ const SavedMap = () => {
   }
   
   return (
+    <>
+      <Stack.Screen options={{
+        title: mapData ? mapData.mapName : "",
+        headerBackTitleVisible: false,
+        headerTintColor: '#6DAB64',
+        headerTitleStyle: {
+          color: '#1D3F13',
+        },
+      }} />
+
       <View className="flex-1 items-center justify-center">
         {mapData && (
           <>
@@ -46,12 +56,34 @@ const SavedMap = () => {
               }}
               mapType={mapData.mapType}
               >
+            
+              {mapData.polygonCoordinates.map((coordinate, index) => (
+                <Marker
+                  key={index}
+                  coordinate={{
+                    latitude: coordinate.latitude,
+                    longitude: coordinate.longitude,
+                  }}
+                  title="Location"
+                  />
+              ))}
 
+              {mapData.polygonCoordinates.length < 3 && (
+                <Polyline
+                  strokeColor="red"
+                  strokeWidth={2}
+                  coordinates={mapData.polygonCoordinates}
+                />
+              )}
+
+              {mapData.polygonCoordinates.length > 2 && (
                 <Polygon 
                   strokeColor="red"
                   strokeWidth={2}
                   coordinates={mapData.polygonCoordinates}
                 />
+              )}
+
             </MapView>
 
             <MeasurementDisplay 
@@ -61,6 +93,7 @@ const SavedMap = () => {
         )}
         
       </View>
+    </>
   )
 }
 
