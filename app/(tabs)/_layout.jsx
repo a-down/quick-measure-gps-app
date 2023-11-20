@@ -10,7 +10,7 @@ const Layout = () => {
   return (
     <Tabs>
       <Tabs.Screen 
-        name="tools"
+        name="ToolsTab"
         options={{
           tabBarLabel: "Tools",
           title: "Quick Measure",
@@ -33,7 +33,7 @@ const Layout = () => {
         }}
       />
       <Tabs.Screen 
-        name="saved"
+        name="SavedTab"
         options={{
           tabBarLabel: "Saved",
           title: "Saved Measurements",
@@ -56,7 +56,7 @@ const Layout = () => {
         }}
       />
       <Tabs.Screen 
-        name="settings"
+        name="SettingsTab"
         options={{
           tabBarLabel: "Settings",
           title: "Settings",

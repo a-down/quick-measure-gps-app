@@ -1,13 +1,11 @@
-import { View, Text, Alert } from 'react-native';
+import { View } from 'react-native';
 import { useLocalSearchParams, useRouter, useFocusEffect, Stack } from 'expo-router';
 import { MeasurementDisplay } from '../components';
 import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
 import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from 'geolib';
-import { useState, useEffect, useCallback } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useState, useCallback } from 'react';
 
 const SavedMap = () => {
-  const router = useRouter();
   const [ mapData, setMapData ] = useState(null)
   const [ polygonCenter, setPolygonCenter ] = useState(null)
 
@@ -20,17 +18,6 @@ const SavedMap = () => {
       setPolygonCenter(getCenterOfBounds(JSON.parse(map).polygonCoordinates))
     }, [])
   );
-
-  const getMapData = async () => {
-    try {
-      const value = await AsyncStorage.getItem('savedMaps')
-      return JSON.parse(value).filter(map => map.id === id)[0]
-    } catch (error) {
-      console.log
-      router.back()
-      Alert.alert("Could not load map")
-    }
-  }
   
   return (
     <>

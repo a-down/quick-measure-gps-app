@@ -30,7 +30,7 @@ export default function Layout() {
             <View style={{width: 24, height: 24, backgroundColor: "#fff"}}></View>
           ),
         }} /> */}
-        <Stack.Screen name="auto-measure" options={{
+        <Stack.Screen name="AutoMeasureScreen" options={{
           title: 'Auto Measure',
           headerBackTitleVisible: false,
           headerTintColor: '#6DAB64',
@@ -47,16 +47,8 @@ export default function Layout() {
           //     onPress={MapTypeAlert}/>
           // )
         }} />
-        <Stack.Screen name="pinpoint-measure" options={{
+        <Stack.Screen name="PinpointMeasureScreen" options={{
           title: 'Pinpoint Measure',
-          headerBackTitleVisible: false,
-          headerTintColor: '#6DAB64',
-          headerTitleStyle: {
-            color: '#1D3F13',
-          },
-        }} />
-        <Stack.Screen name="saved-measurements" options={{
-          title: 'Saved Measurements',
           headerBackTitleVisible: false,
           headerTintColor: '#6DAB64',
           headerTitleStyle: {
@@ -70,7 +62,7 @@ export default function Layout() {
             color: '#1D3F13',
           },
         }} /> */}
-        <Stack.Screen name="save-map-form" options={{
+        <Stack.Screen name="SaveMapFormScreen" options={{
           title: "",
           headerStyle: {
             backgroundColor: '#6DAB64',
