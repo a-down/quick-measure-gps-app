@@ -106,9 +106,7 @@ export default function AutoMeasure() {
             latitudeDelta: 0.001,
             longitudeDelta: 0.001
           }}
-          mapType={mapType || "standard"}
-          // showsUserLocation={true}
-          >
+          mapType={mapType || "standard"}>
 
             {currentLocation && (
               <Marker

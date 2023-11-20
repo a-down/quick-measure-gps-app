@@ -2,9 +2,6 @@ import { View, Text } from 'react-native';
 import { Tabs } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
 
-const headerOptions = {
-  
-}
 
 const Layout = () => {
   return (
@@ -32,6 +29,7 @@ const Layout = () => {
           }
         }}
       />
+      
       <Tabs.Screen 
         name="SavedTab"
         options={{
@@ -55,6 +53,7 @@ const Layout = () => {
           }
         }}
       />
+
       <Tabs.Screen 
         name="SettingsTab"
         options={{

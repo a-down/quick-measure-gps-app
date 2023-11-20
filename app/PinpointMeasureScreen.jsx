@@ -113,9 +113,7 @@ export default function AutoMeasure() {
             latitudeDelta: 0.001,
             longitudeDelta: 0.001
           }}
-          mapType={mapType || "standard"}
-          // showsUserLocation={true}
-          >
+          mapType={mapType || "standard"}>
 
             {polygonCoordinates.length > 0 && (
               (polygonCoordinates.map((coordinate, index) => (
