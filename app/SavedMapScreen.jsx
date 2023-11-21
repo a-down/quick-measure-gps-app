@@ -50,8 +50,8 @@ const SavedMap = () => {
               initialRegion={{
                 latitude: polygonCenter.latitude,
                 longitude: polygonCenter.longitude,
-                latitudeDelta: 0.001,
-                longitudeDelta: 0.001
+                latitudeDelta: 0.003,
+                longitudeDelta: 0.003
               }}
               mapType={mapData.mapType}
               >
