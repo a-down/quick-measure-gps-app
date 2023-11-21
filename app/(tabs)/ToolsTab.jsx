@@ -14,8 +14,8 @@ export default function App() {
 
   const data = [
     {link: '/AutoMeasureScreen', image: mapScreenshot, title: 'Auto Measure', description: 'Track your location with GPS'},
-    {link: '/PinpointMeasureScreen', image: mapScreenshot, title: 'Pinpoint Measure', description: 'Manually log points with GPS'},
-    {link: '/tap-measure', image: mapScreenshot, title: 'Tap to Measure', description: 'Add points manually by tapping the map'},
+    {link: '/PinpointMeasureScreen', image: mapScreenshot, title: 'Pinpoint Measure', description: 'Manually log your position with GPS'},
+    {link: '/TapMeasureScreen', image: mapScreenshot, title: 'Tap to Measure', description: 'Add points manually by tapping the map'},
   ]
 
   const Card = ({item}) => (
