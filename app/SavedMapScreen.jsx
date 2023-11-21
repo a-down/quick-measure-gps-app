@@ -95,7 +95,8 @@ const SavedMap = () => {
 
             <MeasurementDisplay 
               polygonArea={getAreaOfPolygon(mapData.polygonCoordinates)} 
-              polygonDistance={getPathLength(mapData.polygonCoordinates)}/>
+              polygonDistance={getPathLength(mapData.polygonCoordinates)}
+              preferredMeasurements={mapData.measurements}/>
           </>
         )}
         

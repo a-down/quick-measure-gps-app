@@ -2,17 +2,19 @@ import { Text, View, Pressable, useWindowDimensions, Alert, Button } from 'react
 import { useState, useEffect } from 'react';
 import { convertArea, convertDistance } from 'geolib';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import convertToAcres from '../hooks/convertToAcres';
+import handleConvertArea from '../hooks/handleConvertArea';
 
 // preferences default to sq meters and meters
-const defaultPreferences = { area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm', perimeterDistance: false }
+const defaultPreferences = { area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm' }
 
-const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType }) => {
+const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferredMeasurements }) => {
   const { width } = useWindowDimensions();
   const [ measurementPreferences, setMeasurementPreferences ] = useState(defaultPreferences)
 
   // set preferences
   useEffect(() => {
-    getPreferences()
+    preferredMeasurements ? setMeasurementPreferences(preferredMeasurements) : getPreferences()
   }, [])
 
   const getPreferences = async () => {
@@ -103,7 +105,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType }) => {
           <Text className="text-lg">
             <Text className="text-3xl">
               { polygonArea 
-                ? convertArea(polygonArea, measurementPreferences.areaShort).toFixed(2)
+                ? handleConvertArea(polygonArea, measurementPreferences.areaShort).toFixed(2)
                 : 0}
             </Text>
             {` `}{ measurementPreferences.area }
