@@ -22,7 +22,7 @@ export default function App() {
     <View className="bg-gray-2 shadow-sm">
       <Pressable className="flex w-full bg-white relative aspect-video" onPress={() => router.push(item.link)}>
         <Image className="w-full " source={item.image}/>
-        <View className="bg-white w-full p-2 absolute bottom-0">
+        <View className="bg-white w-full p-2 absolute -bottom-0.5">
           <Text className="text-lg font-semibold text-green-10">{item.title}</Text>
           <Text className="text-base text-gray-7">{item.description}</Text>
         </View>
@@ -32,12 +32,12 @@ export default function App() {
 
   const ListHeader = () => (
     <View className="bg-green-4 w-full">
-      <Text className=" text-lg m-4 text-white font-medium">Measure</Text>
+      <Text className=" text-lg m-4 text-white font-medium">Measurement Tools</Text>
     </View>
   )
 
   return (
-    <View className="bg-gray-2">
+    <View className="bg-gray-1">
       <FlatList
         data={data}
         renderItem={({item}) => <Card item={item} />}
