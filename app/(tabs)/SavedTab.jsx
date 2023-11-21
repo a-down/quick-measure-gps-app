@@ -13,7 +13,6 @@ const Saved = () => {
   const getMaps = async () => {
     try {
       const value = await AsyncStorage.getItem('savedMaps')
-      console.log(JSON.parse(value))
       value !== null 
         ? setSavedMaps(JSON.parse(value))
         : setEmptyState(true)

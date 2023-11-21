@@ -10,7 +10,6 @@ const SaveMapForm = () => {
   const router = useRouter();
   const [ mapName, setMapName ] = useState('')
   const { mapType, polygonCoordinates } = useLocalSearchParams();
-  console.log(polygonCoordinates)
 
   // save and get preferences with AsyncStorage
   const saveMap = async () => {

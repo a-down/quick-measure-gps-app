@@ -13,7 +13,6 @@ const SavedMap = () => {
 
   useFocusEffect(
     useCallback(() => {
-      console.log(JSON.parse(map))
       setMapData(JSON.parse(map))
       setPolygonCenter(getCenterOfBounds(JSON.parse(map).polygonCoordinates))
     }, [])
