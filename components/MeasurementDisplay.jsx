@@ -10,7 +10,7 @@ import { Feather } from '@expo/vector-icons';
 // preferences default to sq meters and meters
 const defaultPreferences = { area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm' }
 
-const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferredMeasurements }) => {
+const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferredMeasurements, distanceAround }) => {
   const { width } = useWindowDimensions();
   const [ measurementPreferences, setMeasurementPreferences ] = useState(defaultPreferences)
 
@@ -173,7 +173,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
                   : 0}
               </Text>
               {` `}{ measurementPreferences.area }
-              <Text className="text-sm text-gray-6">{' '}(inner area)</Text>
+              <Text className="text-sm text-gray-6">{' '}(area)</Text>
             </Text>
             
           </View>
@@ -185,7 +185,9 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
                   : 0 }
               </Text>
               {` `}{ measurementPreferences.distance }
-              <Text className="text-sm text-gray-6">{' '}(distance traveled)</Text>
+              <Text className="text-sm text-gray-6">{' '}
+                {distanceAround ? "(distance around)" : "(distance traveled)"}
+              </Text>
             </Text>
           
           </View>

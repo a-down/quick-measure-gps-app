@@ -188,7 +188,7 @@ export default function TapMeasure() {
         polygonArea={polygonArea} 
         polygonDistance={polygonDistance}
         setMapType={setMapType}
-        absolute={true} />
+        distanceAround={true} />
 
         <View className="absolute bottom-0 bg-white p-4 w-full rounded-t-3xl" style={{gap: 8}}>
           {/* <AddMarkerButton updateLocation={updateLocation} /> */}
