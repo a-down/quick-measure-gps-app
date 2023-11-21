@@ -72,11 +72,11 @@ export default function TapMeasure() {
     //   addLocationToPolygon(currentLocation)
     //   setRegion(currentLocation)
     // }
-    // if (polygonCoordinates.length > 1) {
-    //   setPolygonDistance(getPathLength(polygonCoordinates))
-    //   setPolygonArea(getAreaOfPolygon(polygonCoordinates))
-    // }
-  }, [currentLocation])
+    if (polygonCoordinates.length > 1) {
+      setPolygonDistance(getPathLength(polygonCoordinates))
+      setPolygonArea(getAreaOfPolygon(polygonCoordinates))
+    }
+  }, [polygonCoordinates])
 
   const getMapPreferences = async () => {
     try {
