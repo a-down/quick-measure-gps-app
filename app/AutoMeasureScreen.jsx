@@ -127,17 +127,16 @@ export default function AutoMeasure() {
               />
             )}
 
-            <Polyline 
+            <Polygon
+              strokeColor='transparent'
+              fillColor="rgba(255, 255, 255, 0.6)"
+              strokeWidth={1}
+              coordinates={polygonCoordinates} />
+            
+            <Polyline
               strokeColor="red"
               strokeWidth={2}
-              coordinates={polygonCoordinates}
-            />
-
-            <Polyline 
-              strokeColor="gray"
-              strokeWidth={1}
-              coordinates={[polygonCoordinates[0], polygonCoordinates[polygonCoordinates.length - 1]]}
-            />
+              coordinates={polygonCoordinates} />
         </MapView>
       )}
 
