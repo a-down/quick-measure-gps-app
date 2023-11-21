@@ -3,6 +3,7 @@ import { useEffect, useState, useCallback } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getAreaOfPolygon, getPathLength, convertArea, convertDistance } from 'geolib';
 import { useRouter, useFocusEffect, Stack } from 'expo-router';
+import handleConvertArea from '../../hooks/handleConvertArea';
 
 
 const Saved = () => {
@@ -47,7 +48,7 @@ const Saved = () => {
           'savedMaps',
           JSON.stringify(data)
         );
-        setSavedMaps(data)
+        setSavedMaps(data.reverse())
         Alert.alert("Map deleted")
       }
     } catch (error) {
@@ -61,8 +62,8 @@ const Saved = () => {
     const polygonDistance = getPathLength(item.polygonCoordinates)
 
     return (
-      <View className="flex w-full bg-white relative p-4" style={{gap: 8}}>
-        <View className="bg-white w-full">
+      <Pressable className="flex w-full bg-white relative p-4" style={{gap: 8}} onPress={() => router.push({ pathname: "/SavedMapScreen", params: { map: JSON.stringify(item) }})}>
+        <View className="w-full">
           <Text className="text-2xl font-semibold text-green-10">{item.mapName}</Text>
           <Text className="text-base text-gray-7">{item.dateCreated.split("T")[0]}</Text>
         </View>
@@ -71,7 +72,7 @@ const Saved = () => {
           <Text className="text-lg text-gray-8 mr-8">
             <Text className="text-2xl">
               { polygonArea
-                ? convertArea(polygonArea, item.measurements.areaShort).toFixed(2)
+                ? handleConvertArea(polygonArea, item.measurements.areaShort).toFixed(2)
                 : 0}
             </Text>
             {` `}{ item.measurements.area }
@@ -92,7 +93,7 @@ const Saved = () => {
           </Pressable>
           <Pressable className="bg-[#C7504B] opacity-60 w-11 h-full rounded-md" onPress={() => deleteMapAlert({id: item.id, mapName: item.mapName})}></Pressable>
         </View>   
-      </View>
+      </Pressable>
     )
   }
 
