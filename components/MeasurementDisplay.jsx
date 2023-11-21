@@ -4,7 +4,7 @@ import { convertArea, convertDistance } from 'geolib';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // preferences default to sq meters and meters
-const defaultPreferences = { area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm' }
+const defaultPreferences = { area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm', perimeterDistance: false }
 
 const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType }) => {
   const { width } = useWindowDimensions();
@@ -99,22 +99,28 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType }) => {
   return (
     <View className="bg-white p-4 pb-2 top-2 rounded-lg shadow-lg absolute" style={{width: width-16, gap: 8}}>
       <View className="flex-row justify-between flex-wrap" style={{gapY: 8, marginBottom: setMapType ? 0 : 8}}>
-        <Text className="text-lg">
-          <Text className="text-3xl">
-            { polygonArea 
-              ? convertArea(polygonArea, measurementPreferences.areaShort).toFixed(2)
-              : 0}
+        <View>
+          <Text className="text-lg">
+            <Text className="text-3xl">
+              { polygonArea 
+                ? convertArea(polygonArea, measurementPreferences.areaShort).toFixed(2)
+                : 0}
+            </Text>
+            {` `}{ measurementPreferences.area }
           </Text>
-          {` `}{ measurementPreferences.area }
-        </Text>
-        <Text className="text-lg">
-          <Text className="text-3xl">
-            { polygonDistance
-              ? convertDistance(polygonDistance, measurementPreferences.distanceShort).toFixed(2)
-              : 0 }
+          <Text className="text-sm text-gray-6">(inner area)</Text>
+        </View>
+        <View>
+          <Text className="text-lg">
+            <Text className="text-3xl">
+              { polygonDistance
+                ? convertDistance(polygonDistance, measurementPreferences.distanceShort).toFixed(2)
+                : 0 }
+            </Text>
+            {` `}{ measurementPreferences.distance }
           </Text>
-          {` `}{ measurementPreferences.distance }
-        </Text>
+          <Text className="text-sm text-gray-6">(distance traveled)</Text>
+        </View>
       </View>
 
       {setMapType && (      

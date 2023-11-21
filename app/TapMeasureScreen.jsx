@@ -168,11 +168,19 @@ export default function TapMeasure() {
             )}
 
             {polygonCoordinates.length > 2 && (
-              <Polygon 
-                strokeColor="red"
-                strokeWidth={2}
-                coordinates={polygonCoordinates}
-              />
+              <>
+                <Polyline
+                  strokeColor="red"
+                  strokeWidth={2}
+                  coordinates={polygonCoordinates}
+                />
+
+                <Polyline
+                  strokeColor="gray"
+                  strokeWidth={1}
+                  coordinates={[polygonCoordinates[0], polygonCoordinates[polygonCoordinates.length - 1]]}
+                />
+              </>
             )}
         </MapView>
       )}

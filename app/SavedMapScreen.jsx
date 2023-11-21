@@ -76,11 +76,19 @@ const SavedMap = () => {
               )}
 
               {mapData.polygonCoordinates.length > 2 && (
-                <Polygon 
-                  strokeColor="red"
-                  strokeWidth={2}
-                  coordinates={mapData.polygonCoordinates}
-                />
+                <>
+                  <Polyline
+                    strokeColor="red"
+                    strokeWidth={2}
+                    coordinates={mapData.polygonCoordinates}
+                  />
+
+                  <Polyline
+                    strokeColor="gray"
+                    strokeWidth={1}
+                    coordinates={[mapData.polygonCoordinates[0], mapData.polygonCoordinates[mapData.polygonCoordinates.length - 1]]}
+                  />
+                </>
               )}
 
             </MapView>
