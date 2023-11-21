@@ -138,17 +138,16 @@ export default function AutoMeasure() {
 
             {polygonCoordinates.length > 2 && (
               <>
+                <Polygon
+                  strokeColor='transparent'
+                  fillColor="rgba(255, 255, 255, 0.6)"
+                  strokeWidth={1}
+                  coordinates={polygonCoordinates} />
+                
                 <Polyline
                   strokeColor="red"
                   strokeWidth={2}
-                  coordinates={polygonCoordinates}
-                />
-
-                <Polyline
-                  strokeColor="gray"
-                  strokeWidth={1}
-                  coordinates={[polygonCoordinates[0], polygonCoordinates[polygonCoordinates.length - 1]]}
-                />
+                  coordinates={polygonCoordinates} />
               </>
             )}
         </MapView>
@@ -157,13 +156,12 @@ export default function AutoMeasure() {
       <MeasurementDisplay 
         polygonArea={polygonArea} 
         polygonDistance={polygonDistance}
-        setMapType={setMapType}
-        absolute={true} />
+        setMapType={setMapType}/>
 
         <View className="absolute bottom-0 bg-white p-4 w-full rounded-t-3xl" style={{gap: 8}}>
           <AddMarkerButton updateLocation={updateLocation} />
 
-          <View className="w-full flex-row justify-between">
+          <View className="w-full flex-row justify-between mb-1">
             <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
             <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
           </View>

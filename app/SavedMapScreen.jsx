@@ -91,6 +91,21 @@ const SavedMap = () => {
                 </>
               )}
 
+            {mapData.polygonCoordinates.length > 2 && (
+              <>
+                <Polygon
+                  strokeColor='transparent'
+                  fillColor="rgba(255, 255, 255, 0.6)"
+                  strokeWidth={1}
+                  coordinates={mapData.polygonCoordinates} />
+                
+                <Polyline
+                  strokeColor="red"
+                  strokeWidth={2}
+                  coordinates={mapData.polygonCoordinates} />
+              </>
+            )}
+
             </MapView>
 
             <MeasurementDisplay 
