@@ -3,7 +3,7 @@ import { useLocalSearchParams, useRouter, useFocusEffect, Stack } from 'expo-rou
 import { MeasurementDisplay } from '../components';
 import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
 import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from 'geolib';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 
 const SavedMap = () => {
   const [ mapData, setMapData ] = useState(null)
@@ -11,11 +11,22 @@ const SavedMap = () => {
 
   const { map } = useLocalSearchParams();
 
+  const mapView = useRef()
+
   useFocusEffect(
     useCallback(() => {
       setMapData(JSON.parse(map))
       setPolygonCenter(getCenterOfBounds(JSON.parse(map).polygonCoordinates))
     }, [])
+    
+    // mapView.current.fitToCoordinates(mapData.polygonCoordinates, {
+    //   edgePadding: {
+    //     top: 10,
+    //     right: 10,
+    //     bottom: 10,
+    //     left: 10
+    //   }
+    // })
   );
   
   return (
@@ -33,6 +44,8 @@ const SavedMap = () => {
         {mapData && (
           <>
             <MapView 
+              ref={mapView}
+              // onLayout={() => this.fitToCoordinates()}
               style={{flex: 1, width: '100%'}}
               initialRegion={{
                 latitude: polygonCenter.latitude,

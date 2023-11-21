@@ -14,7 +14,7 @@ const Saved = () => {
     try {
       const value = await AsyncStorage.getItem('savedMaps')
       value !== null 
-        ? setSavedMaps(JSON.parse(value))
+        ? setSavedMaps(JSON.parse(value).reverse())
         : setEmptyState(true)
     } catch (error) {
         console.log(error)
