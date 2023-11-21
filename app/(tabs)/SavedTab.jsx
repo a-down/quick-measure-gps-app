@@ -8,14 +8,15 @@ import { useRouter, useFocusEffect, Stack } from 'expo-router';
 const Saved = () => {
   const router = useRouter();
   const [ savedMaps, setSavedMaps ] = useState([])
+  const [ emptyState, setEmptyState ] = useState(false)
 
   const getMaps = async () => {
     try {
       const value = await AsyncStorage.getItem('savedMaps')
       console.log(JSON.parse(value))
-      if (value !== null) {
-        setSavedMaps(JSON.parse(value))
-      }
+      value !== null 
+        ? setSavedMaps(JSON.parse(value))
+        : setEmptyState(true)
     } catch (error) {
         console.log(error)
     }
@@ -91,7 +92,7 @@ const Saved = () => {
             <Text className="text-white font-semibold text-lg text-center">View Map</Text>
           </Pressable>
           <Pressable className="bg-[#C7504B] opacity-60 w-11 h-full rounded-md" onPress={() => deleteMapAlert({id: item.id, mapName: item.mapName})}></Pressable>
-        </View>      
+        </View>   
       </View>
     )
   }
@@ -106,6 +107,21 @@ const Saved = () => {
           ItemSeparatorComponent={() => <View className="h-4 bg-gray-1"></View>}
           />
       )}
+
+      {emptyState && (
+        <View className="h-full justify-center items-center " style={{gap: 16}}>
+          <Text className="text-lg text-gray-8 text-center">Save a map to see it here!</Text>
+          <Pressable className="w-3/4" onPress={() => router.push("/AutoMeasureScreen")}>
+            <Text className="text-lg text-gray-8 text-center">
+              Start{' '}
+              <Text className="text-green-8 underline">
+                Auto Measure
+              </Text>
+              {' '}and walk around your house
+            </Text>
+          </Pressable>
+        </View>
+      )}   
     </View>
   )
 }

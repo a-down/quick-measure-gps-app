@@ -21,7 +21,7 @@ export default function App() {
   const Card = ({item}) => (
     <View className="bg-gray-2 shadow-sm">
       <Pressable className="flex w-full bg-white relative" onPress={() => router.push(item.link)}>
-        <Image className="w-full aspect-video" source={item.image}/>
+        <Image className="w-full" source={item.image}/>
         <View className="bg-white w-full p-2 absolute bottom-0">
           <Text className="text-lg font-semibold text-green-10">{item.title}</Text>
           <Text className="text-base text-gray-7">{item.description}</Text>
