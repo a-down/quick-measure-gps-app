@@ -42,7 +42,7 @@ export default function App() {
         data={data}
         renderItem={({item}) => <Card item={item} />}
         keyExtractor={item => item.title}
-        ListHeaderComponent={() => <ListHeader />}
+        // ListHeaderComponent={() => <ListHeader />}
         ItemSeparatorComponent={() => <View className="h-4 bg-gray-1"></View>}
         />
     </View>

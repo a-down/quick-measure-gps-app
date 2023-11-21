@@ -4,6 +4,8 @@ import { convertArea, convertDistance } from 'geolib';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import convertToAcres from '../hooks/convertToAcres';
 import handleConvertArea from '../hooks/handleConvertArea';
+import { Stack, useLocalSearchParams } from 'expo-router';
+import { Feather } from '@expo/vector-icons';
 
 // preferences default to sq meters and meters
 const defaultPreferences = { area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm' }
@@ -96,54 +98,135 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
       ]
     );
   }
+
+  const settingsIcon = () => {
+    {setMapType && (      
+      // <Button 
+      //   title="Map Settings"
+      //   color="#888"
+      //   onPress={() => {
+      //     Alert.alert(
+      //       "Map Settings",
+      //       "What would you like to change?",
+      //       [
+      //         { text: "Map Type", onPress: () => mapTypeAlert() },
+      //         { text: "Area Units", onPress: () => updateAreaAlert() },
+      //         { text: "Distance Units", onPress: () => updateDistanceAlert() },
+      //         { text: "Cancel", style: "cancel" }
+      //       ]
+      //     )
+      //   }}/>
+      <Pressable
+      onPress={() => {
+        Alert.alert(
+          "Map Settings",
+          "What would you like to change?",
+          [
+            { text: "Map Type", onPress: () => mapTypeAlert() },
+            { text: "Area Units", onPress: () => updateAreaAlert() },
+            { text: "Distance Units", onPress: () => updateDistanceAlert() },
+            { text: "Cancel", style: "cancel" }
+          ]
+        )
+      }}>
+        <Feather name="settings" size={24} color="black" />
+      </Pressable>
+    )}
+  }
   
 
   return (
-    <View className="bg-white p-4 pb-2 top-2 rounded-lg shadow-lg absolute" style={{width: width-16, gap: 8}}>
-      <View className="flex-row justify-between flex-wrap" style={{gapY: 8, marginBottom: setMapType ? 0 : 8}}>
-        <View>
-          <Text className="text-lg">
-            <Text className="text-3xl">
-              { polygonArea 
-                ? handleConvertArea(polygonArea, measurementPreferences.areaShort).toFixed(2)
-                : 0}
+    <>
+      {/* <Stack.Screen options={{
+        title: 'Tap to Measure',
+        headerBackTitleVisible: false,
+        headerTintColor: '#6DAB64',
+        headerTitleStyle: {
+          color: '#1D3F13',
+        },
+        headerRight: () => (    
+          <Button 
+            title="Set"
+            color="#888"
+            onPress={() => {
+              Alert.alert(
+                "Map Settings",
+                "What would you like to change?",
+                [
+                  { text: "Map Type", onPress: () => mapTypeAlert() },
+                  { text: "Area Units", onPress: () => updateAreaAlert() },
+                  { text: "Distance Units", onPress: () => updateDistanceAlert() },
+                  { text: "Cancel", style: "cancel" }
+                ]
+              )
+            }}/>
+          )
+      }} /> */}
+
+      <View className="bg-white p-4 pb-2 top-0 rounded-b-xl shadow-lg absolute flex-row justify-between" style={{width: width, gap: 8}}>
+        <View className=" justify-between flex-wrap" style={{gapY: 8, marginBottom: 8}}>
+          <View>
+            <Text className="text-base">
+              <Text className="text-2xl">
+                { polygonArea 
+                  ? handleConvertArea(polygonArea, measurementPreferences.areaShort).toFixed(2)
+                  : 0}
+              </Text>
+              {` `}{ measurementPreferences.area }
+              <Text className="text-sm text-gray-6">{' '}(inner area)</Text>
             </Text>
-            {` `}{ measurementPreferences.area }
-          </Text>
-          <Text className="text-sm text-gray-6">(inner area)</Text>
-        </View>
-        <View>
-          <Text className="text-lg">
-            <Text className="text-3xl">
-              { polygonDistance
-                ? convertDistance(polygonDistance, measurementPreferences.distanceShort).toFixed(2)
-                : 0 }
+            
+          </View>
+          <View>
+            <Text className="text-base">
+              <Text className="text-2xl">
+                { polygonDistance
+                  ? convertDistance(polygonDistance, measurementPreferences.distanceShort).toFixed(2)
+                  : 0 }
+              </Text>
+              {` `}{ measurementPreferences.distance }
+              <Text className="text-sm text-gray-6">{' '}(distance traveled)</Text>
             </Text>
-            {` `}{ measurementPreferences.distance }
-          </Text>
-          <Text className="text-sm text-gray-6">(distance traveled)</Text>
+          
+          </View>
         </View>
+
+        {setMapType && (      
+          // <Button 
+          //   title="Map Settings"
+          //   color="#888"
+          //   onPress={() => {
+          //     Alert.alert(
+          //       "Map Settings",
+          //       "What would you like to change?",
+          //       [
+          //         { text: "Map Type", onPress: () => mapTypeAlert() },
+          //         { text: "Area Units", onPress: () => updateAreaAlert() },
+          //         { text: "Distance Units", onPress: () => updateDistanceAlert() },
+          //         { text: "Cancel", style: "cancel" }
+          //       ]
+          //     )
+          //   }}/>
+          <Pressable
+            className="mt-2"
+            onPress={() => {
+              Alert.alert(
+                "Map Settings",
+                "What would you like to change?",
+                [
+                  { text: "Map Type", onPress: () => mapTypeAlert() },
+                  { text: "Area Units", onPress: () => updateAreaAlert() },
+                  { text: "Distance Units", onPress: () => updateDistanceAlert() },
+                  { text: "Cancel", style: "cancel" }
+                ]
+              )
+            }}>
+            <Feather name="settings" size={24} color="gray" />
+          </Pressable>
+        )}
+
       </View>
-
-      {setMapType && (      
-        <Button 
-          title="Map Settings"
-          color="#888"
-          onPress={() => {
-            Alert.alert(
-              "Map Settings",
-              "What would you like to change?",
-              [
-                { text: "Map Type", onPress: () => mapTypeAlert() },
-                { text: "Area Units", onPress: () => updateAreaAlert() },
-                { text: "Distance Units", onPress: () => updateDistanceAlert() },
-                { text: "Cancel", style: "cancel" }
-              ]
-            )
-          }}/>
-      )}
-
-    </View>
+    </>
   )
 }
 

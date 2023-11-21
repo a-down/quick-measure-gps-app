@@ -163,7 +163,7 @@ export default function AutoMeasure() {
         <View className="absolute bottom-0 bg-white p-4 w-full rounded-t-3xl" style={{gap: 8}}>
           <AddMarkerButton updateLocation={updateLocation} />
 
-          <View className="w-full flex-row justify-between">
+          <View className="w-full flex-row justify-between mb-1">
             <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
             <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
           </View>
