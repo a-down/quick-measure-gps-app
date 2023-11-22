@@ -163,7 +163,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
           )
       }} /> */}
 
-      <View className="bg-gray-1 p-3 top-0 rounded-b-md shadow-lg absolute flex-row justify-between" style={{width: width, gap: 8}}>
+      <View className="bg-gray-1 p-3 top-0 rounded-b-sm shadow-lg absolute flex-row justify-between" style={{width: width, gap: 8}}>
         <View className=" justify-between flex-wrap" style={{gapY: 8}}>
           <View>
             <Text className="text-base ">
