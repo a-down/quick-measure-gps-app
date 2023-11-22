@@ -20,7 +20,7 @@ export default function TapMeasure() {
   const [ polygonDistance, setPolygonDistance ] = useState()
   const [ isMeasuring, setIsMeasuring ] = useState(true)
   const [ mapType, setMapType ] = useState("")
-  const [ areaVisible, setAreaVisible ] = useState(false)
+  const [ areaVisible, setAreaVisible ] = useState(true)
 
   // check if location permission is granted
     // if so, set initial region as current location

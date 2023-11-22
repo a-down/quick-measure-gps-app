@@ -167,6 +167,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
       <View className="bg-gray-1 p-3 py-2 top-0 rounded-b-sm shadow-lg absolute flex-row justify-between" style={{width: width, gap: 8}}>
         <View className=" justify-between flex-wrap" style={{gapY: 8}}>
 
+          {areaVisible && (
           <View className="flex-row items-center " style={{gap: 8}}>
             <Text className="text-base text-gray-9">
               <Text className="text-xl text-black">
@@ -178,6 +179,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
               <Text className="text-sm text-gray-6">{' '}(area)</Text>
             </Text>
           </View>
+          )}
 
           <View>
             <Text className="text-base text-gray-9">
@@ -196,13 +198,13 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
         </View>
 
           {setMapType && (  
-            <Pressable className="mt-1"
+            <Pressable className="h-full pt-0.5"
               onPress={() => {
                 Alert.alert(
                   "Map Settings",
                   "What would you like to change?",
                   [
-                    { text: areaVisible ? "Hide Area on Map" : "Show Area on Map", onPress: () => setAreaVisible(!areaVisible)},
+                    { text: areaVisible ? "Hide Area" : "Show Area", onPress: () => setAreaVisible(!areaVisible)},
                     { text: "Map Type", onPress: () => mapTypeAlert() },
                     { text: "Area Units", onPress: () => updateAreaAlert() },
                     { text: "Distance Units", onPress: () => updateDistanceAlert() },
@@ -210,7 +212,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
                   ]
                 )
               }}>
-              <Feather name="settings" size={24} color="#477F3C" />
+              <Feather name="settings" size={24} color="#3A7032" />
             </Pressable>
           )}
 
