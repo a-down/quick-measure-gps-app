@@ -6,6 +6,7 @@ import convertToAcres from '../hooks/convertToAcres';
 import handleConvertArea from '../hooks/handleConvertArea';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
+import { mapTypeAlert, updateAreaAlert, updateDistanceAlert } from '../alerts';
 
 // preferences default to sq meters and meters
 const defaultPreferences = { area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm' }
@@ -30,74 +31,74 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
     }
   }
 
-  // save and get preferences with AsyncStorage
-  const storePreferences = async (data) => {
-    try {
-      setMeasurementPreferences(data)
-      await AsyncStorage.setItem(
-        'measurementPreferences',
-        JSON.stringify(data)
-      );
-    } catch (error) {
-        console.log(error)
-    }
-  }
+  // // save and get preferences with AsyncStorage
+  // const storePreferences = async (data) => {
+  //   try {
+  //     setMeasurementPreferences(data)
+  //     await AsyncStorage.setItem(
+  //       'measurementPreferences',
+  //       JSON.stringify(data)
+  //     );
+  //   } catch (error) {
+  //       console.log(error)
+  //   }
+  // }
 
-  // Alert prompts used to update preferences
-  const updateAreaAlert = () => {
-    Alert.alert(
-      "Area Unit of Measurement",
-      "What unit of measurement would you like to use for area?",
-      [
-        { text: "Sq Feet", onPress: () => storePreferences({...measurementPreferences, area: 'sq feet', areaShort: 'sqft'}) },
-        { text: "Sq Yards", onPress: () => storePreferences({...measurementPreferences, area: 'sq yards', areaShort: 'sqyd'}) },
-        { text: "Acres", onPress: () => storePreferences({...measurementPreferences, area: 'acres', areaShort: 'a'}) },
-        { text: "Sq Meters", onPress: () => storePreferences({...measurementPreferences, area: 'sq meters', areaShort: 'sqm'}) },
-        { text: "Sq Kilometers", onPress: () => storePreferences({...measurementPreferences, area: 'sq km', areaShort: 'sqkm'}) },
-        { text: "Cancel", style: "cancel" }
-      ]
-    );
-  }
+  // // Alert prompts used to update preferences
+  // const updateAreaAlert = () => {
+  //   Alert.alert(
+  //     "Area Unit of Measurement",
+  //     "What unit of measurement would you like to use for area?",
+  //     [
+  //       { text: "Sq Feet", onPress: () => storePreferences({...measurementPreferences, area: 'sq feet', areaShort: 'sqft'}) },
+  //       { text: "Sq Yards", onPress: () => storePreferences({...measurementPreferences, area: 'sq yards', areaShort: 'sqyd'}) },
+  //       { text: "Acres", onPress: () => storePreferences({...measurementPreferences, area: 'acres', areaShort: 'a'}) },
+  //       { text: "Sq Meters", onPress: () => storePreferences({...measurementPreferences, area: 'sq meters', areaShort: 'sqm'}) },
+  //       { text: "Sq Kilometers", onPress: () => storePreferences({...measurementPreferences, area: 'sq km', areaShort: 'sqkm'}) },
+  //       { text: "Cancel", style: "cancel" }
+  //     ]
+  //   );
+  // }
   
-  const updateDistanceAlert = () => {
-    Alert.alert(
-      "Area Unit of Measurement",
-      "What unit of measurement would you like to use for area?",
-      [
-        { text: "Feet", onPress: () => storePreferences({...measurementPreferences, distance: 'feet', distanceShort: 'ft'}) },
-        { text: "Yards", onPress: () => storePreferences({...measurementPreferences, distance: 'yards', distanceShort: 'yd'}) },
-        { text: "Meters", onPress: () => storePreferences({...measurementPreferences, distance: 'meters', distanceShort: 'm'}) },
-        { text: "Kilometers", onPress: () => storePreferences({...measurementPreferences, distance: 'km', distanceShort: 'km'}) },
-        { text: "Miles", onPress: () => storePreferences({...measurementPreferences, distance: 'miles', distanceShort: 'mi'}) },
-        { text: "Cancel", style: "cancel" }
-      ]
-    );
-  }
+  // const updateDistanceAlert = () => {
+  //   Alert.alert(
+  //     "Area Unit of Measurement",
+  //     "What unit of measurement would you like to use for area?",
+  //     [
+  //       { text: "Feet", onPress: () => storePreferences({...measurementPreferences, distance: 'feet', distanceShort: 'ft'}) },
+  //       { text: "Yards", onPress: () => storePreferences({...measurementPreferences, distance: 'yards', distanceShort: 'yd'}) },
+  //       { text: "Meters", onPress: () => storePreferences({...measurementPreferences, distance: 'meters', distanceShort: 'm'}) },
+  //       { text: "Kilometers", onPress: () => storePreferences({...measurementPreferences, distance: 'km', distanceShort: 'km'}) },
+  //       { text: "Miles", onPress: () => storePreferences({...measurementPreferences, distance: 'miles', distanceShort: 'mi'}) },
+  //       { text: "Cancel", style: "cancel" }
+  //     ]
+  //   );
+  // }
 
-  const storeMapPreferences = async (data) => {
-    try {
-      setMapType(data)
-      await AsyncStorage.setItem(
-        'mapPreferences',
-        JSON.stringify(data)
-      );
-    } catch (error) {
-        console.log(error)
-    }
-  }
+  // const storeMapPreferences = async (data) => {
+  //   try {
+  //     setMapType(data)
+  //     await AsyncStorage.setItem(
+  //       'mapPreferences',
+  //       JSON.stringify(data)
+  //     );
+  //   } catch (error) {
+  //       console.log(error)
+  //   }
+  // }
 
-  const mapTypeAlert = async () => {
-    Alert.alert(
-      "Map Type",
-      "What type of map would you like to use?",
-      [
-        { text: "Standard", onPress: () => storeMapPreferences("standard") },
-        { text: "Satellite", onPress: () => storeMapPreferences("satellite") },
-        { text: "Hybrid", onPress: () => storeMapPreferences("hybrid") },
-        { text: "Cancel", style: "cancel" }
-      ]
-    );
-  }
+  // const mapTypeAlert = async () => {
+  //   Alert.alert(
+  //     "Map Type",
+  //     "What type of map would you like to use?",
+  //     [
+  //       { text: "Standard", onPress: () => storeMapPreferences("standard") },
+  //       { text: "Satellite", onPress: () => storeMapPreferences("satellite") },
+  //       { text: "Hybrid", onPress: () => storeMapPreferences("hybrid") },
+  //       { text: "Cancel", style: "cancel" }
+  //     ]
+  //   );
+  // }
 
   const settingsIcon = () => {
     {setMapType && (      
