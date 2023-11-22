@@ -8,6 +8,7 @@ import { useState, useCallback, useRef } from 'react';
 const SavedMap = () => {
   const [ mapData, setMapData ] = useState(null)
   const [ polygonCenter, setPolygonCenter ] = useState(null)
+  const [ areaVisible, setAreaVisible ] = useState(true)
 
   const { map } = useLocalSearchParams();
 
@@ -93,11 +94,13 @@ const SavedMap = () => {
 
             {mapData.polygonCoordinates.length > 2 && (
               <>
-                <Polygon
-                  strokeColor='transparent'
-                  fillColor="rgba(255, 255, 255, 0.6)"
-                  strokeWidth={1}
-                  coordinates={mapData.polygonCoordinates} />
+                {areaVisible && (
+                  <Polygon
+                    strokeColor='transparent'
+                    fillColor="rgba(255, 255, 255, 0.6)"
+                    strokeWidth={1}
+                    coordinates={mapData.polygonCoordinates} />
+                )}
                 
                 <Polyline
                   strokeColor="red"
@@ -111,7 +114,9 @@ const SavedMap = () => {
             <MeasurementDisplay 
               polygonArea={getAreaOfPolygon(mapData.polygonCoordinates)} 
               polygonDistance={getPathLength(mapData.polygonCoordinates)}
-              preferredMeasurements={mapData.measurements}/>
+              preferredMeasurements={mapData.measurements}
+              areaVisible={areaVisible}
+              setAreaVisible={setAreaVisible}/>
           </>
         )}
         
