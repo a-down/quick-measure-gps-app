@@ -218,7 +218,7 @@ export default function TapMeasure() {
         <View className="absolute bottom-0 p-4 w-full" style={{gap: 8}}>
           {/* <AddMarkerButton updateLocation={updateLocation} /> */}
 
-          <View className="w-full flex-row justify-between mb-2">
+          <View className="w-full flex-row justify-between mb-14">
             <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
             <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
           </View>

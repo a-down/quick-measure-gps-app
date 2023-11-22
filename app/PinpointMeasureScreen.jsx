@@ -193,7 +193,7 @@ export default function AutoMeasure() {
 
       <View className="absolute bottom-2 py-4 px-2 w-full items-end mb-2" style={{gap: 8}}>
 
-        <View className="w-full flex-row justify-between mb-1">
+        <View className="w-full flex-row justify-between absolute bottom-24 left-2">
           <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
           <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
         </View>
