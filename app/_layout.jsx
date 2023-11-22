@@ -47,14 +47,6 @@ export default function Layout() {
           //     onPress={MapTypeAlert}/>
           // )
         }} />
-        <Stack.Screen name="PinpointMeasureScreen" options={{
-          title: 'Pinpoint Measure',
-          headerBackTitleVisible: false,
-          headerTintColor: '#6DAB64',
-          headerTitleStyle: {
-            color: '#1D3F13',
-          },
-        }} />
         <Stack.Screen name="TapMeasureScreen" options={{
           title: 'Tap to Measure',
           headerBackTitleVisible: false,

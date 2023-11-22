@@ -163,29 +163,29 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
           )
       }} /> */}
 
-      <View className="bg-gray-1 p-3 top-0 rounded-b-sm shadow-lg absolute flex-row justify-between" style={{width: width, gap: 8}}>
+      <View className="bg-gray-1 p-3 py-2 top-0 rounded-b-sm shadow-lg absolute flex-row justify-between" style={{width: width, gap: 8}}>
         <View className=" justify-between flex-wrap" style={{gapY: 8}}>
           <View>
-            <Text className="text-base ">
-              <Text className="text-2xl ">
+            <Text className="text-base text-gray-9">
+              <Text className="text-xl text-black">
                 { polygonArea 
                   ? handleConvertArea(polygonArea, measurementPreferences.areaShort).toFixed(2)
                   : 0}
               </Text>
               {` `}{ measurementPreferences.area }
-              <Text className="text-sm text-gray-7">{' '}(area)</Text>
+              <Text className="text-sm text-gray-6">{' '}(area)</Text>
             </Text>
             
           </View>
           <View>
-            <Text className="text-base ">
-              <Text className="text-2xl ">
+            <Text className="text-base text-gray-9">
+              <Text className="text-xl text-black">
                 { polygonDistance
                   ? convertDistance(polygonDistance, measurementPreferences.distanceShort).toFixed(2)
                   : 0 }
               </Text>
               {` `}{ measurementPreferences.distance }
-              <Text className="text-sm text-gray-7">{' '}
+              <Text className="text-sm text-gray-6">{' '}
                 {distanceAround ? "(distance around)" : "(distance traveled)"}
               </Text>
             </Text>

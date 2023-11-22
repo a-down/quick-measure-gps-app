@@ -3,7 +3,7 @@ import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
 import { useEffect, useState } from 'react';
 import * as Location from "expo-location";
 import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from 'geolib';
-import { useRouter, Link } from 'expo-router';
+import { useRouter, Link, Stack } from 'expo-router';
 import { MeasurementDisplay, AddMarkerButton, ResetMeasurementsButton, RedoMarkerButton, SaveMeasurementsButton } from '../components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useStorage } from '../hooks';
@@ -126,6 +126,16 @@ export default function AutoMeasure() {
   }
 
   return (
+    <>
+      <Stack.Screen options={{
+        title: 'Pinpoint Measure',
+        headerBackTitleVisible: false,
+        headerTintColor: '#6DAB64',
+        headerTitleStyle: {
+          color: '#1D3F13',
+        },
+      }} />
+
     <View className="flex-1 items-center justify-center">
       {region && (
         <MapView 
@@ -181,16 +191,23 @@ export default function AutoMeasure() {
         polygonDistance={polygonDistance}
         setMapType={setMapType}/>
 
-        <View className="absolute bottom-0 py-4 px-2 w-full rounded-t-md" style={{gap: 8}}>
-          <AddMarkerButton updateLocation={updateLocation} />
+      <View className="absolute bottom-2 py-4 px-2 w-full items-end mb-2" style={{gap: 8}}>
 
-          <View className="w-full flex-row justify-between mb-1">
-            <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
-            <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
-          </View>
+        <View className="w-full flex-row justify-between mb-1">
+          <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
+          <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
         </View>
+
+        <AddMarkerButton updateLocation={updateLocation} />
+
+        {/* <View className="w-full flex-row justify-between mb-1" style={{gap: 8}}>
+          <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
+          <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
+        </View> */}
+      </View>
 
       
     </View>
+  </>
   );
 }

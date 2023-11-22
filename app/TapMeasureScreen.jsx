@@ -209,7 +209,7 @@ export default function TapMeasure() {
         setMapType={setMapType}
         distanceAround={true} />
 
-        <View className="absolute bottom-0 bg-white p-4 w-full rounded-t-3xl" style={{gap: 8}}>
+        <View className="absolute bottom-0 p-4 w-full" style={{gap: 8}}>
           {/* <AddMarkerButton updateLocation={updateLocation} /> */}
 
           <View className="w-full flex-row justify-between mb-2">
