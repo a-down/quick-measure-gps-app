@@ -58,10 +58,16 @@ export default function TapMeasure() {
   // }
 
   // when location changes and the user is measuring, add the new location to the polygon and generate measurements for the polygon
+  const saveToStorage = async () => { 
+    try {
+      await AsyncStorage.setItem('currentTapCoordinates', JSON.stringify(polygonCoordinates))
+    } catch (error) {
+      console.log(error)
+    }
+  }
   useEffect(() => {
-
     if (polygonCoordinates.length > 1) {
-      useStorage('save', 'currentTapCoordinates', polygonCoordinates)
+      saveToStorage()
       setPolygonDistance(getPathLength(polygonCoordinates))
       setPolygonArea(getAreaOfPolygon(polygonCoordinates))
     }
