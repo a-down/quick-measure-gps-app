@@ -145,7 +145,7 @@ export default function AutoMeasure() {
         polygonDistance={polygonDistance}
         setMapType={setMapType}/>
 
-      <View className="absolute bottom-0 bg-green-5 p-4 w-full rounded-t-md" style={{gap: 8}}>
+      <View className="absolute bottom-0 py-4 px-2 w-full rounded-t-md" style={{gap: 8}}>
         <StopMeasuringButton isMeasuring={isMeasuring} setIsMeasuring={setIsMeasuring} polygonCoordinates={polygonCoordinates} />
 
         <View className="w-full flex-row justify-between mb-1">

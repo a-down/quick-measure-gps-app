@@ -35,7 +35,7 @@ export default function Layout() {
           headerBackTitleVisible: false,
           headerTintColor: '#1D3F13',
           headerStyle: {
-            backgroundColor: '#6DAB64',
+            backgroundColor: '#fff',
           },
           headerTitleStyle: {
             color: '#1D3F13',

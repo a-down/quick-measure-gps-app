@@ -16,7 +16,7 @@ export default function AutoMeasure() {
   const { height, width } = useWindowDimensions();
   const [ currentLocation, setCurrentLocation ] = useState(null);
   const [ region, setRegion ] = useState(null);
-  const [ polygonCoordinates, setPolygonCoordinates ] = useState(walkToMailbox)
+  const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
   const [ polygonArea, setPolygonArea ] = useState()
   const [ polygonDistance, setPolygonDistance ] = useState()
   const [ isMeasuring, setIsMeasuring ] = useState(true)
@@ -181,7 +181,7 @@ export default function AutoMeasure() {
         polygonDistance={polygonDistance}
         setMapType={setMapType}/>
 
-        <View className="absolute bottom-0 p-4 w-full rounded-t-md" style={{gap: 8}}>
+        <View className="absolute bottom-0 py-4 px-2 w-full rounded-t-md" style={{gap: 8}}>
           <AddMarkerButton updateLocation={updateLocation} />
 
           <View className="w-full flex-row justify-between mb-1">

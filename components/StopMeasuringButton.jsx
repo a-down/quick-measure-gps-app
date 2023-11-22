@@ -32,7 +32,7 @@ const StopMeasuringButton = ({ isMeasuring, setIsMeasuring, polygonCoordinates }
 
   return (
     <Pressable 
-      className=" p-4 rounded-2xl shadow-sm" 
+      className=" p-4 rounded-full shadow-sm" 
       style={{backgroundColor: isMeasuring ? '#C9E9C8' : '#6DAB64'}}
       onPress={stopMeasuringAlert}>
       <Text className="text-center text-xl font-semibold" style={{color: isMeasuring ? '#3B3B3B' : '#fff'}}>
