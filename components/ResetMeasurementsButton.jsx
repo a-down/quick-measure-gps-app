@@ -21,14 +21,10 @@ const ResetMeasurementsButton = ({ resetMeasurements, mapType }) => {
 
   return (
     <View className="flex-grow">
-      <Button 
-        color={mapType === "standard" ? "#7f1d1d" : "#fee2e2"}
-        title="Reset" 
-        onPress={resetMeasurementsAlert} />
-      {/* <Pressable className="py-2 px-4 bg-gray-9 flex-row justify-center border-green-2 rounded-full" style={{gap: 8}}>
-        <Feather name="x-circle" size={24} color="#477F3C"/>
-        <Text className="mt-1 text-green-2">Reset</Text>
-      </Pressable> */}
+      <Pressable className="flex-row justify-center rounded-full items-center" style={{gap: 8}} onPress={resetMeasurementsAlert}>
+        <Feather name="x-circle" size={24} color={mapType === "standard" ? "#7f1d1d" : "#fee2e2"}/>
+        <Text className="text-lg" style={{color: mapType === "standard" ? "#7f1d1d" : "#fee2e2"}}>Reset</Text>
+      </Pressable>
     </View>
   )
   // return (
