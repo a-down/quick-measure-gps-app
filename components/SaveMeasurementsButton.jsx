@@ -11,7 +11,7 @@ const SaveMeasurementsButton = ({ polygonCoordinates, polygonArea, polygonDistan
 
       <Button 
         style={{fontWeight: 'bold'}}
-        color="#000"
+        color={mapType === "standard" ? "#000" : "#fff"}
         title="Save" 
         onPress={() => router.push({pathname: "/SaveMapFormScreen", params: { polygonCoordinates: JSON.stringify(polygonCoordinates), mapType }})} />  
     </View>

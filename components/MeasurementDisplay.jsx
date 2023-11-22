@@ -163,29 +163,29 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
           )
       }} /> */}
 
-      <View className="bg-white p-4 pb-2 top-0 rounded-b-xl shadow-lg absolute flex-row justify-between" style={{width: width, gap: 8}}>
-        <View className=" justify-between flex-wrap" style={{gapY: 8, marginBottom: 8}}>
+      <View className="bg-gray-1 p-3 top-0 rounded-b-md shadow-lg absolute flex-row justify-between" style={{width: width, gap: 8}}>
+        <View className=" justify-between flex-wrap" style={{gapY: 8}}>
           <View>
-            <Text className="text-base">
-              <Text className="text-2xl">
+            <Text className="text-base ">
+              <Text className="text-2xl ">
                 { polygonArea 
                   ? handleConvertArea(polygonArea, measurementPreferences.areaShort).toFixed(2)
                   : 0}
               </Text>
               {` `}{ measurementPreferences.area }
-              <Text className="text-sm text-gray-6">{' '}(area)</Text>
+              <Text className="text-sm text-gray-7">{' '}(area)</Text>
             </Text>
             
           </View>
           <View>
-            <Text className="text-base">
-              <Text className="text-2xl">
+            <Text className="text-base ">
+              <Text className="text-2xl ">
                 { polygonDistance
                   ? convertDistance(polygonDistance, measurementPreferences.distanceShort).toFixed(2)
                   : 0 }
               </Text>
               {` `}{ measurementPreferences.distance }
-              <Text className="text-sm text-gray-6">{' '}
+              <Text className="text-sm text-gray-7">{' '}
                 {distanceAround ? "(distance around)" : "(distance traveled)"}
               </Text>
             </Text>
@@ -193,38 +193,29 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
           </View>
         </View>
 
-        {setMapType && (      
-          // <Button 
-          //   title="Map Settings"
-          //   color="#888"
-          //   onPress={() => {
-          //     Alert.alert(
-          //       "Map Settings",
-          //       "What would you like to change?",
-          //       [
-          //         { text: "Map Type", onPress: () => mapTypeAlert() },
-          //         { text: "Area Units", onPress: () => updateAreaAlert() },
-          //         { text: "Distance Units", onPress: () => updateDistanceAlert() },
-          //         { text: "Cancel", style: "cancel" }
-          //       ]
-          //     )
-          //   }}/>
-          <Pressable
-            className="mt-2"
-            onPress={() => {
-              Alert.alert(
-                "Map Settings",
-                "What would you like to change?",
-                [
-                  { text: "Map Type", onPress: () => mapTypeAlert() },
-                  { text: "Area Units", onPress: () => updateAreaAlert() },
-                  { text: "Distance Units", onPress: () => updateDistanceAlert() },
-                  { text: "Cancel", style: "cancel" }
-                ]
-              )
-            }}>
-            <Feather name="settings" size={24} color="gray" />
-          </Pressable>
+        {setMapType && (  
+          <View>
+            <Pressable
+              className="mt-2"
+              onPress={() => {
+                Alert.alert(
+                  "Map Settings",
+                  "What would you like to change?",
+                  [
+                    { text: "Map Type", onPress: () => mapTypeAlert() },
+                    { text: "Area Units", onPress: () => updateAreaAlert() },
+                    { text: "Distance Units", onPress: () => updateDistanceAlert() },
+                    { text: "Cancel", style: "cancel" }
+                  ]
+                )
+              }}>
+              <Feather name="settings" size={24} color="#477F3C" />
+            </Pressable>
+
+            {/* <Pressable>
+              <Feather name="x-circle" size={24} color="#477F3C"/>
+            </Pressable> */}
+          </View>
         )}
 
       </View>

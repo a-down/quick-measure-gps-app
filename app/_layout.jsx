@@ -33,10 +33,10 @@ export default function Layout() {
         <Stack.Screen name="AutoMeasureScreen" options={{
           title: 'Auto Measure',
           headerBackTitleVisible: false,
-          headerTintColor: '#6DAB64',
-          // headerStyle: {
-          //   backgroundColor: '#1D3F13',
-          // },
+          headerTintColor: '#1D3F13',
+          headerStyle: {
+            backgroundColor: '#6DAB64',
+          },
           headerTitleStyle: {
             color: '#1D3F13',
           },
