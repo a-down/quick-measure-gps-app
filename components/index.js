@@ -1,5 +1,4 @@
 export { default as AddMarkerButton } from './AddMarkerButton';
-export { default as MapTypeAlert } from './MapTypeAlert';
 export { default as MeasurementDisplay } from './MeasurementDisplay';
 export { default as SaveMeasurementsButton } from './SaveMeasurementsButton';
 export { default as StopMeasuringButton } from './StopMeasuringButton';

@@ -14,6 +14,7 @@ const defaultPreferences = { area: 'sq meters', areaShort: 'sqm', distance: 'met
 const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferredMeasurements, distanceAround, areaVisible, setAreaVisible }) => {
   const { width } = useWindowDimensions();
   const [ measurementPreferences, setMeasurementPreferences ] = useState(defaultPreferences)
+  
   // set preferences
   useEffect(() => {
     preferredMeasurements ? setMeasurementPreferences(preferredMeasurements) : getPreferences()
@@ -97,73 +98,10 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
         { text: "Cancel", style: "cancel" }
       ]
     );
-  }
-
-  const settingsIcon = () => {
-    {setMapType && (      
-      // <Button 
-      //   title="Map Settings"
-      //   color="#888"
-      //   onPress={() => {
-      //     Alert.alert(
-      //       "Map Settings",
-      //       "What would you like to change?",
-      //       [
-      //         { text: "Map Type", onPress: () => mapTypeAlert() },
-      //         { text: "Area Units", onPress: () => updateAreaAlert() },
-      //         { text: "Distance Units", onPress: () => updateDistanceAlert() },
-      //         { text: "Cancel", style: "cancel" }
-      //       ]
-      //     )
-      //   }}/>
-      <Pressable
-      onPress={() => {
-        Alert.alert(
-          "Map Settings",
-          "What would you like to change?",
-          [
-            { text: "Map Type", onPress: () => mapTypeAlert() },
-            { text: "Area Units", onPress: () => updateAreaAlert() },
-            { text: "Distance Units", onPress: () => updateDistanceAlert() },
-            { text: "Cancel", style: "cancel" }
-          ]
-        )
-      }}>
-        <Feather name="settings" size={24} color="black" />
-      </Pressable>
-
-    )}
-  }
-  
+  }  
 
   return (
     <>
-      {/* <Stack.Screen options={{
-        title: 'Tap to Measure',
-        headerBackTitleVisible: false,
-        headerTintColor: '#6DAB64',
-        headerTitleStyle: {
-          color: '#1D3F13',
-        },
-        headerRight: () => (    
-          <Button 
-            title="Set"
-            color="#888"
-            onPress={() => {
-              Alert.alert(
-                "Map Settings",
-                "What would you like to change?",
-                [
-                  { text: "Map Type", onPress: () => mapTypeAlert() },
-                  { text: "Area Units", onPress: () => updateAreaAlert() },
-                  { text: "Distance Units", onPress: () => updateDistanceAlert() },
-                  { text: "Cancel", style: "cancel" }
-                ]
-              )
-            }}/>
-          )
-      }} /> */}
-
       <View className="bg-gray-1 p-3 py-2 top-0 rounded-b-sm shadow-lg absolute flex-row justify-between" style={{width: width, gap: 8}}>
         <View className=" justify-between flex-wrap" style={{gapY: 8}}>
 

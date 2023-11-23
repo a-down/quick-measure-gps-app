@@ -47,7 +47,6 @@ const SaveMapForm = () => {
       );
 
       Alert.alert(`${mapName} saved!`)
-
       router.back()
 
     } catch (error) {

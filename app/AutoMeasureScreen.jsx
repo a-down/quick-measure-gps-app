@@ -43,13 +43,6 @@ export default function AutoMeasure() {
       let location = await Location.getCurrentPositionAsync({});
       setCurrentLocation(location.coords);
 
-      // setRegion({
-      //   latitude: location.coords.latitude,
-      //   longitude: location.coords.longitude,
-      //   latitudeDelta: 0.005,
-      //   longitudeDelta: 0.005,
-      // });
-
       const locationSubscription = await Location.watchPositionAsync(
         {accuracy:Location.Accuracy.BestForNavigation, distanceInterval: 1},
         (loc) => {
@@ -85,7 +78,6 @@ export default function AutoMeasure() {
   // add a new location to the polygon
   const addLocationToPolygon = async (newLocation) => {
     await setPolygonCoordinates([{ latitude: newLocation.latitude, longitude: newLocation.longitude}, ...polygonCoordinates])
-    // console.log(polygonCoordinates)
   }
 
   // reset the polygon coordinates and measurements

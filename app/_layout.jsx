@@ -1,15 +1,8 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { Button, View, Text } from 'react-native';
-import { MapTypeAlert } from '../components';
 
 export default function Layout() {
   const params = useLocalSearchParams();
-
-  // const homeHeader = () = {
-  //   return (
-
-  //   )
-  // }
 
   return (
       <Stack>

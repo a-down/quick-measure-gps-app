@@ -50,14 +50,12 @@ export default function AutoMeasure() {
     await setCurrentLocation(location.coords);
   }
 
-  const redoPreviousMarker = async () => {
-    await updateLocation()
-    // let oldCoordinates = [...polygonCoordinates]
-    polygonCoordinates.length === 1
-      ? await setPolygonCoordinates([currentLocation.coords])
-      : await setPolygonCoordinates(polygonCoordinates.slice(0, -1).push(currentLocation.coords))
-    // console.log(polygonCoordinates)
-  }
+  // const redoPreviousMarker = async () => {
+  //   await updateLocation()
+  //   polygonCoordinates.length === 1
+  //     ? await setPolygonCoordinates([currentLocation.coords])
+  //     : await setPolygonCoordinates(polygonCoordinates.slice(0, -1).push(currentLocation.coords))
+  // }
 
   // when location changes and the user is measuring, add the new location to the polygon and generate measurements for the polygon
   useEffect(() => {
@@ -115,7 +113,6 @@ export default function AutoMeasure() {
   const addLocationToPolygon = async () => {
     await setPolygonCoordinates([{ latitude: currentLocation.latitude, longitude: currentLocation.longitude}, ...polygonCoordinates])
     useStorage('save', 'currentPinpointCoordinates', polygonCoordinates)
-    // console.log(polygonCoordinates)
   }
 
   // reset the polygon coordinates and measurements
@@ -197,21 +194,14 @@ export default function AutoMeasure() {
         setAreaVisible={setAreaVisible}/>
 
       <View className="absolute bottom-2 py-4 px-2 w-full items-end mb-2" style={{gap: 8}}>
-
         <View className="w-full flex-row justify-between absolute bottom-24 left-2">
           <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
           <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
         </View>
 
         <AddMarkerButton updateLocation={updateLocation} />
-
-        {/* <View className="w-full flex-row justify-between mb-1" style={{gap: 8}}>
-          <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
-          <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
-        </View> */}
       </View>
 
-      
     </View>
   </>
   );

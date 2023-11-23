@@ -13,12 +13,10 @@ const walkToMailbox = [{latitude: 44.00719339068559, longitude: -92.390454587572
 export default function TapMeasure() {
   const router = useRouter();  
 
-  const { height, width } = useWindowDimensions();
   const [ region, setRegion ] = useState(null);
   const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
   const [ polygonArea, setPolygonArea ] = useState()
   const [ polygonDistance, setPolygonDistance ] = useState()
-  const [ isMeasuring, setIsMeasuring ] = useState(true)
   const [ mapType, setMapType ] = useState("")
   const [ areaVisible, setAreaVisible ] = useState(true)
 
@@ -43,20 +41,6 @@ export default function TapMeasure() {
     getInitialLocation();
     getCurrentMap()
   }, []);
-
-  // const updateLocation = async () => {
-  //   let location = await Location.getCurrentPositionAsync({});
-  //   await setCurrentLocation(location.coords);
-  // }
-
-  // const redoPreviousMarker = async () => {
-  //   await updateLocation()
-  //   // let oldCoordinates = [...polygonCoordinates]
-  //   polygonCoordinates.length === 1
-  //     ? await setPolygonCoordinates([currentLocation.coords])
-  //     : await setPolygonCoordinates(polygonCoordinates.slice(0, -1).push(currentLocation.coords))
-  //   // console.log(polygonCoordinates)
-  // }
 
   // when location changes and the user is measuring, add the new location to the polygon and generate measurements for the polygon
   const saveToStorage = async () => { 
@@ -117,36 +101,7 @@ export default function TapMeasure() {
   // add a new location to the polygon
   const addLocationToPolygon = async (location) => {
     await setPolygonCoordinates([{ latitude: location.latitude, longitude: location.longitude}, ...polygonCoordinates])
-    // console.log(polygonCoordinates)
   }
-
-  // const startMarkerDrag = async (oldLocation) => {
-  //   try {
-  //     await AsyncStorage.setItem("oldLocation", JSON.stringify(oldLocation))
-  //   } catch (error) {
-  //     Alert.alert("There was an error repositioning the marker.")
-  //     console.log(error)
-  //   }
-  // }
-
-  // const endMarkerDrag = (newLocation) => {
-  //   try {
-  //     const oldLocation = AsyncStorage.getItem("oldLocation")
-  //     const oldLocationIndex = polygonCoordinates.indexOf(newLocation)
-  //     console.log("old index", oldLocationIndex)
-      
-  //     let oldCoordinates = [...polygonCoordinates]
-  //     oldCoordinates.splice(oldLocationIndex, 1)
-  //     // newPolygonCoordinates[oldLocationIndex].latitude = newLocation.latitude
-  //     // newPolygonCoordinates[oldLocationIndex].longitude = newLocation.longitude
-  //     let newPolygonCoordinates = oldCoordinates.slice(0, oldLocationIndex).push(newLocation).concat(oldCoordinates.slice(oldLocationIndex))
-      
-  //     setPolygonCoordinates(newPolygonCoordinates)
-  //   } catch (error) {
-  //     Alert.alert("There was an error repositioning the marker.")
-  //     console.log(error)
-  //   }
-  // }
 
   // reset the polygon coordinates and measurements
   const resetMeasurements = () => {
@@ -178,9 +133,6 @@ export default function TapMeasure() {
                     latitude: coordinate.latitude,
                     longitude: coordinate.longitude,
                   }}
-                  // draggable={true}
-                  // onDragStart={() => startMarkerDrag(coordinate)}
-                  // onDragEnd={() => endMarkerDrag(coordinate)}
                   />
               )))
             )}
@@ -221,15 +173,12 @@ export default function TapMeasure() {
         setAreaVisible={setAreaVisible} />
 
         <View className="absolute bottom-0 p-4 w-full" style={{gap: 8}}>
-          {/* <AddMarkerButton updateLocation={updateLocation} /> */}
-
           <View className="w-full flex-row justify-between mb-14">
             <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
             <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
           </View>
         </View>
 
-      
     </View>
   );
 }
