@@ -1,16 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Pressable, useWindowDimensions, ScrollView, Image, Button, FlatList } from 'react-native';
-import * as SplashScreen from 'expo-splash-screen';
-import MapView, { Polygon, Marker } from 'react-native-maps';
-import { useEffect, useState} from 'react';
-import * as Location from "expo-location";
-import { getAreaOfPolygon, convertArea } from 'geolib';
-import { useRouter, Link } from 'expo-router';
+import { Text, View, Pressable, useWindowDimensions, Image, FlatList } from 'react-native';
+import { useRouter } from 'expo-router';
 import mapScreenshot from "../../assets/map-screenshot.png";
 
 export default function App() {
   const router = useRouter();
-  const { width, height } = useWindowDimensions();
 
   const data = [
     {link: '/AutoMeasureScreen', image: mapScreenshot, title: 'Auto Measure', description: 'Track your location with GPS'},
@@ -30,11 +23,11 @@ export default function App() {
     </View>
   )
 
-  const ListHeader = () => (
-    <View className="bg-green-4 w-full">
-      <Text className=" text-lg m-4 text-white font-medium">Measurement Tools</Text>
-    </View>
-  )
+  // const ListHeader = () => (
+  //   <View className="bg-green-4 w-full">
+  //     <Text className=" text-lg m-4 text-white font-medium">Measurement Tools</Text>
+  //   </View>
+  // )
 
   return (
     <View className="bg-gray-1">

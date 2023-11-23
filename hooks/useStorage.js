@@ -4,7 +4,8 @@ export default useStorage = async (method, itemName, data) => {
   try {
     switch (method) {
       case ('get'):
-        return AsyncStorage.getItem(itemName)
+        const value = await AsyncStorage.getItem(itemName)
+        return JSON.parse(value)
         break;
       case ('set'):
         return await AsyncStorage.setItem(itemName, JSON.stringify(data))

@@ -1,8 +1,8 @@
-import { View, Text, Pressable, FlatList, Button, Alert } from 'react-native';
-import { useEffect, useState, useCallback } from 'react'
+import { View, Text, Pressable, FlatList, Alert } from 'react-native';
+import { useState, useCallback } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getAreaOfPolygon, getPathLength, convertArea, convertDistance } from 'geolib';
-import { useRouter, useFocusEffect, Stack } from 'expo-router';
+import { getAreaOfPolygon, getPathLength, convertDistance } from 'geolib';
+import { useRouter, useFocusEffect } from 'expo-router';
 import handleConvertArea from '../../hooks/handleConvertArea';
 
 

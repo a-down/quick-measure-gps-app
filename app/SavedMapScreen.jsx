@@ -1,9 +1,9 @@
 import { View } from 'react-native';
-import { useLocalSearchParams, useRouter, useFocusEffect, Stack } from 'expo-router';
-import { MeasurementDisplay } from '../components';
+import { useLocalSearchParams, useFocusEffect, Stack } from 'expo-router';
+import { MeasurementDisplay, Map } from '../components';
 import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
 import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from 'geolib';
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback } from 'react';
 
 const SavedMap = () => {
   const [ mapData, setMapData ] = useState(null)
@@ -12,22 +12,11 @@ const SavedMap = () => {
 
   const { map } = useLocalSearchParams();
 
-  const mapView = useRef()
-
   useFocusEffect(
     useCallback(() => {
       setMapData(JSON.parse(map))
       setPolygonCenter(getCenterOfBounds(JSON.parse(map).polygonCoordinates))
     }, [])
-    
-    // mapView.current.fitToCoordinates(mapData.polygonCoordinates, {
-    //   edgePadding: {
-    //     top: 10,
-    //     right: 10,
-    //     bottom: 10,
-    //     left: 10
-    //   }
-    // })
   );
   
   return (
@@ -44,56 +33,11 @@ const SavedMap = () => {
       <View className="flex-1 items-center justify-center">
         {mapData && (
           <>
-            <MapView 
-              ref={mapView}
-              // onLayout={() => this.fitToCoordinates()}
-              style={{flex: 1, width: '100%'}}
-              initialRegion={{
-                latitude: polygonCenter.latitude,
-                longitude: polygonCenter.longitude,
-                latitudeDelta: 0.003,
-                longitudeDelta: 0.003
-              }}
+            <Map 
+              region={polygonCenter}
+              polygonCoordinates={mapData.polygonCoordinates}
               mapType={mapData.mapType}
-              >
-            
-              {mapData.polygonCoordinates.map((coordinate, index) => (
-                <Marker
-                  key={index}
-                  coordinate={{
-                    latitude: coordinate.latitude,
-                    longitude: coordinate.longitude,
-                  }}
-                  title="Location"
-                  />
-              ))}
-
-              {mapData.polygonCoordinates.length < 3 && (
-                <Polyline
-                  strokeColor="red"
-                  strokeWidth={2}
-                  coordinates={mapData.polygonCoordinates}
-                />
-              )}
-
-            {mapData.polygonCoordinates.length > 2 && (
-              <>
-                {areaVisible && (
-                  <Polygon
-                    strokeColor='transparent'
-                    fillColor="rgba(255, 255, 255, 0.6)"
-                    strokeWidth={1}
-                    coordinates={mapData.polygonCoordinates} />
-                )}
-                
-                <Polyline
-                  strokeColor="red"
-                  strokeWidth={2}
-                  coordinates={mapData.polygonCoordinates} />
-              </>
-            )}
-
-            </MapView>
+              areaVisible={areaVisible}/>
 
             <MeasurementDisplay 
               polygonArea={getAreaOfPolygon(mapData.polygonCoordinates)} 
