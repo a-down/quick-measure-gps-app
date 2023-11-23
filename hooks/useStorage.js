@@ -13,6 +13,8 @@ export default useStorage = async (method, itemName, data) => {
       case ('remove'):
         return await AsyncStorage.removeItem(itemName)
         break;
+      default:
+        return console.error('Invalid method')
     }
 
   } catch (error) {

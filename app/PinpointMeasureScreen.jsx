@@ -38,8 +38,8 @@ export default function AutoMeasure() {
       } 
 
     };
-    getInitialLocation();
     getCurrentMap();
+    getInitialLocation();
   }, []);
 
   const updateLocation = async () => {
@@ -87,7 +87,7 @@ export default function AutoMeasure() {
   // add a new location to the polygon
   const addLocationToPolygon = async () => {
     await setPolygonCoordinates([{ latitude: currentLocation.latitude, longitude: currentLocation.longitude}, ...polygonCoordinates])
-    useStorage('save', 'currentPinpointCoordinates', polygonCoordinates)
+    useStorage('set', 'currentPinpointCoordinates', polygonCoordinates)
   }
 
   // reset the polygon coordinates and measurements
@@ -101,13 +101,14 @@ export default function AutoMeasure() {
   return (
     <>
       <View className="flex-1 items-center justify-center">
-      {region && (
-        <Map 
-          region={region}
-          polygonCoordinates={polygonCoordinates}
-          mapType={mapType}
-          areaVisible={areaVisible}/>
-      )}
+
+        {region && polygonCoordinates && (
+          <Map 
+            region={region}
+            polygonCoordinates={polygonCoordinates}
+            mapType={mapType}
+            areaVisible={areaVisible}/>
+        )}
 
         <MeasurementDisplay 
           polygonArea={polygonArea} 

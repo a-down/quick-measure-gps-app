@@ -74,6 +74,7 @@ export default function AutoMeasure() {
 
   // reset the polygon coordinates and measurements
   const resetMeasurements = () => {
+    useStorage('remove', 'currentAutoCoordinates')
     setPolygonCoordinates([])
     setPolygonArea(null)
     setPolygonDistance(null)
