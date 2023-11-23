@@ -5,7 +5,7 @@ import * as Location from "expo-location";
 import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from 'geolib';
 import { useRouter } from 'expo-router';
 import { MeasurementDisplay, ResetMeasurementsButton, SaveMeasurementsButton } from '../components';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useStorage } from '../hooks';
 
 const walkToMailbox = [{latitude: 44.00719339068559, longitude: -92.39045458757248}, {latitude: 44.00720777521759, longitude: -92.39044857257788}, {latitude: 44.00722463996818, longitude: -92.39044552876923}, {latitude: 44.00723910893775, longitude: -92.39043884259915}, {latitude: 44.007253440055344, longitude: -92.3904339617919}, {latitude: 44.00726996411364, longitude: -92.39043368123015}, {latitude: 44.00728242210206, longitude: -92.39042937761312}, {latitude: 44.00729738115168, longitude: -92.39042271172833}, {latitude: 44.00730698411163, longitude: -92.39041823226454}, {latitude: 44.00731678282986, longitude: -92.39041522381036}, {latitude: 44.007331483445654, longitude: -92.39041748500719}, {latitude: 44.00734617151441, longitude: -92.3904142248112}, {latitude: 44.00735833376541, longitude: -92.39039820105242}, {latitude: 44.007364923916036, longitude: -92.39038508187748}, {latitude: 44.007367904436194, longitude: -92.39036323363482}, {latitude: 44.00737559615935, longitude: -92.39032280977409}, {latitude: 44.007378468563495, longitude: -92.39030045648173}]
 
@@ -22,7 +22,7 @@ export default function TapMeasure() {
   // check if location permission is granted
     // if so, set initial region as current location
   useEffect(() => {
-    getMapPreferences()
+    useStorage('get', 'mapPreferences').then(value => setMapType(value))
     const getInitialLocation = async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
@@ -41,59 +41,29 @@ export default function TapMeasure() {
     getCurrentMap()
   }, []);
 
-  // when location changes and the user is measuring, add the new location to the polygon and generate measurements for the polygon
-  const saveToStorage = async () => { 
-    try {
-      await AsyncStorage.setItem('currentTapCoordinates', JSON.stringify(polygonCoordinates))
-    } catch (error) {
-      console.log(error)
-    }
-  }
   useEffect(() => {
     if (polygonCoordinates.length > 1) {
-      saveToStorage()
       setPolygonDistance(getPathLength(polygonCoordinates))
       setPolygonArea(getAreaOfPolygon(polygonCoordinates))
+      useStorage('set', 'currentTapCoordinates', polygonCoordinates)
     }
   }, [polygonCoordinates])
 
-  const getMapPreferences = async () => {
-    try {
-      const value = await AsyncStorage.getItem('mapPreferences');
-      if (value !== null) {
-        setMapType(JSON.parse(value))
-      } 
-    } catch (error) {
-        console.log(error)
-    }
-  }
-
+  // get the current map from storage or set the map to the user's current location
   const getCurrentMap = async () => {
-    try {
-      const value = await AsyncStorage.getItem('currentTapCoordinates');
-      if (value !== null) {
-        setPolygonCoordinates(JSON.parse(value))
-        const center = getCenterOfBounds(JSON.parse(value))
-        setRegion(center)
+    const value = await useStorage('get', 'currentPinpointCoordinates')
 
-      } else {
-        let location = await Location.getCurrentPositionAsync({});
-        setRegion({
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude,
-        });
-      }
+    if (value !== null) {
+      setPolygonCoordinates(JSON.parse(value))
+      const center = getCenterOfBounds(JSON.parse(value))
+      setRegion(center)
 
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const removeCurrentMapFromStorage = async () => {
-    try {
-      await AsyncStorage.removeItem('currentTapCoordinates')
-    } catch (error) {
-      console.log(error)
+    } else {
+      let location = await Location.getCurrentPositionAsync({});
+      setRegion({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      });
     }
   }
 
@@ -104,7 +74,7 @@ export default function TapMeasure() {
 
   // reset the polygon coordinates and measurements
   const resetMeasurements = () => {
-    removeCurrentMapFromStorage()
+    useStorage('remove', 'currentTapCoordinates')
     setPolygonCoordinates([])
     setPolygonArea(null)
     setPolygonDistance(null)
