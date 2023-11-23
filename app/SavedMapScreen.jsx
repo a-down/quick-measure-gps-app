@@ -76,22 +76,6 @@ const SavedMap = () => {
                 />
               )}
 
-              {mapData.polygonCoordinates.length > 2 && (
-                <>
-                  <Polyline
-                    strokeColor="red"
-                    strokeWidth={2}
-                    coordinates={mapData.polygonCoordinates}
-                  />
-
-                  <Polyline
-                    strokeColor="gray"
-                    strokeWidth={1}
-                    coordinates={[mapData.polygonCoordinates[0], mapData.polygonCoordinates[mapData.polygonCoordinates.length - 1]]}
-                  />
-                </>
-              )}
-
             {mapData.polygonCoordinates.length > 2 && (
               <>
                 {areaVisible && (
