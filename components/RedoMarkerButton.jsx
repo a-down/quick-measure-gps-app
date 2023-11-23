@@ -1,4 +1,4 @@
-import { Text, Pressable, Alert } from 'react-native';
+import { Text, Pressable } from 'react-native';
 
 const RedoMarkerButton = ({ redoPreviousMarker }) => {
 

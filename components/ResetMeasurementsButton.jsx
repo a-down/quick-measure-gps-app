@@ -1,4 +1,4 @@
-import { Text, Pressable, Alert, Button, View, Circle } from 'react-native';
+import { Text, Pressable, Alert, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 const ResetMeasurementsButton = ({ resetMeasurements, mapType }) => {

@@ -1,4 +1,3 @@
-import { View, Text } from 'react-native';
 import { Tabs } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
 

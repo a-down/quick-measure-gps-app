@@ -1,4 +1,4 @@
-import { Text, Pressable, Alert } from 'react-native';
+import { Text, Pressable } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 const StopMeasuringButton = ({ updateLocation }) => {

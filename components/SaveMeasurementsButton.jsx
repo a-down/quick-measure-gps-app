@@ -1,7 +1,7 @@
-import { View, Button, Alert, Pressable, Text } from 'react-native'
+import { Pressable, Text } from 'react-native'
 import React from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useRouter, Link } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
 
 const SaveMeasurementsButton = ({ polygonCoordinates, polygonArea, polygonDistance, mapType }) => {

@@ -1,10 +1,10 @@
-import { Text, View, Pressable, useWindowDimensions, Alert, Button } from 'react-native';
+import { View, useWindowDimensions, Alert } from 'react-native';
 import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
 import { useEffect, useState } from 'react';
 import * as Location from "expo-location";
 import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from 'geolib';
-import { useRouter, Link, Stack } from 'expo-router';
-import { MeasurementDisplay, AddMarkerButton, ResetMeasurementsButton, RedoMarkerButton, SaveMeasurementsButton } from '../components';
+import { useRouter, Stack } from 'expo-router';
+import { MeasurementDisplay, AddMarkerButton, ResetMeasurementsButton, SaveMeasurementsButton } from '../components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useStorage } from '../hooks';
 

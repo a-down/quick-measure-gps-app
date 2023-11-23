@@ -1,9 +1,9 @@
 import { View } from 'react-native';
-import { useLocalSearchParams, useRouter, useFocusEffect, Stack } from 'expo-router';
+import { useLocalSearchParams, useFocusEffect, Stack } from 'expo-router';
 import { MeasurementDisplay } from '../components';
 import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
 import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from 'geolib';
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback } from 'react';
 
 const SavedMap = () => {
   const [ mapData, setMapData ] = useState(null)

@@ -1,12 +1,9 @@
-import { Text, View, Pressable, useWindowDimensions, Alert, Button } from 'react-native';
+import { Text, View, Pressable, useWindowDimensions, Alert } from 'react-native';
 import { useState, useEffect } from 'react';
-import { convertArea, convertDistance } from 'geolib';
+import { convertDistance } from 'geolib';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import convertToAcres from '../hooks/convertToAcres';
 import handleConvertArea from '../hooks/handleConvertArea';
-import { Stack, useLocalSearchParams } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
-import { mapTypeAlert, updateAreaAlert, updateDistanceAlert } from '../alerts';
 
 // preferences default to sq meters and meters
 const defaultPreferences = { area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm' }
