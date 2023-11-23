@@ -60,7 +60,7 @@ const SaveMapForm = () => {
       <Text className=" text-lg font-medium mb-2">Enter a name for the map</Text>
 
       <TextInput 
-        className="w-full bg-white p-2 rounded-lg border-gray-4 border mb-3"
+        className="w-full bg-white p-2 rounded-sm border-gray-4 border mb-3"
         value={mapName}
         onChangeText={setMapName}></TextInput>
 

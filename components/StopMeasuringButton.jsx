@@ -1,5 +1,6 @@
 import { Text, Pressable, Alert } from 'react-native';
 import { useState, useEffect } from 'react';
+import { Feather } from '@expo/vector-icons';
 
 const StopMeasuringButton = ({ isMeasuring, setIsMeasuring, polygonCoordinates }) => {
   const [ buttonText, setButtonText ] = useState("Stop Measuring")
@@ -32,10 +33,13 @@ const StopMeasuringButton = ({ isMeasuring, setIsMeasuring, polygonCoordinates }
 
   return (
     <Pressable 
-      className=" p-4 rounded-2xl shadow-sm" 
-      style={{backgroundColor: isMeasuring ? '#C9E9C8' : '#6DAB64'}}
+      className=" p-4 rounded-full shadow-sm flex-row items-center justify-center" 
+      style={{backgroundColor: isMeasuring ? '#C9E9C8' : '#6DAB64', gap: 8}}
       onPress={stopMeasuringAlert}>
-      <Text className="text-center text-xl font-semibold" style={{color: isMeasuring ? '#3B3B3B' : '#fff'}}>
+        {isMeasuring 
+          ? <Feather name="pause" size={24} color='#1D3F13'/> 
+          : <Feather name="play" size={24} color='#fff'/>}
+      <Text className="text-center text-xl font-semibold" style={{color: isMeasuring ? '#1D3F13' : '#fff'}}>
         { buttonText }
       </Text>
     </Pressable>

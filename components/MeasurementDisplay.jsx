@@ -6,14 +6,14 @@ import convertToAcres from '../hooks/convertToAcres';
 import handleConvertArea from '../hooks/handleConvertArea';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
+import { mapTypeAlert, updateAreaAlert, updateDistanceAlert } from '../alerts';
 
 // preferences default to sq meters and meters
 const defaultPreferences = { area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm' }
 
-const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferredMeasurements, distanceAround }) => {
+const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferredMeasurements, distanceAround, areaVisible, setAreaVisible }) => {
   const { width } = useWindowDimensions();
   const [ measurementPreferences, setMeasurementPreferences ] = useState(defaultPreferences)
-
   // set preferences
   useEffect(() => {
     preferredMeasurements ? setMeasurementPreferences(preferredMeasurements) : getPreferences()
@@ -131,6 +131,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
       }}>
         <Feather name="settings" size={24} color="black" />
       </Pressable>
+
     )}
   }
   
@@ -163,11 +164,13 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
           )
       }} /> */}
 
-      <View className="bg-white p-4 pb-2 top-0 rounded-b-xl shadow-lg absolute flex-row justify-between" style={{width: width, gap: 8}}>
-        <View className=" justify-between flex-wrap" style={{gapY: 8, marginBottom: 8}}>
-          <View>
-            <Text className="text-base">
-              <Text className="text-2xl">
+      <View className="bg-gray-1 p-3 py-2 top-0 rounded-b-sm shadow-lg absolute flex-row justify-between" style={{width: width, gap: 8}}>
+        <View className=" justify-between flex-wrap" style={{gapY: 8}}>
+
+          {areaVisible && (
+          <View className="flex-row items-center " style={{gap: 8}}>
+            <Text className="text-base text-gray-9">
+              <Text className="text-xl text-black">
                 { polygonArea 
                   ? handleConvertArea(polygonArea, measurementPreferences.areaShort).toFixed(2)
                   : 0}
@@ -175,11 +178,12 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
               {` `}{ measurementPreferences.area }
               <Text className="text-sm text-gray-6">{' '}(area)</Text>
             </Text>
-            
           </View>
+          )}
+
           <View>
-            <Text className="text-base">
-              <Text className="text-2xl">
+            <Text className="text-base text-gray-9">
+              <Text className="text-xl text-black">
                 { polygonDistance
                   ? convertDistance(polygonDistance, measurementPreferences.distanceShort).toFixed(2)
                   : 0 }
@@ -193,39 +197,29 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
           </View>
         </View>
 
-        {setMapType && (      
-          // <Button 
-          //   title="Map Settings"
-          //   color="#888"
-          //   onPress={() => {
-          //     Alert.alert(
-          //       "Map Settings",
-          //       "What would you like to change?",
-          //       [
-          //         { text: "Map Type", onPress: () => mapTypeAlert() },
-          //         { text: "Area Units", onPress: () => updateAreaAlert() },
-          //         { text: "Distance Units", onPress: () => updateDistanceAlert() },
-          //         { text: "Cancel", style: "cancel" }
-          //       ]
-          //     )
-          //   }}/>
-          <Pressable
-            className="mt-2"
-            onPress={() => {
-              Alert.alert(
-                "Map Settings",
-                "What would you like to change?",
-                [
-                  { text: "Map Type", onPress: () => mapTypeAlert() },
-                  { text: "Area Units", onPress: () => updateAreaAlert() },
-                  { text: "Distance Units", onPress: () => updateDistanceAlert() },
-                  { text: "Cancel", style: "cancel" }
-                ]
-              )
-            }}>
-            <Feather name="settings" size={24} color="gray" />
-          </Pressable>
-        )}
+          {setMapType ? (  
+            <Pressable className="h-full pt-0.5"
+              onPress={() => {
+                Alert.alert(
+                  "Map Settings",
+                  "What would you like to change?",
+                  [
+                    { text: areaVisible ? "Hide Area" : "Show Area", onPress: () => setAreaVisible(!areaVisible)},
+                    { text: "Map Type", onPress: () => mapTypeAlert() },
+                    { text: "Area Units", onPress: () => updateAreaAlert() },
+                    { text: "Distance Units", onPress: () => updateDistanceAlert() },
+                    { text: "Cancel", style: "cancel" }
+                  ]
+                )
+              }}>
+              <Feather name="settings" size={24} color="#3A7032" />
+            </Pressable>
+          ) : (
+            <Pressable className="h-full pt-0.5"
+              onPress={() => setAreaVisible(!areaVisible)}>
+              <Feather name={areaVisible ? "eye" : "eye-off"} size={24} color="#3A7032"/>
+            </Pressable>
+          )}
 
       </View>
     </>

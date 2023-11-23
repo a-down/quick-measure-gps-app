@@ -20,7 +20,7 @@ export default function AutoMeasure() {
   const [ polygonDistance, setPolygonDistance ] = useState()
   const [ isMeasuring, setIsMeasuring ] = useState(true)
   const [ mapType, setMapType ] = useState("")
-
+  const [ areaVisible, setAreaVisible ] = useState(true)
 
   // check if location permission is granted
     // if so, set initial region as current location
@@ -127,11 +127,13 @@ export default function AutoMeasure() {
               />
             )}
 
-            <Polygon
-              strokeColor='transparent'
-              fillColor="rgba(255, 255, 255, 0.6)"
-              strokeWidth={1}
-              coordinates={polygonCoordinates} />
+            {areaVisible && (
+              <Polygon
+                strokeColor='transparent'
+                fillColor="rgba(255, 255, 255, 0.6)"
+                strokeWidth={1}
+                coordinates={polygonCoordinates} />
+            )}
             
             <Polyline
               strokeColor="red"
@@ -143,15 +145,17 @@ export default function AutoMeasure() {
       <MeasurementDisplay 
         polygonArea={polygonArea} 
         polygonDistance={polygonDistance}
-        setMapType={setMapType}/>
+        setMapType={setMapType}
+        areaVisible={areaVisible}
+        setAreaVisible={setAreaVisible}/>
 
-      <View className="absolute bottom-0 bg-white p-4 w-full rounded-t-3xl" style={{gap: 8}}>
-        <StopMeasuringButton isMeasuring={isMeasuring} setIsMeasuring={setIsMeasuring} polygonCoordinates={polygonCoordinates} />
-
-        <View className="w-full flex-row justify-between mb-1">
+      <View className="absolute bottom-2 py-4 px-2 w-full mb-2" style={{gap: 8}}>
+        <View className="w-full flex-row justify-between absolute bottom-24 left-2">
           <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
           <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
         </View>
+
+        <StopMeasuringButton isMeasuring={isMeasuring} setIsMeasuring={setIsMeasuring} polygonCoordinates={polygonCoordinates} />
       </View>
       
     </View>

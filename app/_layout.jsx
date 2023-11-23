@@ -33,10 +33,10 @@ export default function Layout() {
         <Stack.Screen name="AutoMeasureScreen" options={{
           title: 'Auto Measure',
           headerBackTitleVisible: false,
-          headerTintColor: '#6DAB64',
-          // headerStyle: {
-          //   backgroundColor: '#1D3F13',
-          // },
+          headerTintColor: '#1D3F13',
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
           headerTitleStyle: {
             color: '#1D3F13',
           },
@@ -46,14 +46,6 @@ export default function Layout() {
           //     color="#888"
           //     onPress={MapTypeAlert}/>
           // )
-        }} />
-        <Stack.Screen name="PinpointMeasureScreen" options={{
-          title: 'Pinpoint Measure',
-          headerBackTitleVisible: false,
-          headerTintColor: '#6DAB64',
-          headerTitleStyle: {
-            color: '#1D3F13',
-          },
         }} />
         <Stack.Screen name="TapMeasureScreen" options={{
           title: 'Tap to Measure',
