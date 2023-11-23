@@ -1,6 +1,4 @@
-import { View, Text } from 'react-native'
 import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
-import React from 'react'
 
 export default function Map({ region, polygonCoordinates, mapType, addLocationToPolygon, tappable, areaVisible}) {
 return (
