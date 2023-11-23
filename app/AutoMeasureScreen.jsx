@@ -86,14 +86,6 @@ export default function AutoMeasure() {
     setPolygonDistance(null)
   }
 
-  const getDistanceTraveled = (coordinates) => {
-    let distance = 0;
-    for (let i = 0; i < coordinates.length - 1; i++) {
-      distance += getPathLength([coordinates[i], coordinates[i+1]])
-    }
-    return distance;
-  }
-
   return (
     <View className="flex-1 items-center justify-center">
       {currentLocation && mapType && (
