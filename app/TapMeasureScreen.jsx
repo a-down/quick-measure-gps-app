@@ -51,12 +51,11 @@ export default function TapMeasure() {
 
   // get the current map from storage or set the map to the user's current location
   const getCurrentMap = async () => {
-    const value = await useStorage('get', 'currentPinpointCoordinates')
+    const value = await useStorage('get', 'currentTapCoordinates')
 
     if (value !== null) {
-      setPolygonCoordinates(JSON.parse(value))
-      const center = getCenterOfBounds(JSON.parse(value))
-      setRegion(center)
+      setPolygonCoordinates(value)
+      setRegion(getCenterOfBounds(value))
 
     } else {
       let location = await Location.getCurrentPositionAsync({});

@@ -57,6 +57,7 @@ export default function AutoMeasure() {
   // when location changes and the user is measuring, add the new location to the polygon and generate measurements for the polygon
   useEffect(() => {
     if (currentLocation) {
+      useStorage('set', 'currentPinpointCoordinates', polygonCoordinates)
       addLocationToPolygon(currentLocation)
       setRegion(currentLocation)
     }
@@ -71,9 +72,8 @@ export default function AutoMeasure() {
     const value = await useStorage('get', 'currentPinpointCoordinates')
 
     if (value !== null) {
-      setPolygonCoordinates(JSON.parse(value))
-      const center = getCenterOfBounds(JSON.parse(value))
-      setRegion(center)
+      setPolygonCoordinates(value)
+      setRegion(getCenterOfBounds(value))
 
     } else {
       let location = await Location.getCurrentPositionAsync({});
