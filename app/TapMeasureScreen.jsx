@@ -68,7 +68,11 @@ export default function TapMeasure() {
 
   // add a new location to the polygon
   const addLocationToPolygon = async (location) => {
-    await setPolygonCoordinates([{ latitude: location.latitude, longitude: location.longitude}, ...polygonCoordinates])
+    if (polygonCoordinates.includes(location) === false) await setPolygonCoordinates([{ latitude: location.latitude, longitude: location.longitude}, ...polygonCoordinates])
+  }
+
+  const removeLocationFromPolygon = async (location) => {
+    await setPolygonCoordinates(polygonCoordinates.filter(coordinate => coordinate.latitude !== location.latitude && coordinate.longitude !== location.longitude))
   }
 
   // reset the polygon coordinates and measurements
@@ -88,7 +92,8 @@ export default function TapMeasure() {
           mapType={mapType}
           tappable={true}
           addLocationToPolygon={addLocationToPolygon}
-          areaVisible={areaVisible}/>
+          areaVisible={areaVisible}
+          removeLocationFromPolygon={removeLocationFromPolygon}/>
       )}
 
       <MeasurementDisplay 
