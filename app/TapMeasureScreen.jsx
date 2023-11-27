@@ -126,7 +126,7 @@ export default function TapMeasure() {
         ref={bottomSheetRef}
         index={0}
         snapPoints={snapPoints}
-        onChange={handleSheetChanges}
+        // onChange={handleSheetChanges}
       >
         <View className="flex-1 py-2 px-6">
           <Text className="font-bold text-lg mb-2">View/Edit Markers</Text>
