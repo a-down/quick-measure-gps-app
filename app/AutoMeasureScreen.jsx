@@ -13,8 +13,7 @@ export default function AutoMeasure() {
   const router = useRouter();  
 
   const [ currentLocation, setCurrentLocation ] = useState(null);
-  // const [ region, setRegion ] = useState(null);
-  const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
+  const [ polygonCoordinates, setPolygonCoordinates ] = useState(walkToMailbox)
   const [ polygonArea, setPolygonArea ] = useState()
   const [ polygonDistance, setPolygonDistance ] = useState()
   const [ isMeasuring, setIsMeasuring ] = useState(true)
@@ -74,6 +73,8 @@ export default function AutoMeasure() {
 
   // reset the polygon coordinates and measurements
   const resetMeasurements = () => {
+    bottomSheetRef.current.close()
+    setMarkersToDelete([])
     useStorage('remove', 'currentAutoCoordinates')
     setPolygonCoordinates([])
     setPolygonArea(null)

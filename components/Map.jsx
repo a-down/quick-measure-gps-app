@@ -28,7 +28,8 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
                     longitude: coordinate.longitude,
                   }}
                   onPress={() => {
-                    deleteMode && markersToDelete.includes(coordinate) 
+                    if (!deleteMode) return false
+                    markersToDelete.includes(coordinate) 
                       ? setMarkersToDelete(markersToDelete.filter(marker => marker !== coordinate))
                       : setMarkersToDelete([...markersToDelete, coordinate])
                   }}
@@ -83,7 +84,8 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
                     longitude: coordinate.longitude,
                   }}
                   onPress={() => {
-                    deleteMode && markersToDelete.includes(coordinate) 
+                    if (!deleteMode) return false
+                    markersToDelete.includes(coordinate) 
                       ? setMarkersToDelete(markersToDelete.filter(marker => marker !== coordinate))
                       : setMarkersToDelete([...markersToDelete, coordinate])
                   }}

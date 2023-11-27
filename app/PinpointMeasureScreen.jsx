@@ -125,8 +125,8 @@ export default function AutoMeasure() {
           areaVisible={areaVisible}
           setAreaVisible={setAreaVisible}/>
 
-        <View className="absolute bottom-0 w-full items-center" style={{gap: 8}}>
-          <View className="w-full flex flex-row justify-between mb-14 p-4 rounded-lg">
+        <View className="absolute bottom-2 py-4 px-2 w-full mb-2" style={{gap: 8}}>
+          <View className="w-full flex-row justify-between absolute bottom-24 left-2">
             <ToggleDeleteModeButton
               setDeleteMode={setDeleteMode}
               setMarkersToDelete={setMarkersToDelete}
@@ -135,6 +135,8 @@ export default function AutoMeasure() {
 
             <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
           </View>
+
+          <AddMarkerButton updateLocation={updateLocation} />
         </View>
 
         <DeleteOptionsBottomSheet
@@ -144,6 +146,7 @@ export default function AutoMeasure() {
           setPolygonCoordinates={setPolygonCoordinates}
           previousCoordinates={previousCoordinates}
           setPreviousCoordinates={setPreviousCoordinates}
+          setMarkersToDelete={setMarkersToDelete}
           >
               <DeleteMarkersButton 
                 polygonCoordinates={polygonCoordinates}

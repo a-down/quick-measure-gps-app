@@ -130,6 +130,7 @@ export default function TapMeasure() {
         setPolygonCoordinates={setPolygonCoordinates}
         previousCoordinates={previousCoordinates}
         setPreviousCoordinates={setPreviousCoordinates}
+        setMarkersToDelete={setMarkersToDelete}
         >
             <DeleteMarkersButton 
               polygonCoordinates={polygonCoordinates}

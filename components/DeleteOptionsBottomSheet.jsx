@@ -3,13 +3,14 @@ import BottomSheet from '@gorhom/bottom-sheet';
 import { Text, Pressable, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-function DeleteOptionsBottomSheet({ children, bottomSheetRef, deleteMode, setDeleteMode, setPolygonCoordinates, previousCoordinates, setPreviousCoordinates }) {
+function DeleteOptionsBottomSheet({ children, bottomSheetRef, deleteMode, setDeleteMode, setPolygonCoordinates, previousCoordinates, setPreviousCoordinates, setMarkersToDelete }) {
 
   const snapPoints = useMemo(() => [200], []);
   const handleSheetChanges = useCallback((index) => {
     if (index === -1) {
       setDeleteMode(false)
       setPreviousCoordinates([])
+      setMarkersToDelete([])
     }
   }, []);
 
@@ -43,7 +44,7 @@ function DeleteOptionsBottomSheet({ children, bottomSheetRef, deleteMode, setDel
         )}
 
         {children}
-        
+
       </View>
 
     </BottomSheet>
