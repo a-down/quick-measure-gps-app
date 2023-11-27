@@ -1,4 +1,4 @@
-import { Text, Pressable, View } from 'react-native';
+import { Text, Pressable, View, Alert } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 const DeleteMarkersButton = ({ polygonCoordinates, setPolygonCoordinates, markersToDelete, setMarkersToDelete, mapType, resetMeasurements, setPreviousCoordinates, previousCoordinates }) => {
@@ -11,7 +11,20 @@ const DeleteMarkersButton = ({ polygonCoordinates, setPolygonCoordinates, marker
       setPolygonCoordinates(newPolygonCoordinates)
       setMarkersToDelete([])
     } else {
-      resetMeasurements()
+      Alert.alert(
+        "Delete Markers",
+        "Are you sure you want to delete ALL markers?",
+        [
+          {
+            text: "Cancel",
+            style: "cancel"
+          },
+          { text: "Delete All", 
+            style: "destructive",
+            onPress: () => resetMeasurements() 
+          }
+        ]
+      )
     }
   }
 
