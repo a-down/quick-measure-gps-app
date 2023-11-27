@@ -12,9 +12,9 @@ const Settings = () => {
   return (
     <View className="flex-1">
       <BottomSheet
-      style={{ flex: 1 }}
+        style={{ flex: 1 }}
         ref={bottomSheetRef}
-        index={1}
+        index={2}
         snapPoints={snapPoints}
         onChange={handleSheetChanges}
       >
