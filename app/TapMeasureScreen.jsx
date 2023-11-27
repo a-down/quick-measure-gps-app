@@ -1,4 +1,4 @@
-import { View, Alert, ScrollView, Text, Pressable } from 'react-native';
+import { View, Alert, ScrollView, Text, Pressable, Button } from 'react-native';
 import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
 import { useEffect, useState, useRef, useMemo, useCallback } from 'react';
 import * as Location from "expo-location";
@@ -27,6 +27,8 @@ export default function TapMeasure() {
   const [ mapType, setMapType ] = useState("")
   const [ areaVisible, setAreaVisible ] = useState(true)
   const [ selectedCoordinateIndex, setSelectedCoordinateIndex ] = useState(null)
+  const [ deleteMode, setDeleteMode ] = useState(false)
+  const [ markersToDelete, setMarkersToDelete ] = useState([])
 
   // check if location permission is granted
     // if so, set initial region as current location
@@ -86,6 +88,7 @@ export default function TapMeasure() {
 
   // reset the polygon coordinates and measurements
   const resetMeasurements = () => {
+    setSelectedCoordinateIndex(null)
     useStorage('remove', 'currentTapCoordinates')
     setPolygonCoordinates([])
     setPolygonArea(null)
@@ -103,7 +106,10 @@ export default function TapMeasure() {
           addLocationToPolygon={addLocationToPolygon}
           areaVisible={areaVisible}
           removeLocationFromPolygon={removeLocationFromPolygon}
-          selectedCoordinateIndex={selectedCoordinateIndex}/>
+          selectedCoordinateIndex={selectedCoordinateIndex}
+          deleteMode={deleteMode}
+          markersToDelete={markersToDelete}
+          setMarkersToDelete={setMarkersToDelete}/>
       )}
 
       <MeasurementDisplay 
@@ -117,11 +123,19 @@ export default function TapMeasure() {
         <View className="absolute bottom-0 p-4 w-full" style={{gap: 8}}>
           <View className="w-full flex-row justify-between mb-14">
             <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
+            <Button title="Delete Markers" onPress={() => {
+              setDeleteMode(!deleteMode)
+            }}/>
             <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
           </View>
+          <Button title="fully delete" onPress={() => {
+            const newPolygonCoordinates = polygonCoordinates.filter(coordinate => !markersToDelete.includes(coordinate))
+            setPolygonCoordinates(newPolygonCoordinates)
+            setMarkersToDelete([])
+          }} />
         </View>
 
-      <BottomSheet
+      {/* <BottomSheet
         style={{ flex: 1 }}
         ref={bottomSheetRef}
         index={0}
@@ -158,7 +172,7 @@ export default function TapMeasure() {
             ))}
           </ScrollView>
         </View>
-      </BottomSheet>
+      </BottomSheet> */}
 
     </View>
   );
