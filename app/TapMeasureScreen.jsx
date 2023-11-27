@@ -132,17 +132,18 @@ export default function TapMeasure() {
         setPreviousCoordinates={setPreviousCoordinates}
         setMarkersToDelete={setMarkersToDelete}
         >
-            <DeleteMarkersButton 
-              polygonCoordinates={polygonCoordinates}
-              setPolygonCoordinates={setPolygonCoordinates}
-              markersToDelete={markersToDelete}
-              setMarkersToDelete={setMarkersToDelete}
-              mapType={mapType}
-              resetMeasurements={resetMeasurements}
-              previousCoordinates={previousCoordinates}
-              setPreviousCoordinates={setPreviousCoordinates} />
+          
+        <DeleteMarkersButton 
+          polygonCoordinates={polygonCoordinates}
+          setPolygonCoordinates={setPolygonCoordinates}
+          markersToDelete={markersToDelete}
+          setMarkersToDelete={setMarkersToDelete}
+          mapType={mapType}
+          resetMeasurements={resetMeasurements}
+          previousCoordinates={previousCoordinates}
+          setPreviousCoordinates={setPreviousCoordinates} />
 
-            <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} markersToDelete={markersToDelete} polygonCoordinatesLength={polygonCoordinates.length}/>
+        <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} markersToDelete={markersToDelete} polygonCoordinatesLength={polygonCoordinates.length}/>
       </DeleteOptionsBottomSheet>
 
     </View>

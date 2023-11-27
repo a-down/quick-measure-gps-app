@@ -21,7 +21,7 @@ const ResetMeasurementsButton = ({ resetMeasurements, mapType, markersToDelete, 
 
   return (
     <View className="flex-grow">
-      <Pressable className={`flex-row justify-center rounded-full items-center ${polygonCoordinatesLength > 0 ? '' : 'opacity-50'}`} style={{gap: 8}} onPress={resetMeasurementsAlert}>
+      <Pressable className={`flex-row justify-center rounded-full items-center ${polygonCoordinatesLength > 0 ? '' : 'opacity-50'}`} style={{gap: 8}} onPress={polygonCoordinatesLength > 0 ? resetMeasurementsAlert : null}>
         <Feather 
           name="x-circle" 
           size={24} 
