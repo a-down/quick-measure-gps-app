@@ -1,4 +1,4 @@
-import { View, Alert, ScrollView, Text } from 'react-native';
+import { View, Alert, ScrollView, Text, Pressable } from 'react-native';
 import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
 import { useEffect, useState, useRef, useMemo, useCallback } from 'react';
 import * as Location from "expo-location";
@@ -14,7 +14,7 @@ export default function TapMeasure() {
   const router = useRouter();  
 
   const bottomSheetRef = useRef();
-  const snapPoints = useMemo(() => [60, '50%'], []);
+  const snapPoints = useMemo(() => [60, '50%', '100%'], []);
   const handleSheetChanges = useCallback((index) => {
     console.log('handleSheetChanges', index)
   }, []);
@@ -25,6 +25,7 @@ export default function TapMeasure() {
   const [ polygonDistance, setPolygonDistance ] = useState()
   const [ mapType, setMapType ] = useState("")
   const [ areaVisible, setAreaVisible ] = useState(true)
+  const [ selectedCoordinate, setSelectedCoordinate ] = useState(null)
 
   // check if location permission is granted
     // if so, set initial region as current location
@@ -125,49 +126,21 @@ export default function TapMeasure() {
         snapPoints={snapPoints}
         onChange={handleSheetChanges}
       >
-        <ScrollView className="flex-1 py-2 px-6">
-          <Text className="font-semibold text-xl">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-        </ScrollView>
+        <View className="flex-1 py-2 px-6">
+          <Text className="font-bold text-lg mb-2">View/Edit Markers</Text>
+
+          <ScrollView className="flex-1">
+            {polygonCoordinates.map((coordinate, index) => (
+              <Pressable 
+                key={index} 
+                className=' px-2 py-4 rounded-lg mb-2' 
+                onPress={() => setSelectedCoordinate(index)}
+                style={{ backgroundColor: selectedCoordinate === index ? "#E1E1E1" : "#FFF" }}>
+                <Text>Marker{' '}{index}</Text>
+              </Pressable>
+            ))}
+          </ScrollView>
+        </View>
       </BottomSheet>
 
     </View>
