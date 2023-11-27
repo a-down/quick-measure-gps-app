@@ -128,27 +128,11 @@ export default function TapMeasure() {
 
         <View className="absolute bottom-0 w-full items-center" style={{gap: 8}}>
           <View className="w-full flex flex-row justify-between mb-14 p-4 rounded-lg">
-
             <ToggleDeleteModeButton
               setDeleteMode={setDeleteMode}
               setMarkersToDelete={setMarkersToDelete}
               deleteMode={deleteMode}
               mapType={mapType} />
-
-            {/* {deleteMode && (
-              <DeleteMarkersButton 
-                onPress={() => setDeleteMode(!deleteMode)}
-                polygonCoordinates={polygonCoordinates}
-                setPolygonCoordinates={setPolygonCoordinates}
-                markersToDelete={markersToDelete}
-                setMarkersToDelete={setMarkersToDelete}
-                mapType={mapType}
-                resetMeasurements={resetMeasurements} />
-            )}
-
-            {deleteMode && (
-              <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
-            )} */}
 
             <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
           </View>
@@ -163,14 +147,13 @@ export default function TapMeasure() {
         index={deleteMode ? 0 : -1}
         snapPoints={snapPoints}
         enablePanDownToClose={true}
-        onChange={handleSheetChanges}
-      >
+        onChange={handleSheetChanges}>
         <View className="flex-1 px-6 justify-start relative" style={{gap: 24}}>
 
             <Text className=" text-[#fee2e2] text-sm text-center mb-2 ">(swipe down to dismiss)</Text>
 
             {previousCoordinates.length > 0 && (
-              <Pressable className="absolute left-4 p-2 bg-[#fee2e2] text-[#7f1d1d] rounded-md flex-row"
+              <Pressable className="absolute left-4 py-2 px-3 bg-[#fee2e2] text-[#7f1d1d] rounded-full flex-row"
                 style={{gap: 4}} 
                 onPress={() => {
                   setPolygonCoordinates(previousCoordinates[0])
@@ -178,13 +161,12 @@ export default function TapMeasure() {
                     ? setPreviousCoordinates(previousCoordinates.slice(1))
                     : setPreviousCoordinates([])
               }}>
-                <Feather name="rotate-ccw" size={16} color="black" />
+                <Feather name="rotate-ccw" size={16} color="#7f1d1d" />
                 <Text>Undo</Text>
               </Pressable>
             )}
 
             <DeleteMarkersButton 
-              onPress={() => setDeleteMode(!deleteMode)}
               polygonCoordinates={polygonCoordinates}
               setPolygonCoordinates={setPolygonCoordinates}
               markersToDelete={markersToDelete}
@@ -194,7 +176,7 @@ export default function TapMeasure() {
               previousCoordinates={previousCoordinates}
               setPreviousCoordinates={setPreviousCoordinates} />
 
-            <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
+            <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} markersToDelete={markersToDelete} polygonCoordinatesLength={polygonCoordinates.length}/>
         </View>
       </BottomSheet>
 

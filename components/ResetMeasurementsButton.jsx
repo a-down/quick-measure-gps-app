@@ -1,7 +1,7 @@
 import { Text, Pressable, Alert, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-const ResetMeasurementsButton = ({ resetMeasurements, mapType, setMarkersToDelete }) => {
+const ResetMeasurementsButton = ({ resetMeasurements, mapType, markersToDelete, polygonCoordinatesLength }) => {
   const resetMeasurementsAlert = () => {
     Alert.alert(
       "Reset Measurements",
@@ -11,7 +11,7 @@ const ResetMeasurementsButton = ({ resetMeasurements, mapType, setMarkersToDelet
           text: "Cancel",
           style: "cancel"
         },
-        { text: "Reset", 
+        { text: "Delete All", 
           style: "destructive",
           onPress: () => resetMeasurements() 
         }
@@ -21,7 +21,7 @@ const ResetMeasurementsButton = ({ resetMeasurements, mapType, setMarkersToDelet
 
   return (
     <View className="flex-grow">
-      <Pressable className="flex-row justify-center rounded-full items-center" style={{gap: 8}} onPress={resetMeasurementsAlert}>
+      <Pressable className={`flex-row justify-center rounded-full items-center ${polygonCoordinatesLength > 0 ? '' : 'opacity-50'}`} style={{gap: 8}} onPress={resetMeasurementsAlert}>
         <Feather 
           name="x-circle" 
           size={24} 
