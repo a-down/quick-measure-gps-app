@@ -1,11 +1,11 @@
 import { Text, Pressable, Alert, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-const ResetMeasurementsButton = ({ resetMeasurements, mapType }) => {
+const ResetMeasurementsButton = ({ resetMeasurements, mapType, setMarkersToDelete }) => {
   const resetMeasurementsAlert = () => {
     Alert.alert(
       "Reset Measurements",
-      "Are you sure you want to reset your measurements?",
+      "Are you sure you want to delete ALL markers?",
       [
         {
           text: "Cancel",

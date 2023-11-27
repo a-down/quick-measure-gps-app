@@ -4,7 +4,7 @@ import { useEffect, useState, useRef, useMemo, useCallback } from 'react';
 import * as Location from "expo-location";
 import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from 'geolib';
 import { useRouter } from 'expo-router';
-import { MeasurementDisplay, ResetMeasurementsButton, SaveMeasurementsButton, Map } from '../components';
+import { MeasurementDisplay, ResetMeasurementsButton, SaveMeasurementsButton, Map, ToggleDeleteModeButton, DeleteMarkersButton } from '../components';
 import { useStorage } from '../hooks';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { Feather } from '@expo/vector-icons';
@@ -88,7 +88,7 @@ export default function TapMeasure() {
 
   // reset the polygon coordinates and measurements
   const resetMeasurements = () => {
-    setSelectedCoordinateIndex(null)
+    setMarkersToDelete([])
     useStorage('remove', 'currentTapCoordinates')
     setPolygonCoordinates([])
     setPolygonArea(null)
@@ -122,17 +122,31 @@ export default function TapMeasure() {
 
         <View className="absolute bottom-0 p-4 w-full" style={{gap: 8}}>
           <View className="w-full flex-row justify-between mb-14">
-            <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
-            <Button title="Delete Markers" onPress={() => {
-              setDeleteMode(!deleteMode)
-            }}/>
-            <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
+
+            <ToggleDeleteModeButton
+              setDeleteMode={setDeleteMode}
+              setMarkersToDelete={setMarkersToDelete}
+              deleteMode={deleteMode}
+              mapType={mapType} />
+
+            {deleteMode && (
+              <DeleteMarkersButton 
+                onPress={() => setDeleteMode(!deleteMode)}
+                polygonCoordinates={polygonCoordinates}
+                setPolygonCoordinates={setPolygonCoordinates}
+                markersToDelete={markersToDelete}
+                setMarkersToDelete={setMarkersToDelete}
+                mapType={mapType} />
+            )}
+
+            {deleteMode && (
+              <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
+            )}
+
+            {!deleteMode && (
+              <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
+            )}
           </View>
-          <Button title="fully delete" onPress={() => {
-            const newPolygonCoordinates = polygonCoordinates.filter(coordinate => !markersToDelete.includes(coordinate))
-            setPolygonCoordinates(newPolygonCoordinates)
-            setMarkersToDelete([])
-          }} />
         </View>
 
       {/* <BottomSheet
