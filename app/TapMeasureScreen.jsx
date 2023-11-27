@@ -16,9 +16,9 @@ export default function TapMeasure() {
 
   const bottomSheetRef = useRef();
   const snapPoints = useMemo(() => [60, '50%', '100%'], []);
-  const handleSheetChanges = useCallback((index) => {
-    console.log('handleSheetChanges', index)
-  }, []);
+  // const handleSheetChanges = useCallback((index) => {
+  //   console.log('handleSheetChanges', index)
+  // }, []);
 
   const [ region, setRegion ] = useState(null);
   const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
