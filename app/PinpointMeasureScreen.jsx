@@ -61,26 +61,22 @@ export default function AutoMeasure() {
 
   // when location changes and the user is measuring, add the new location to the polygon and generate measurements for the polygon
   useEffect(() => {
-    const update = async () => {
-      if (currentLocation) {
-        addLocationToPolygon(currentLocation)
-        useStorage('set', 'currentPinpointCoordinates', polygonCoordinates)
-        setRegion(currentLocation)
-      }
-      if (polygonCoordinates.length > 1) {
-        setPolygonDistance(getPathLength(polygonCoordinates))
-        setPolygonArea(getAreaOfPolygon(polygonCoordinates))
-      }
+    if (currentLocation) {
+      addLocationToPolygon(currentLocation)
+      setRegion(currentLocation)
     }
-    update()
+    if (polygonCoordinates.length > 1) {
+      setPolygonDistance(getPathLength(polygonCoordinates))
+      setPolygonArea(getAreaOfPolygon(polygonCoordinates))
+    }
   }, [currentLocation])
 
   // get the current map from storage or set the map to the user's current location
   const getCurrentMap = async () => {
     const value = await useStorage('get', 'currentPinpointCoordinates')
 
-    if (value !== null) {
-      console.log(value)
+    if (value !== null && value.length > 0) {
+      console.log('value', value)
       setPolygonCoordinates(value)
       setRegion(getCenterOfBounds(value))
 
@@ -97,6 +93,7 @@ export default function AutoMeasure() {
   const addLocationToPolygon = async () => {
     await setPolygonCoordinates([{ latitude: currentLocation.latitude, longitude: currentLocation.longitude}, ...polygonCoordinates])
     useStorage('set', 'currentPinpointCoordinates', polygonCoordinates)
+    console.log('polygonCoordinates', polygonCoordinates)
   }
 
   // reset the polygon coordinates and measurements
@@ -152,8 +149,7 @@ export default function AutoMeasure() {
           setPolygonCoordinates={setPolygonCoordinates}
           previousCoordinates={previousCoordinates}
           setPreviousCoordinates={setPreviousCoordinates}
-          setMarkersToDelete={setMarkersToDelete}
-          >
+          setMarkersToDelete={setMarkersToDelete}>
 
           <DeleteMarkersButton 
             polygonCoordinates={polygonCoordinates}

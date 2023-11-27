@@ -84,6 +84,7 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
                     longitude: coordinate.longitude,
                   }}
                   onPress={() => {
+                    console.log("pressed")
                     if (!deleteMode) return false
                     markersToDelete.includes(coordinate) 
                       ? setMarkersToDelete(markersToDelete.filter(marker => marker !== coordinate))
