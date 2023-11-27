@@ -18,7 +18,6 @@ export default function TapMeasure() {
   const [ polygonDistance, setPolygonDistance ] = useState()
   const [ mapType, setMapType ] = useState("")
   const [ areaVisible, setAreaVisible ] = useState(true)
-  const [ selectedCoordinateIndex, setSelectedCoordinateIndex ] = useState(null)
   const [ deleteMode, setDeleteMode ] = useState(false)
   const [ markersToDelete, setMarkersToDelete ] = useState([])
   const [ previousCoordinates, setPreviousCoordinates ] = useState([])
@@ -99,8 +98,6 @@ export default function TapMeasure() {
           tappable={true}
           addLocationToPolygon={addLocationToPolygon}
           areaVisible={areaVisible}
-          removeLocationFromPolygon={removeLocationFromPolygon}
-          selectedCoordinateIndex={selectedCoordinateIndex}
           deleteMode={deleteMode}
           markersToDelete={markersToDelete}
           setMarkersToDelete={setMarkersToDelete}/>
@@ -114,17 +111,17 @@ export default function TapMeasure() {
         areaVisible={areaVisible}
         setAreaVisible={setAreaVisible} />
 
-        <View className="absolute bottom-0 w-full items-center" style={{gap: 8}}>
-          <View className="w-full flex flex-row justify-between mb-14 p-4 rounded-lg">
-            <ToggleDeleteModeButton
-              setDeleteMode={setDeleteMode}
-              setMarkersToDelete={setMarkersToDelete}
-              deleteMode={deleteMode}
-              mapType={mapType} />
+      <View className="absolute bottom-0 w-full items-center" style={{gap: 8}}>
+        <View className="w-full flex flex-row justify-between mb-14 p-4 rounded-lg">
+          <ToggleDeleteModeButton
+            setDeleteMode={setDeleteMode}
+            setMarkersToDelete={setMarkersToDelete}
+            deleteMode={deleteMode}
+            mapType={mapType} />
 
-            <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
-          </View>
+          <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
         </View>
+      </View>
 
       <DeleteOptionsBottomSheet
         bottomSheetRef={bottomSheetRef}
