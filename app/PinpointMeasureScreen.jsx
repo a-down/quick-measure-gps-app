@@ -16,7 +16,7 @@ export default function AutoMeasure() {
 
   const [ currentLocation, setCurrentLocation ] = useState(null);
   const [ region, setRegion ] = useState(null);
-  const [ polygonCoordinates, setPolygonCoordinates ] = useState(walkToMailbox)
+  const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
   const [ polygonArea, setPolygonArea ] = useState()
   const [ polygonDistance, setPolygonDistance ] = useState()
   const [ mapType, setMapType ] = useState("")
@@ -61,15 +61,18 @@ export default function AutoMeasure() {
 
   // when location changes and the user is measuring, add the new location to the polygon and generate measurements for the polygon
   useEffect(() => {
-    if (currentLocation) {
-      useStorage('set', 'currentPinpointCoordinates', polygonCoordinates)
-      addLocationToPolygon(currentLocation)
-      setRegion(currentLocation)
+    const update = async () => {
+      if (currentLocation) {
+        addLocationToPolygon(currentLocation)
+        useStorage('set', 'currentPinpointCoordinates', polygonCoordinates)
+        setRegion(currentLocation)
+      }
+      if (polygonCoordinates.length > 1) {
+        setPolygonDistance(getPathLength(polygonCoordinates))
+        setPolygonArea(getAreaOfPolygon(polygonCoordinates))
+      }
     }
-    if (polygonCoordinates.length > 1) {
-      setPolygonDistance(getPathLength(polygonCoordinates))
-      setPolygonArea(getAreaOfPolygon(polygonCoordinates))
-    }
+    update()
   }, [currentLocation])
 
   // get the current map from storage or set the map to the user's current location
@@ -77,6 +80,7 @@ export default function AutoMeasure() {
     const value = await useStorage('get', 'currentPinpointCoordinates')
 
     if (value !== null) {
+      console.log(value)
       setPolygonCoordinates(value)
       setRegion(getCenterOfBounds(value))
 
@@ -97,6 +101,8 @@ export default function AutoMeasure() {
 
   // reset the polygon coordinates and measurements
   const resetMeasurements = () => {
+    bottomSheetRef.current.close()
+    setMarkersToDelete([])
     useStorage('remove', 'currentPinpointCoordinates')
     setPolygonCoordinates([])
     setPolygonArea(null)
