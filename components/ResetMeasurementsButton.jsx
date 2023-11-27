@@ -25,10 +25,10 @@ const ResetMeasurementsButton = ({ resetMeasurements, mapType, setMarkersToDelet
         <Feather 
           name="x-circle" 
           size={24} 
-          color={mapType === "standard" ? "#7f1d1d" : "#fee2e2"}/>
+          color={"#fee2e2"}/>
         <Text 
-          className="text-lg" 
-          style={{color: mapType === "standard" ? "#7f1d1d" : "#fee2e2"}}>
+          className="text-lg font-medium" 
+          style={{color: "#fee2e2"}}>
             Reset
         </Text>
       </Pressable>

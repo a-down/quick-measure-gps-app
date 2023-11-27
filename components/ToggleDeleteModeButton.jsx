@@ -12,11 +12,11 @@ const ToggleDeleteModeButton = ({ setDeleteMode, setMarkersToDelete, mapType, de
         <Feather 
           name={deleteMode ? "skip-back" : "trash"}
           size={24} 
-          color={mapType === "standard" ? "#7f1d1d" : "#fee2e2"}/>
+          color={mapType !== "standard" || deleteMode ? "#fee2e2" : "#7f1d1d"}/>
         <Text 
           className="text-lg" 
-          style={{color: mapType === "standard" ? "#7f1d1d" : "#fee2e2"}}>
-            {deleteMode ? 'Go Back' : 'Delete Options'}
+          style={{color: mapType !== "standard" || deleteMode ? "#fee2e2" : "#7f1d1d"}}>
+            {deleteMode ? 'Back' : 'Delete Options'}
         </Text>
       </Pressable>
     </View>

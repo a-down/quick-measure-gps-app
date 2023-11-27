@@ -1,4 +1,4 @@
-import { View, Alert, ScrollView, Text, Pressable, Button } from 'react-native';
+import { View, Alert, ScrollView, Text, Pressable, Button, useWindowDimensions } from 'react-native';
 import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
 import { useEffect, useState, useRef, useMemo, useCallback } from 'react';
 import * as Location from "expo-location";
@@ -13,6 +13,7 @@ const walkToMailbox = [{latitude: 44.00719339068559, longitude: -92.390454587572
 
 export default function TapMeasure() {
   const router = useRouter();  
+  const { width } = useWindowDimensions();
 
   const bottomSheetRef = useRef();
   const snapPoints = useMemo(() => [60, '40%', '100%'], []);
@@ -120,8 +121,8 @@ export default function TapMeasure() {
         areaVisible={areaVisible}
         setAreaVisible={setAreaVisible} />
 
-        <View className="absolute bottom-0 p-4 w-full" style={{gap: 8}}>
-          <View className="w-full flex flex-row justify-between mb-14" style={{gap: 8}}>
+        <View className="absolute bottom-0 w-full items-center" style={{gap: 8}}>
+          <View className="flex flex-row justify-between mb-14 p-4 rounded-lg" style={{width: width-16, gap: 8, backgroundColor: deleteMode ? '#7f1d1d' : "transparent"}}>
 
             <ToggleDeleteModeButton
               setDeleteMode={setDeleteMode}

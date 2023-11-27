@@ -37,10 +37,10 @@ const DeleteMarkersButton = ({ polygonCoordinates, setPolygonCoordinates, marker
         <Feather 
           name="trash" 
           size={24} 
-          color={mapType === "standard" ? "#7f1d1d" : "#fee2e2"}/>
+          color={"#fee2e2"}/>
         <Text 
-          className="text-lg" 
-          style={{color: mapType === "standard" ? "#7f1d1d" : "#fee2e2"}}>
+          className="text-lg font-medium" 
+          style={{color: "#fee2e2"}}>
             Delete
         </Text>
       </Pressable>
