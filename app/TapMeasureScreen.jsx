@@ -1,28 +1,16 @@
-import { View, Alert, ScrollView, Text, Pressable, Button, useWindowDimensions } from 'react-native';
-import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
+import { View, Alert } from 'react-native';
 import { useEffect, useState, useRef, useMemo, useCallback } from 'react';
 import * as Location from "expo-location";
 import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from 'geolib';
 import { useRouter } from 'expo-router';
-import { MeasurementDisplay, ResetMeasurementsButton, SaveMeasurementsButton, Map, ToggleDeleteModeButton, DeleteMarkersButton } from '../components';
+import { MeasurementDisplay, ResetMeasurementsButton, SaveMeasurementsButton, Map, ToggleDeleteModeButton, DeleteMarkersButton, DeleteOptionsBottomSheet } from '../components';
 import { useStorage } from '../hooks';
-import BottomSheet from '@gorhom/bottom-sheet';
-import { Feather } from '@expo/vector-icons';
 
-const walkToMailbox = [{latitude: 44.00719339068559, longitude: -92.39045458757248}, {latitude: 44.00720777521759, longitude: -92.39044857257788}, {latitude: 44.00722463996818, longitude: -92.39044552876923}, {latitude: 44.00723910893775, longitude: -92.39043884259915}, {latitude: 44.007253440055344, longitude: -92.3904339617919}, {latitude: 44.00726996411364, longitude: -92.39043368123015}, {latitude: 44.00728242210206, longitude: -92.39042937761312}, {latitude: 44.00729738115168, longitude: -92.39042271172833}, {latitude: 44.00730698411163, longitude: -92.39041823226454}, {latitude: 44.00731678282986, longitude: -92.39041522381036}, {latitude: 44.007331483445654, longitude: -92.39041748500719}, {latitude: 44.00734617151441, longitude: -92.3904142248112}, {latitude: 44.00735833376541, longitude: -92.39039820105242}, {latitude: 44.007364923916036, longitude: -92.39038508187748}, {latitude: 44.007367904436194, longitude: -92.39036323363482}, {latitude: 44.00737559615935, longitude: -92.39032280977409}, {latitude: 44.007378468563495, longitude: -92.39030045648173}]
 
 export default function TapMeasure() {
   const router = useRouter();  
-  const { width } = useWindowDimensions();
 
   const bottomSheetRef = useRef();
-  const snapPoints = useMemo(() => [200], []);
-  const handleSheetChanges = useCallback((index) => {
-    if (index === -1) {
-      setDeleteMode(false)
-      setPreviousCoordinates([])
-    }
-  }, []);
 
   const [ region, setRegion ] = useState(null);
   const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
@@ -138,34 +126,14 @@ export default function TapMeasure() {
           </View>
         </View>
 
-      <BottomSheet
-        style={{ flex: 1 }}
-        color={'#7f1d1d'}
-        backgroundStyle={{ backgroundColor: '#7f1d1d' }}
-        handleIndicatorStyle={{ backgroundColor: '#fee2e2' }}
-        ref={bottomSheetRef}
-        index={deleteMode ? 0 : -1}
-        snapPoints={snapPoints}
-        enablePanDownToClose={true}
-        onChange={handleSheetChanges}>
-        <View className="flex-1 px-6 justify-start relative" style={{gap: 24}}>
-
-            <Text className=" text-[#fee2e2] text-sm text-center mb-2 ">(swipe down to dismiss)</Text>
-
-            {previousCoordinates.length > 0 && (
-              <Pressable className="absolute left-4 py-2 px-3 bg-[#fee2e2] text-[#7f1d1d] rounded-full flex-row"
-                style={{gap: 4}} 
-                onPress={() => {
-                  setPolygonCoordinates(previousCoordinates[0])
-                  previousCoordinates.length > 1 
-                    ? setPreviousCoordinates(previousCoordinates.slice(1))
-                    : setPreviousCoordinates([])
-              }}>
-                <Feather name="rotate-ccw" size={16} color="#7f1d1d" />
-                <Text>Undo</Text>
-              </Pressable>
-            )}
-
+      <DeleteOptionsBottomSheet
+        bottomSheetRef={bottomSheetRef}
+        deleteMode={deleteMode}
+        setDeleteMode={setDeleteMode}
+        setPolygonCoordinates={setPolygonCoordinates}
+        previousCoordinates={previousCoordinates}
+        setPreviousCoordinates={setPreviousCoordinates}
+        >
             <DeleteMarkersButton 
               polygonCoordinates={polygonCoordinates}
               setPolygonCoordinates={setPolygonCoordinates}
@@ -177,8 +145,7 @@ export default function TapMeasure() {
               setPreviousCoordinates={setPreviousCoordinates} />
 
             <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} markersToDelete={markersToDelete} polygonCoordinatesLength={polygonCoordinates.length}/>
-        </View>
-      </BottomSheet>
+      </DeleteOptionsBottomSheet>
 
     </View>
   );

@@ -1,5 +1,6 @@
 export { default as AddMarkerButton } from './AddMarkerButton';
 export { default as DeleteMarkersButton } from './DeleteMarkersButton';
+export { default as DeleteOptionsBottomSheet } from './DeleteOptionsBottomSheet';
 export { default as Map } from './Map';
 export { default as MeasurementDisplay } from './MeasurementDisplay';
 export { default as RedoMarkerButton } from './RedoMarkerButton';
