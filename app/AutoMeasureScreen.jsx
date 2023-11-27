@@ -15,7 +15,7 @@ export default function AutoMeasure() {
   const bottomSheetRef = useRef();
 
   const [ currentLocation, setCurrentLocation ] = useState(null);
-  const [ polygonCoordinates, setPolygonCoordinates ] = useState(walkToMailbox)
+  const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
   const [ polygonArea, setPolygonArea ] = useState()
   const [ polygonDistance, setPolygonDistance ] = useState()
   const [ isMeasuring, setIsMeasuring ] = useState(true)
@@ -93,7 +93,10 @@ export default function AutoMeasure() {
           region={currentLocation}
           polygonCoordinates={polygonCoordinates}
           mapType={mapType}
-          areaVisible={areaVisible}/>
+          areaVisible={areaVisible}
+          deleteMode={deleteMode}
+          markersToDelete={markersToDelete}
+          setMarkersToDelete={setMarkersToDelete}/>
       )}
 
       <MeasurementDisplay 
