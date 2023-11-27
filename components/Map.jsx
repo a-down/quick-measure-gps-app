@@ -1,7 +1,7 @@
 import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
 import { useState, useEffect } from 'react';
 
-export default function Map({ region, polygonCoordinates, mapType, addLocationToPolygon, tappable, areaVisible, removeLocationFromPolygon}) {
+export default function Map({ region, polygonCoordinates, mapType, addLocationToPolygon, tappable, areaVisible, removeLocationFromPolygon, selectedCoordinateIndex }) {
   const [ selectedMarker, setSelectedMarker ] = useState(null)
 
   return (
@@ -28,6 +28,7 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
                     latitude: coordinate.latitude,
                     longitude: coordinate.longitude,
                   }}
+                  pinColor={ selectedCoordinateIndex === index ? "red" : "wheat"}
                   title="Delete"
                   onSelect={(e) => setSelectedMarker(e.nativeEvent.coordinate)}
                   onCalloutPress={() => removeLocationFromPolygon(selectedMarker)}
@@ -80,6 +81,7 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
                     latitude: coordinate.latitude,
                     longitude: coordinate.longitude,
                   }}
+                  pinColor={ selectedCoordinateIndex === index ? "red" : "wheat"}
                   />
               )))
             )}

@@ -25,7 +25,7 @@ export default function TapMeasure() {
   const [ polygonDistance, setPolygonDistance ] = useState()
   const [ mapType, setMapType ] = useState("")
   const [ areaVisible, setAreaVisible ] = useState(true)
-  const [ selectedCoordinate, setSelectedCoordinate ] = useState(null)
+  const [ selectedCoordinateIndex, setSelectedCoordinateIndex ] = useState(null)
 
   // check if location permission is granted
     // if so, set initial region as current location
@@ -101,7 +101,8 @@ export default function TapMeasure() {
           tappable={true}
           addLocationToPolygon={addLocationToPolygon}
           areaVisible={areaVisible}
-          removeLocationFromPolygon={removeLocationFromPolygon}/>
+          removeLocationFromPolygon={removeLocationFromPolygon}
+          selectedCoordinateIndex={selectedCoordinateIndex}/>
       )}
 
       <MeasurementDisplay 
@@ -134,9 +135,9 @@ export default function TapMeasure() {
               <Pressable 
                 key={index} 
                 className=' px-2 py-4 rounded-lg mb-2' 
-                onPress={() => setSelectedCoordinate(index)}
-                style={{ backgroundColor: selectedCoordinate === index ? "#E1E1E1" : "#FFF" }}>
-                <Text>Marker{' '}{index}</Text>
+                onPress={() => setSelectedCoordinateIndex(index)}
+                style={{ backgroundColor: selectedCoordinateIndex === index ? "#E1E1E1" : "#FFF" }}>
+                <Text>Marker{' '}{index + 1}</Text>
               </Pressable>
             ))}
           </ScrollView>
