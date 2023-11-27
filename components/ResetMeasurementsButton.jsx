@@ -29,7 +29,7 @@ const ResetMeasurementsButton = ({ resetMeasurements, mapType, setMarkersToDelet
         <Text 
           className="text-lg font-medium" 
           style={{color: "#fee2e2"}}>
-            Reset
+            Delete All Markers
         </Text>
       </Pressable>
     </View>

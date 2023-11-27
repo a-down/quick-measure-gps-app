@@ -16,10 +16,10 @@ export default function TapMeasure() {
   const { width } = useWindowDimensions();
 
   const bottomSheetRef = useRef();
-  const snapPoints = useMemo(() => [60, '40%', '100%'], []);
-  // const handleSheetChanges = useCallback((index) => {
-  //   console.log('handleSheetChanges', index)
-  // }, []);
+  const snapPoints = useMemo(() => [200], []);
+  const handleSheetChanges = useCallback((index) => {
+    if (index === -1) setDeleteMode(false)
+  }, []);
 
   const [ region, setRegion ] = useState(null);
   const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
@@ -122,7 +122,7 @@ export default function TapMeasure() {
         setAreaVisible={setAreaVisible} />
 
         <View className="absolute bottom-0 w-full items-center" style={{gap: 8}}>
-          <View className="flex flex-row justify-between mb-14 p-4 rounded-lg" style={{width: width-16, gap: 8, backgroundColor: deleteMode ? '#7f1d1d' : "transparent"}}>
+          <View className="w-full flex flex-row justify-between mb-14 p-4 rounded-lg">
 
             <ToggleDeleteModeButton
               setDeleteMode={setDeleteMode}
@@ -130,7 +130,7 @@ export default function TapMeasure() {
               deleteMode={deleteMode}
               mapType={mapType} />
 
-            {deleteMode && (
+            {/* {deleteMode && (
               <DeleteMarkersButton 
                 onPress={() => setDeleteMode(!deleteMode)}
                 polygonCoordinates={polygonCoordinates}
@@ -143,52 +143,38 @@ export default function TapMeasure() {
 
             {deleteMode && (
               <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
-            )}
+            )} */}
 
-            {!deleteMode && (
-              <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
-            )}
+            <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
           </View>
         </View>
 
-      {/* <BottomSheet
+      <BottomSheet
         style={{ flex: 1 }}
+        color={'#7f1d1d'}
+        backgroundStyle={{ backgroundColor: '#7f1d1d' }}
+        handleIndicatorStyle={{ backgroundColor: '#fee2e2' }}
         ref={bottomSheetRef}
-        index={0}
+        index={deleteMode ? 0 : -1}
         snapPoints={snapPoints}
-        // onChange={handleSheetChanges}
+        enablePanDownToClose={true}
+        onChange={handleSheetChanges}
       >
-        <View className="flex-1 py-2 px-6">
-          <Text className="font-bold text-lg mb-2">View/Edit Markers</Text>
+        <View className="flex-1 px-6 justify-start" style={{gap: 24}}>
+            <Text className=" text-[#fee2e2] text-sm text-center mb-2">(swipe down to dismiss)</Text>
 
-          <ScrollView className="flex-1 pb-[100px]">
-            {polygonCoordinates.map((coordinate, index) => (
-              <Pressable 
-                key={index} 
-                className=' px-2 py-4 rounded-lg mb-2 flex-row justify-between' 
-                onPress={() => setSelectedCoordinateIndex(index)}
-                style={{ backgroundColor: selectedCoordinateIndex === index ? "#E1E1E1" : "#FFF" }}>
-                <Text>Marker{' '}{polygonCoordinates.length - index}</Text>
-                <Pressable onPress={() => {
-                  Alert.alert(
-                    "Delete Marker",
-                    `Are you sure you want to delete Marker ${polygonCoordinates.length - index}?`,
-                    [
-                      { text: "Cancel", style: "cancel" },
-                      { text: "Delete", style: "destructive", onPress: () => {
-                        removeLocationFromPolygon(coordinate)
-                        setSelectedCoordinateIndex(null)
-                      }}
-                    ]
-                  )
-                }}>
-                  <Feather name="trash" size={16} color="red" />
-                </Pressable>
-              </Pressable>
-            ))}
-          </ScrollView>
+            <DeleteMarkersButton 
+              onPress={() => setDeleteMode(!deleteMode)}
+              polygonCoordinates={polygonCoordinates}
+              setPolygonCoordinates={setPolygonCoordinates}
+              markersToDelete={markersToDelete}
+              setMarkersToDelete={setMarkersToDelete}
+              mapType={mapType}
+              resetMeasurements={resetMeasurements} />
+
+            <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
         </View>
-      </BottomSheet> */}
+      </BottomSheet>
 
     </View>
   );
