@@ -30,6 +30,7 @@ export default function TapMeasure() {
   const [ selectedCoordinateIndex, setSelectedCoordinateIndex ] = useState(null)
   const [ deleteMode, setDeleteMode ] = useState(false)
   const [ markersToDelete, setMarkersToDelete ] = useState([])
+  const [ previousCoordinates, setPreviousCoordinates ] = useState([])
 
   // check if location permission is granted
     // if so, set initial region as current location
@@ -89,6 +90,7 @@ export default function TapMeasure() {
 
   // reset the polygon coordinates and measurements
   const resetMeasurements = () => {
+    bottomSheetRef.current.close()
     setMarkersToDelete([])
     useStorage('remove', 'currentTapCoordinates')
     setPolygonCoordinates([])
@@ -160,7 +162,16 @@ export default function TapMeasure() {
         enablePanDownToClose={true}
         onChange={handleSheetChanges}
       >
-        <View className="flex-1 px-6 justify-start" style={{gap: 24}}>
+        <View className="flex-1 px-6 justify-start relative" style={{gap: 24}}>
+            {previousCoordinates.length > 0 && (
+              <Button title="Undo" onPress={() => {
+                setPolygonCoordinates(previousCoordinates[0])
+                previousCoordinates.length > 1 
+                  ? setPreviousCoordinates(previousCoordinates.slice(1))
+                  : setPreviousCoordinates([])
+              }} />
+            )}
+
             <Text className=" text-[#fee2e2] text-sm text-center mb-2">(swipe down to dismiss)</Text>
 
             <DeleteMarkersButton 
@@ -170,7 +181,9 @@ export default function TapMeasure() {
               markersToDelete={markersToDelete}
               setMarkersToDelete={setMarkersToDelete}
               mapType={mapType}
-              resetMeasurements={resetMeasurements} />
+              resetMeasurements={resetMeasurements}
+              previousCoordinates={previousCoordinates}
+              setPreviousCoordinates={setPreviousCoordinates} />
 
             <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} />
         </View>
