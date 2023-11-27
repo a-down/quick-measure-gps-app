@@ -17,7 +17,7 @@ const DeleteMarkersButton = ({ polygonCoordinates, setPolygonCoordinates, marker
 
   return (
     <View>
-      <Pressable className="flex-row justify-center rounded-full items-center" style={{gap: 8}} onPress={deleteMarkers}>
+      <Pressable className={`flex-row justify-center rounded-full items-center ${markersToDelete.length > 0 ? '' : 'opacity-50'}`} style={{gap: 8}} onPress={markersToDelete.length > 0 ? deleteMarkers : null}>
         <Feather 
           name="trash" 
           size={24} 
@@ -25,7 +25,7 @@ const DeleteMarkersButton = ({ polygonCoordinates, setPolygonCoordinates, marker
         <Text 
           className="text-lg font-medium" 
           style={{color: "#fee2e2"}}>
-            Delete Selected Markers
+            {markersToDelete.length > 1 ? 'Delete Selected Markers' : 'Delete Selected Marker'}
         </Text>
       </Pressable>
     </View>

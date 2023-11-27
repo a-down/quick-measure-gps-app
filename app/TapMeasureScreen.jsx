@@ -18,7 +18,10 @@ export default function TapMeasure() {
   const bottomSheetRef = useRef();
   const snapPoints = useMemo(() => [200], []);
   const handleSheetChanges = useCallback((index) => {
-    if (index === -1) setDeleteMode(false)
+    if (index === -1) {
+      setDeleteMode(false)
+      setPreviousCoordinates([])
+    }
   }, []);
 
   const [ region, setRegion ] = useState(null);
@@ -163,16 +166,22 @@ export default function TapMeasure() {
         onChange={handleSheetChanges}
       >
         <View className="flex-1 px-6 justify-start relative" style={{gap: 24}}>
-            {previousCoordinates.length > 0 && (
-              <Button title="Undo" onPress={() => {
-                setPolygonCoordinates(previousCoordinates[0])
-                previousCoordinates.length > 1 
-                  ? setPreviousCoordinates(previousCoordinates.slice(1))
-                  : setPreviousCoordinates([])
-              }} />
-            )}
 
-            <Text className=" text-[#fee2e2] text-sm text-center mb-2">(swipe down to dismiss)</Text>
+            <Text className=" text-[#fee2e2] text-sm text-center mb-2 ">(swipe down to dismiss)</Text>
+
+            {previousCoordinates.length > 0 && (
+              <Pressable className="absolute left-4 p-2 bg-[#fee2e2] text-[#7f1d1d] rounded-md flex-row"
+                style={{gap: 4}} 
+                onPress={() => {
+                  setPolygonCoordinates(previousCoordinates[0])
+                  previousCoordinates.length > 1 
+                    ? setPreviousCoordinates(previousCoordinates.slice(1))
+                    : setPreviousCoordinates([])
+              }}>
+                <Feather name="rotate-ccw" size={16} color="black" />
+                <Text>Undo</Text>
+              </Pressable>
+            )}
 
             <DeleteMarkersButton 
               onPress={() => setDeleteMode(!deleteMode)}
