@@ -121,7 +121,7 @@ export default function TapMeasure() {
         setAreaVisible={setAreaVisible} />
 
         <View className="absolute bottom-0 p-4 w-full" style={{gap: 8}}>
-          <View className="w-full flex-row justify-between mb-14">
+          <View className="w-full flex flex-row justify-between mb-14" style={{gap: 8}}>
 
             <ToggleDeleteModeButton
               setDeleteMode={setDeleteMode}
@@ -136,7 +136,8 @@ export default function TapMeasure() {
                 setPolygonCoordinates={setPolygonCoordinates}
                 markersToDelete={markersToDelete}
                 setMarkersToDelete={setMarkersToDelete}
-                mapType={mapType} />
+                mapType={mapType}
+                resetMeasurements={resetMeasurements} />
             )}
 
             {deleteMode && (

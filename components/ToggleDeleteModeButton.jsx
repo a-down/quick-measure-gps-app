@@ -1,4 +1,4 @@
-import { Text, Pressable, Alert, View } from 'react-native';
+import { Text, Pressable, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 const ToggleDeleteModeButton = ({ setDeleteMode, setMarkersToDelete, mapType, deleteMode }) => {
@@ -16,7 +16,7 @@ const ToggleDeleteModeButton = ({ setDeleteMode, setMarkersToDelete, mapType, de
         <Text 
           className="text-lg" 
           style={{color: mapType === "standard" ? "#7f1d1d" : "#fee2e2"}}>
-            {deleteMode ? 'Go Back' : 'Delete Markers'}
+            {deleteMode ? 'Go Back' : 'Delete Options'}
         </Text>
       </Pressable>
     </View>

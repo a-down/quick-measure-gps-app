@@ -9,8 +9,8 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
         <MapView 
           style={{flex: 1, width: '100%'}}
           region={{
-            latitude: selectedCoordinateIndex ? polygonCoordinates[selectedCoordinateIndex].latitude : region.latitude,
-            longitude: selectedCoordinateIndex ? polygonCoordinates[selectedCoordinateIndex].longitude : region.longitude,
+            latitude: region.latitude,
+            longitude: region.longitude,
             latitudeDelta: 0.001,
             longitudeDelta: 0.001
           }}
