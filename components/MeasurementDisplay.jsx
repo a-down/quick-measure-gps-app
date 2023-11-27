@@ -132,29 +132,29 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
           </View>
         </View>
 
-          {setMapType ? (  
-            <Pressable className="h-full pt-0.5"
-              onPress={() => {
-                Alert.alert(
-                  "Map Settings",
-                  "What would you like to change?",
-                  [
-                    { text: areaVisible ? "Hide Area" : "Show Area", onPress: () => setAreaVisible(!areaVisible)},
-                    { text: "Map Type", onPress: () => mapTypeAlert() },
-                    { text: "Area Units", onPress: () => updateAreaAlert() },
-                    { text: "Distance Units", onPress: () => updateDistanceAlert() },
-                    { text: "Cancel", style: "cancel" }
-                  ]
-                )
-              }}>
-              <Feather name="settings" size={24} color="#3A7032" />
-            </Pressable>
-          ) : (
-            <Pressable className="h-full pt-0.5"
-              onPress={() => setAreaVisible(!areaVisible)}>
-              <Feather name={areaVisible ? "eye" : "eye-off"} size={24} color="#3A7032"/>
-            </Pressable>
-          )}
+        {setMapType ? (  
+          <Pressable className="h-full pt-0.5"
+            onPress={() => {
+              Alert.alert(
+                "Map Settings",
+                "What would you like to change?",
+                [
+                  { text: areaVisible ? "Show Distance Only" : "Show Area", onPress: () => setAreaVisible(!areaVisible)},
+                  { text: "Map Type", onPress: () => mapTypeAlert() },
+                  { text: "Area Units", onPress: () => updateAreaAlert() },
+                  { text: "Distance Units", onPress: () => updateDistanceAlert() },
+                  { text: "Cancel", style: "cancel" }
+                ]
+              )
+            }}>
+            <Feather name="settings" size={24} color="#3A7032" />
+          </Pressable>
+        ) : (
+          <Pressable className="h-full pt-0.5"
+            onPress={() => setAreaVisible(!areaVisible)}>
+            <Feather name={areaVisible ? "eye" : "eye-off"} size={24} color="#3A7032"/>
+          </Pressable>
+        )}
 
       </View>
     </>

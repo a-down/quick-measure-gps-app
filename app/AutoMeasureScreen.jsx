@@ -14,6 +14,7 @@ export default function AutoMeasure() {
 
   const bottomSheetRef = useRef();
 
+  const [ region, setRegion ] = useState(null);
   const [ currentLocation, setCurrentLocation ] = useState(null);
   const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
   const [ polygonArea, setPolygonArea ] = useState()
@@ -47,7 +48,7 @@ export default function AutoMeasure() {
       } 
 
       let location = await Location.getCurrentPositionAsync({});
-      setCurrentLocation(location.coords);
+      setRegion(location.coords);
 
       const locationSubscription = await Location.watchPositionAsync(
         {accuracy:Location.Accuracy.BestForNavigation, distanceInterval: 1},
@@ -62,6 +63,7 @@ export default function AutoMeasure() {
   // when location changes and the user is measuring, add the new location to the polygon and generate measurements for the polygon
   useEffect(() => {
     if (currentLocation && isMeasuring) {
+      setRegion(currentLocation)
       addLocationToPolygon(currentLocation)
       useStorage('set', 'currentAutoCoordinates', polygonCoordinates)
     }
@@ -90,7 +92,7 @@ export default function AutoMeasure() {
     <View className="flex-1 items-center justify-center">
       {currentLocation && (
         <Map 
-          region={currentLocation}
+          region={region}
           polygonCoordinates={polygonCoordinates}
           mapType={mapType}
           areaVisible={areaVisible}
