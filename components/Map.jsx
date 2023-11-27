@@ -10,8 +10,8 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
         <MapView 
           style={{flex: 1, width: '100%'}}
           region={{
-            latitude: region.latitude,
-            longitude: region.longitude,
+            latitude: selectedCoordinateIndex ? polygonCoordinates[selectedCoordinateIndex].latitude : region.latitude,
+            longitude: selectedCoordinateIndex ? polygonCoordinates[selectedCoordinateIndex].longitude : region.longitude,
             latitudeDelta: 0.001,
             longitudeDelta: 0.001
           }}
@@ -29,9 +29,6 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
                     longitude: coordinate.longitude,
                   }}
                   pinColor={ selectedCoordinateIndex === index ? "red" : "wheat"}
-                  title="Delete"
-                  onSelect={(e) => setSelectedMarker(e.nativeEvent.coordinate)}
-                  onCalloutPress={() => removeLocationFromPolygon(selectedMarker)}
                   />
               )))
             )}

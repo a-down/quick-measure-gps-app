@@ -15,7 +15,7 @@ export default function TapMeasure() {
   const router = useRouter();  
 
   const bottomSheetRef = useRef();
-  const snapPoints = useMemo(() => [60, '50%', '100%'], []);
+  const snapPoints = useMemo(() => [60, '40%', '100%'], []);
   // const handleSheetChanges = useCallback((index) => {
   //   console.log('handleSheetChanges', index)
   // }, []);
@@ -131,7 +131,7 @@ export default function TapMeasure() {
         <View className="flex-1 py-2 px-6">
           <Text className="font-bold text-lg mb-2">View/Edit Markers</Text>
 
-          <ScrollView className="flex-1">
+          <ScrollView className="flex-1 pb-[100px]">
             {polygonCoordinates.map((coordinate, index) => (
               <Pressable 
                 key={index} 
@@ -142,7 +142,7 @@ export default function TapMeasure() {
                 <Pressable onPress={() => {
                   Alert.alert(
                     "Delete Marker",
-                    "Are you sure you want to delete this marker?",
+                    `Are you sure you want to delete Marker ${polygonCoordinates.length - index}?`,
                     [
                       { text: "Cancel", style: "cancel" },
                       { text: "Delete", style: "destructive", onPress: () => {
