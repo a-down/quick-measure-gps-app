@@ -10,7 +10,7 @@ import { useStorage } from '../hooks';
 export default function TapMeasure() {
   const router = useRouter();  
 
-  const bottomSheetRef = useRef();
+  const deleteSheetRef = useRef();
 
   const [ region, setRegion ] = useState(null);
   const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
@@ -80,7 +80,7 @@ export default function TapMeasure() {
 
   // reset the polygon coordinates and measurements
   const resetMeasurements = () => {
-    bottomSheetRef.current.close()
+    deleteSheetRef.current.close()
     setMarkersToDelete([])
     useStorage('remove', 'currentTapCoordinates')
     setPolygonCoordinates([])
@@ -124,7 +124,7 @@ export default function TapMeasure() {
       </View>
 
       <DeleteOptionsBottomSheet
-        bottomSheetRef={bottomSheetRef}
+        deleteSheetRef={deleteSheetRef}
         deleteMode={deleteMode}
         setDeleteMode={setDeleteMode}
         setPolygonCoordinates={setPolygonCoordinates}

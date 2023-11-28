@@ -12,7 +12,7 @@ const walkToMailbox = [{latitude: 44.00719339068559, longitude: -92.390454587572
 export default function AutoMeasure() {
   const router = useRouter();  
 
-  const bottomSheetRef = useRef();
+  const deleteSheetRef = useRef();
 
   const [ region, setRegion ] = useState(null);
   const [ currentLocation, setCurrentLocation ] = useState(null);
@@ -80,7 +80,7 @@ export default function AutoMeasure() {
 
   // reset the polygon coordinates and measurements
   const resetMeasurements = () => {
-    bottomSheetRef.current.close()
+    deleteSheetRef.current.close()
     setMarkersToDelete([])
     useStorage('remove', 'currentAutoCoordinates')
     setPolygonCoordinates([])
@@ -126,7 +126,7 @@ export default function AutoMeasure() {
       </View>
 
       <DeleteOptionsBottomSheet
-        bottomSheetRef={bottomSheetRef}
+        deleteSheetRef={deleteSheetRef}
         deleteMode={deleteMode}
         setDeleteMode={setDeleteMode}
         setPolygonCoordinates={setPolygonCoordinates}
