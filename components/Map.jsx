@@ -1,5 +1,4 @@
 import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
-import { useState, useEffect } from 'react';
 import mapMarker from '../assets/map-marker.png';
 import mapMarkerRed from '../assets/map-marker-red.png';
 
@@ -35,7 +34,6 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
                       ? setMarkersToDelete(markersToDelete.filter(marker => marker !== coordinate))
                       : setMarkersToDelete([...markersToDelete, coordinate])
                   }}
-                  pinColor={ deleteMode && markersToDelete.includes(coordinate) ? "#2B561F" : "red" }
                   image={ deleteMode && markersToDelete.includes(coordinate) ? mapMarkerRed : mapMarker}
                   />
               )))
@@ -43,7 +41,7 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
 
             {polygonCoordinates.length > 0 && (
               <Polyline
-                strokeColor="red"
+                strokeColor="#E40C0C"
                 strokeWidth={2}
                 coordinates={polygonCoordinates}
                 lineJoin='round' />
@@ -83,7 +81,6 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
                       ? setMarkersToDelete(markersToDelete.filter(marker => marker !== coordinate))
                       : setMarkersToDelete([...markersToDelete, coordinate])
                   }}
-                  pinColor={ deleteMode && markersToDelete.includes(coordinate) ? "red" : "wheat" }
                   image={ deleteMode && markersToDelete.includes(coordinate) ? mapMarkerRed : mapMarker}
                   />
               )))
@@ -91,7 +88,7 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
 
             {polygonCoordinates.length > 0 && (
               <Polyline
-                strokeColor="#05400A"
+                strokeColor="#E40C0C"
                 strokeWidth={2}
                 coordinates={polygonCoordinates}
                 lineJoin='round' />
