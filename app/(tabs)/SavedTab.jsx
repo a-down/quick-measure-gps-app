@@ -50,13 +50,17 @@ const Saved = () => {
     const polygonDistance = getPathLength(item.polygonCoordinates)
 
     return (
-      <Pressable className="flex w-full bg-white relative p-4" style={{gap: 8}} onPress={() => router.push({ pathname: "/SavedMapScreen", params: { map: JSON.stringify(item) }})}>
-        <View className="w-full">
+      <Pressable className="flex w-full bg-white relative p-4" onPress={() => router.push({ pathname: "/SavedMapScreen", params: { map: JSON.stringify(item) }})}>
+        <View className="w-full mb-1">
           <Text className="text-2xl font-semibold text-green-10">{item.mapName}</Text>
-          <Text className="text-base text-gray-7">{item.dateCreated.split("T")[0]}</Text>
+          <Text className="text-base text-gray-7">
+            {item.dateCreated.split("T")[0].split("-")[1]}/
+            {item.dateCreated.split("T")[0].split("-")[2]}/
+            {item.dateCreated.split("T")[0].split("-")[0]}
+          </Text>
         </View>
 
-        <View className="flex-row flex-wrap mb-4" style={{gapY: 8}}>
+        <View className="flex-row flex-wrap mb-3">
           <Text className="text-lg text-gray-8 mr-8">
             <Text className="text-2xl">
               { polygonArea
@@ -75,12 +79,15 @@ const Saved = () => {
           </Text>
         </View>  
 
-        <View className=" flex-row w-full" style={{gap: 8}}>
+        <View className=" flex-row w-full items-center" style={{gap: 8}}>
           <Pressable className="bg-green-5 p-2 rounded-md flex-grow" onPress={() => router.push({ pathname: "/SavedMapScreen", params: { map: JSON.stringify(item) }})}>
             <Text className="text-white font-semibold text-lg text-center">View Map</Text>
           </Pressable>
-          <Pressable className="bg-[#C7504B] opacity-60 w-11 h-full rounded-md" onPress={() => deleteMapAlert({id: item.id, mapName: item.mapName})}></Pressable>
-        </View>   
+        </View>  
+
+        <Pressable className="absolute right-4 top-5" hitSlop={20} onPress={() => deleteMapAlert({id: item.id, mapName: item.mapName})}>
+          <Feather name="trash-2" size={24} color="#C7504B"/>
+        </Pressable> 
       </Pressable>
     )
   }
