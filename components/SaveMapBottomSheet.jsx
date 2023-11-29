@@ -10,10 +10,9 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType }) {
 
   const [ mapName, setMapName ] = useState('')
 
-  const snapPoints = useMemo(() => [220, "80%"], []);
+  const snapPoints = useMemo(() => ["80%"], []);
   const handleSheetChanges = useCallback((index) => {
-    if (index === 0) Keyboard.dismiss()
-    if (index === 1) Keyboard.isVisible(true)
+    if (index !== 0) Keyboard.dismiss()
   }, []);
 
   const keyboardDismiss = () => {
@@ -76,22 +75,31 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType }) {
 
       <View className="flex-1 px-6 justify-start relative" style={{gap: 16}}>
         
-        <Text className=" text-lg font-medium">Enter a name for the map</Text>
+        <View style={{gap: 8}}>
+          <Text className=" text-lg font-medium">Enter a name for the map</Text>
 
-        <TextInput
-          className="w-full bg-white p-2 rounded-sm border-gray-4 border mb-2"
-          value={mapName}
-          onChangeText={setMapName}
-          onFocus={() => saveSheetRef.current.snapToIndex(1)}/>
+          <TextInput
+            className="w-full bg-white p-2 rounded-sm border-gray-4 border mb-2"
+            value={mapName}
+            onChangeText={setMapName}
+            onFocus={() => saveSheetRef.current.snapToIndex(0)}
+            onBlur={() => Keyboard.dismiss()}/>
+        </View>
 
-        <Pressable 
-          className=" p-4 rounded-2xl shadow-sm" 
-          style={{backgroundColor: '#6DAB64'}}
-          onPress={saveMap}>
-          <Text className="text-center text-xl text-white font-semibold">
-            Save Map
+        <View style={{gap: 8}}>
+          <Pressable 
+            className=" p-4 rounded-2xl shadow-sm" 
+            style={{backgroundColor: '#6DAB64'}}
+            onPress={saveMap}>
+            <Text className="text-center text-xl text-white font-semibold">
+              Save Map
+            </Text>
+          </Pressable>
+
+          <Text className="text-gray-8 text-center">
+          (the map will save with the current map type, distance measurement, and area measurement)
           </Text>
-        </Pressable>
+        </View>
 
       </View>
 
