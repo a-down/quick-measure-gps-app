@@ -1,4 +1,5 @@
 import { Stack } from 'expo-router';
+import { useFonts, Jost_400Regular, Jost_600SemiBold, Jost_700Bold } from '@expo-google-fonts/jost';
 
 export default function Layout() {
 
@@ -16,6 +17,8 @@ export default function Layout() {
           },
           headerTitleStyle: {
             color: '#1D3F13',
+            fontFamily: 'Jost_600SemiBold',
+            fontSize: 18
           },
         }} />
         <Stack.Screen name="PinpointMeasureScreen" options={{
@@ -24,6 +27,8 @@ export default function Layout() {
           headerTintColor: '#6DAB64',
           headerTitleStyle: {
             color: '#1D3F13',
+            fontFamily: 'Jost_600SemiBold',
+            fontSize: 18
           },
         }} />
         <Stack.Screen name="TapMeasureScreen" options={{
@@ -32,6 +37,8 @@ export default function Layout() {
           headerTintColor: '#6DAB64',
           headerTitleStyle: {
             color: '#1D3F13',
+            fontFamily: 'Jost_600SemiBold',
+            fontSize: 18
           },
         }} />
       </Stack>

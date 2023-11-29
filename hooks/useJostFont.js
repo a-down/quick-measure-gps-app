@@ -1,8 +1,7 @@
 import { StyleSheet } from "react-native";
 import { useFonts, Jost_400Regular, Jost_600SemiBold, Jost_700Bold } from '@expo-google-fonts/jost';
 
-
-export default jostFont = StyleSheet.create({
+jostFontStyles = StyleSheet.create({
   regular: {
     fontFamily: 'Jost_400Regular',
     fontSize: 18
@@ -20,3 +19,8 @@ export default jostFont = StyleSheet.create({
     fontSize: 18
   }
 })
+
+export const regular = jostFontStyles.regular
+export const medium = jostFontStyles.medium
+export const semibold = jostFontStyles.semibold
+export const bold = jostFontStyles.bold

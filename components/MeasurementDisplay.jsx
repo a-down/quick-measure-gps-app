@@ -4,7 +4,7 @@ import { convertDistance } from 'geolib';
 import handleConvertArea from '../hooks/handleConvertArea';
 import { Feather } from '@expo/vector-icons';
 import { useStorage } from '../hooks';
-import { jostFont } from '../hooks';
+import { regular, medium, semibold, bold } from '../hooks/useJostFont';
 
 // preferences default to sq meters and meters
 const defaultPreferences = { area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm' }
@@ -85,8 +85,8 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
 
           {areaVisible && (
           <View className="flex-row items-center " style={{gap: 8}}>
-            <Text className=" text-gray-9" style={jostFont.regular}>
-              <Text className=" text-black" style={[jostFont.regular, {fontSize: 20}]}>
+            <Text className=" text-gray-9" style={regular}>
+              <Text className=" text-black" style={[regular, {fontSize: 20}]}>
                 { polygonArea 
                   ? handleConvertArea(polygonArea, measurementPreferences.areaShort).toFixed(2)
                   : 0}
@@ -98,8 +98,8 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
           )}
 
           <View>
-            <Text className="text-base text-gray-9" style={jostFont.regular}>
-              <Text className="text-xl text-black" style={[jostFont.regular, {fontSize: 20}]}>
+            <Text className="text-base text-gray-9" style={regular}>
+              <Text className="text-xl text-black" style={[regular, {fontSize: 20}]}>
                 { polygonDistance
                   ? convertDistance(polygonDistance, measurementPreferences.distanceShort).toFixed(2)
                   : 0 }
