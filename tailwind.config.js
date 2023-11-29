@@ -11,13 +11,6 @@ module.exports = {
       semibold: ['Jost_600SemiBold'],
       bold: ['Jost_700Bold'],
     },
-    fontSize: {
-      xs: ['13px', '13px'],
-      sm: ['15px', '15px'],
-      base: ['17px', '17px'],
-      lg: ['19px', '19px'],
-      xl: ['21px', '21px']
-    },
     extend: {
       colors: {
         'green-1': "#E7F8E6",

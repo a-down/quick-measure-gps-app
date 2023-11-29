@@ -26,7 +26,8 @@ const Layout = () => {
           },
           headerTitleStyle: {
             color: '#fff',
-            fontFamily: 'Jost_700Bold'
+            fontFamily: 'Jost_700Bold',
+            fontSize: 18
           },
           tabBarIcon: ({ color, size }) => (
             <Feather name="map" size={size} color={color} />
@@ -36,7 +37,7 @@ const Layout = () => {
           tabBarLabelStyle: {
             fontWeight: "bold",
             fontFamily: 'Jost_600SemiBold', 
-            fontSize: 14
+            fontSize: 15
           }
         }}
       />
@@ -52,7 +53,8 @@ const Layout = () => {
           },
           headerTitleStyle: {
             color: '#fff',
-            fontFamily: 'Jost_700Bold'
+            fontFamily: 'Jost_700Bold',
+            fontSize: 18
           },
           tabBarIcon: ({ color, size }) => (
             <Feather name="bookmark" size={size} color={color} className="mt-4"/>
@@ -61,7 +63,7 @@ const Layout = () => {
           tabBarActiveTintColor: "#6DAB64",
           tabBarLabelStyle: {
             fontFamily: 'Jost_600SemiBold',
-            fontSize: 14
+            fontSize: 15
           }
         }}
       />
