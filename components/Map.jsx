@@ -1,5 +1,7 @@
 import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
 import { useState, useEffect } from 'react';
+import mapMarker from '../assets/map-marker.png';
+import mapMarkerRed from '../assets/map-marker-red.png';
 
 export default function Map({ region, polygonCoordinates, mapType, addLocationToPolygon, tappable, areaVisible, deleteMode, markersToDelete, setMarkersToDelete }) {
 
@@ -34,6 +36,7 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
                       : setMarkersToDelete([...markersToDelete, coordinate])
                   }}
                   pinColor={ deleteMode && markersToDelete.includes(coordinate) ? "red" : "#2B561F" }
+                  image={ deleteMode && markersToDelete.includes(coordinate) ? mapMarkerRed : mapMarker}
                   />
               )))
             )}
