@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, useMemo, useCallback } from 'react';
 import * as Location from "expo-location";
 import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from 'geolib';
 import { useRouter } from 'expo-router';
-import { MeasurementDisplay, ResetMeasurementsButton, SaveMeasurementsButton, Map, ToggleDeleteModeButton, DeleteMarkersButton, DeleteOptionsBottomSheet } from '../components';
+import { MeasurementDisplay, ResetMeasurementsButton, SaveMeasurementsButton, Map, ToggleDeleteModeButton, DeleteMarkersButton, DeleteOptionsBottomSheet, SaveMapBottomSheet } from '../components';
 import { useStorage } from '../hooks';
 
 
@@ -11,6 +11,7 @@ export default function TapMeasure() {
   const router = useRouter();  
 
   const deleteSheetRef = useRef();
+  const saveSheetRef = useRef();
 
   const [ region, setRegion ] = useState(null);
   const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
@@ -119,7 +120,7 @@ export default function TapMeasure() {
             deleteMode={deleteMode}
             mapType={mapType} />
 
-          <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
+          <SaveMeasurementsButton saveSheetRef={saveSheetRef}/>
         </View>
       </View>
 
@@ -145,6 +146,11 @@ export default function TapMeasure() {
 
         <ResetMeasurementsButton resetMeasurements={resetMeasurements} mapType={mapType} markersToDelete={markersToDelete} polygonCoordinatesLength={polygonCoordinates.length}/>
       </DeleteOptionsBottomSheet>
+
+      <SaveMapBottomSheet 
+        polygonCoordinates={polygonCoordinates}
+        saveSheetRef={saveSheetRef}
+        mapType={mapType}/>
 
     </View>
   );
