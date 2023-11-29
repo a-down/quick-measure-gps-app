@@ -34,17 +34,6 @@ export default function Layout() {
             color: '#1D3F13',
           },
         }} />
-        <Stack.Screen name="SaveMapFormScreen" options={{
-          title: "",
-          headerStyle: {
-            backgroundColor: '#6DAB64',
-          },
-          headerBackTitleVisible: false,
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            color: '#fff',
-          },
-        }} />
       </Stack>
   )
 }
