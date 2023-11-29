@@ -125,7 +125,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
               </Text>
               {` `}{ measurementPreferences.distance }
               <Text className="text-sm text-gray-6">{' '}
-                {distanceAround ? "(distance around)" : "(distance traveled)"}
+                (distance)
               </Text>
             </Text>
           

@@ -1,7 +1,6 @@
 import { Tabs } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
 
-
 const Layout = () => {
   return (
     <Tabs>
