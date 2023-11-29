@@ -132,8 +132,18 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
           </Pressable>
         ) : (
           <Pressable className="h-full pt-0.5"
-            onPress={() => setAreaVisible(!areaVisible)}>
-            <Feather name={areaVisible ? "eye" : "eye-off"} size={24} color="#3A7032"/>
+            onPress={() => {
+              Alert.alert(
+                "Visibility Settings",
+                "What would you like to change?",
+                [
+                  { text: areaVisible ? "Show Distance Only" : "Show Area", onPress: () => setAreaVisible(!areaVisible)},
+                  { text: markersVisible ? "Hide Markers" : "Show Markers", onPress: () => setMarkersVisible(!markersVisible)},
+                  { text: "Cancel", style: "cancel" }
+                ]
+              )
+            }}>
+            <Feather name="eye" size={24} color="#3A7032"/>
           </Pressable>
         )}
 

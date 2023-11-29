@@ -9,6 +9,7 @@ const SavedMap = () => {
   const [ mapData, setMapData ] = useState(null)
   const [ polygonCenter, setPolygonCenter ] = useState(null)
   const [ areaVisible, setAreaVisible ] = useState(true)
+  const [ markersVisible, setMarkersVisible ] = useState(true)
 
   const { map } = useLocalSearchParams();
 
@@ -37,14 +38,17 @@ const SavedMap = () => {
               region={polygonCenter}
               polygonCoordinates={mapData.polygonCoordinates}
               mapType={mapData.mapType}
-              areaVisible={areaVisible}/>
+              areaVisible={areaVisible}
+              markersVisible={markersVisible}/>
 
             <MeasurementDisplay 
               polygonArea={getAreaOfPolygon(mapData.polygonCoordinates)} 
               polygonDistance={getPathLength(mapData.polygonCoordinates)}
               preferredMeasurements={mapData.measurements}
               areaVisible={areaVisible}
-              setAreaVisible={setAreaVisible}/>
+              setAreaVisible={setAreaVisible}
+              markersVisible={markersVisible}
+              setMarkersVisible={setMarkersVisible}/>
           </>
         )}
         
