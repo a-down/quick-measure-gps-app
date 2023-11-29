@@ -21,6 +21,7 @@ export default function AutoMeasure() {
   const [ polygonDistance, setPolygonDistance ] = useState()
   const [ mapType, setMapType ] = useState("")
   const [ areaVisible, setAreaVisible ] = useState(true)
+  const [ markersVisible, setMarkersVisible ] = useState(true)
   const [ deleteMode, setDeleteMode ] = useState(false)
   const [ markersToDelete, setMarkersToDelete ] = useState([])
   const [ previousCoordinates, setPreviousCoordinates ] = useState([])
@@ -118,7 +119,8 @@ export default function AutoMeasure() {
             areaVisible={areaVisible}
             deleteMode={deleteMode}
             markersToDelete={markersToDelete}
-            setMarkersToDelete={setMarkersToDelete}/>
+            setMarkersToDelete={setMarkersToDelete}
+            markersVisible={markersVisible}/>
         )}
 
         <MeasurementDisplay 
@@ -126,7 +128,9 @@ export default function AutoMeasure() {
           polygonDistance={polygonDistance}
           setMapType={setMapType}
           areaVisible={areaVisible}
-          setAreaVisible={setAreaVisible}/>
+          setAreaVisible={setAreaVisible}
+          markersVisible={markersVisible}
+          setMarkersVisible={setMarkersVisible} />
 
         <View className="absolute bottom-2 py-4 px-2 w-full mb-2" style={{gap: 8}}>
           <View className="w-full flex-row justify-between absolute bottom-24 left-2">

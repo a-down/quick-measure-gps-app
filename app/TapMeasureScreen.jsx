@@ -19,6 +19,7 @@ export default function TapMeasure() {
   const [ polygonDistance, setPolygonDistance ] = useState()
   const [ mapType, setMapType ] = useState("")
   const [ areaVisible, setAreaVisible ] = useState(true)
+  const [ markersVisible, setMarkersVisible ] = useState(true)
   const [ deleteMode, setDeleteMode ] = useState(false)
   const [ markersToDelete, setMarkersToDelete ] = useState([])
   const [ previousCoordinates, setPreviousCoordinates ] = useState([])
@@ -101,7 +102,8 @@ export default function TapMeasure() {
           areaVisible={areaVisible}
           deleteMode={deleteMode}
           markersToDelete={markersToDelete}
-          setMarkersToDelete={setMarkersToDelete}/>
+          setMarkersToDelete={setMarkersToDelete}
+          markersVisible={markersVisible}/>
       )}
 
       <MeasurementDisplay 
@@ -110,7 +112,9 @@ export default function TapMeasure() {
         setMapType={setMapType}
         distanceAround={true}
         areaVisible={areaVisible}
-        setAreaVisible={setAreaVisible} />
+        setAreaVisible={setAreaVisible}
+        markersVisible={markersVisible}
+        setMarkersVisible={setMarkersVisible} />
 
       <View className="absolute bottom-0 w-full items-center" style={{gap: 8}}>
         <View className="w-full flex flex-row justify-between mb-14 p-4 rounded-lg">

@@ -4,11 +4,12 @@ import { convertDistance } from 'geolib';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import handleConvertArea from '../hooks/handleConvertArea';
 import { Feather } from '@expo/vector-icons';
+import { useStorage } from '../hooks';
 
 // preferences default to sq meters and meters
 const defaultPreferences = { area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm' }
 
-const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferredMeasurements, distanceAround, areaVisible, setAreaVisible }) => {
+const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferredMeasurements, distanceAround, areaVisible, setAreaVisible, markersVisible, setMarkersVisible }) => {
   const { width } = useWindowDimensions();
   const [ measurementPreferences, setMeasurementPreferences ] = useState(defaultPreferences)
   
@@ -73,15 +74,8 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
   }
 
   const storeMapPreferences = async (data) => {
-    try {
-      setMapType(data)
-      await AsyncStorage.setItem(
-        'mapPreferences',
-        JSON.stringify(data)
-      );
-    } catch (error) {
-        console.log(error)
-    }
+    setMapType(data)
+    useStorage('set', 'mapPreferences', data)
   }
 
   const mapTypeAlert = async () => {
@@ -89,9 +83,9 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
       "Map Type",
       "What type of map would you like to use?",
       [
-        { text: "Standard", onPress: () => storeMapPreferences("standard") },
         { text: "Satellite", onPress: () => storeMapPreferences("satellite") },
         { text: "Hybrid", onPress: () => storeMapPreferences("hybrid") },
+        { text: "Standard", onPress: () => storeMapPreferences("standard") },
         { text: "Cancel", style: "cancel" }
       ]
     );
@@ -140,6 +134,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
                 "What would you like to change?",
                 [
                   { text: areaVisible ? "Show Distance Only" : "Show Area", onPress: () => setAreaVisible(!areaVisible)},
+                  { text: markersVisible ? "Hide Markers" : "Show Markers", onPress: () => setMarkersVisible(!markersVisible)},
                   { text: "Map Type", onPress: () => mapTypeAlert() },
                   { text: "Area Units", onPress: () => updateAreaAlert() },
                   { text: "Distance Units", onPress: () => updateDistanceAlert() },

@@ -2,7 +2,7 @@ import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
 import mapMarker from '../assets/map-marker.png';
 import mapMarkerRed from '../assets/map-marker-red.png';
 
-export default function Map({ region, polygonCoordinates, mapType, addLocationToPolygon, tappable, areaVisible, deleteMode, markersToDelete, setMarkersToDelete }) {
+export default function Map({ region, polygonCoordinates, mapType, addLocationToPolygon, tappable, areaVisible, deleteMode, markersToDelete, setMarkersToDelete, markersVisible }) {
 
   return (
     <>
@@ -20,7 +20,7 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
 
           mapType={mapType || "satellite"}>
 
-            {polygonCoordinates.length > 0 && (
+            {polygonCoordinates.length > 0 && markersVisible && (
               (polygonCoordinates.map((coordinate, index) => (
                 <Marker
                   key={index}
@@ -67,7 +67,7 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
 
           mapType={mapType || "satellite"}>
 
-            {polygonCoordinates.length > 0 && (
+            {polygonCoordinates.length > 0 && markersVisible && (
               (polygonCoordinates.map((coordinate, index) => (
                 <Marker
                   key={index}
