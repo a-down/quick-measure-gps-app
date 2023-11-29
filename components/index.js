@@ -7,5 +7,5 @@ export { default as RedoMarkerButton } from './RedoMarkerButton';
 export { default as ResetMeasurementsButton } from './ResetMeasurementsButton';
 export { default as SaveMapBottomSheet } from './SaveMapBottomSheet';
 export { default as SaveMeasurementsButton } from './SaveMeasurementsButton';
-export { default as StopMeasuringButton } from './StopMeasuringButton';
+export { default as ToggleMeasuringButton } from './ToggleMeasuringButton';
 export { default as ToggleDeleteModeButton } from './ToggleDeleteModeButton';

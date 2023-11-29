@@ -1,8 +1,9 @@
 import { Text, Pressable, Alert } from 'react-native';
 import { useState, useEffect } from 'react';
+import * as Location from "expo-location";
 import { Feather } from '@expo/vector-icons';
 
-const StopMeasuringButton = ({ isMeasuring, setIsMeasuring, polygonCoordinates }) => {
+const ToggleMeasuringButton = ({ isMeasuring, setIsMeasuring, polygonCoordinates, setPolygonCoordinates }) => {
   const [ buttonText, setButtonText ] = useState("Stop Measuring")
   
   useEffect(() => {
@@ -15,7 +16,11 @@ const StopMeasuringButton = ({ isMeasuring, setIsMeasuring, polygonCoordinates }
     }
   }, [isMeasuring, polygonCoordinates])
 
-  const stopMeasuringAlert = () => {
+  const stopMeasuringAlert = async () => {
+    if (polygonCoordinates.length === 0) {
+      let location = await Location.getCurrentPositionAsync({});
+      setPolygonCoordinates([{latitude: location.coords.latitude, longitude: location.coords.longitude}])
+    }
     isMeasuring 
       ? Alert.alert(
         "Stop Measuring",
@@ -46,4 +51,4 @@ const StopMeasuringButton = ({ isMeasuring, setIsMeasuring, polygonCoordinates }
   )
 }
 
-export default StopMeasuringButton;
+export default ToggleMeasuringButton;
