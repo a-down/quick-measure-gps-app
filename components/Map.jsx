@@ -4,7 +4,6 @@ import mapMarker from '../assets/map-marker.png';
 import mapMarkerRed from '../assets/map-marker-red.png';
 
 export default function Map({ region, polygonCoordinates, mapType, addLocationToPolygon, tappable, areaVisible, deleteMode, markersToDelete, setMarkersToDelete }) {
-  const [ polylines, setPolylines ] = useState([])
 
   return (
     <>
@@ -20,7 +19,7 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
 
           onPress={(e) => !deleteMode ? addLocationToPolygon(e.nativeEvent.coordinate) : null}
 
-          mapType={mapType || "standard"}>
+          mapType={mapType || "satellite"}>
 
             {polygonCoordinates.length > 0 && (
               (polygonCoordinates.map((coordinate, index) => (
@@ -36,7 +35,7 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
                       ? setMarkersToDelete(markersToDelete.filter(marker => marker !== coordinate))
                       : setMarkersToDelete([...markersToDelete, coordinate])
                   }}
-                  pinColor={ deleteMode && markersToDelete.includes(coordinate) ? "red" : "#2B561F" }
+                  pinColor={ deleteMode && markersToDelete.includes(coordinate) ? "#2B561F" : "red" }
                   image={ deleteMode && markersToDelete.includes(coordinate) ? mapMarkerRed : mapMarker}
                   />
               )))
@@ -44,7 +43,7 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
 
             {polygonCoordinates.length > 0 && (
               <Polyline
-                strokeColor="#05400A"
+                strokeColor="red"
                 strokeWidth={2}
                 coordinates={polygonCoordinates}
                 lineJoin='round' />
@@ -68,7 +67,7 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
             longitudeDelta: 0.001
           }}
 
-          mapType={mapType || "standard"}>
+          mapType={mapType || "satellite"}>
 
             {polygonCoordinates.length > 0 && (
               (polygonCoordinates.map((coordinate, index) => (
@@ -85,6 +84,7 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
                       : setMarkersToDelete([...markersToDelete, coordinate])
                   }}
                   pinColor={ deleteMode && markersToDelete.includes(coordinate) ? "red" : "wheat" }
+                  image={ deleteMode && markersToDelete.includes(coordinate) ? mapMarkerRed : mapMarker}
                   />
               )))
             )}
@@ -97,7 +97,7 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
                 lineJoin='round' />
             )}
 
-            {polygonCoordinates.length && areaVisible > 2 && (
+            {polygonCoordinates.length > 2 && areaVisible && (
               <Polygon
                 strokeColor='transparent'
                 fillColor="rgba(255, 255, 255, 0.6)"
