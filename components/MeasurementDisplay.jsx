@@ -1,7 +1,6 @@
 import { Text, View, Pressable, useWindowDimensions, Alert } from 'react-native';
 import { useState, useEffect } from 'react';
 import { convertDistance } from 'geolib';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import handleConvertArea from '../hooks/handleConvertArea';
 import { Feather } from '@expo/vector-icons';
 import { useStorage } from '../hooks';
@@ -19,27 +18,14 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
   }, [])
 
   const getPreferences = async () => {
-    try {
-      const value = await AsyncStorage.getItem('measurementPreferences');
-      if (value !== null) {
-        setMeasurementPreferences(JSON.parse(value))
-      } 
-    } catch (error) {
-        console.log(error)
-    }
+    const value = await useStorage('get', 'measurementPreferences')
+    if (value !== null) setMeasurementPreferences(value)
   }
 
-  // save and get preferences with AsyncStorage
+  // save and get preferences
   const storePreferences = async (data) => {
-    try {
-      setMeasurementPreferences(data)
-      await AsyncStorage.setItem(
-        'measurementPreferences',
-        JSON.stringify(data)
-      );
-    } catch (error) {
-        console.log(error)
-    }
+    setMeasurementPreferences(data)
+    await useStorage('set', 'measurementPreferences', data)
   }
 
   // Alert prompts used to update preferences
