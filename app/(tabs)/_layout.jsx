@@ -52,30 +52,6 @@ const Layout = () => {
           }
         }}
       />
-
-      <Tabs.Screen 
-        name="SettingsTab"
-        options={{
-          tabBarLabel: "Settings",
-          title: "Settings",
-          headerBackTitleVisible: false,
-          headerStyle: {
-            backgroundColor: '#6DAB64',
-          },
-          headerTitleStyle: {
-            color: '#fff',
-          },
-          tabBarIcon: ({ color, size }) => (
-            <Feather name="settings" size={size} color={color} />
-          ),
-          tabBarInactiveTintColor: "#9F9F9F",
-          tabBarActiveTintColor: "#6DAB64",
-          tabBarLabelStyle: {
-            fontWeight: "bold",
-            fontSize: 13
-          }
-        }}
-      />
       
     </Tabs>
   )
