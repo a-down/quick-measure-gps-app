@@ -10,7 +10,7 @@ const ToggleDeleteModeButton = ({ setDeleteMode, setMarkersToDelete, mapType, de
         if (deleteMode) setMarkersToDelete([])
       }}>
         <Feather 
-          name={"trash"}
+          name={"trash-2"}
           size={24} 
           color={mapType !== "standard" ? "#fee2e2" : "#7f1d1d"}/>
         <Text 

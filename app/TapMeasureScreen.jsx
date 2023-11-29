@@ -120,7 +120,7 @@ export default function TapMeasure() {
             deleteMode={deleteMode}
             mapType={mapType} />
 
-          <SaveMeasurementsButton saveSheetRef={saveSheetRef}/>
+          <SaveMeasurementsButton saveSheetRef={saveSheetRef} mapType={mapType}/>
         </View>
       </View>
 

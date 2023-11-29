@@ -33,17 +33,17 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
                       ? setMarkersToDelete(markersToDelete.filter(marker => marker !== coordinate))
                       : setMarkersToDelete([...markersToDelete, coordinate])
                   }}
-                  pinColor={ deleteMode && markersToDelete.includes(coordinate) ? "red" : "wheat" }
+                  pinColor={ deleteMode && markersToDelete.includes(coordinate) ? "red" : "#2B561F" }
                   />
               )))
             )}
 
             {polygonCoordinates.length < 3 && (
               <Polyline
-                strokeColor="red"
+                strokeColor="#2B561F"
                 strokeWidth={2}
                 coordinates={polygonCoordinates}
-              />
+                lineJoin='round' />
             )}
 
             {polygonCoordinates.length > 2 && (
@@ -57,9 +57,10 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
                 )}
                 
                 <Polyline
-                  strokeColor="red"
+                  strokeColor="#2B561F"
                   strokeWidth={2}
-                  coordinates={polygonCoordinates} />
+                  coordinates={polygonCoordinates}
+                  lineJoin='round' />
               </>
             )}
         </MapView>
@@ -99,7 +100,7 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
                 strokeColor="red"
                 strokeWidth={2}
                 coordinates={polygonCoordinates}
-              />
+                lineJoin='round' />
             )}
 
             {polygonCoordinates.length > 2 && (
@@ -115,7 +116,8 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
                 <Polyline
                   strokeColor="red"
                   strokeWidth={2}
-                  coordinates={polygonCoordinates} />
+                  coordinates={polygonCoordinates}
+                  lineJoin='round' />
               </>
             )}
         </MapView>
