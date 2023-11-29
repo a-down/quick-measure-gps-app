@@ -1,6 +1,8 @@
 import { Text, View, Pressable, useWindowDimensions, Image, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';
 import mapScreenshot from "../../assets/map-screenshot.png";
+import { jostFont } from '../../hooks'
+
 
 export default function App() {
   const router = useRouter();
@@ -16,8 +18,8 @@ export default function App() {
       <Pressable className="flex w-full bg-white relative aspect-video" onPress={() => router.push(item.link)}>
         <Image className="w-full " source={item.image}/>
         <View className="bg-white w-full p-2 absolute -bottom-0.5">
-          <Text className="text-lg font-semibold text-green-10">{item.title}</Text>
-          <Text className="text-base text-gray-7">{item.description}</Text>
+          <Text className=" font-semibold text-green-10" style={[jostFont.semibold]}>{item.title}</Text>
+          <Text className="text-base text-gray-7" style={jostFont.regular}>{item.description}</Text>
         </View>
       </Pressable>
     </View>

@@ -1,7 +1,18 @@
 import { Tabs } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
+import { useFonts, Jost_400Regular, Jost_600SemiBold, Jost_700Bold } from '@expo-google-fonts/jost';
 
 const Layout = () => {
+  let [fontsLoaded] = useFonts({
+    Jost_400Regular,
+    Jost_600SemiBold,
+    Jost_700Bold
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <Tabs>
       <Tabs.Screen 
@@ -15,6 +26,7 @@ const Layout = () => {
           },
           headerTitleStyle: {
             color: '#fff',
+            fontFamily: 'Jost_700Bold'
           },
           tabBarIcon: ({ color, size }) => (
             <Feather name="map" size={size} color={color} />
@@ -23,7 +35,8 @@ const Layout = () => {
           tabBarActiveTintColor: "#6DAB64",
           tabBarLabelStyle: {
             fontWeight: "bold",
-            fontSize: 13
+            fontFamily: 'Jost_600SemiBold', 
+            fontSize: 14
           }
         }}
       />
@@ -39,6 +52,7 @@ const Layout = () => {
           },
           headerTitleStyle: {
             color: '#fff',
+            fontFamily: 'Jost_700Bold'
           },
           tabBarIcon: ({ color, size }) => (
             <Feather name="bookmark" size={size} color={color} className="mt-4"/>
@@ -46,8 +60,8 @@ const Layout = () => {
           tabBarInactiveTintColor: "#9F9F9F",
           tabBarActiveTintColor: "#6DAB64",
           tabBarLabelStyle: {
-            fontWeight: "bold",
-            fontSize: 13
+            fontFamily: 'Jost_600SemiBold',
+            fontSize: 14
           }
         }}
       />
