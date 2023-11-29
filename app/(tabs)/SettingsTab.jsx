@@ -1,6 +1,7 @@
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, Button } from 'react-native';
 import { useRef, useMemo, useCallback } from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
+import { useStorage } from '../../hooks';
 
 const Settings = () => {
   const bottomSheetRef = useRef();
@@ -11,57 +12,9 @@ const Settings = () => {
 
   return (
     <View className="flex-1">
-      <BottomSheet
-        style={{ flex: 1 }}
-        ref={bottomSheetRef}
-        index={2}
-        snapPoints={snapPoints}
-        onChange={handleSheetChanges}
-      >
-        <ScrollView className="flex-1 p-4">
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-          <Text className="font-semibold">View/Edit Markers</Text>
-        </ScrollView>
-      </BottomSheet>
+      <Button title="Delete Stored Data" onPress={() => {
+        useStorage('remove', 'savedMaps')
+      }} />
 
     </View>
   )

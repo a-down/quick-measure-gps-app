@@ -31,7 +31,7 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType }) {
       let data
       if (value !== null) {
         data = [
-          value,
+          ...value,
           {
             id: uuid.v4(),
             dateCreated: new Date(),
@@ -55,6 +55,7 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType }) {
 
       Alert.alert(`${mapName} saved!`)
       saveSheetRef.current.close()
+      Keyboard.dismiss()
 
     } catch (error) {
       console.log(error)
