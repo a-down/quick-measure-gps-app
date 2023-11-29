@@ -1,25 +1,18 @@
 import { View, Text, Pressable, FlatList, Alert } from 'react-native';
 import { useState, useCallback } from 'react'
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getAreaOfPolygon, getPathLength, convertDistance } from 'geolib';
 import { useRouter, useFocusEffect } from 'expo-router';
 import handleConvertArea from '../../hooks/handleConvertArea';
+import { useStorage } from '../../hooks';
 
 
 const Saved = () => {
   const router = useRouter();
   const [ savedMaps, setSavedMaps ] = useState([])
-  const [ emptyState, setEmptyState ] = useState(false)
 
   const getMaps = async () => {
-    try {
-      const value = await AsyncStorage.getItem('savedMaps')
-      value !== null 
-        ? setSavedMaps(JSON.parse(value).reverse())
-        : setEmptyState(true)
-    } catch (error) {
-        console.log(error)
-    }
+    const value = await useStorage('get', 'savedMaps')
+    if (value !== null) setSavedMaps(value.reverse())
   }
 
   useFocusEffect(
@@ -41,19 +34,13 @@ const Saved = () => {
 
   const deleteMap = async (id) => {
     try {
-      const value = await AsyncStorage.getItem('savedMaps')
-      if (value !== null) {
-        const data = JSON.parse(value).filter(map => map.id !== id)
-        await AsyncStorage.setItem(
-          'savedMaps',
-          JSON.stringify(data)
-        );
-        setSavedMaps(data.reverse())
-        Alert.alert("Map deleted")
-      }
-    } catch (error) {
-        console.log(error)
-        Alert.alert("Could not delete map")
+      const value = await useStorage('get', 'savedMaps')
+      const data = value.filter(map => map.id !== id)
+      await useStorage('set', 'savedMaps', data)
+      setSavedMaps(data.reverse())
+      Alert.alert("Map deleted")
+    } catch {
+      Alert.alert("Could not delete map")
     }
   }
 
@@ -108,16 +95,16 @@ const Saved = () => {
           />
       )}
 
-      {emptyState && (
+      {savedMaps.length === 0 && (
         <View className="h-full justify-center items-center " style={{gap: 16}}>
           <Text className="text-lg text-gray-8 text-center">Save a map to see it here!</Text>
-          <Pressable className="w-3/4" onPress={() => router.push("/AutoMeasureScreen")}>
+          <Pressable className="w-3/4" onPress={() => router.push("/TapMeasureScreen")}>
             <Text className="text-lg text-gray-8 text-center">
-              Start{' '}
+              Try using{' '}
               <Text className="text-green-8 underline">
-                Auto Measure
+                Tap to Measure
               </Text>
-              {' '}and walk around your house
+              {' '}and save your map to see it here!
             </Text>
           </Pressable>
         </View>
