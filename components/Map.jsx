@@ -4,6 +4,7 @@ import mapMarker from '../assets/map-marker.png';
 import mapMarkerRed from '../assets/map-marker-red.png';
 
 export default function Map({ region, polygonCoordinates, mapType, addLocationToPolygon, tappable, areaVisible, deleteMode, markersToDelete, setMarkersToDelete }) {
+  const [ polylines, setPolylines ] = useState([])
 
   return (
     <>
@@ -41,30 +42,20 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
               )))
             )}
 
-            {polygonCoordinates.length < 3 && (
+            {polygonCoordinates.length > 0 && (
               <Polyline
-                strokeColor="#2B561F"
+                strokeColor="#05400A"
                 strokeWidth={2}
                 coordinates={polygonCoordinates}
                 lineJoin='round' />
             )}
 
-            {polygonCoordinates.length > 2 && (
-              <>
-                {areaVisible && (
-                  <Polygon
-                    strokeColor='transparent'
-                    fillColor="rgba(255, 255, 255, 0.6)"
-                    strokeWidth={1}
-                    coordinates={polygonCoordinates} />
-                )}
-                
-                <Polyline
-                  strokeColor="#2B561F"
-                  strokeWidth={2}
-                  coordinates={polygonCoordinates}
-                  lineJoin='round' />
-              </>
+            {polygonCoordinates.length > 2 && areaVisible && (
+              <Polygon
+                strokeColor='transparent'
+                fillColor="rgba(255, 255, 255, 0.6)"
+                strokeWidth={1}
+                coordinates={polygonCoordinates} />
             )}
         </MapView>
       ) : (
@@ -98,30 +89,20 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
               )))
             )}
 
-            {polygonCoordinates.length < 3 && (
+            {polygonCoordinates.length > 0 && (
               <Polyline
-                strokeColor="red"
+                strokeColor="#05400A"
                 strokeWidth={2}
                 coordinates={polygonCoordinates}
                 lineJoin='round' />
             )}
 
-            {polygonCoordinates.length > 2 && (
-              <>
-                {areaVisible && (
-                  <Polygon
-                    strokeColor='transparent'
-                    fillColor="rgba(255, 255, 255, 0.6)"
-                    strokeWidth={1}
-                    coordinates={polygonCoordinates} />
-                )}
-                
-                <Polyline
-                  strokeColor="red"
-                  strokeWidth={2}
-                  coordinates={polygonCoordinates}
-                  lineJoin='round' />
-              </>
+            {polygonCoordinates.length && areaVisible > 2 && (
+              <Polygon
+                strokeColor='transparent'
+                fillColor="rgba(255, 255, 255, 0.6)"
+                strokeWidth={1}
+                coordinates={polygonCoordinates} />
             )}
         </MapView>
       )}
