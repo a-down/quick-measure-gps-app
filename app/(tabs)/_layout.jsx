@@ -18,7 +18,7 @@ const Layout = () => {
             color: '#fff',
           },
           tabBarIcon: ({ color, size }) => (
-            <Feather name="map-pin" size={size} color={color} />
+            <Feather name="map" size={size} color={color} />
           ),
           tabBarInactiveTintColor: "#9F9F9F",
           tabBarActiveTintColor: "#6DAB64",

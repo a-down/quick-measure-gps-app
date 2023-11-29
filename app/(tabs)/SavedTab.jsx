@@ -4,6 +4,7 @@ import { getAreaOfPolygon, getPathLength, convertDistance } from 'geolib';
 import { useRouter, useFocusEffect } from 'expo-router';
 import handleConvertArea from '../../hooks/handleConvertArea';
 import { useStorage } from '../../hooks';
+import { Feather } from '@expo/vector-icons';
 
 
 const Saved = () => {
@@ -97,14 +98,14 @@ const Saved = () => {
 
       {savedMaps.length === 0 && (
         <View className="h-full justify-center items-center " style={{gap: 16}}>
+          <Feather name="bookmark" size={64} color="#6DAB64" style={{marginBottom: 64}}/>
           <Text className="text-lg text-gray-8 text-center">Save a map to see it here!</Text>
           <Pressable className="w-3/4" onPress={() => router.push("/TapMeasureScreen")}>
             <Text className="text-lg text-gray-8 text-center">
               Try using{' '}
-              <Text className="text-green-8 underline">
-                Tap to Measure
+              <Text className="text-green-8 font-semibold">
+                Tap to Measure.
               </Text>
-              {' '}and save your map to see it here!
             </Text>
           </Pressable>
         </View>
