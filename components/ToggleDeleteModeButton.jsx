@@ -1,5 +1,6 @@
 import { Text, Pressable, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { medium } from '../hooks/useJostFont';
 
 const ToggleDeleteModeButton = ({ setDeleteMode, setMarkersToDelete, mapType, deleteMode }) => {
 
@@ -14,8 +15,7 @@ const ToggleDeleteModeButton = ({ setDeleteMode, setMarkersToDelete, mapType, de
           size={24} 
           color={mapType !== "standard" ? "#fee2e2" : "#7f1d1d"}/>
         <Text 
-          className="text-lg" 
-          style={{color: mapType !== "standard" ? "#fee2e2" : "#7f1d1d"}}>
+          style={[medium, {color: mapType !== "standard" ? "#fee2e2" : "#7f1d1d", fontSize: 20}]}>
             Delete Options
         </Text>
       </Pressable>

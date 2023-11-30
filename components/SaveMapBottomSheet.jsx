@@ -4,6 +4,8 @@ import { Text, Pressable, View, TextInput, Keyboard, Alert } from 'react-native'
 import { useState } from 'react';
 import { useStorage } from '../hooks';
 import uuid from 'react-native-uuid';
+import { Feather } from '@expo/vector-icons';
+import { regular, medium, semibold } from '../hooks/useJostFont';
 
 function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType }) {
 
@@ -75,10 +77,11 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType }) {
       <View className="flex-1 px-6 justify-start relative" style={{gap: 16}}>
         
         <View style={{gap: 8}}>
-          <Text className=" text-lg font-medium">Enter a name for the map</Text>
+          <Text style={[medium, {fontSize: 20}]}>Enter a name for the map</Text>
 
           <TextInput
-            className="w-full bg-white p-2 rounded-sm border-gray-4 border mb-2"
+            className="w-full bg-white p-2 rounded-sm border-gray-4 border mb-2 text-gray-8"
+            style={regular}
             value={mapName}
             onChangeText={setMapName}
             onFocus={() => saveSheetRef.current.snapToIndex(0)}
@@ -87,15 +90,16 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType }) {
 
         <View style={{gap: 8}}>
           <Pressable 
-            className=" p-4 rounded-2xl shadow-sm" 
-            style={{backgroundColor: '#6DAB64'}}
+            className=" p-4 rounded-2xl shadow-sm flex-row justify-center items-center" 
+            style={{backgroundColor: '#6DAB64', gap: 8}}
             onPress={saveMap}>
-            <Text className="text-center text-xl text-white font-semibold">
+            <Feather name="download" size={24} color="white" />
+            <Text className="text-center text-white" style={[semibold, {fontSize: 22}]}>
               Save Map
             </Text>
           </Pressable>
 
-          <Text className="text-gray-8 text-center">
+          <Text className="text-gray-8 text-center" style={regular}>
           (the map will save with the current map type, distance measurement, and area measurement)
           </Text>
         </View>

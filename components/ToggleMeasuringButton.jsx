@@ -2,6 +2,7 @@ import { Text, Pressable, Alert } from 'react-native';
 import { useState, useEffect } from 'react';
 import * as Location from "expo-location";
 import { Feather } from '@expo/vector-icons';
+import { semibold } from '../hooks/useJostFont';
 
 const ToggleMeasuringButton = ({ isMeasuring, setIsMeasuring, polygonCoordinates, setPolygonCoordinates }) => {
   const [ buttonText, setButtonText ] = useState("Stop Measuring")
@@ -42,9 +43,9 @@ const ToggleMeasuringButton = ({ isMeasuring, setIsMeasuring, polygonCoordinates
       style={{backgroundColor: isMeasuring ? '#C9E9C8' : '#6DAB64', gap: 8}}
       onPress={stopMeasuringAlert}>
         {isMeasuring 
-          ? <Feather name="pause" size={24} color='#1D3F13'/> 
+          ? <Feather name="pause-circle" size={24} color='#1D3F13'/> 
           : <Feather name="play" size={24} color='#fff'/>}
-      <Text className="text-center text-xl font-semibold" style={{color: isMeasuring ? '#1D3F13' : '#fff'}}>
+      <Text className="text-center" style={[semibold, {color: isMeasuring ? '#1D3F13' : '#fff', fontSize: 20}]}>
         { buttonText }
       </Text>
     </Pressable>
