@@ -80,7 +80,7 @@ const Saved = () => {
         </View>  
 
         <View className=" flex-row w-full items-center" style={{gap: 8}}>
-          <Pressable className="bg-green-5 p-2 rounded-md flex-grow active:opacity-40" onPress={() => router.push({ pathname: "/SavedMapScreen", params: { map: JSON.stringify(item) }})}>
+          <Pressable className="bg-green-5 p-2 rounded-md flex-grow active:bg-green-4" onPress={() => router.push({ pathname: "/SavedMapScreen", params: { map: JSON.stringify(item) }})}>
             <Text className="text-white text-center" style={[semibold, {fontSize: 20}]}>View Map</Text>
           </Pressable>
         </View>  
