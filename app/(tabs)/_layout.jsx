@@ -17,9 +17,9 @@ const Layout = () => {
   return (
     <Tabs>
       <Tabs.Screen 
-        name="ToolsTab"
+        name="MeasureTab"
         options={{
-          tabBarLabel: "Tools",
+          tabBarLabel: "Measure",
           title: "Quick Measure",
           headerBackTitleVisible: false,
           headerStyle: {

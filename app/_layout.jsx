@@ -22,7 +22,7 @@ export default function Layout() {
           },
         }} />
         <Stack.Screen name="PinpointMeasureScreen" options={{
-          title: 'Pinpoint Measure',
+          title: 'Manual Measure',
           headerBackTitleVisible: false,
           headerTintColor: '#6DAB64',
           headerTitleStyle: {

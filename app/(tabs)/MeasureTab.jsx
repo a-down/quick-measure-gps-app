@@ -1,10 +1,9 @@
 import { Text, View, Pressable, useWindowDimensions, Image, FlatList, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import mapScreenshot from "../../assets/map-screenshot.png";
-import homeBG from "../../assets/home-bg.svg";
 import { regular, semibold, medium, bold } from '../../hooks/useJostFont';
 import walkingIcon from '../../assets/walking-icon.png';
-import { Feather, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 
 export default function App() {
   const { width } = useWindowDimensions();
@@ -21,14 +20,14 @@ export default function App() {
       <View className="bg-green-8 w-[1060px] aspect-square relative -top-[600px] rounded-full"></View>
 
       <ScrollView className="flex-1 top-0 left-0 absolute p-8" contentContainerStyle={{ alignItems: 'center'}}>
-
-        <Image source={walkingIcon} height={114.12} width={80} className="mb-6"/>
-
-        <Text className="text-white text-center mb-6" style={[bold, {fontSize: 24, width: "60%"}]}>Easy Tools for a Quick Measure</Text>
+        <View className="items-center justify-start" style={{gap: 24}}>
+          <Image source={walkingIcon} height={114.12} width={80}/>
+          <Text className="text-white text-center mb-6" style={[bold, {fontSize: 24, maxWidth: 200}]}>Easy Tools for a Quick Measure</Text>
+        </View>
 
         <View className="bg-gray-1 w-full rounded-lg shadow-2xl p-4 flex-row flex-wrap justify-around" style={{width: width-64, gap: 16 }}>
           {data.map((item, index) => (
-            <Pressable onPress={() => router.push(item.link)} className="items-center w-[45%] justift-start" key={index}>
+            <Pressable onPress={() => router.push(item.link)} className="items-center justift-start" key={index} style={{maxWidth: 130}}>
               {/* <View className="bg-green-3 h-[100px] w-[100px] rounded-full mb-2 justify-center items-center"> */}
               {item.icon === 'gesture-tap' 
                 ? <MaterialCommunityIcons name={item.icon} size={96} color="#8CC185" style={{textAlign: 'center'}}/>
@@ -40,7 +39,6 @@ export default function App() {
             </Pressable>
           ))}
         </View>
-
       </ScrollView>
 
     </View>
