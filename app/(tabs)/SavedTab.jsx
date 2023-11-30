@@ -111,7 +111,7 @@ const Saved = () => {
             <Text className=" text-gray-8 text-center" style={[regular, {fontSize: 20}]}>
               Try using{' '}
               <Text className="text-green-8 " style={[semibold, {fontSize: 20}]}>
-                Tap to Measure.
+                Tap to Measure
               </Text>
             </Text>
           </Pressable>
