@@ -3,6 +3,7 @@ import { useRouter } from 'expo-router';
 import mapScreenshot from "../../assets/map-screenshot.png";
 import homeBG from "../../assets/home-bg.svg";
 import { regular, semibold, medium, bold } from '../../hooks/useJostFont';
+import walkingIcon from '../../assets/walking-icon.png';
 
 export default function App() {
   const { width } = useWindowDimensions();
@@ -18,11 +19,11 @@ export default function App() {
     <View className="bg-green-9 relative flex-1 items-center">
       <View className="bg-green-8 w-[1060px] aspect-square relative -top-[600px] rounded-full"></View>
 
-      <ScrollView className="w-full h-full top-0 left-0 absolute p-8" contentContainerStyle={{ alignItems: 'center'}}>
+      <ScrollView className="flex-1 top-0 left-0 absolute p-8" contentContainerStyle={{ alignItems: 'center'}}>
 
-        <View className="bg-green-3 w-[60px] h-[112px] mb-6"></View>
+        <Image source={walkingIcon} height={114.12} width={80} className="mb-6"/>
 
-        <Text className="text-white text-center mb-4" style={[bold, {fontSize: 24, width: "60%"}]}>Easy Tools for a Quick Measure</Text>
+        <Text className="text-white text-center mb-6" style={[bold, {fontSize: 24, width: "60%"}]}>Easy Tools for a Quick Measure</Text>
 
         <View className="bg-gray-1 w-full rounded-lg shadow-2xl p-4 flex-row flex-wrap justify-around" style={{width: width-64, gap: 16 }}>
           {data.map((item, index) => (
