@@ -1,5 +1,6 @@
 import { Text, Pressable, View, Alert } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { medium } from '../hooks/useJostFont';
 
 const DeleteMarkersButton = ({ polygonCoordinates, setPolygonCoordinates, markersToDelete, setMarkersToDelete, mapType, resetMeasurements, setPreviousCoordinates, previousCoordinates }) => {
 
@@ -36,8 +37,7 @@ const DeleteMarkersButton = ({ polygonCoordinates, setPolygonCoordinates, marker
           size={24} 
           color={"#fee2e2"}/>
         <Text 
-          className="text-lg font-medium" 
-          style={{color: "#fee2e2"}}>
+          style={[medium, {color: "#fee2e2", fontSize: 20}]}>
             {markersToDelete.length > 1 ? 'Delete Selected Markers' : 'Delete Selected Marker'}
         </Text>
       </Pressable>

@@ -3,7 +3,6 @@ import { useRouter } from 'expo-router';
 import mapScreenshot from "../../assets/map-screenshot.png";
 import { regular, semibold } from '../../hooks/useJostFont'
 
-
 export default function App() {
   const router = useRouter();
 
@@ -18,8 +17,8 @@ export default function App() {
       <Pressable className="flex w-full bg-white relative aspect-video" onPress={() => router.push(item.link)}>
         <Image className="w-full " source={item.image}/>
         <View className="bg-white w-full p-2 absolute -bottom-0.5">
-          <Text className=" font-semibold text-green-10" style={semibold}>{item.title}</Text>
-          <Text className="text-base text-gray-7" style={regular}>{item.description}</Text>
+          <Text className=" text-green-10" style={[semibold, {fontSize: 20}]}>{item.title}</Text>
+          <Text className=" text-gray-7" style={regular}>{item.description}</Text>
         </View>
       </Pressable>
     </View>

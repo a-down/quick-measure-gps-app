@@ -2,7 +2,6 @@ import { useMemo, useCallback } from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { Text, Pressable, View, TextInput, Keyboard, Alert } from 'react-native';
 import { useState } from 'react';
-import { Feather } from '@expo/vector-icons';
 import { useStorage } from '../hooks';
 import uuid from 'react-native-uuid';
 

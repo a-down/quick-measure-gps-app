@@ -5,8 +5,7 @@ import { useRouter, useFocusEffect } from 'expo-router';
 import handleConvertArea from '../../hooks/handleConvertArea';
 import { useStorage } from '../../hooks';
 import { Feather } from '@expo/vector-icons';
-import { jostFont } from '../../hooks';
-
+import { regular, medium, semibold, bold } from '../../hooks/useJostFont'
 
 const Saved = () => {
   const router = useRouter();
@@ -53,8 +52,8 @@ const Saved = () => {
     return (
       <Pressable className="flex w-full bg-white relative p-4" onPress={() => router.push({ pathname: "/SavedMapScreen", params: { map: JSON.stringify(item) }})}>
         <View className="w-full mb-1">
-          <Text className="text-2xl font-semibold text-green-10">{item.mapName}</Text>
-          <Text className="text-base text-gray-7">
+          <Text className=" text-green-10" style={[semibold, {fontSize: 24}]}>{item.mapName}</Text>
+          <Text className=" text-gray-7" style={regular}>
             {item.dateCreated.split("T")[0].split("-")[1]}/
             {item.dateCreated.split("T")[0].split("-")[2]}/
             {item.dateCreated.split("T")[0].split("-")[0]}
@@ -62,7 +61,7 @@ const Saved = () => {
         </View>
 
         <View className="flex-row flex-wrap mb-3">
-          <Text className="text-lg text-gray-8 mr-8">
+          <Text className=" text-gray-8 mr-8" style={[regular, {fontSize: 20}]}>
             <Text className="text-2xl">
               { polygonArea
                 ? handleConvertArea(polygonArea, item.measurements.areaShort).toFixed(2)
@@ -70,7 +69,7 @@ const Saved = () => {
             </Text>
             {` `}{ item.measurements.area }
           </Text>
-          <Text className="text-lg text-gray-8">
+          <Text className=" text-gray-8" style={[regular, {fontSize: 20}]}>
             <Text className="text-2xl">
               { polygonDistance
                 ? convertDistance(polygonDistance, item.measurements.distanceShort).toFixed(2)
@@ -82,7 +81,7 @@ const Saved = () => {
 
         <View className=" flex-row w-full items-center" style={{gap: 8}}>
           <Pressable className="bg-green-5 p-2 rounded-md flex-grow" onPress={() => router.push({ pathname: "/SavedMapScreen", params: { map: JSON.stringify(item) }})}>
-            <Text className="text-white font-semibold text-lg text-center">View Map</Text>
+            <Text className="text-white text-center" style={[semibold, {fontSize: 20}]}>View Map</Text>
           </Pressable>
         </View>  
 
@@ -107,11 +106,11 @@ const Saved = () => {
       {savedMaps.length === 0 && (
         <View className="h-full justify-center items-center " style={{gap: 16}}>
           <Feather name="bookmark" size={64} color="#6DAB64" style={{marginBottom: 64}}/>
-          <Text className="text-lg text-gray-8 text-center">Save a map to see it here!</Text>
+          <Text className=" text-gray-8 text-center" style={[regular, {fontSize: 20}]}>Save a map to see it here!</Text>
           <Pressable className="w-3/4" onPress={() => router.push("/TapMeasureScreen")}>
-            <Text className="text-lg text-gray-8 text-center">
+            <Text className=" text-gray-8 text-center" style={[regular, {fontSize: 20}]}>
               Try using{' '}
-              <Text className="text-green-8 font-semibold">
+              <Text className="text-green-8 " style={[semibold, {fontSize: 20}]}>
                 Tap to Measure.
               </Text>
             </Text>

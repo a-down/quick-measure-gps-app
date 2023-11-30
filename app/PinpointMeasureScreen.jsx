@@ -13,6 +13,7 @@ export default function AutoMeasure() {
   const router = useRouter();  
 
   const deleteSheetRef = useRef();
+  const saveSheetRef = useRef();
 
   const [ currentLocation, setCurrentLocation ] = useState(null);
   const [ region, setRegion ] = useState(null);
@@ -53,13 +54,6 @@ export default function AutoMeasure() {
     await setCurrentLocation(location.coords);
   }
 
-  // const redoPreviousMarker = async () => {
-  //   await updateLocation()
-  //   polygonCoordinates.length === 1
-  //     ? await setPolygonCoordinates([currentLocation.coords])
-  //     : await setPolygonCoordinates(polygonCoordinates.slice(0, -1).push(currentLocation.coords))
-  // }
-
   // when location changes and the user is measuring, add the new location to the polygon and generate measurements for the polygon
   useEffect(() => {
     if (currentLocation) {
@@ -77,7 +71,6 @@ export default function AutoMeasure() {
     const value = await useStorage('get', 'currentPinpointCoordinates')
 
     if (value !== null && value.length > 0) {
-      console.log('value', value)
       setPolygonCoordinates(value)
       setRegion(getCenterOfBounds(value))
 
@@ -94,7 +87,6 @@ export default function AutoMeasure() {
   const addLocationToPolygon = async () => {
     await setPolygonCoordinates([{ latitude: currentLocation.latitude, longitude: currentLocation.longitude}, ...polygonCoordinates])
     useStorage('set', 'currentPinpointCoordinates', polygonCoordinates)
-    console.log('polygonCoordinates', polygonCoordinates)
   }
 
   // reset the polygon coordinates and measurements
@@ -140,7 +132,12 @@ export default function AutoMeasure() {
               deleteMode={deleteMode}
               mapType={mapType} />
 
-            <SaveMeasurementsButton polygonCoordinates={polygonCoordinates} polygonArea={polygonArea} polygonDistance={polygonDistance} mapType={mapType}/>
+            <SaveMeasurementsButton 
+              polygonCoordinates={polygonCoordinates} 
+              polygonArea={polygonArea} 
+              polygonDistance={polygonDistance} 
+              mapType={mapType} 
+              saveSheetReg={saveSheetRef}/>
           </View>
 
           <AddMarkerButton updateLocation={updateLocation} />

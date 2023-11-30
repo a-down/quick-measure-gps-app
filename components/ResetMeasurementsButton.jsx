@@ -1,5 +1,6 @@
 import { Text, Pressable, Alert, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { medium } from '../hooks/useJostFont';
 
 const ResetMeasurementsButton = ({ resetMeasurements, mapType, markersToDelete, polygonCoordinatesLength }) => {
   const resetMeasurementsAlert = () => {
@@ -27,8 +28,7 @@ const ResetMeasurementsButton = ({ resetMeasurements, mapType, markersToDelete, 
           size={24} 
           color={"#fee2e2"}/>
         <Text 
-          className="text-lg font-medium" 
-          style={{color: "#fee2e2"}}>
+          style={[medium, {color: "#fee2e2", fontSize: 20}]}>
             Delete All Markers
         </Text>
       </Pressable>

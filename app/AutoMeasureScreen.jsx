@@ -14,6 +14,7 @@ export default function AutoMeasure() {
   const router = useRouter();  
 
   const deleteSheetRef = useRef();
+  const saveSheetRef = useRef();
 
   const [ region, setRegion ] = useState(null);
   const [ currentLocation, setCurrentLocation ] = useState(null);

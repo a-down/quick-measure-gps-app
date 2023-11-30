@@ -1,5 +1,6 @@
 import { Text, Pressable } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { semibold } from '../hooks/useJostFont';
 
 const StopMeasuringButton = ({ updateLocation }) => {
 
@@ -11,7 +12,7 @@ const StopMeasuringButton = ({ updateLocation }) => {
 
       <Feather name="plus-circle" size={24} color="#fff"/>
 
-      <Text className="text-center text-xl text-white font-semibold">
+      <Text className="text-center text-white" style={[semibold, {fontSize: 22}]}>
         Add Marker
       </Text>
     </Pressable>
