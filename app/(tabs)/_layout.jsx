@@ -36,14 +36,13 @@ const Layout = () => {
           tabBarInactiveTintColor: "#6DAB64",
           tabBarActiveTintColor: "#AED6A9",
           tabBarStyle: {
-            paddingTop: 4,
-            backgroundColor: "#2C561F",
+            backgroundColor: "#2B561F",
             borderTopColor: "transparent",
           },
           tabBarLabelStyle: {
             fontWeight: "bold",
-            fontFamily: 'Jost_600SemiBold', 
-            fontSize: 15
+            fontFamily: 'Jost_500Medium', 
+            fontSize: 13
           }
         }}
       />
@@ -68,8 +67,8 @@ const Layout = () => {
           tabBarInactiveTintColor: "#9F9F9F",
           tabBarActiveTintColor: "#6DAB64",
           tabBarLabelStyle: {
-            fontFamily: 'Jost_600SemiBold',
-            fontSize: 15
+            fontFamily: 'Jost_500Medium',
+            fontSize: 13
           }
         }}
       />
