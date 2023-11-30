@@ -1,44 +1,41 @@
-import { Text, View, Pressable, useWindowDimensions, Image, FlatList } from 'react-native';
+import { Text, View, Pressable, useWindowDimensions, Image, FlatList, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import mapScreenshot from "../../assets/map-screenshot.png";
-import { regular, semibold } from '../../hooks/useJostFont'
+import homeBG from "../../assets/home-bg.svg";
+import { regular, semibold, medium, bold } from '../../hooks/useJostFont';
 
 export default function App() {
+  const { width } = useWindowDimensions();
   const router = useRouter();
 
   const data = [
-    {link: '/AutoMeasureScreen', image: mapScreenshot, title: 'Auto Measure', description: 'Track your location with GPS'},
-    {link: '/PinpointMeasureScreen', image: mapScreenshot, title: 'Pinpoint Measure', description: 'Manually log your position with GPS'},
-    {link: '/TapMeasureScreen', image: mapScreenshot, title: 'Tap to Measure', description: 'Add points manually by tapping the map'},
+    {link: '/AutoMeasureScreen', image: mapScreenshot, title: 'Auto', description: 'Track your location with GPS'},
+    {link: '/PinpointMeasureScreen', image: mapScreenshot, title: 'Manual', description: 'Manually log your location with GPS'},
+    {link: '/TapMeasureScreen', image: mapScreenshot, title: 'Tap', description: 'Measure anywhere in the world by tapping'},
   ]
 
-  const Card = ({item}) => (
-    <View className="bg-gray-2 shadow-sm">
-      <Pressable className="flex w-full bg-white relative aspect-video" onPress={() => router.push(item.link)}>
-        <Image className="w-full " source={item.image}/>
-        <View className="bg-white w-full p-2 absolute -bottom-0.5">
-          <Text className=" text-green-10" style={[semibold, {fontSize: 20}]}>{item.title}</Text>
-          <Text className=" text-gray-7" style={regular}>{item.description}</Text>
-        </View>
-      </Pressable>
-    </View>
-  )
-
-  // const ListHeader = () => (
-  //   <View className="bg-green-4 w-full">
-  //     <Text className=" text-lg m-4 text-white font-medium">Measurement Tools</Text>
-  //   </View>
-  // )
-
   return (
-    <View className="bg-gray-1">
-      <FlatList
-        data={data}
-        renderItem={({item}) => <Card item={item} />}
-        keyExtractor={item => item.title}
-        // ListHeaderComponent={() => <ListHeader />}
-        ItemSeparatorComponent={() => <View className="h-4 bg-gray-1"></View>}
-        />
+    <View className="bg-green-9 relative flex-1 items-center">
+      <View className="bg-green-8 w-[1060px] aspect-square relative -top-[600px] rounded-full"></View>
+
+      <ScrollView className="w-full h-full top-0 left-0 absolute p-8" contentContainerStyle={{ alignItems: 'center'}}>
+
+        <View className="bg-green-3 w-[60px] h-[112px] mb-6"></View>
+
+        <Text className="text-white text-center mb-4" style={[bold, {fontSize: 24, width: "60%"}]}>Easy Tools for a Quick Measure</Text>
+
+        <View className="bg-gray-1 w-full rounded-lg shadow-2xl p-4 flex-row flex-wrap justify-around" style={{width: width-64, gap: 16 }}>
+          {data.map((item, index) => (
+            <Pressable onPress={() => router.push(item.link)} className="items-center w-[45%]" key={index}>
+              <View className="bg-green-3 h-[100px] aspect-square rounded-full mb-2"></View>
+              <Text className=" text-green-10" style={[semibold, {fontSize: 18}]}>{item.title}</Text>
+              <Text className=" text-gray-7 text-center" style={[regular, {fontSize: 14}]}>{item.description}</Text>  
+            </Pressable>
+          ))}
+        </View>
+
+      </ScrollView>
+
     </View>
   );
 }

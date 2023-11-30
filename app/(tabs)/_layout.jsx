@@ -33,8 +33,13 @@ const Layout = () => {
           tabBarIcon: ({ color, size }) => (
             <Feather name="map" size={size} color={color} />
           ),
-          tabBarInactiveTintColor: "#9F9F9F",
-          tabBarActiveTintColor: "#6DAB64",
+          tabBarInactiveTintColor: "#6DAB64",
+          tabBarActiveTintColor: "#AED6A9",
+          tabBarStyle: {
+            paddingTop: 4,
+            backgroundColor: "#2C561F",
+            borderTopColor: "transparent",
+          },
           tabBarLabelStyle: {
             fontWeight: "bold",
             fontFamily: 'Jost_600SemiBold', 
