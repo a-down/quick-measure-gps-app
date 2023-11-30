@@ -62,7 +62,7 @@ const Saved = () => {
 
         <View className="flex-row flex-wrap mb-3">
           <Text className=" text-gray-8 mr-8" style={[regular, {fontSize: 20}]}>
-            <Text className="text-2xl">
+            <Text style={{fontSize: 24}}>
               { polygonArea
                 ? handleConvertArea(polygonArea, item.measurements.areaShort).toFixed(2)
                 : 0}
@@ -70,7 +70,7 @@ const Saved = () => {
             {` `}{ item.measurements.area }
           </Text>
           <Text className=" text-gray-8" style={[regular, {fontSize: 20}]}>
-            <Text className="text-2xl">
+            <Text style={{fontSize: 24}}>
               { polygonDistance
                 ? convertDistance(polygonDistance, item.measurements.distanceShort).toFixed(2)
                 : 0 }
