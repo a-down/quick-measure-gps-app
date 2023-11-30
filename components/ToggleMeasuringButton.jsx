@@ -4,7 +4,7 @@ import * as Location from "expo-location";
 import { Feather } from '@expo/vector-icons';
 import { semibold } from '../hooks/useJostFont';
 
-const ToggleMeasuringButton = ({ isMeasuring, setIsMeasuring, polygonCoordinates, setPolygonCoordinates }) => {
+const ToggleMeasuringButton = ({ isMeasuring, setIsMeasuring, polygonCoordinates, setPolygonCoordinates, startLocationTracking, stopLocationTracking }) => {
   const [ buttonText, setButtonText ] = useState("Stop Measuring")
   
   useEffect(() => {
@@ -31,10 +31,10 @@ const ToggleMeasuringButton = ({ isMeasuring, setIsMeasuring, polygonCoordinates
             text: "Cancel",
             style: "cancel"
           },
-          { text: "Stop Measuring", onPress: () => setIsMeasuring(false) }
+          { text: "Stop Measuring", onPress: () => stopLocationTracking() }
         ]
       )
-      : setIsMeasuring(true)
+      : startLocationTracking()
   }
 
   return (

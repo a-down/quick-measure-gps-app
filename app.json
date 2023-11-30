@@ -17,7 +17,13 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.gpsapp"
+      "bundleIdentifier": "com.anonymous.gpsapp",
+      "infoPlist": { 
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Your location is required to measure area and distance.",
+        "NSLocationAlwaysUsageDescription": "Your location is required to measure area and distance.",
+        "NSLocationWhenInUseUsageDescription": "Your location is required to measure area and distance.",
+        "UIBackgroundModes": [ "location", "fetch" ] 
+      }
     },
     "android": {
       "adaptiveIcon": {

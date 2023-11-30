@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Your location is required to measure area and distance.</string>
     <key>CADisableMinimumFrameDurationOnPhone</key>
     <true/>
     <key>CFBundleDevelopmentRegion</key>
@@ -29,6 +27,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
+          <string>gps-app</string>
           <string>com.anonymous.gpsapp</string>
         </array>
       </dict>
@@ -50,6 +49,21 @@
         </dict>
       </dict>
     </dict>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Your location is required to measure area and distance.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Your location is required to measure area and distance.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Your location is required to measure area and distance.</string>
+    <key>NSUserActivityTypes</key>
+    <array>
+      <string>$(PRODUCT_BUNDLE_IDENTIFIER).expo.index_route</string>
+    </array>
+    <key>UIBackgroundModes</key>
+    <array>
+      <string>location</string>
+      <string>fetch</string>
+    </array>
     <key>UILaunchStoryboardName</key>
     <string>SplashScreen</string>
     <key>UIRequiredDeviceCapabilities</key>
