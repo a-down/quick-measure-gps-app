@@ -6,7 +6,7 @@ export default () => {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <Redirect href="/ToolsTab" />
+      <Redirect href="/MeasureTab" />
     </GestureHandlerRootView>
   )
 }

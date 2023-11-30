@@ -27,7 +27,7 @@ export default function App() {
 
         <View className="bg-gray-1 w-full rounded-lg shadow-2xl p-4 flex-row flex-wrap justify-around" style={{width: width-64, gap: 16 }}>
           {data.map((item, index) => (
-            <Pressable onPress={() => router.push(item.link)} className="items-center justift-start" key={index} style={{maxWidth: 130}}>
+            <Pressable onPress={() => router.push(item.link)} className="items-center justify-start" key={index} style={{maxWidth: 130}}>
               {/* <View className="bg-green-3 h-[100px] w-[100px] rounded-full mb-2 justify-center items-center"> */}
               {item.icon === 'gesture-tap' 
                 ? <MaterialCommunityIcons name={item.icon} size={96} color="#8CC185" style={{textAlign: 'center'}}/>
