@@ -80,12 +80,12 @@ const Saved = () => {
         </View>  
 
         <View className=" flex-row w-full items-center" style={{gap: 8}}>
-          <Pressable className="bg-green-5 p-2 rounded-md flex-grow" onPress={() => router.push({ pathname: "/SavedMapScreen", params: { map: JSON.stringify(item) }})}>
+          <Pressable className="bg-green-5 p-2 rounded-md flex-grow active:opacity-40" onPress={() => router.push({ pathname: "/SavedMapScreen", params: { map: JSON.stringify(item) }})}>
             <Text className="text-white text-center" style={[semibold, {fontSize: 20}]}>View Map</Text>
           </Pressable>
         </View>  
 
-        <Pressable className="absolute right-4 top-5" hitSlop={20} onPress={() => deleteMapAlert({id: item.id, mapName: item.mapName})}>
+        <Pressable className="absolute right-4 top-5 active:opacity-40" hitSlop={20} onPress={() => deleteMapAlert({id: item.id, mapName: item.mapName})}>
           <Feather name="trash-2" size={24} color="#C7504B"/>
         </Pressable> 
       </Pressable>

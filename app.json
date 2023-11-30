@@ -41,6 +41,10 @@
         "projectId": "9ee746d6-ce97-4102-b551-727beb3eddad"
       }
     },
-    "owner": "a-down"
+    "owner": "a-down",
+    "runtimeVersion": "1.0.0",
+    "updates": {
+      "url": "https://u.expo.dev/9ee746d6-ce97-4102-b551-727beb3eddad"
+    }
   }
 }

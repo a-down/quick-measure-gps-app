@@ -49,7 +49,8 @@ target 'gpsapp' do
 
   use_react_native!(
     :path => config[:reactNativePath],
-    # :hermes_enabled => podfile_properties['expo.jsEngine'] == nil || podf['expo.jsEngine'] == 'hermes',
+    :hermes_enabled => podfile_properties['expo.jsEngine'] == nil || podf['expo.jsEngine'] == 'hermes',
+    :hermes_enabled => true,
     :hermes_enabled => flags[:hermes_enabled],
     :fabric_enabled => flags[:fabric_enabled],
     # An absolute path to your application root.
