@@ -114,7 +114,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
         </View>
 
         {setMapType ? (  
-          <Pressable className="h-full pt-0.5"
+          <Pressable className="h-full pt-0.5 active:opacity-40"
             onPress={() => {
               Alert.alert(
                 "Map Settings",
@@ -132,7 +132,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
             <Feather name="settings" size={24} color="#3A7032" />
           </Pressable>
         ) : (
-          <Pressable className="h-full pt-0.5"
+          <Pressable className="h-full pt-0.5 active:opacity-40"
             onPress={() => {
               Alert.alert(
                 "Visibility Settings",

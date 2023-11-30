@@ -9,7 +9,7 @@ const SaveMeasurementsButton = ({ polygonCoordinates, polygonArea, polygonDistan
 
   return (
     <Pressable 
-      className="flex-grow flex-row justify-center rounded-full items-center" 
+      className="flex-grow flex-row justify-center rounded-full items-center active:opacity-40" 
       style={{gap: 8}} 
       onPress={() => saveSheetRef.current.snapToIndex(0)}>
 

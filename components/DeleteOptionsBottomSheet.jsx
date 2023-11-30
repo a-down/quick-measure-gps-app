@@ -30,7 +30,7 @@ function DeleteOptionsBottomSheet({ children, deleteSheetRef, deleteMode, setDel
         <Text className=" text-[#fee2e2] text-center mb-2 " style={[regular, {fontSize: 16}]}>(swipe down to dismiss)</Text>
 
         {previousCoordinates.length > 0 && (
-          <Pressable className="absolute left-4 py-2 px-3 bg-[#fee2e2] text-[#7f1d1d] rounded-full flex-row items-center"
+          <Pressable className="absolute left-4 py-2 px-3 bg-[#fee2e2] text-[#7f1d1d] rounded-full flex-row items-center active:opacity-80"
             style={{gap: 4}} 
             onPress={() => {
               setPolygonCoordinates(previousCoordinates[0])

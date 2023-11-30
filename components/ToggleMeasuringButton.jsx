@@ -39,8 +39,8 @@ const ToggleMeasuringButton = ({ isMeasuring, setIsMeasuring, polygonCoordinates
 
   return (
     <Pressable 
-      className=" p-4 rounded-full shadow-sm flex-row items-center justify-center" 
-      style={{backgroundColor: isMeasuring ? '#C9E9C8' : '#6DAB64', gap: 8}}
+      className={` p-4 rounded-full shadow-sm flex-row items-center justify-center ${isMeasuring ? 'bg-green-3' : 'bg-green-5'} ${isMeasuring  ? 'active:bg-green-2' : 'active:bg-green-4'}`} 
+      style={{gap: 8}}
       onPress={stopMeasuringAlert}>
         {isMeasuring 
           ? <Feather name="pause-circle" size={24} color='#1D3F13'/> 

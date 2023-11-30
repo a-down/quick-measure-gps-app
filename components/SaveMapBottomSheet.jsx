@@ -90,8 +90,8 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType }) {
 
         <View style={{gap: 8}}>
           <Pressable 
-            className=" p-4 rounded-2xl shadow-sm flex-row justify-center items-center" 
-            style={{backgroundColor: '#6DAB64', gap: 8}}
+            className=" p-4 rounded-2xl shadow-sm flex-row justify-center items-center bg-green-5 active:bg-green-4" 
+            style={{gap: 8}}
             onPress={saveMap}>
             <Feather name="download" size={24} color="white" />
             <Text className="text-center text-white" style={[semibold, {fontSize: 22}]}>

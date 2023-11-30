@@ -3,17 +3,31 @@ import { useRouter } from 'expo-router';
 import mapScreenshot from "../../assets/map-screenshot.png";
 import { regular, semibold, medium, bold } from '../../hooks/useJostFont';
 import walkingIcon from '../../assets/walking-icon.png';
-import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Ionicons, FontAwesome5, Feather } from '@expo/vector-icons';
 
 export default function App() {
   const { width } = useWindowDimensions();
   const router = useRouter();
 
   const data = [
-    {link: '/AutoMeasureScreen', image: mapScreenshot, title: 'Auto', description: 'Track your location with GPS', icon: 'md-compass'},
-    {link: '/PinpointMeasureScreen', image: mapScreenshot, title: 'Manual', description: 'Manually log your location with GPS', icon: 'md-pencil'},
+    {link: '/AutoMeasureScreen', image: mapScreenshot, title: 'Auto', description: 'Measure automatically with GPS', icon: 'satellite-dish'},
+    {link: '/PinpointMeasureScreen', image: mapScreenshot, title: 'Manual', description: 'Measure manually with GPS', icon: 'plus-circle'},
     {link: '/TapMeasureScreen', image: mapScreenshot, title: 'Tap', description: 'Measure anywhere in the world by tapping', icon: 'gesture-tap'},
   ]
+
+  const Icon = (name) => {
+    switch(name) {
+      case 'satellite-dish':
+        return <FontAwesome5 name={name} size={82} color='#8CC185' style={{textAlign: 'center', marginBottom: 4}}/>
+      case 'gesture-tap':
+        return <MaterialCommunityIcons name={name} size={82} color='#8CC185' style={{textAlign: 'center', marginBottom: 4}}/>
+      case 'plus-circle':
+        // return <Ionicons name={name} size={82} color='#8CC185' style={{textAlign: 'center', backgroundColor: '#ddd'}}/>
+        // return <Feather name={name} size={82} color='#8CC185' style={{textAlign: 'center', marginBottom: 4}}/>
+        return <MaterialCommunityIcons name={name} size={82} color='#8CC185' style={{textAlign: 'center', marginBottom: 4}}/>
+
+    }
+  }
 
   return (
     <View className="bg-green-9 relative flex-1 items-center">
@@ -27,13 +41,8 @@ export default function App() {
 
         <View className="bg-gray-1 w-full rounded-lg shadow-2xl p-4 flex-row flex-wrap justify-around" style={{width: width-64, gap: 16 }}>
           {data.map((item, index) => (
-            <Pressable onPress={() => router.push(item.link)} className="items-center justify-start" key={index} style={{maxWidth: 130}}>
-              {/* <View className="bg-green-3 h-[100px] w-[100px] rounded-full mb-2 justify-center items-center"> */}
-              {item.icon === 'gesture-tap' 
-                ? <MaterialCommunityIcons name={item.icon} size={96} color="#8CC185" style={{textAlign: 'center'}}/>
-                : <Ionicons name={item.icon} size={96} color="#8CC185" style={{textAlign: 'center'}}/>}
-
-              {/* </View> */}
+            <Pressable onPress={() => router.push(item.link)} className="items-center justify-start active:opacity-80" key={index} style={{maxWidth: 135}}>
+              {Icon(item.icon)}
               <Text className=" text-green-10 text-center mt-2" style={[semibold, {fontSize: 18}]}>{item.title}</Text>
               <Text className=" text-gray-7 text-center" style={[regular, {fontSize: 14}]}>{item.description}</Text>  
             </Pressable>

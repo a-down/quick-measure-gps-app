@@ -6,9 +6,11 @@ const ToggleDeleteModeButton = ({ setDeleteMode, setMarkersToDelete, mapType, de
 
   return (
     <View className="flex-grow">
-      <Pressable className="flex-row justify-center rounded-full items-center" style={{gap: 8}} onPress={() => {
-        setDeleteMode(prev => !prev)
-        if (deleteMode) setMarkersToDelete([])
+      <Pressable className="flex-row justify-center rounded-full items-center active:opacity-40"
+        style={{gap: 8}}
+        onPress={() => {
+          setDeleteMode(prev => !prev)
+          if (deleteMode) setMarkersToDelete([])
       }}>
         <Feather 
           name={"trash-2"}
