@@ -77,10 +77,6 @@ export default function TapMeasure() {
     if (polygonCoordinates.includes(location) === false) await setPolygonCoordinates([{ latitude: location.latitude, longitude: location.longitude}, ...polygonCoordinates])
   }
 
-  const removeLocationFromPolygon = async (location) => {
-    await setPolygonCoordinates(polygonCoordinates.filter(coordinate => coordinate.latitude !== location.latitude && coordinate.longitude !== location.longitude))
-  }
-
   // reset the polygon coordinates and measurements
   const resetMeasurements = () => {
     deleteSheetRef.current.close()
