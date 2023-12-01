@@ -8,7 +8,6 @@ import { MaterialCommunityIcons, Ionicons, FontAwesome5, Feather } from '@expo/v
 export default function App() {
   const { width } = useWindowDimensions();
   const router = useRouter();
-  console.log(width)
 
   const data = [
     {link: '/AutoMeasureScreen', image: mapScreenshot, title: 'Auto', description: 'Measure automatically with GPS', icon: 'satellite-dish'},
