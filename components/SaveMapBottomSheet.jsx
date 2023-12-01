@@ -21,6 +21,8 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType }) {
     saveSheetRef.current.snapToIndex(0)
   }
 
+  // save the map to storage
+    // view in saved maps screen
   const saveMap = async () => {
     if (!mapName) return Alert.alert("Please enter a name for the map")
 
@@ -28,6 +30,7 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType }) {
       const measurements = await useStorage('get', 'measurementPreferences');
       const value = await useStorage('get', 'savedMaps')
 
+      // create new array or add current map to existing array
       let data
       if (value !== null) {
         data = [

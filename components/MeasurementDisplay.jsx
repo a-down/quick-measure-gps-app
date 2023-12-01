@@ -18,12 +18,13 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
     preferredMeasurements ? setMeasurementPreferences(preferredMeasurements) : getPreferences()
   }, [])
 
+  // get preferrences from storage
   const getPreferences = async () => {
     const value = await useStorage('get', 'measurementPreferences')
     if (value !== null) setMeasurementPreferences(value)
   }
 
-  // save and get preferences
+  // store preferences to storage
   const storePreferences = async (data) => {
     setMeasurementPreferences(data)
     await useStorage('set', 'measurementPreferences', data)
@@ -46,6 +47,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
     );
   }
   
+  // Alert prompts used to update distance measurement
   const updateDistanceAlert = () => {
     Alert.alert(
       "Area Unit of Measurement",
@@ -61,11 +63,13 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
     );
   }
 
+  // store map type preferences - standard, hybrid, satellite
   const storeMapPreferences = async (data) => {
     setMapType(data)
     useStorage('set', 'mapPreferences', data)
   }
 
+  // Alert prompts used to update map type
   const mapTypeAlert = async () => {
     Alert.alert(
       "Map Type",

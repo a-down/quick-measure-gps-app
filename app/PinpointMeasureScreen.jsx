@@ -56,7 +56,7 @@ export default function AutoMeasure() {
     await setCurrentLocation(location.coords);
   }
 
-  // when location changes and the user is measuring, add the new location to the polygon and generate measurements for the polygon
+  // when location changes with updateLocation, add the new location to the polygon and generate measurements for the polygon
   useEffect(() => {
     if (currentLocation) {
       addLocationToPolygon(currentLocation)

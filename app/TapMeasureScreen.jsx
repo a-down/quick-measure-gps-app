@@ -46,6 +46,7 @@ export default function TapMeasure() {
     getCurrentMap()
   }, []);
 
+  // when a coordinate is added to polygonCoordinates, generate measurements and store the current polygon to storage
   useEffect(() => {
     if (polygonCoordinates.length > 1) {
       setPolygonDistance(getPathLength(polygonCoordinates))
@@ -95,7 +96,7 @@ export default function TapMeasure() {
       {!currentLocation && (
         <ActivityIndicator size="small" color="#6DAB64" />
       )}
-      
+
       {region && (
         <Map 
           region={region}
