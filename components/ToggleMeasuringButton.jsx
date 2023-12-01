@@ -12,7 +12,7 @@ const ToggleMeasuringButton = ({ isMeasuring, setIsMeasuring, polygonCoordinates
   // update buttonText based on isMeasuring and if polygonGoogleCoordinates has any coordinates
   useEffect(() => {
     if (isMeasuring) {
-      setButtonText("Stop Measuring")
+      setButtonText("Pause Measuring")
     } else if (!isMeasuring && polygonCoordinates.length !== 0) {
       setButtonText("Resume Measuring")
     } else {
