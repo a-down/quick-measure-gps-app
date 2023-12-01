@@ -2,8 +2,6 @@
 
 Quick Measure is a quick and easy tool to find GPS measurements. Use your GPS position to measure distance and area. The focus is on quick: it only takes 2 presses and your feet (or a motorized vehicle) to find measurements
 
-## VISUALS HERE
-
 ## Who is it For?
 
 I created this app for my dad, who is a farmer. Traditional distance and area measurement tools involve clicking on a satellite map to add markers. My dad needed to find measurements for fields that change every year and sections of land that are not defined on a map. And he does not want to wait until he's back in the house with a computer!
@@ -13,6 +11,12 @@ Quick Measure is for anyone that needs to find distance or area! Farmers, landsc
 Quick Measure is developed with React Native, which is a cross-platform language. However, Quick Measure is currently only available for iOS devices.
 
 * Quick Measure should never be used for official or legal measurements. When an official measurement is required, please contact a Professional Land Surveyor.
+
+<img src="./assets/visuals/homepage-visual.png" alt="Visual of Quick Measure Homepage" width="18%">
+<img src="./assets/visuals/auto-measure-visual.png" alt="Visual of Quick Measure Auto Measure" width="18%">
+<img src="./assets/visuals/manual-measure-visual.png" alt="Visual of Quick Measure Manual Measure" width="18%">
+<img src="./assets/visuals/tap-to-measure-visual.png" alt="Visual of Quick Measure Tap to Measure" width="18%">
+<img src="./assets/visuals/saved-measurements-visual.png" alt="Visual of Quick Measure Saved Measurements" width="18%">
 
 ## Features
 
