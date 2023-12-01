@@ -1,18 +1,17 @@
 import { Text, View, Pressable, useWindowDimensions, Image, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
-import mapScreenshot from "../../assets/map-screenshot.png";
-import { regular, semibold, medium, bold } from '../../hooks/useJostFont';
+import { regular, semibold, bold } from '../../hooks/useJostFont';
 import walkingIcon from '../../assets/walking-icon.png';
-import { MaterialCommunityIcons, Ionicons, FontAwesome5, Feather } from '@expo/vector-icons';
+import { MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 
 export default function App() {
   const { width } = useWindowDimensions();
   const router = useRouter();
 
   const pageLinks = [
-    {link: '/AutoMeasureScreen', image: mapScreenshot, title: 'Auto', description: 'Measure automatically with GPS', icon: 'satellite-dish'},
-    {link: '/ManualMeasureScreen', image: mapScreenshot, title: 'Manual', description: 'Measure manually with GPS', icon: 'plus-circle'},
-    {link: '/TapMeasureScreen', image: mapScreenshot, title: 'Tap', description: 'Measure anywhere in the world by tapping', icon: 'gesture-tap'},
+    {link: '/AutoMeasureScreen', title: 'Auto', description: 'Measure automatically with GPS', icon: 'satellite-dish'},
+    {link: '/ManualMeasureScreen', title: 'Manual', description: 'Measure manually with GPS', icon: 'plus-circle'},
+    {link: '/TapMeasureScreen', title: 'Tap', description: 'Measure anywhere in the world by tapping', icon: 'gesture-tap'},
   ]
 
   const Icon = (name) => {
