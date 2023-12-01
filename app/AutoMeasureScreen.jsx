@@ -28,7 +28,7 @@ export default function AutoMeasure() {
 
   // check if location permission is granted
     // if so, set initial region as current location
-    // if so, start locationSubscription
+    // if so, start locationSubscription for location updates
   useEffect(() => {
     useStorage('get', 'mapPreferences').then(value => setMapType(value))
     useStorage('get', 'currentAutoCoordinates').then(value => {

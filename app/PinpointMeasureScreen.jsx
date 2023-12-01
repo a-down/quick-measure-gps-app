@@ -49,6 +49,8 @@ export default function AutoMeasure() {
     getInitialLocation();
   }, []);
 
+  // get the user's current location
+  // called when the user presses the add marker button
   const updateLocation = async () => {
     let location = await Location.getCurrentPositionAsync({});
     await setCurrentLocation(location.coords);
