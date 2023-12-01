@@ -17,8 +17,10 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
           }}
 
           onPress={(e) => !deleteMode ? addLocationToPolygon(e.nativeEvent.coordinate) : null}
-
-          mapType={mapType || "satellite"}>
+          mapType={mapType || "satellite"}
+          loadingEnabled={true}
+          loadingBackgroundColor="#F7F7F7"
+          loadingIndicatorColor="#6DAB64">
 
             {polygonCoordinates.length > 0 && markersVisible && (
               (polygonCoordinates.map((coordinate, index) => (
@@ -67,7 +69,10 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
             longitudeDelta: 0.001
           }}
 
-          mapType={mapType || "satellite"}>
+          mapType={mapType || "satellite"}
+          loadingEnabled={true}
+          loadingBackgroundColor="#F7F7F7"
+          loadingIndicatorColor="#6DAB64">
 
             {polygonCoordinates.length > 0 && markersVisible && (
               (polygonCoordinates.map((coordinate, index) => (
