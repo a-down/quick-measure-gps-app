@@ -12,7 +12,7 @@ Quick Measure is developed with React Native, which is a cross-platform language
 
 * Quick Measure should never be used for official or legal measurements. When an official measurement is required, please contact a Professional Land Surveyor.
 
-<div style="display:flex; flex-direction:row; justify-content:justify-around; flex-wrap:wrap; gap:10px;">
+<div style="display:flex; flex-direction:row; justify-content:justify-around; flex-wrap:wrap; gap:10px; border:#fff;">
   <img src="./assets/visuals/homepage-visual.png" alt="Visual of Quick Measure Homepage" width="200">
   <img src="./assets/visuals/auto-measure-visual.png" alt="Visual of Quick Measure Auto Measure" width="200">
   <img src="./assets/visuals/manual-measure-visual.png" alt="Visual of Quick Measure Manual Measure" width="200">
@@ -80,4 +80,4 @@ Units of measurement available are `feet`, `yards`, `miles`, `acres`, `meters`, 
 
 For issues, please create an issue on the [project repo](https://github.com/a-down/quick-measure-gps-app/issues).
 
-For questions or conversations, reach out on [LinkedIn](https://linkedin.com/in/alec-downing/)
+For questions or conversations, reach out on [LinkedIn](https://linkedin.com/in/alec-downing/).
