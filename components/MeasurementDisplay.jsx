@@ -37,6 +37,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
       [
         { text: "Sq Feet", onPress: () => storePreferences({...measurementPreferences, area: 'sq feet', areaShort: 'sqft'}) },
         { text: "Sq Yards", onPress: () => storePreferences({...measurementPreferences, area: 'sq yards', areaShort: 'sqyd'}) },
+        { text: "Sq Miles", onPress: () => storePreferences({...measurementPreferences, area: 'sq miles', areaShort: 'sqmi'}) },
         { text: "Acres", onPress: () => storePreferences({...measurementPreferences, area: 'acres', areaShort: 'a'}) },
         { text: "Sq Meters", onPress: () => storePreferences({...measurementPreferences, area: 'sq meters', areaShort: 'sqm'}) },
         { text: "Sq Kilometers", onPress: () => storePreferences({...measurementPreferences, area: 'sq km', areaShort: 'sqkm'}) },
