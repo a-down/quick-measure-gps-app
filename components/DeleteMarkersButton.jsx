@@ -2,7 +2,7 @@ import { Text, Pressable, View, Alert } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { medium } from '../hooks/useJostFont';
 
-const DeleteMarkersButton = ({ polygonCoordinates, setPolygonCoordinates, markersToDelete, setMarkersToDelete, mapType, resetMeasurements, setPreviousCoordinates, previousCoordinates }) => {
+const DeleteMarkersButton = ({ polygonCoordinates, setPolygonCoordinates, markersToDelete, setMarkersToDelete, resetMeasurements, setPreviousCoordinates, previousCoordinates }) => {
 
   const deleteMarkers = () => {
     const newPolygonCoordinates = polygonCoordinates.filter(coordinate => !markersToDelete.includes(coordinate))

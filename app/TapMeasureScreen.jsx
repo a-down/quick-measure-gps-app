@@ -1,5 +1,5 @@
 import { View, Alert } from 'react-native';
-import { useEffect, useState, useRef, useMemo, useCallback } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import * as Location from "expo-location";
 import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from 'geolib';
 import { useRouter } from 'expo-router';

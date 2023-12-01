@@ -1,4 +1,4 @@
-import { Text, View, Pressable, useWindowDimensions, Image, FlatList, ScrollView } from 'react-native';
+import { Text, View, Pressable, useWindowDimensions, Image, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import mapScreenshot from "../../assets/map-screenshot.png";
 import { regular, semibold, medium, bold } from '../../hooks/useJostFont';
@@ -9,7 +9,7 @@ export default function App() {
   const { width } = useWindowDimensions();
   const router = useRouter();
 
-  const data = [
+  const pageLinks = [
     {link: '/AutoMeasureScreen', image: mapScreenshot, title: 'Auto', description: 'Measure automatically with GPS', icon: 'satellite-dish'},
     {link: '/PinpointMeasureScreen', image: mapScreenshot, title: 'Manual', description: 'Measure manually with GPS', icon: 'plus-circle'},
     {link: '/TapMeasureScreen', image: mapScreenshot, title: 'Tap', description: 'Measure anywhere in the world by tapping', icon: 'gesture-tap'},
@@ -22,10 +22,7 @@ export default function App() {
       case 'gesture-tap':
         return <MaterialCommunityIcons name={name} size={82} color='#8CC185' style={{textAlign: 'center', marginBottom: 4}}/>
       case 'plus-circle':
-        // return <Ionicons name={name} size={82} color='#8CC185' style={{textAlign: 'center', backgroundColor: '#ddd'}}/>
-        // return <Feather name={name} size={82} color='#8CC185' style={{textAlign: 'center', marginBottom: 4}}/>
         return <FontAwesome5 name={name} size={82} color='#8CC185' style={{textAlign: 'center', marginBottom: 4}}/>
-
     }
   }
 
@@ -40,7 +37,7 @@ export default function App() {
         </View>
 
         <View className="bg-gray-1 w-full rounded-lg shadow-2xl p-4 flex-row flex-wrap justify-around" style={{width: width-64, gap: 16}}>
-          {data.map((item, index) => (
+          {pageLinks.map((item, index) => (
             <Pressable onPress={() => router.push(item.link)} className="items-center justify-end active:opacity-80" key={index} style={{width: 131}}>
               {Icon(item.icon)}
               <Text className=" text-green-10 text-center mt-2" style={[semibold, {fontSize: 18}]}>{item.title}</Text>

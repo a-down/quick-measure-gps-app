@@ -5,7 +5,7 @@ import { useRouter, useFocusEffect } from 'expo-router';
 import handleConvertArea from '../../hooks/handleConvertArea';
 import { useStorage } from '../../hooks';
 import { Feather } from '@expo/vector-icons';
-import { regular, medium, semibold, bold } from '../../hooks/useJostFont'
+import { regular, semibold } from '../../hooks/useJostFont'
 
 const Saved = () => {
   const router = useRouter();

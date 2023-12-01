@@ -4,12 +4,12 @@ import { convertDistance } from 'geolib';
 import handleConvertArea from '../hooks/handleConvertArea';
 import { Feather } from '@expo/vector-icons';
 import { useStorage } from '../hooks';
-import { regular, medium, semibold, bold } from '../hooks/useJostFont';
+import { regular } from '../hooks/useJostFont';
 
 // preferences default to sq meters and meters
 const defaultPreferences = { area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm' }
 
-const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferredMeasurements, distanceAround, areaVisible, setAreaVisible, markersVisible, setMarkersVisible }) => {
+const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferredMeasurements, areaVisible, setAreaVisible, markersVisible, setMarkersVisible }) => {
   const { width } = useWindowDimensions();
   const [ measurementPreferences, setMeasurementPreferences ] = useState(defaultPreferences)
   
@@ -110,8 +110,8 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
                 (distance)
               </Text>
             </Text>
-          
           </View>
+
         </View>
 
         {setMapType ? (  

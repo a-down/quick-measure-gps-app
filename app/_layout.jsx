@@ -1,5 +1,4 @@
 import { Stack } from 'expo-router';
-import { useFonts, Jost_400Regular, Jost_600SemiBold, Jost_700Bold } from '@expo-google-fonts/jost';
 
 export default function Layout() {
 

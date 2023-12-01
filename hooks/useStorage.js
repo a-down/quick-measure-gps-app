@@ -23,7 +23,6 @@ export default useStorage = async (method, itemName, data) => {
     }
 
   } catch (error) {
-    console.log(error)
     return null;
   }
 }

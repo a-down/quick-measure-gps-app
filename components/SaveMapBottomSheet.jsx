@@ -58,7 +58,6 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType }) {
       Keyboard.dismiss()
 
     } catch (error) {
-      console.log(error)
       Alert.alert('There was an error saving the map. Please try again.')
     }
   }

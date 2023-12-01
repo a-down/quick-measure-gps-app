@@ -2,7 +2,7 @@ import { Text, Pressable, Alert, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { medium } from '../hooks/useJostFont';
 
-const ResetMeasurementsButton = ({ resetMeasurements, mapType, markersToDelete, polygonCoordinatesLength }) => {
+const ResetMeasurementsButton = ({ resetMeasurements, polygonCoordinatesLength }) => {
   const resetMeasurementsAlert = () => {
     Alert.alert(
       "Reset Measurements",

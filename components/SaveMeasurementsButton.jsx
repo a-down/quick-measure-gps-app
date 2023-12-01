@@ -1,11 +1,8 @@
 import { Pressable, Text } from 'react-native'
-import React from 'react'
-import { useRouter } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
-import { regular, medium } from '../hooks/useJostFont';
+import { medium } from '../hooks/useJostFont';
 
-const SaveMeasurementsButton = ({ polygonCoordinates, polygonArea, polygonDistance, mapType, saveSheetRef }) => {
-  const router = useRouter();
+const SaveMeasurementsButton = ({ mapType, saveSheetRef }) => {
 
   return (
     <Pressable 

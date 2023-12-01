@@ -1,7 +1,6 @@
 import { View } from 'react-native';
 import { useLocalSearchParams, useFocusEffect, Stack } from 'expo-router';
 import { MeasurementDisplay, Map } from '../components';
-import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
 import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from 'geolib';
 import { useState, useCallback } from 'react';
 
