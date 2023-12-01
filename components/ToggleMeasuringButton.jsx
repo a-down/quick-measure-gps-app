@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import * as Location from "expo-location";
 import { Feather } from '@expo/vector-icons';
 import { semibold } from '../hooks/useJostFont';
+import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
+
 
 const ToggleMeasuringButton = ({ isMeasuring, setIsMeasuring, polygonCoordinates, setPolygonCoordinates }) => {
   const [ buttonText, setButtonText ] = useState("Stop Measuring")
@@ -22,8 +24,8 @@ const ToggleMeasuringButton = ({ isMeasuring, setIsMeasuring, polygonCoordinates
       let location = await Location.getCurrentPositionAsync({});
       setPolygonCoordinates([{latitude: location.coords.latitude, longitude: location.coords.longitude}])
     }
-    isMeasuring 
-      ? Alert.alert(
+    if (isMeasuring) {
+      Alert.alert(
         "Stop Measuring",
         "Are you sure you want to stop measuring?",
         [
@@ -31,10 +33,17 @@ const ToggleMeasuringButton = ({ isMeasuring, setIsMeasuring, polygonCoordinates
             text: "Cancel",
             style: "cancel"
           },
-          { text: "Stop Measuring", onPress: () => setIsMeasuring(false) }
+          { text: "Stop Measuring", onPress: () => {
+            setIsMeasuring(false)
+            deactivateKeepAwake()
+          } }
         ]
       )
-      : setIsMeasuring(true)
+    
+     } else {
+      setIsMeasuring(true)
+      activateKeepAwakeAsync()
+     } 
   }
 
   return (
