@@ -35,6 +35,8 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
                       : setMarkersToDelete([...markersToDelete, coordinate])
                   }}
                   image={ deleteMode && markersToDelete.includes(coordinate) ? mapMarkerRed : mapMarker}
+                  style={{width: 32, height: 32}}
+                  resizeMode="contain"
                   />
               )))
             )}
