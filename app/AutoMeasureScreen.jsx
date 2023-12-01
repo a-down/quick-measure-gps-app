@@ -52,7 +52,7 @@ export default function AutoMeasure() {
       setRegion(location.coords);
 
       const locationSubscription = await Location.watchPositionAsync(
-        {accuracy:Location.Accuracy.BestForNavigation, distanceInterval: 1},
+        {accuracy:Location.Accuracy.Highest, distanceInterval: 1},
         (loc) => {
           setCurrentLocation(loc.coords)
         }

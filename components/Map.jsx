@@ -1,4 +1,5 @@
 import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
+import { Image } from 'react-native';
 import mapMarker from '../assets/map-marker.png';
 import mapMarkerRed from '../assets/map-marker-red.png';
 
@@ -35,11 +36,9 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
                     markersToDelete.includes(coordinate) 
                       ? setMarkersToDelete(markersToDelete.filter(marker => marker !== coordinate))
                       : setMarkersToDelete([...markersToDelete, coordinate])
-                  }}
-                  image={ deleteMode && markersToDelete.includes(coordinate) ? mapMarkerRed : mapMarker}
-                  style={{width: 32, height: 32}}
-                  resizeMode="contain"
-                  />
+                  }}>
+                  <Image source={deleteMode && markersToDelete.includes(coordinate) ? mapMarkerRed : mapMarker} style={{width: 16, height: 16}} resizeMode="contain" />
+                </Marker>
               )))
             )}
 
@@ -87,9 +86,9 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
                     markersToDelete.includes(coordinate) 
                       ? setMarkersToDelete(markersToDelete.filter(marker => marker !== coordinate))
                       : setMarkersToDelete([...markersToDelete, coordinate])
-                  }}
-                  image={ deleteMode && markersToDelete.includes(coordinate) ? mapMarkerRed : mapMarker}
-                  />
+                  }}>
+                  <Image source={deleteMode && markersToDelete.includes(coordinate) ? mapMarkerRed : mapMarker} style={{width: 16, height: 16}} resizeMode="contain" />
+                </Marker>
               )))
             )}
 
