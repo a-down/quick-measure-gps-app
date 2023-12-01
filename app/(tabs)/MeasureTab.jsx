@@ -31,7 +31,7 @@ export default function App() {
 
       <ScrollView className="flex-1 top-0 left-0 absolute p-8" contentContainerStyle={{ alignItems: 'center'}}>
         <View className="items-center justify-start" style={{gap: 24}}>
-          <Image source={walkingIcon} height={114.12} width={80}/>
+          <Image source={walkingIcon} style={{height: 115, width: 80}}/>
           <Text className="text-white text-center mb-6" style={[bold, {fontSize: 24, maxWidth: 200}]}>Easy Tools for a Quick Measure</Text>
         </View>
 
