@@ -1,5 +1,4 @@
-import { View, useWindowDimensions, Alert } from 'react-native';
-import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
+import { View, Alert, ActivityIndicator } from 'react-native';
 import { useEffect, useState, useRef } from 'react';
 import * as Location from "expo-location";
 import { getAreaOfPolygon, getPathLength } from 'geolib';
@@ -91,6 +90,10 @@ export default function AutoMeasure() {
 
   return (
     <View className="flex-1 items-center justify-center">
+      {!currentLocation && (
+        <ActivityIndicator size="small" color="#6DAB64" />
+      )}
+
       {currentLocation && (
         <Map 
           region={region}
@@ -141,8 +144,7 @@ export default function AutoMeasure() {
         setPolygonCoordinates={setPolygonCoordinates}
         previousCoordinates={previousCoordinates}
         setPreviousCoordinates={setPreviousCoordinates}
-        setMarkersToDelete={setMarkersToDelete}
-        >
+        setMarkersToDelete={setMarkersToDelete}>
 
         <DeleteMarkersButton 
           polygonCoordinates={polygonCoordinates}
