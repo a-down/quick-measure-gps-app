@@ -1,11 +1,11 @@
 import { View, Alert } from 'react-native';
-import MapView, { Polygon, Marker, Polyline } from 'react-native-maps';
 import { useEffect, useState, useRef } from 'react';
 import * as Location from "expo-location";
 import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from 'geolib';
 import { useRouter } from 'expo-router';
 import { MeasurementDisplay, AddMarkerButton, ResetMeasurementsButton, SaveMeasurementsButton, Map, ToggleDeleteModeButton, DeleteOptionsBottomSheet, DeleteMarkersButton, SaveMapBottomSheet } from '../components';
 import { useStorage } from '../hooks';
+import { activateKeepAwakeAsync } from 'expo-keep-awake';
 
 
 export default function AutoMeasure() {
@@ -44,6 +44,7 @@ export default function AutoMeasure() {
       } 
 
     };
+    activateKeepAwakeAsync()
     getCurrentMap();
     getInitialLocation();
   }, []);
