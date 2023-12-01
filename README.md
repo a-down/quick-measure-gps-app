@@ -1,16 +1,16 @@
 # Quick Measure
 
-Quick Measure is a quick and easy tool to find GPS measurements. Use your GPS position to measure distance and area. The focus is on quick: it only takes 2 taps and your feet to find measurements with your location.
+Quick Measure is a quick and simple tool to find GPS measurements. Use your GPS position to measure distance and area. The primary goal is quickness: it only takes two taps and feet to start measuring with your location!
 
 ## Who is it For?
 
-I created this app for my dad, who is a farmer. Traditional distance and area measurement tools involve clicking on a satellite map to add markers. My dad needed to find measurements for fields that change every year and sections of land that are not defined on a map. And he does not want to wait until he's back in the house with a computer!
+I created this app for my dad, a farmer. Traditional distance and area measurement tools involve clicking on a satellite map to add markers. My dad needed to find measurements for fields that change annually and undefined sections of land. He should not have to guess where to measure when he's back at the computer.
 
-Quick Measure is for anyone that needs to find distance or area! Farmers, landscapers, homeowners, hunters, runners, and dog walkers are only a few examples of users that will benefit from Quick Measure. 
+Quick Measure is for anyone who needs to find distance or area! Farmers, landscapers, homeowners, hunters, runners, and dog walkers are only a few examples.  
 
-Quick Measure is developed with React Native, which is a cross-platform language. However, Quick Measure is currently only available for iOS devices.
+Quick Measure is built with React Native, which is a cross-platform language. However, Quick Measure is currently only available for iOS devices.
 
-* Quick Measure should never be used for official or legal measurements. When an official measurement is required, please contact a Professional Land Surveyor.
+* Quick Measure should never be used for official or legal measurements. Contact a Professional Land Surveyor when an official measurement is required.
 * Quick Measure should never be used while operating machinery.
 * Quick Measure should never be used as a turn-based navigation app.
 
@@ -26,27 +26,27 @@ Quick Measure is developed with React Native, which is a cross-platform language
 
 ### Auto Measure
 
-Use your phone's GPS to automatically track and display your path as you walk or run around the space you want to measure. You can "Start Measuring", "Pause Measuring", and "Resume Measuring".
+Automatically track your path with your phone's GPS as you walk or run around the space you want to measure. You can "Start Measuring," "Pause Measuring," and "Resume Measuring."
 
 ### Manual Measure
 
-Use your phone's GPS to manually add markers to your path. This feature is best when you expect straight lines on your path or when you are unable to walk where you want to measure.
+Manually add markers to your path with your phone's GPS. Use "Manual Measure" to create straight line or when you cannot walk the line you wish to measure.
 
 ### Tap to Measure
 
-Your traditional measurement tool that involves tapping on a map to add markers.
+Tap on the map to add markers with this traditional measurement tool.
 
-### Save Map
+### Save Measurements
 
-Save a measurement from any tool to view later in the "Saved" tab. Saved measurements display a quickview with measurement name, date saved, distance, and area. Click on the measurement to view the map with saved measurements.
+Save a measurement from any tool to view later in the "Saved" tab. Saved measurements display a quick view with the measurement's name, creation date, distance, and area. Click on the measurement to view the map.
 
 ### Measurement Display
 
-Display distance and area or just distance on the map. Great option for runners, dog walkers, or anyone else that only needs to find the distance of their path. 
+Display distance and area or only distance on the map. Ideal for runners, dog walkers, or anyone only requiring distance.
 
 ### Units of Measurement
 
-Units of measurement available are `feet`, `yards`, `miles`, `acres`, `meters`, and `kilometers`.
+Units of measurement available: `feet`, `yards`, `miles`, `acres`, `meters`, and `kilometers`.
 
 ## Usage
   1. Choose a measurement tool (`Auto`, `Manual`, `Tap`)
