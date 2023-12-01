@@ -12,11 +12,11 @@ Quick Measure is developed with React Native, which is a cross-platform language
 
 * Quick Measure should never be used for official or legal measurements. When an official measurement is required, please contact a Professional Land Surveyor.
 
-<img src="./assets/visuals/homepage-visual.png" alt="Visual of Quick Measure Homepage" width="18%">
-<img src="./assets/visuals/auto-measure-visual.png" alt="Visual of Quick Measure Auto Measure" width="18%">
-<img src="./assets/visuals/manual-measure-visual.png" alt="Visual of Quick Measure Manual Measure" width="18%">
-<img src="./assets/visuals/tap-to-measure-visual.png" alt="Visual of Quick Measure Tap to Measure" width="18%">
-<img src="./assets/visuals/saved-measurements-visual.png" alt="Visual of Quick Measure Saved Measurements" width="18%">
+<img src="./assets/visuals/homepage-visual.png" alt="Visual of Quick Measure Homepage" width="200">
+<img src="./assets/visuals/auto-measure-visual.png" alt="Visual of Quick Measure Auto Measure" width="200">
+<img src="./assets/visuals/manual-measure-visual.png" alt="Visual of Quick Measure Manual Measure" width="200">
+<img src="./assets/visuals/tap-to-measure-visual.png" alt="Visual of Quick Measure Tap to Measure" width="200">
+<img src="./assets/visuals/saved-measurements-visual.png" alt="Visual of Quick Measure Saved Measurements" width="200">
 
 ## Features
 
