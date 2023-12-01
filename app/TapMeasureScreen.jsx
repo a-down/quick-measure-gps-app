@@ -89,7 +89,7 @@ export default function TapMeasure() {
 
   return (
     <View className="flex-1 items-center justify-center">
-      {!currentLocation && (
+      {!region && (
         <ActivityIndicator size="small" color="#6DAB64" />
       )}
 
