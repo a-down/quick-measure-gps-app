@@ -11,7 +11,7 @@ export default function App() {
 
   const pageLinks = [
     {link: '/AutoMeasureScreen', image: mapScreenshot, title: 'Auto', description: 'Measure automatically with GPS', icon: 'satellite-dish'},
-    {link: '/PinpointMeasureScreen', image: mapScreenshot, title: 'Manual', description: 'Measure manually with GPS', icon: 'plus-circle'},
+    {link: '/ManualMeasureScreen', image: mapScreenshot, title: 'Manual', description: 'Measure manually with GPS', icon: 'plus-circle'},
     {link: '/TapMeasureScreen', image: mapScreenshot, title: 'Tap', description: 'Measure anywhere in the world by tapping', icon: 'gesture-tap'},
   ]
 

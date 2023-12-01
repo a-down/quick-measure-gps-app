@@ -20,7 +20,7 @@ export default function Layout() {
             fontSize: 18
           },
         }} />
-        <Stack.Screen name="PinpointMeasureScreen" options={{
+        <Stack.Screen name="ManualMeasureScreen" options={{
           title: 'Manual Measure',
           headerBackTitleVisible: false,
           headerTintColor: '#6DAB64',
