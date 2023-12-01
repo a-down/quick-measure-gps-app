@@ -129,7 +129,7 @@ export default function AutoMeasure() {
           markersVisible={markersVisible}
           setMarkersVisible={setMarkersVisible} />
 
-        <View className="absolute bottom-2 py-4 px-2 w-full mb-2" style={{gap: 8}}>
+        <View className="absolute bottom-10 py-4 px-2 w-full mb-2" style={{gap: 8}}>
           <View className="w-full flex-row justify-between absolute bottom-24 left-2">
             <ToggleDeleteModeButton
               setDeleteMode={setDeleteMode}
