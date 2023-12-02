@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Quick Measure - GPS",
+    "name": "Quick Measure",
     "slug": "quick-measure-gps",
     "scheme": "quick-measure-gps",
     "version": "1.0.0",
@@ -17,7 +17,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.a-down.quick-measure-gps"
+      "bundleIdentifier": "com.a-down.quick-measure-gps",
+      "buildNumber": "2"
     },
     "android": {
       "adaptiveIcon": {
