@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Quick Measure",
+    "name": "Quick Measure - GPS",
     "slug": "quick-measure-gps",
     "scheme": "quick-measure-gps",
     "version": "1.0.0",
@@ -24,7 +24,7 @@
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#3A7032"
       },
-      "package": "com.a-down.quick-measure-gps"
+      "package": "com.adown.quickmeasuregps"
     },
     "web": {
       "favicon": "./assets/favicon.png",
