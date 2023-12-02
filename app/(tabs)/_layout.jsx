@@ -1,6 +1,8 @@
 import { Tabs } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
 import { useFonts, Jost_400Regular, Jost_500Medium, Jost_600SemiBold, Jost_700Bold } from '@expo-google-fonts/jost';
+// import * as Updates from 'expo-updates';
+// import { useEffect } from 'react';
 
 const Layout = () => {
   let [fontsLoaded] = useFonts({
@@ -13,6 +15,24 @@ const Layout = () => {
   if (!fontsLoaded) {
     return null;
   }
+
+  // async function onFetchUpdateAsync() {
+  //   try {
+  //     const update = await Updates.checkForUpdateAsync();
+
+  //     if (update.isAvailable) {
+  //       await Updates.fetchUpdateAsync();
+  //       await Updates.reloadAsync();
+  //     }
+  //   } catch (error) {
+  //     // You can also add an alert() to see the error message in case of an error when fetching updates.
+  //     alert(`Error fetching latest Expo update: ${error}`);
+  //   }
+  // }
+
+  // useEffect(() => {
+
+  // })
 
   return (
     <Tabs>

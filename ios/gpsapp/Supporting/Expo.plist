@@ -3,13 +3,13 @@
 <plist version="1.0">
   <dict>
     <key>EXUpdatesCheckOnLaunch</key>
-    <string>ALWAYS</string>
+    <string>WIFI_ONLY</string>
     <key>EXUpdatesEnabled</key>
     <true/>
     <key>EXUpdatesLaunchWaitMs</key>
-    <integer>0</integer>
+    <integer>20000</integer>
     <key>EXUpdatesURL</key>
-    <string>https://u.expo.dev/9ee746d6-ce97-4102-b551-727beb3eddad</string>
+    <string>https://u.expo.dev/009cf2cd-1186-4e6a-86cd-4fd7cc58e2c7</string>
     <key>EXUpdatesRuntimeVersion</key>
     <string>1.0.0</string>
   </dict>

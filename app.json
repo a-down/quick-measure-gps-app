@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "gps-app",
-    "slug": "gps-app",
-    "scheme": "gps-app",
+    "name": "Quick Measure",
+    "slug": "quick-measure-gps",
+    "scheme": "quick-measure-gps",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -17,34 +17,43 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.gpsapp"
+      "bundleIdentifier": "com.a-down.quick-measure-gps"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#3A7032"
       },
-      "package": "com.anonymous.gpsapp"
+      "package": "com.a-down.quick-measure-gps"
     },
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      [
+        "expo-updates",
+        {
+          "username": "a-down"
+        }
+      ]
     ],
     "extra": {
       "router": {
         "origin": false
       },
       "eas": {
-        "projectId": "9ee746d6-ce97-4102-b551-727beb3eddad"
+        "projectId": "009cf2cd-1186-4e6a-86cd-4fd7cc58e2c7"
       }
     },
     "owner": "a-down",
     "runtimeVersion": "1.0.0",
     "updates": {
-      "url": "https://u.expo.dev/9ee746d6-ce97-4102-b551-727beb3eddad"
+      "url": "https://u.expo.dev/009cf2cd-1186-4e6a-86cd-4fd7cc58e2c7",
+      "enabled": true,
+      "checkAutomatically": "WIFI_ONLY",
+      "fallbackToCacheTimeout": 20000
     }
   }
 }
