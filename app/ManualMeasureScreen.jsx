@@ -30,24 +30,24 @@ export default function AutoMeasure() {
     // if so, set initial region as current location
   useEffect(() => {
     useStorage('get', 'mapPreferences').then(value => setMapType(value))
-    const getInitialLocation = async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        Alert.alert(
-          "Location Permission Required",
-          "Please enable location services in your phone settings to use this feature.",
-          [
-            { text: "Go Back", style: "cancel", onPress: () => router.back()}
-          ]
-        )
-        return;
-      } 
-
-    };
-    activateKeepAwakeAsync()
-    getCurrentMap();
-    getInitialLocation();
+    start()
   }, []);
+
+  const start = async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== "granted") {
+      Alert.alert(
+        "Location Permission Required",
+        "Please enable location services in your phone settings to use this feature.",
+        [
+          { text: "Go Back", style: "cancel", onPress: () => router.back()}
+        ]
+      )
+      return;
+    } 
+    await getCurrentMap()
+    await activateKeepAwakeAsync()
+  }
 
   // get the user's current location
   // called when the user presses the add marker button
