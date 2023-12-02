@@ -56,5 +56,8 @@
       "checkAutomatically": "WIFI_ONLY",
       "fallbackToCacheTimeout": 20000
     }
+  },
+  "react-native-google-mobile-ads": {
+    "ios_app_id": "ca-app-pub-2810780842614584~1331427803"
   }
 }
