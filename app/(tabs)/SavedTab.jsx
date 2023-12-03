@@ -97,7 +97,7 @@ const Saved = () => {
       <StatusBar style="light" />
       {savedMaps && (
         <FlatList
-          contentContainerStyle={{paddingBottom: 16, alignItems: 'center'}}
+          contentContainerStyle={{paddingBottom: 16, paddingTop: 24, alignItems: 'center'}}
           data={savedMaps}
           renderItem={({item}) => <Card2 item={item} />}
           keyExtractor={(item, index) => `${item.mapName}-${index}`}
