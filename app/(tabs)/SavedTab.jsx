@@ -46,62 +46,15 @@ const Saved = () => {
     }
   }
 
-  const Card = ({ item }) => {
-    const polygonArea = getAreaOfPolygon(item.polygonCoordinates)
-    const polygonDistance = getPathLength(item.polygonCoordinates)
-
-    return (
-      <Pressable className="flex w-full bg-white relative p-4" onPress={() => router.push({ pathname: "/SavedMapScreen", params: { map: JSON.stringify(item) }})}>
-        <View className="w-full mb-1">
-          <Text className=" text-green-10" style={[semibold, {fontSize: 24}]}>{item.mapName}</Text>
-          <Text className=" text-gray-7" style={regular}>
-            {item.dateCreated.split("T")[0].split("-")[1]}/
-            {item.dateCreated.split("T")[0].split("-")[2]}/
-            {item.dateCreated.split("T")[0].split("-")[0]}
-          </Text>
-        </View>
-
-        <View className="flex-row flex-wrap mb-3">
-          <Text className=" text-gray-8 mr-8" style={[regular, {fontSize: 20}]}>
-            <Text style={{fontSize: 24}}>
-              { polygonArea
-                ? handleConvertArea(polygonArea, item.measurements.areaShort).toFixed(2)
-                : 0}
-            </Text>
-            {` `}{ item.measurements.area }
-          </Text>
-          <Text className=" text-gray-8" style={[regular, {fontSize: 20}]}>
-            <Text style={{fontSize: 24}}>
-              { polygonDistance
-                ? convertDistance(polygonDistance, item.measurements.distanceShort).toFixed(2)
-                : 0 }
-            </Text>
-            {` `}{ item.measurements.distance }
-          </Text>
-        </View>  
-
-        <View className=" flex-row w-full items-center" style={{gap: 8}}>
-          <Pressable className="bg-green-5 p-2 rounded-md flex-grow active:bg-green-4" onPress={() => router.push({ pathname: "/SavedMapScreen", params: { map: JSON.stringify(item) }})}>
-            <Text className="text-white text-center" style={[semibold, {fontSize: 20}]}>View Map</Text>
-          </Pressable>
-        </View>  
-
-        <Pressable className="absolute right-4 top-5 active:opacity-40" hitSlop={20} onPress={() => deleteMapAlert({id: item.id, mapName: item.mapName})}>
-          <Feather name="trash-2" size={24} color="#C7504B"/>
-        </Pressable> 
-      </Pressable>
-    )
-  }
-
   const Card2 = ({ item }) => {
     const polygonArea = getAreaOfPolygon(item.polygonCoordinates)
     const polygonDistance = getPathLength(item.polygonCoordinates)
 
     return (
-      <Pressable className="flex-row w-full max-h-fit bg-white relative justify-between rounded-lg shadow-sm active:opacity-80" onPress={() => router.push({ pathname: "/SavedMapScreen", params: { map: JSON.stringify(item) }})}>
-        <ScrollView className="pl-3 pt-3 relative flex-grow">
-          <View className="mb-2">
-            <Text className=" text-green-10" style={[semibold, {fontSize: 24}]}>{item.mapName}</Text>
+      <Pressable className="flex-row w-full p-4 pb-3 bg-white relative justify-between rounded-lg mb-4 shadow-sm active:opacity-80" onPress={() => router.push({ pathname: "/SavedMapScreen", params: { map: JSON.stringify(item) }})}>
+        <View className="h-full flex-grow ">
+          <View className="mb-2 ">
+            <Text className=" text-green-8" style={[semibold, {fontSize: 24, lineHeight: 26}]}>{item.mapName}</Text>
             <Text className=" text-gray-7" style={[regular, {fontSize: 16}]}>
               {item.dateCreated.split("T")[0].split("-")[1]}/
               {item.dateCreated.split("T")[0].split("-")[2]}/
@@ -110,7 +63,7 @@ const Saved = () => {
           </View>
 
           <View className=" flex-wrap">
-            <Text className=" text-gray-8 mr-8" style={[regular, {fontSize: 16}]}>
+            <Text className=" text-gray-8" style={[regular, {fontSize: 16}]}>
               <Text className="text-gray-10" style={{fontSize: 18}}>
                 { polygonArea
                   ? handleConvertArea(polygonArea, item.measurements.areaShort).toFixed(2)
@@ -128,18 +81,11 @@ const Saved = () => {
             </Text>
           </View>  
 
-          <Pressable className="active:opacity-40 absolute p-3 bottom-0 right-0 bg-white rounded-md" hitSlop={20} onPress={() => deleteMapAlert({id: item.id, mapName: item.mapName})}>
+          <Pressable className="active:opacity-40 absolute bottom-1 right-0" hitSlop={20} onPress={() => deleteMapAlert({id: item.id, mapName: item.mapName})}>
             <Feather name="trash-2" size={24} color="#B1B1B1"/>
           </Pressable> 
-        </ScrollView>
+        </View>
 
-        {/* <View className=" flex-row w-full items-center" style={{gap: 8}}>
-          <Pressable className="bg-green-5 p-2 rounded-md flex-grow active:bg-green-4" onPress={() => router.push({ pathname: "/SavedMapScreen", params: { map: JSON.stringify(item) }})}>
-            <Text className="text-white text-center" style={[semibold, {fontSize: 20}]}>View Map</Text>
-          </Pressable>
-        </View>   */}
-
-        <View className="bg-green-4 h-[200px] aspect-square rounded-r-lg"/>
       </Pressable>
     )
   }
@@ -147,15 +93,16 @@ const Saved = () => {
   
 
   return (
-    <View className=" bg-gray-1 flex-1 p-2">
+    <View className=" bg-gray-1 flex-1">
       <StatusBar style="light" />
       {savedMaps && (
         <FlatList
+          contentContainerStyle={{paddingBottom: 16, alignItems: 'center'}}
           data={savedMaps}
           renderItem={({item}) => <Card2 item={item} />}
           keyExtractor={(item, index) => `${item.mapName}-${index}`}
-          ItemSeparatorComponent={() => <View className="h-4 bg-gray-1"></View>}
-          alwaysBounceVertical={false}
+          alwaysBounceVertical={false}f
+          overScrollMode={'never'}
           />
       )}
 
