@@ -56,6 +56,7 @@ const Layout = () => {
           tabBarInactiveTintColor: "#6DAB64",
           tabBarActiveTintColor: "#fff",
           tabBarStyle: {
+            paddingTop: 4,
             backgroundColor: "#2B561F",
             borderTopColor: "transparent",
           },
@@ -91,6 +92,7 @@ const Layout = () => {
             fontSize: 13
           },
           tabBarStyle: {
+            paddingTop: 4,
             backgroundColor: "#F7F7F7",
             borderTopColor: "transparent",
           },
