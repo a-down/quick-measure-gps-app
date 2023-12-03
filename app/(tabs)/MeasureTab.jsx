@@ -59,14 +59,14 @@ export default function App() {
       </ScrollView> */}
 
       <ScrollView className="w-full h-full p-8 absolute" contentContainerStyle={{ alignItems: 'center'}} alwaysBounceVertical={false}>
-        <View className="items-center justify-start" style={{gap: 24}}>
+        <View className="items-center justify-start mb-8" style={{gap: 24}}>
           <Image source={walkingIcon} style={{height: 115, width: 80, marginRight: 12}}/>
-          <Text className="text-white text-center mb-6" style={[bold, {fontSize: 24, maxWidth: 200}]}>Easy Tools for a Quick Measure</Text>
+          <Text className="text-white text-center" style={[bold, {fontSize: 24, maxWidth: 200}]}>Easy Tools for a Quick Measure</Text>
         </View>
 
         <View>
           {pageLinks.map((item, index) => (
-              <Pressable onPress={() => router.push(item.link)} className=" active:opacity-80 flex-row justify-start items-center p-4 bg-green-1 rounded-md" key={item.title + index} style={{width: width-32, marginBottom: 16, gap: 16}}>
+              <Pressable onPress={() => router.push(item.link)} className=" bg-green-1 active:bg-green-2 flex-row justify-start items-center p-4  rounded-md" key={item.title + index} style={{width: width-32, marginBottom: 16, gap: 24}}>
                 {Icon(item.icon)}
                 <View className="items-start">
                   <Text className=" text-green-10 text-center" style={[semibold, {fontSize: 22}]}>{item.title}</Text>
