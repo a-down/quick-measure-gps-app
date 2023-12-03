@@ -4,6 +4,10 @@ import { regular, semibold, bold } from '../../hooks/useJostFont';
 import walkingIcon from '../../assets/walking-icon.png';
 import { MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 
+// import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
+// import { useState, useEffect } from 'react';
+// import { SafeAreaView } from 'react-native';
+
 export default function App() {
   const { width } = useWindowDimensions();
   const router = useRouter();
@@ -26,7 +30,15 @@ export default function App() {
   }
 
   return (
-    <View className="bg-green-9 relative flex-1 items-center">
+    <SafeAreaView className="bg-green-9 relative flex-1 items-center">
+      {/* <BannerAd 
+        unitId={TestIds.BANNER}
+        size={BannerAdSize.SMALL_BANNER}
+        requestOptions={{
+          requestNonPersonalizedAdsOnly: true,
+        }}
+      /> */}
+
       <View className="bg-green-8 w-[1060px] aspect-square relative bottom-[600px] rounded-full"></View>
 
       <ScrollView className="flex-1 top-0 left-0 absolute p-8" contentContainerStyle={{ alignItems: 'center'}}>
@@ -46,6 +58,6 @@ export default function App() {
         </View>
       </ScrollView>
 
-    </View>
+    </SafeAreaView>
   );
 }
