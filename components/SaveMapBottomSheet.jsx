@@ -1,15 +1,18 @@
 import { useMemo, useCallback } from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { Text, Pressable, View, TextInput, Keyboard, Alert } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useStorage } from '../hooks';
 import uuid from 'react-native-uuid';
 import { Feather } from '@expo/vector-icons';
 import { regular, medium, semibold } from '../hooks/useJostFont';
+import { handleConvertArea } from '../hooks'
+import { convertDistance } from 'geolib';
 
-function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType }) {
+function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType, polygonArea, polygonDistance, currentPreferences }) {
 
   const [ mapName, setMapName ] = useState('')
+  console.log(currentPreferences)
 
   const snapPoints = useMemo(() => ["80%"], []);
   const handleSheetChanges = useCallback((index) => {
@@ -92,7 +95,7 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType }) {
 
         <View style={{gap: 8}}>
           <Pressable 
-            className=" p-4 rounded-2xl shadow-sm flex-row justify-center items-center bg-green-5 active:bg-green-4" 
+            className=" p-4 rounded-2xl shadow-sm flex-row justify-center items-center bg-green-5 active:bg-green-4 mb-8" 
             style={{gap: 8}}
             onPress={saveMap}>
             <Feather name="download" size={24} color="white" />
@@ -101,9 +104,30 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType }) {
             </Text>
           </Pressable>
 
-          <Text className="text-gray-8 text-center" style={regular}>
-          (the map will save with the current map type, distance measurement, and area measurement)
+          {currentPreferences && (
+            <>
+              <Text style={medium}>
+                Measurements and Preferences to Save:
+              </Text>
+
+              <Text style={regular}>
+                Area: {polygonArea > 0 ? handleConvertArea(polygonArea, currentPreferences.areaShort).toFixed(2) : 0} {currentPreferences.area}
+              </Text>
+
+              <Text style={regular}>
+                Distance: {polygonArea > 0 ? convertDistance(polygonDistance, currentPreferences.distanceShort).toFixed(2) : 0} {currentPreferences.distance}
+              </Text>
+
+              <Text style={regular} className="mb-8">
+                Map Type: {mapType}
+              </Text>
+            </>
+          )}
+
+          <Text className="text-gray-7 text-center" style={regular}>
+            (You cannot change this map's preferences after saving.)
           </Text>
+
         </View>
 
       </View>

@@ -9,7 +9,7 @@ import { regular } from '../hooks/useJostFont';
 // preferences default to sq meters and meters
 const defaultPreferences = { area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm' }
 
-const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferredMeasurements, areaVisible, setAreaVisible, markersVisible, setMarkersVisible }) => {
+const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferredMeasurements, areaVisible, setAreaVisible, markersVisible, setMarkersVisible, getPreferencesForSave }) => {
   const { width } = useWindowDimensions();
   const [ measurementPreferences, setMeasurementPreferences ] = useState(defaultPreferences)
   
@@ -28,6 +28,7 @@ const MeasurementDisplay = ({ polygonArea, polygonDistance, setMapType, preferre
   const storePreferences = async (data) => {
     setMeasurementPreferences(data)
     await useStorage('set', 'measurementPreferences', data)
+    await getPreferencesForSave()
   }
 
   // Alert prompts used to update preferences
