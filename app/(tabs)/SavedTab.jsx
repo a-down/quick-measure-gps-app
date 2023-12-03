@@ -6,6 +6,7 @@ import handleConvertArea from '../../hooks/handleConvertArea';
 import { useStorage } from '../../hooks';
 import { Feather } from '@expo/vector-icons';
 import { regular, semibold } from '../../hooks/useJostFont'
+import { StatusBar } from 'expo-status-bar';
 
 const Saved = () => {
   const router = useRouter();
@@ -94,6 +95,7 @@ const Saved = () => {
 
   return (
     <View className=" bg-gray-1 flex-1">
+      <StatusBar style="light" />
       {savedMaps && (
         <FlatList
           data={savedMaps}

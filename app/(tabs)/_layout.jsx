@@ -54,7 +54,7 @@ const Layout = () => {
             <Feather name="map" size={size} color={color} />
           ),
           tabBarInactiveTintColor: "#6DAB64",
-          tabBarActiveTintColor: "#AED6A9",
+          tabBarActiveTintColor: "#fff",
           tabBarStyle: {
             backgroundColor: "#2B561F",
             borderTopColor: "transparent",
@@ -84,12 +84,16 @@ const Layout = () => {
           tabBarIcon: ({ color, size }) => (
             <Feather name="bookmark" size={size} color={color} className="mt-4"/>
           ),
-          tabBarInactiveTintColor: "#9F9F9F",
-          tabBarActiveTintColor: "#6DAB64",
+          tabBarInactiveTintColor: "#B1B1B1",
+          tabBarActiveTintColor: "#2B561F",
           tabBarLabelStyle: {
             fontFamily: 'Jost_500Medium',
             fontSize: 13
-          }
+          },
+          tabBarStyle: {
+            backgroundColor: "#F7F7F7",
+            borderTopColor: "transparent",
+          },
         }}
       />
       

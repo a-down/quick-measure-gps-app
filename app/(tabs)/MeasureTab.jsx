@@ -3,6 +3,7 @@ import { useRouter } from 'expo-router';
 import { regular, semibold, bold } from '../../hooks/useJostFont';
 import walkingIcon from '../../assets/walking-icon.png';
 import { MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
+import { StatusBar } from 'expo-status-bar';
 
 // import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
 // import { useState, useEffect } from 'react';
@@ -31,6 +32,7 @@ export default function App() {
 
   return (
     <SafeAreaView className="bg-green-9 relative flex-1 items-center w-full h-full">
+      <StatusBar style="light" />
       {/* <BannerAd 
         unitId={TestIds.BANNER}
         size={BannerAdSize.SMALL_BANNER}
@@ -66,11 +68,11 @@ export default function App() {
 
         <View>
           {pageLinks.map((item, index) => (
-              <Pressable onPress={() => router.push(item.link)} className=" bg-green-1 active:bg-green-2 flex-row justify-start items-center p-4  rounded-md" key={item.title + index} style={{width: width-32, marginBottom: 16, gap: 24}}>
+              <Pressable onPress={() => router.push(item.link)} className=" bg-gray-1 active:bg-gray-2 flex-row justify-start items-center p-4  rounded-md" key={item.title + index} style={{width: width-32, marginBottom: 16, gap: 24}}>
                 {Icon(item.icon)}
                 <View className="items-start">
                   <Text className=" text-green-10 text-center" style={[semibold, {fontSize: 22}]}>{item.title}</Text>
-                  <Text className=" text-gray-7 text-center" style={[regular, {fontSize: 14}]}>{item.description}</Text>  
+                  <Text className=" text-gray-7 text-center text-wrap overflow-ellipsis" style={[regular, {fontSize: 14}]}>{item.description}</Text>  
                 </View>
               </Pressable>
           ))}
