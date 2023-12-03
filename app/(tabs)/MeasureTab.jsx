@@ -15,7 +15,7 @@ export default function App() {
   const { width } = useWindowDimensions();
   const router = useRouter();
 
-  const [ savedMaps, setSavedMaps ] = useState([])
+  const [ savedMaps, setSavedMaps ] = useState(null)
 
   useFocusEffect(
     useCallback(() => {
@@ -25,10 +25,14 @@ export default function App() {
 
   const getRecentlySaved = async () => {
     const value = await useStorage('get', 'savedMaps')
-    const reversed = value.reverse()
-    let numberOfMaps
-    reversed.length < 3 ? numberOfMaps = reversed.length : numberOfMaps = 3
-    setSavedMaps(reversed.slice(0, numberOfMaps))
+    if (value !== null) {
+      const reversed = value.reverse()
+      let numberOfMaps
+      reversed.length < 3 ? numberOfMaps = reversed.length : numberOfMaps = 3
+      setSavedMaps(reversed.slice(0, numberOfMaps))
+    } else {
+      setSavedMaps(null)
+    }
   }
 
   const pageLinks = [
@@ -40,11 +44,11 @@ export default function App() {
   const Icon = (name) => {
     switch(name) {
       case 'satellite-dish':
-        return <FontAwesome5 name={name} size={48} color='#8CC185' style={{textAlign: 'center', marginBottom: 4}}/>
+        return <FontAwesome5 name={name} size={48} color='#6DAB64' style={{textAlign: 'center', marginBottom: 4}}/>
       case 'gesture-tap':
-        return <MaterialCommunityIcons name={name} size={48} color='#8CC185' style={{textAlign: 'center', marginBottom: 4}}/>
+        return <MaterialCommunityIcons name={name} size={48} color='#6DAB64' style={{textAlign: 'center', marginBottom: 4}}/>
       case 'plus-circle':
-        return <FontAwesome5 name={name} size={48} color='#8CC185' style={{textAlign: 'center', marginBottom: 4}}/>
+        return <FontAwesome5 name={name} size={48} color='#6DAB64' style={{textAlign: 'center', marginBottom: 4}}/>
     }
   }
 
@@ -79,8 +83,8 @@ export default function App() {
       </ScrollView> */}
 
       <ScrollView className="w-full h-full pt-8 absolute" contentContainerStyle={{ alignItems: 'center'}} alwaysBounceVertical={false}>
-        <View className="bg-green-8 w-[1060px] aspect-square absolute bottom-[500px] rounded-full"></View>
-        <View className="items-center justify-start mb-8" style={{gap: 24}}>
+        <View className="bg-green-8 w-[1060px] aspect-square absolute -top-[730px] rounded-full"></View>
+        <View className="items-center justify-start mb-6" style={{gap: 24}}>
           <Image source={walkingIcon} style={{height: 115, width: 80, marginRight: 12}}/>
           <Text className="text-white text-center" style={[bold, {fontSize: 24, maxWidth: 200}]}>Easy Tools for a Quick Measure</Text>
         </View>
@@ -88,9 +92,10 @@ export default function App() {
         <View className="bg-green-9 w-full items-center pt-4 px-4 rounded-lg" style={{width: width-32}}>
           {pageLinks.map((item, index) => (
             <Pressable 
-              className=" bg-gray-1 active:bg-gray-2 flex-row justify-start items-center p-4 w-full rounded-md" 
+              className=" bg-gray-1 active:bg-gray-2 flex-row justify-start items-center p-4 w-full rounded-md"
               onPress={() => router.push(item.link)} 
-              key={item.title + index} style={{ marginBottom: 16, gap: 24}}>
+              key={item.title + index} 
+              style={{ marginBottom: 16, gap: 24}}>
               {Icon(item.icon)}
               <View className="justify-center items-start mt-1">
                 <Text className=" text-green-10 text-center" style={[semibold, {fontSize: 22, lineHeight: 24}]}>{item.title}</Text>
@@ -98,28 +103,30 @@ export default function App() {
               </View>
             </Pressable>
           ))}
-
-          <View className="w-full mt-4 pb-12">
-            <Text className="text-white mb-4" style={[bold, {fontSize: 20}]}>Recently Saved</Text>
-            {savedMaps.map((map, index) => (
-              <Pressable 
-                className="p-4 bg-green-8 rounded-md mb-2 flex-row justify-between items-center" 
-                onPress={() => router.push({ pathname: '/SavedMapScreen', params: { map: JSON.stringify(map) }})}
-                key={index}>
-                <View>
-                  <Text className="text-white" style={[medium, {fontSize: 18}]}>{map.mapName}</Text>
-                  <Text className="text-gray-1" style={[regular, {fontSize: 12}]}>
-                    {map.dateCreated.split("T")[0].split("-")[1]}/
-                    {map.dateCreated.split("T")[0].split("-")[2]}/
-                    {map.dateCreated.split("T")[0].split("-")[0]}
-                  </Text>
-                </View>
-                <Feather name="chevron-right" size={24} color="#fff"/>
-              </Pressable>
+        
+          {savedMaps && (
+            <View className="w-full mt-4 pb-12">
+              <Text className="text-white mb-4" style={[bold, {fontSize: 20}]}>Recently Saved</Text>
               
-            ))}
+              {savedMaps.map((map, index) => (
+                <Pressable 
+                  className="p-4 bg-green-8 rounded-md mb-2 flex-row justify-between items-center active:bg-green-7" 
+                  onPress={() => router.push({ pathname: '/SavedMapScreen', params: { map: JSON.stringify(map) }})}
+                  key={index}>
+                  <View>
+                    <Text className="text-green-1" style={[semibold, {fontSize: 18}]}>{map.mapName}</Text>
+                    <Text className="text-gray-1" style={[regular, {fontSize: 12}]}>
+                      {map.dateCreated.split("T")[0].split("-")[1]}/
+                      {map.dateCreated.split("T")[0].split("-")[2]}/
+                      {map.dateCreated.split("T")[0].split("-")[0]}
+                    </Text>
+                  </View>
+                  <Feather name="chevron-right" size={24} color="#E7F8E6"/>
+                </Pressable>
+              ))}
 
-          </View>
+            </View>
+          )}
         </View>
 
         
