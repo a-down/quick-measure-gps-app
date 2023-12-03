@@ -105,7 +105,7 @@ export default function App() {
           ))}
         
           {savedMaps && (
-            <View className="w-full mt-4 pb-12">
+            <View className="w-full mt-4 pb-14">
               <Text className="text-white mb-4" style={[bold, {fontSize: 20}]}>Recently Saved</Text>
               
               {savedMaps.map((map, index) => (
@@ -124,6 +124,14 @@ export default function App() {
                   <Feather name="chevron-right" size={24} color="#E7F8E6"/>
                 </Pressable>
               ))}
+
+              <Pressable 
+                className="w-full flex-row justify-center items-center mt-2 active:opacity-80" 
+                style={{gap: 8}}
+                onPress={() => router.replace('/SavedTab')}>
+                <Text className="text-green-1" style={regular}>See all saved maps</Text>
+                <Feather name="chevron-right" size={16} color="#E7F8E6"/>
+              </Pressable>
 
             </View>
           )}
