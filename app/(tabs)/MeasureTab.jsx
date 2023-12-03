@@ -79,7 +79,7 @@ export default function App() {
       </ScrollView> */}
 
       <ScrollView className="w-full h-full pt-8 absolute" contentContainerStyle={{ alignItems: 'center'}} alwaysBounceVertical={false}>
-        <View className="bg-green-8 w-[1060px] aspect-square absolute bottom-[400px] rounded-full"></View>
+        <View className="bg-green-8 w-[1060px] aspect-square absolute bottom-[500px] rounded-full"></View>
         <View className="items-center justify-start mb-8" style={{gap: 24}}>
           <Image source={walkingIcon} style={{height: 115, width: 80, marginRight: 12}}/>
           <Text className="text-white text-center" style={[bold, {fontSize: 24, maxWidth: 200}]}>Easy Tools for a Quick Measure</Text>
