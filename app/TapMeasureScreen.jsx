@@ -23,6 +23,7 @@ export default function TapMeasure() {
   const [ deleteMode, setDeleteMode ] = useState(false)
   const [ markersToDelete, setMarkersToDelete ] = useState([])
   const [ previousCoordinates, setPreviousCoordinates ] = useState([])
+  const [ currentPreferences, setCurrentPreferences ] = useState(null)
 
   // check if location permission is granted
     // if so, set initial region as current location
@@ -44,6 +45,7 @@ export default function TapMeasure() {
       return;
     } 
     await getCurrentMap()
+    await getPreferencesForSave()
   }
 
   // when a coordinate is added to polygonCoordinates, generate measurements and store the current polygon to storage
@@ -87,6 +89,12 @@ export default function TapMeasure() {
     setPolygonDistance(null)
   }
 
+  // get preferences to display on SaveMapBottomSheet
+  const getPreferencesForSave = async () => {
+    const value = await useStorage('get', 'measurementPreferences')
+    if (value !== null) setCurrentPreferences(value)
+  }
+
   return (
     <View className="flex-1 items-center justify-center">
       {!region && (
@@ -115,7 +123,8 @@ export default function TapMeasure() {
         areaVisible={areaVisible}
         setAreaVisible={setAreaVisible}
         markersVisible={markersVisible}
-        setMarkersVisible={setMarkersVisible} />
+        setMarkersVisible={setMarkersVisible}
+        getPreferencesForSave={getPreferencesForSave} />
 
       <View className="absolute bottom-0 w-full items-center" style={{gap: 8}}>
         <View className="w-full flex flex-row justify-between mb-14 p-4 rounded-lg">
@@ -155,7 +164,10 @@ export default function TapMeasure() {
       <SaveMapBottomSheet 
         polygonCoordinates={polygonCoordinates}
         saveSheetRef={saveSheetRef}
-        mapType={mapType}/>
+        mapType={mapType}
+        polygonArea={polygonArea}
+        polygonDistance={polygonDistance}
+        currentPreferences={currentPreferences}/>
 
     </View>
   );

@@ -25,6 +25,7 @@ export default function AutoMeasure() {
   const [ deleteMode, setDeleteMode ] = useState(false)
   const [ markersToDelete, setMarkersToDelete ] = useState([])
   const [ previousCoordinates, setPreviousCoordinates ] = useState([])
+  const [ currentPreferences, setCurrentPreferences ] = useState(null)
 
   // check if location permission is granted
     // if so, set initial region as current location
@@ -47,6 +48,7 @@ export default function AutoMeasure() {
     } 
     await getCurrentMap()
     await activateKeepAwakeAsync()
+    await getPreferencesForSave()
   }
 
   // get the user's current location
@@ -101,6 +103,12 @@ export default function AutoMeasure() {
     setPolygonDistance(null)
   }
 
+  // get preferences to display on SaveMapBottomSheet
+  const getPreferencesForSave = async () => {
+    const value = await useStorage('get', 'measurementPreferences')
+    if (value !== null) setCurrentPreferences(value)
+  }
+
   return (
     <>
       <View className="flex-1 items-center justify-center">
@@ -127,7 +135,8 @@ export default function AutoMeasure() {
           areaVisible={areaVisible}
           setAreaVisible={setAreaVisible}
           markersVisible={markersVisible}
-          setMarkersVisible={setMarkersVisible} />
+          setMarkersVisible={setMarkersVisible}
+          getPreferencesForSave={getPreferencesForSave} />
 
         <View className="absolute bottom-10 py-4 px-2 w-full mb-2" style={{gap: 8}}>
           <View className="w-full flex-row justify-between absolute bottom-24 left-2">
@@ -174,7 +183,10 @@ export default function AutoMeasure() {
         <SaveMapBottomSheet 
           polygonCoordinates={polygonCoordinates}
           saveSheetRef={saveSheetRef}
-          mapType={mapType}/>
+          mapType={mapType}
+          polygonArea={polygonArea}
+          polygonDistance={polygonDistance}
+          currentPreferences={currentPreferences}/>
 
       </View>
     </>

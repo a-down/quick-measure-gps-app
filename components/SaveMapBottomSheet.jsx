@@ -1,15 +1,18 @@
 import { useMemo, useCallback } from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { Text, Pressable, View, TextInput, Keyboard, Alert } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useStorage } from '../hooks';
 import uuid from 'react-native-uuid';
 import { Feather } from '@expo/vector-icons';
 import { regular, medium, semibold } from '../hooks/useJostFont';
+import { handleConvertArea } from '../hooks'
+import { convertDistance } from 'geolib';
 
-function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType }) {
+function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType, polygonArea, polygonDistance, currentPreferences }) {
 
   const [ mapName, setMapName ] = useState('')
+  console.log(currentPreferences)
 
   const snapPoints = useMemo(() => ["80%"], []);
   const handleSheetChanges = useCallback((index) => {
@@ -101,9 +104,28 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType }) {
             </Text>
           </Pressable>
 
-          <Text className="text-gray-8 text-center" style={regular}>
-          (the map will save with the current map type, distance measurement, and area measurement)
+          <Text className="text-gray-8 text-center mb-8" style={regular}>
+            (the map will save with the current map type and measurement types)
           </Text>
+
+          {currentPreferences && (
+            <>
+              <Text>Measurements and Preferences to Save:</Text>
+
+              <Text>
+                Area: {polygonArea > 0 ? handleConvertArea(polygonArea, currentPreferences.areaShort).toFixed(2) : 0} {currentPreferences.area}
+              </Text>
+
+              <Text>
+                Distance: {polygonArea > 0 ? convertDistance(polygonDistance, currentPreferences.distanceShort).toFixed(2) : 0} {currentPreferences.distance}
+              </Text>
+
+              <Text>
+                Map Type: {mapType}
+              </Text>
+            </>
+          )}
+
         </View>
 
       </View>
