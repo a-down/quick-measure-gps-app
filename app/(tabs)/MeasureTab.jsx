@@ -6,7 +6,7 @@ import { MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 
 // import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
 // import { useState, useEffect } from 'react';
-// import { SafeAreaView } from 'react-native';
+import { SafeAreaView } from 'react-native';
 
 export default function App() {
   const { width } = useWindowDimensions();
