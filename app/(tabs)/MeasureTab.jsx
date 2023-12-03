@@ -41,7 +41,7 @@ export default function App() {
 
       <View className="bg-green-8 w-[1060px] aspect-square relative bottom-[600px] rounded-full"></View>
 
-      <ScrollView className="flex-1 top-0 left-0 absolute p-8" contentContainerStyle={{ alignItems: 'center'}}>
+      <ScrollView className="flex-1 top-0 left-0 absolute p-8" contentContainerStyle={{ alignItems: 'center'}} alwaysBounceVertical={false}>
         <View className="items-center justify-start" style={{gap: 24}}>
           <Image source={walkingIcon} style={{height: 115, width: 80}}/>
           <Text className="text-white text-center mb-6" style={[bold, {fontSize: 24, maxWidth: 200}]}>Easy Tools for a Quick Measure</Text>
