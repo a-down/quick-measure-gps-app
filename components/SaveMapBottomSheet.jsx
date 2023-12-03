@@ -95,7 +95,7 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType, polygon
 
         <View style={{gap: 8}}>
           <Pressable 
-            className=" p-4 rounded-2xl shadow-sm flex-row justify-center items-center bg-green-5 active:bg-green-4" 
+            className=" p-4 rounded-2xl shadow-sm flex-row justify-center items-center bg-green-5 active:bg-green-4 mb-8" 
             style={{gap: 8}}
             onPress={saveMap}>
             <Feather name="download" size={24} color="white" />
@@ -104,27 +104,29 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType, polygon
             </Text>
           </Pressable>
 
-          <Text className="text-gray-8 text-center mb-8" style={regular}>
-            (the map will save with the current map type and measurement types)
-          </Text>
-
           {currentPreferences && (
             <>
-              <Text>Measurements and Preferences to Save:</Text>
+              <Text style={medium}>
+                Measurements and Preferences to Save:
+              </Text>
 
-              <Text>
+              <Text style={regular}>
                 Area: {polygonArea > 0 ? handleConvertArea(polygonArea, currentPreferences.areaShort).toFixed(2) : 0} {currentPreferences.area}
               </Text>
 
-              <Text>
+              <Text style={regular}>
                 Distance: {polygonArea > 0 ? convertDistance(polygonDistance, currentPreferences.distanceShort).toFixed(2) : 0} {currentPreferences.distance}
               </Text>
 
-              <Text>
+              <Text style={regular} className="mb-8">
                 Map Type: {mapType}
               </Text>
             </>
           )}
+
+          <Text className="text-gray-7 text-center" style={regular}>
+            (You cannot change this map's preferences after saving.)
+          </Text>
 
         </View>
 
