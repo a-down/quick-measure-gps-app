@@ -6,8 +6,7 @@ import { MaterialCommunityIcons, FontAwesome5, Feather } from '@expo/vector-icon
 import { StatusBar } from 'expo-status-bar';
 import { useStorage } from '../../hooks';
 import { useCallback, useState } from 'react';
-
-// import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
+import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
 
 export default function App() {
   const { width } = useWindowDimensions();
@@ -57,15 +56,15 @@ export default function App() {
       <ScrollView className="w-full h-full absolute" contentContainerStyle={{ alignItems: 'center'}} alwaysBounceVertical={false}>
 
         <View className="bg-green-8 w-[1060px] aspect-square absolute -top-[640px] rounded-full"></View>
-          {/* this ad works */}
-          {/* <BannerAd 
+
+        <BannerAd 
           unitId={TestIds.BANNER}
           size={BannerAdSize.BANNER}
           requestOptions={{
             requestNonPersonalizedAdsOnly: true,
-          }}/> */}
+          }}/>
 
-        <View className="items-center justify-start mb-6 mt-8" style={{gap: 24}}>
+        <View className="items-center justify-start mb-4 mt-4" style={{gap: 24}}>
           <Image source={walkingIcon} style={{height: 115, width: 80, marginRight: 12}}/>
           <Text className="text-white text-center" style={[bold, {fontSize: 24, maxWidth: 200}]}>Easy Tools for a Quick Measure</Text>
         </View>
@@ -86,7 +85,7 @@ export default function App() {
             </Pressable>
           ))}
           
-          <View className="w-full mt-4 pb-14">
+          <View className="w-full mt-2 mb-2">
             {savedMaps && (
               <>
                 <Text className="text-white mb-4" style={[bold, {fontSize: 20}]}>Recently Saved</Text>
@@ -117,18 +116,15 @@ export default function App() {
                 </Pressable>
               </>
             )}
-
-            {/* this ad works */}
-            {/* <BannerAd 
-            unitId={TestIds.BANNER}
-            size={BannerAdSize.BANNER}
-            requestOptions={{
-              requestNonPersonalizedAdsOnly: true,
-            }}/> */}
-
           </View>
         </View>
         
+        <BannerAd 
+          unitId={TestIds.BANNER}
+          size={BannerAdSize.BANNER}
+          requestOptions={{
+            requestNonPersonalizedAdsOnly: true,
+          }}/>
 
       </ScrollView>
 

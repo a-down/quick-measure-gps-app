@@ -7,6 +7,7 @@ import { useStorage } from '../../hooks';
 import { Feather } from '@expo/vector-icons';
 import { regular, semibold } from '../../hooks/useJostFont'
 import { StatusBar } from 'expo-status-bar';
+import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
 
 const Saved = () => {
   const router = useRouter();
@@ -83,9 +84,6 @@ const Saved = () => {
               <Feather name="trash-2" size={24} color="#B1B1B1"/>
             </Pressable> 
         </View>
-
-        
-
       </Pressable>
     )
   }
@@ -93,7 +91,7 @@ const Saved = () => {
   
 
   return (
-    <View className=" bg-gray-1 flex-1">
+    <View className=" bg-gray-1 flex-1 items-center">
       <StatusBar style="light" />
       {savedMaps && (
         <FlatList
@@ -119,7 +117,16 @@ const Saved = () => {
             </Text>
           </Pressable>
         </View>
-      )}   
+      )}  
+
+      <View className="absolute w-full items-center bottom-0">
+        <BannerAd 
+          unitId={TestIds.BANNER}
+          size={BannerAdSize.BANNER}
+          requestOptions={{
+            requestNonPersonalizedAdsOnly: true,
+          }}/> 
+      </View>
     </View>
   )
 }
