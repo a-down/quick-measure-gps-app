@@ -7,7 +7,7 @@ import { useStorage } from '../../hooks';
 import { Feather } from '@expo/vector-icons';
 import { regular, semibold } from '../../hooks/useJostFont'
 import { StatusBar } from 'expo-status-bar';
-import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
+// import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
 
 const Saved = () => {
   const router = useRouter();
@@ -120,12 +120,12 @@ const Saved = () => {
       )}  
 
       <View className="absolute w-full items-center bottom-0">
-        <BannerAd 
+        {/* <BannerAd 
           unitId={TestIds.BANNER}
           size={BannerAdSize.BANNER}
           requestOptions={{
             requestNonPersonalizedAdsOnly: true,
-          }}/> 
+          }}/>  */}
       </View>
     </View>
   )

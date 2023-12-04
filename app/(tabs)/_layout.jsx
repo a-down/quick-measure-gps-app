@@ -1,10 +1,11 @@
 import { Tabs } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
 import { useFonts, Jost_400Regular, Jost_500Medium, Jost_600SemiBold, Jost_700Bold } from '@expo-google-fonts/jost';
-// import * as Updates from 'expo-updates';
-// import { useEffect } from 'react';
+import { useRouter } from 'expo-router';
 
 const Layout = () => {
+  const router = useRouter()
+
   let [fontsLoaded] = useFonts({
     Jost_400Regular,
     Jost_500Medium,
@@ -50,6 +51,9 @@ const Layout = () => {
             fontFamily: 'Jost_700Bold',
             fontSize: 18
           },
+          headerRight: () => (
+            <Feather name="help-circle" size={24} color="#fff" style={{marginRight: 16}} onPress={() => router.push('/HelpScreen')} />
+          ),
           tabBarIcon: ({ color, size }) => (
             <Feather name="map" size={size} color={color} />
           ),

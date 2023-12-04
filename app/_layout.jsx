@@ -40,6 +40,19 @@ export default function Layout() {
             fontSize: 18
           },
         }} />
+        <Stack.Screen name="HelpScreen" options={{
+          title: 'Help',
+          headerBackTitleVisible: false,
+          headerTintColor: '#fff',
+          headerStyle: {
+            backgroundColor: '#6DAB64',
+          },
+          headerTitleStyle: {
+            color: '#fff',
+            fontFamily: 'Jost_600SemiBold',
+            fontSize: 18
+          },
+        }} />
       </Stack>
   )
 }
