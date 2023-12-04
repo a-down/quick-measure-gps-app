@@ -15,9 +15,9 @@ export default function AutoMeasure() {
 
   const [ region, setRegion ] = useState(null);
   const [ currentLocation, setCurrentLocation ] = useState(null);
-  const [ polygonCoordinates, setPolygonCoordinates ] = useState([{"latitude": 36.5613419495347, "longitude": -121.94035277951814}, {"latitude": 36.561320353528366, "longitude": -121.94032320403902}, {"latitude": 36.56130811577776, "longitude": -121.94028377005317}, {"latitude": 36.56130595617645, "longitude": -121.9402434398544}, {"latitude": 36.56132179324036, "longitude": -121.9402004209757}, {"latitude": 36.561342669390484, "longitude": -121.94016905302965}, {"latitude": 36.5613664249903, "longitude": -121.94013858133755}, {"latitude": 36.5614074573727, "longitude": -121.94010542096552}, {"latitude": 36.56144920958814, "longitude": -121.94008749641905}, {"latitude": 36.561477284348385, "longitude": -121.94006867565965}, {"latitude": 36.56151610406361, "longitude": -121.94007355852877}, {"latitude": 36.56155416509598, "longitude": -121.94008428736507}, {"latitude": 36.56158504476788, "longitude": -121.94008786363023}, {"latitude": 36.561629568951, "longitude": -121.94010663909374}, {"latitude": 36.56167193868202, "longitude": -121.9401173679301}, {"latitude": 36.56169348261525, "longitude": -121.94013703744969}, {"latitude": 36.56172077159969, "longitude": -121.94016922395866}, {"latitude": 36.56176242316126, "longitude": -121.94018799942219}, {"latitude": 36.56181341041146, "longitude": -121.94018352910098}, {"latitude": 36.561861525088375, "longitude": -121.94019246978431}, {"latitude": 36.56189455905772, "longitude": -121.94019425793734}, {"latitude": 36.56191035788623, "longitude": -121.94024253770074}, {"latitude": 36.561927592980126, "longitude": -121.94026578348547}, {"latitude": 36.56194985495973, "longitude": -121.94029707593839}, {"latitude": 36.561987915778445, "longitude": -121.9403355209215}, {"latitude": 36.562005150855036, "longitude": -121.94035429638508}, {"latitude": 36.562029567196, "longitude": -121.94038827104708}, {"latitude": 36.5620575741784, "longitude": -121.94042850418327}, {"latitude": 36.562097789325776, "longitude": -121.94045532627406}])
-  const [ polygonArea, setPolygonArea ] = useState(getAreaOfPolygon(polygonCoordinates))
-  const [ polygonDistance, setPolygonDistance ] = useState(getPathLength(polygonCoordinates))
+  const [ polygonCoordinates, setPolygonCoordinates ] = useState([])
+  const [ polygonArea, setPolygonArea ] = useState()
+  const [ polygonDistance, setPolygonDistance ] = useState()
   const [ isMeasuring, setIsMeasuring ] = useState(false)
   const [ mapType, setMapType ] = useState("")
   const [ areaVisible, setAreaVisible ] = useState(true)
@@ -33,7 +33,11 @@ export default function AutoMeasure() {
   useEffect(() => {
     useStorage('get', 'mapPreferences').then(value => setMapType(value))
     useStorage('get', 'currentAutoCoordinates').then(value => {
-      if (value) setPolygonCoordinates(value)
+      if (value) {
+        setPolygonCoordinates(value)
+        setPolygonDistance(getPathLength(value))
+        setPolygonArea(getAreaOfPolygon(value))
+      }
     })
     getPreferencesForSave()
     const getInitialLocation = async () => {

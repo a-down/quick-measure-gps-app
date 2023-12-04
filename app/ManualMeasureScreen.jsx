@@ -77,6 +77,8 @@ export default function AutoMeasure() {
     if (value !== null && value.length > 0) {
       setPolygonCoordinates(value)
       setRegion(getCenterOfBounds(value))
+      setPolygonDistance(getPathLength(value))
+      setPolygonArea(getAreaOfPolygon(value))
 
     } else {
       let location = await Location.getCurrentPositionAsync({});

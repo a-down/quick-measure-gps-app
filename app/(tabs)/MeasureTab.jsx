@@ -1,4 +1,4 @@
-import { Text, View, Pressable, useWindowDimensions, Image, ScrollView } from 'react-native';
+import { Text, View, Pressable, useWindowDimensions, Image, ScrollView, SafeAreaView } from 'react-native';
 import { useRouter, useFocusEffect } from 'expo-router';
 import { regular, semibold, bold, medium } from '../../hooks/useJostFont';
 import walkingIcon from '../../assets/walking-icon.png';
@@ -7,9 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useStorage } from '../../hooks';
 import { useCallback, useState } from 'react';
 
-import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
-import { useEffect } from 'react';
-import { SafeAreaView } from 'react-native';
+// import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
 
 export default function App() {
   const { width } = useWindowDimensions();
