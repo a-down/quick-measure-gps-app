@@ -16,9 +16,9 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
+      "supportsTablet": false,
       "bundleIdentifier": "com.a-down.quick-measure-gps",
-      "buildNumber": "2"
+      "buildNumber": "3"
     },
     "android": {
       "adaptiveIcon": {

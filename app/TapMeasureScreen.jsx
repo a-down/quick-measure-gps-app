@@ -25,8 +25,6 @@ export default function TapMeasure() {
   const [ previousCoordinates, setPreviousCoordinates ] = useState([])
   const [ currentPreferences, setCurrentPreferences ] = useState(null)
 
-  console.log(polygonCoordinates)
-
   // check if location permission is granted
     // if so, set initial region as current location
   useEffect(() => {
