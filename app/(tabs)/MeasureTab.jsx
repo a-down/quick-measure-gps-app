@@ -44,11 +44,11 @@ export default function App() {
   const Icon = (name) => {
     switch(name) {
       case 'satellite-dish':
-        return <FontAwesome5 name={name} size={48} color='#6DAB64' style={{textAlign: 'center', marginBottom: 4}}/>
+        return <FontAwesome5 name={name} size={40} color='#6DAB64' style={{textAlign: 'center', marginBottom: 4}}/>
       case 'gesture-tap':
-        return <MaterialCommunityIcons name={name} size={48} color='#6DAB64' style={{textAlign: 'center', marginBottom: 4}}/>
+        return <MaterialCommunityIcons name={name} size={40} color='#6DAB64' style={{textAlign: 'center', marginBottom: 4}}/>
       case 'plus-circle':
-        return <FontAwesome5 name={name} size={48} color='#6DAB64' style={{textAlign: 'center', marginBottom: 4}}/>
+        return <FontAwesome5 name={name} size={40} color='#6DAB64' style={{textAlign: 'center', marginBottom: 4}}/>
     }
   }
 
@@ -73,15 +73,16 @@ export default function App() {
         <View className="w-full items-center rounded-lg" style={{width: width-32}}>
           {pageLinks.map((item, index) => (
             <Pressable 
-              className=" bg-gray-1 active:bg-gray-2 flex-row justify-start items-center p-4 w-full rounded-md"
+              className=" bg-gray-1 active:bg-gray-2 flex-row justify-between items-center p-4 w-full rounded-md"
               onPress={() => router.push(item.link)} 
               key={item.title + index} 
               style={{ marginBottom: 16, gap: 24}}>
-              {Icon(item.icon)}
+              
               <View className="justify-center items-start mt-1">
                 <Text className=" text-green-10 text-center" style={[semibold, {fontSize: 22, lineHeight: 24}]}>{item.title}</Text>
                 <Text className=" text-gray-7 text-center text-wrap overflow-ellipsis" style={[regular, {fontSize: 15, lineHeight: 17}]}>{item.description}</Text>  
               </View>
+              {Icon(item.icon)}
             </Pressable>
           ))}
         

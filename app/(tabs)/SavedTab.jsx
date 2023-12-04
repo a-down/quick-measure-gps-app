@@ -51,7 +51,7 @@ const Saved = () => {
     const polygonDistance = getPathLength(item.polygonCoordinates)
 
     return (
-      <Pressable className="flex-row w-full p-4 pb-3 bg-white relative justify-between rounded-lg mb-4 shadow-sm active:opacity-80" onPress={() => router.push({ pathname: "/SavedMapScreen", params: { map: JSON.stringify(item) }})}>
+      <Pressable className="flex-row w-full p-4 pb-3 bg-white relative justify-between rounded-lg mb-4 shadow-sm active:shadow-xl" onPress={() => router.push({ pathname: "/SavedMapScreen", params: { map: JSON.stringify(item) }})}>
         <View className="h-full flex-grow ">
           <View className="mb-2 ">
             <Text className=" text-green-8" style={[semibold, {fontSize: 24, lineHeight: 26}]}>{item.mapName}</Text>
@@ -62,28 +62,27 @@ const Saved = () => {
             </Text>
           </View>
 
-          <View className=" flex-wrap">
-            <Text className=" text-gray-8" style={[regular, {fontSize: 16}]}>
-              <Text className="text-gray-10" style={{fontSize: 18}}>
-                { polygonArea
-                  ? handleConvertArea(polygonArea, item.measurements.areaShort).toFixed(2)
-                  : 0}
+          <View className=" flex-wrap flex-row">
+            <Text className=" text-gray-8 mr-4" style={[regular, {fontSize: 18}]}>
+              <Text className="text-gray-10" style={{fontSize: 20}}>
+                { polygonArea ? handleConvertArea(polygonArea, item.measurements.areaShort).toFixed(2) : 0 }
               </Text>
               {` `}{ item.measurements.area }
             </Text>
-            <Text className=" text-gray-8" style={[regular, {fontSize: 16}]}>
-              <Text className="text-gray-10" style={{fontSize: 18}}>
-                { polygonDistance
-                  ? convertDistance(polygonDistance, item.measurements.distanceShort).toFixed(2)
-                  : 0 }
+
+            <Text className=" text-gray-8 flex-grow" style={[regular, {fontSize: 18}]}>
+              <Text className="text-gray-10" style={{fontSize: 20}}>
+                { polygonDistance ? convertDistance(polygonDistance, item.measurements.distanceShort).toFixed(2) : 0 }
               </Text>
               {` `}{ item.measurements.distance }
             </Text>
+
+            <Pressable className="active:opacity-40" hitSlop={28} onPress={() => deleteMapAlert({id: item.id, mapName: item.mapName})}>
+              <Feather name="trash-2" size={24} color="#B1B1B1"/>
+            </Pressable> 
           </View>  
 
-          <Pressable className="active:opacity-40 absolute bottom-1 right-0" hitSlop={20} onPress={() => deleteMapAlert({id: item.id, mapName: item.mapName})}>
-            <Feather name="trash-2" size={24} color="#B1B1B1"/>
-          </Pressable> 
+
         </View>
 
       </Pressable>
