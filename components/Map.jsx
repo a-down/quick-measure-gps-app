@@ -18,7 +18,7 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
           }}
 
           onPress={(e) => !deleteMode ? addLocationToPolygon(e.nativeEvent.coordinate) : null}
-          mapType={mapType || "satellite"}
+          mapType={mapType || "hybrid"}
           loadingEnabled={true}
           loadingBackgroundColor="#F7F7F7"
           loadingIndicatorColor="#6DAB64">
@@ -68,7 +68,7 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
             longitudeDelta: 0.001
           }}
 
-          mapType={mapType || "satellite"}
+          mapType={mapType || "hybrid"}
           loadingEnabled={true}
           loadingBackgroundColor="#F7F7F7"
           loadingIndicatorColor="#6DAB64">
