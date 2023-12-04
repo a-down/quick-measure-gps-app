@@ -79,13 +79,13 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType, polygon
       onChange={handleSheetChanges}
       onPress={keyboardDismiss}>
 
-      <View className="flex-1 px-6 justify-start relative" style={{gap: 16}}>
+      <View className="flex-1 px-6 justify-start relative" style={{gap: 8}}>
         
         <View style={{gap: 8}}>
           <Text style={[medium, {fontSize: 20}]}>Enter a name for the map</Text>
 
           <TextInput
-            className="w-full bg-white p-2 rounded-sm border-gray-4 border mb-2 text-gray-8"
+            className="w-full bg-white p-2 rounded-sm border-gray-4 border text-gray-8"
             style={regular}
             value={mapName}
             onChangeText={setMapName}
@@ -93,44 +93,45 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType, polygon
             onBlur={() => Keyboard.dismiss()}/>
         </View>
 
-        <View style={{gap: 8}}>
-          <Pressable 
-            className=" p-4 rounded-2xl shadow-sm flex-row justify-center items-center bg-green-5 active:bg-green-4 mb-8" 
-            style={{gap: 8}}
-            onPress={saveMap}>
-            <Feather name="download" size={24} color="white" />
-            <Text className="text-center text-white" style={[semibold, {fontSize: 22}]}>
-              Save Map
-            </Text>
-          </Pressable>
+        <Text className="text-gray-6 text-center" style={regular}>
+          You cannot change this map's preferences after saving. Preview below{' '} 
+          <Feather name='chevron-down' size={16} color='#7E7E7E' />
+        </Text>
 
-          {currentPreferences && (
-            <>
-              <Text style={medium}>
-                Measurements and Preferences to Save:
-              </Text>
-
-              <Text style={regular}>
-                Area: {polygonArea > 0 ? handleConvertArea(polygonArea, currentPreferences.areaShort).toFixed(2) : 0} {currentPreferences.area}
-              </Text>
-
-              <Text style={regular}>
-                Distance: {polygonArea > 0 ? convertDistance(polygonDistance, currentPreferences.distanceShort).toFixed(2) : 0} {currentPreferences.distance}
-              </Text>
-
-              <Text style={regular} className="mb-8">
-                Map Type: {mapType}
-              </Text>
-            </>
-          )}
-
-          <Text className="text-gray-7 text-center" style={regular}>
-            (You cannot change this map's preferences after saving.)
+        <Pressable 
+          className=" p-4 rounded-2xl shadow-sm flex-row justify-center items-center bg-green-5 active:bg-green-4 mb-8" 
+          style={{gap: 8}}
+          onPress={saveMap}>
+          <Feather name="download" size={24} color="white" />
+          <Text className="text-center text-white" style={[semibold, {fontSize: 22}]}>
+            Save Map
           </Text>
+        </Pressable>
+
+        {currentPreferences && (
+          <View>
+            <Text style={medium}>
+              Measurements and Preferences to Save:
+            </Text>
+
+            <Text style={regular}>
+              Area: {polygonArea > 0 ? handleConvertArea(polygonArea, currentPreferences.areaShort).toFixed(2) : 0} {currentPreferences.area}
+            </Text>
+
+            <Text style={regular}>
+              Distance: {polygonArea > 0 ? convertDistance(polygonDistance, currentPreferences.distanceShort).toFixed(2) : 0} {currentPreferences.distance}
+            </Text>
+
+            <Text style={regular}>
+              Map Type: {mapType || 'hybrid'}
+            </Text>
+            <Text style={regular} className="ml-2 mb-8 text-gray-6">
+              (ex. satellite, hybrid, standard)
+            </Text>
+          </View>
+        )}
 
         </View>
-
-      </View>
 
     </BottomSheet>
   )
