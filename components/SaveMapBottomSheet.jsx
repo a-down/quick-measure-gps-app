@@ -9,7 +9,7 @@ import { regular, medium, semibold } from '../hooks/useJostFont';
 import { handleConvertArea } from '../hooks'
 import { convertDistance } from 'geolib';
 
-function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType, polygonArea, polygonDistance, currentPreferences }) {
+function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType, polygonArea, polygonDistance, currentPreferences, tool }) {
 
   const [ mapName, setMapName ] = useState('')
 
@@ -44,6 +44,7 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType, polygon
             mapType,
             polygonCoordinates: polygonCoordinates,
             measurements: measurements,
+            tool: tool
           }
         ] 
       } else {
@@ -54,6 +55,7 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType, polygon
           mapType,
           polygonCoordinates: polygonCoordinates,
           measurements: measurements,
+          tool: tool
         }]
       }
       await useStorage('set', 'savedMaps', data);

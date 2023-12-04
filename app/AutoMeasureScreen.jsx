@@ -172,7 +172,8 @@ export default function AutoMeasure() {
         mapType={mapType}
         polygonArea={polygonArea}
         polygonDistance={polygonDistance}
-        currentPreferences={currentPreferences}/>
+        currentPreferences={currentPreferences}
+        tool={'AutoMeasure'}/>
       
     </View>
   );

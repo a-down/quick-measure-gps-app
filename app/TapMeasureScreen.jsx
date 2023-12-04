@@ -167,7 +167,8 @@ export default function TapMeasure() {
         mapType={mapType}
         polygonArea={polygonArea}
         polygonDistance={polygonDistance}
-        currentPreferences={currentPreferences}/>
+        currentPreferences={currentPreferences}
+        tool={'TapMeasure'}/>
 
     </View>
   );
