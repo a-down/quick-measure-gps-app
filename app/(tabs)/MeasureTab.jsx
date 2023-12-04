@@ -7,8 +7,8 @@ import { StatusBar } from 'expo-status-bar';
 import { useStorage } from '../../hooks';
 import { useCallback, useState } from 'react';
 
-// import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
-// import { useState, useEffect } from 'react';
+import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
+import { useEffect } from 'react';
 import { SafeAreaView } from 'react-native';
 
 export default function App() {
@@ -55,17 +55,19 @@ export default function App() {
   return (
     <SafeAreaView className="bg-green-9 relative flex-1 items-center w-full h-full">
       <StatusBar style="light" />
-      {/* <BannerAd 
-        unitId={TestIds.BANNER}
-        size={BannerAdSize.SMALL_BANNER}
-        requestOptions={{
-          requestNonPersonalizedAdsOnly: true,
-        }}
-      /> */}
 
-      <ScrollView className="w-full h-full pt-8 absolute" contentContainerStyle={{ alignItems: 'center'}} alwaysBounceVertical={false}>
+      <ScrollView className="w-full h-full absolute" contentContainerStyle={{ alignItems: 'center'}} alwaysBounceVertical={false}>
+
         <View className="bg-green-8 w-[1060px] aspect-square absolute -top-[640px] rounded-full"></View>
-        <View className="items-center justify-start mb-6" style={{gap: 24}}>
+          {/* this ad works */}
+          {/* <BannerAd 
+          unitId={TestIds.BANNER}
+          size={BannerAdSize.BANNER}
+          requestOptions={{
+            requestNonPersonalizedAdsOnly: true,
+          }}/> */}
+
+        <View className="items-center justify-start mb-6 mt-8" style={{gap: 24}}>
           <Image source={walkingIcon} style={{height: 115, width: 80, marginRight: 12}}/>
           <Text className="text-white text-center" style={[bold, {fontSize: 24, maxWidth: 200}]}>Easy Tools for a Quick Measure</Text>
         </View>
@@ -85,40 +87,49 @@ export default function App() {
               {Icon(item.icon)}
             </Pressable>
           ))}
-        
-          {savedMaps && (
-            <View className="w-full mt-4 pb-14">
-              <Text className="text-white mb-4" style={[bold, {fontSize: 20}]}>Recently Saved</Text>
-              
-              {savedMaps.map((map, index) => (
+          
+          <View className="w-full mt-4 pb-14">
+            {savedMaps && (
+              <>
+                <Text className="text-white mb-4" style={[bold, {fontSize: 20}]}>Recently Saved</Text>
+                
+                {savedMaps.map((map, index) => (
+                  <Pressable 
+                    className="p-4 bg-green-8 rounded-md mb-2 flex-row justify-between items-center active:bg-green-7" 
+                    onPress={() => router.push({ pathname: '/SavedMapScreen', params: { map: JSON.stringify(map) }})}
+                    key={index}>
+                    <View>
+                      <Text className="text-green-1" style={[semibold, {fontSize: 18}]}>{map.mapName}</Text>
+                      <Text className="text-gray-1" style={[regular, {fontSize: 12}]}>
+                        {map.dateCreated.split("T")[0].split("-")[1]}/
+                        {map.dateCreated.split("T")[0].split("-")[2]}/
+                        {map.dateCreated.split("T")[0].split("-")[0]}
+                      </Text>
+                    </View>
+                    <Feather name="chevron-right" size={24} color="#E7F8E6"/>
+                  </Pressable>
+                ))}
+
                 <Pressable 
-                  className="p-4 bg-green-8 rounded-md mb-2 flex-row justify-between items-center active:bg-green-7" 
-                  onPress={() => router.push({ pathname: '/SavedMapScreen', params: { map: JSON.stringify(map) }})}
-                  key={index}>
-                  <View>
-                    <Text className="text-green-1" style={[semibold, {fontSize: 18}]}>{map.mapName}</Text>
-                    <Text className="text-gray-1" style={[regular, {fontSize: 12}]}>
-                      {map.dateCreated.split("T")[0].split("-")[1]}/
-                      {map.dateCreated.split("T")[0].split("-")[2]}/
-                      {map.dateCreated.split("T")[0].split("-")[0]}
-                    </Text>
-                  </View>
-                  <Feather name="chevron-right" size={24} color="#E7F8E6"/>
+                  className="w-full flex-row justify-center items-center mt-2 mb-4 active:opacity-80" 
+                  style={{gap: 8}}
+                  onPress={() => router.replace('/SavedTab')}>
+                  <Text className="text-green-1" style={regular}>See all saved maps</Text>
+                  <Feather name="chevron-right" size={16} color="#E7F8E6"/>
                 </Pressable>
-              ))}
+              </>
+            )}
 
-              <Pressable 
-                className="w-full flex-row justify-center items-center mt-2 active:opacity-80" 
-                style={{gap: 8}}
-                onPress={() => router.replace('/SavedTab')}>
-                <Text className="text-green-1" style={regular}>See all saved maps</Text>
-                <Feather name="chevron-right" size={16} color="#E7F8E6"/>
-              </Pressable>
+            {/* this ad works */}
+            {/* <BannerAd 
+            unitId={TestIds.BANNER}
+            size={BannerAdSize.BANNER}
+            requestOptions={{
+              requestNonPersonalizedAdsOnly: true,
+            }}/> */}
 
-            </View>
-          )}
+          </View>
         </View>
-
         
 
       </ScrollView>

@@ -1,4 +1,4 @@
-import { View, Alert, ActivityIndicator } from 'react-native';
+import { View, Alert, ActivityIndicator, StatusBar } from 'react-native';
 import { useEffect, useState, useRef } from 'react';
 import * as Location from "expo-location";
 import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from 'geolib';
@@ -112,6 +112,7 @@ export default function AutoMeasure() {
   return (
     <>
       <View className="flex-1 items-center justify-center">
+        <StatusBar style="dark" />
         {!currentLocation && (
           <ActivityIndicator size="small" color="#6DAB64" />
         )}

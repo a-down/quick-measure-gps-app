@@ -17,8 +17,8 @@ Quick Measure is built with React Native, which is a cross-platform language. Ho
 <div style="display:flex; flex-direction:row; justify-content:justify-around; flex-wrap:wrap; gap:10px; border:#fff;">
   <img src="./assets/visuals/homepage-visual.png" alt="Visual of Quick Measure Homepage" width="200">
   <img src="./assets/visuals/auto-measure-visual.png" alt="Visual of Quick Measure Auto Measure" width="200">
-  <img src="./assets/visuals/manual-measure-visual.png" alt="Visual of Quick Measure Manual Measure" width="200">
   <img src="./assets/visuals/tap-to-measure-visual.png" alt="Visual of Quick Measure Tap to Measure" width="200">
+  <img src="./assets/visuals/save-bottom-sheet-visual.png" alt="Visual of Quick Measure Saving Bottom Sheet" width="200">
   <img src="./assets/visuals/saved-measurements-visual.png" alt="Visual of Quick Measure Saved Measurements" width="200">
 </div>
 
