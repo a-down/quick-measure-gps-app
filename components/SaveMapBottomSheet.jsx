@@ -12,7 +12,6 @@ import { convertDistance } from 'geolib';
 function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType, polygonArea, polygonDistance, currentPreferences }) {
 
   const [ mapName, setMapName ] = useState('')
-  console.log(currentPreferences)
 
   const snapPoints = useMemo(() => ["80%"], []);
   const handleSheetChanges = useCallback((index) => {
