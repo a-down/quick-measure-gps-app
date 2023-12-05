@@ -39,6 +39,12 @@
           "username": "a-down"
         }
       ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "$(PRODUCT_NAME) requires access to your location to measure area and distance."
+        }
+      ],
       "react-native-iap"
     ],
     "extra": {
