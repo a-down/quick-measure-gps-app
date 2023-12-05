@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, View, Text } from 'react-native'
+import { SafeAreaView, ScrollView, View, Text, Linking, Pressable } from 'react-native'
 import { regular, semibold, medium } from '../hooks/useJostFont'
 import React from 'react'
 
@@ -55,6 +55,23 @@ const HelpScreen = () => {
           <Text style={[regular, {lineHeight: 28}]}>Quick Measure - GPS should NEVER be used as a turn-based navigation app.</Text>
 
           <Text style={[regular, {lineHeight: 28}]}>GPS measurements will be more accurate outdoors.</Text>
+        </View>
+
+        <View style={{gap: 8}}>
+          <Text style={[semibold, {fontSize: 20}]}>Contact</Text>
+
+          <Text style={[regular, {lineHeight: 28}]}>If you have questions about or issues with Quick Measure, please reach out at{' '} 
+            <Pressable onPress={() => Linking.openURL('mailto:alec@alecdowning.com')} className="active:opacity-40">
+              <Text className="text-green-5" style={[semibold]}>
+                alec@alecdowning.com.
+              </Text>
+            </Pressable>
+          </Text>
+
+          <Text style={[regular, {lineHeight: 28}]}>If you love the app, I'd love to hear from you too. Please rate and review, and thank you for using Quick Measure!</Text>
+
+          <Text style={[semibold, {lineHeight: 28, textAlign: 'right'}]}>- Alec</Text>
+
         </View>
 
       </ScrollView>
