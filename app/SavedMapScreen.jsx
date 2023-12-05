@@ -3,8 +3,12 @@ import { useLocalSearchParams, useFocusEffect, Stack } from 'expo-router';
 import { MeasurementDisplay, Map } from '../components';
 import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from 'geolib';
 import { useState, useCallback } from 'react';
+import { Feather } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
 const SavedMap = () => {
+  const router = useRouter()
+  
   const [ mapData, setMapData ] = useState(null)
   const [ polygonCenter, setPolygonCenter ] = useState(null)
   const [ areaVisible, setAreaVisible ] = useState(true)
@@ -28,6 +32,9 @@ const SavedMap = () => {
         headerTitleStyle: {
           color: '#1D3F13',
         },
+        headerRight: () => (
+          <Feather name="help-circle" size={24} color="#1D3F13" onPress={() => router.push('/HelpScreen')} />
+        )
       }} />
 
       <View className="flex-1 items-center justify-center">
