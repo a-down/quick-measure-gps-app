@@ -133,10 +133,6 @@ const Saved = () => {
         </View>
       )}  
 
-      <Pressable onPress={() => router.push('/PurchaseScreen')} className="active:opacity-40">
-        <Text>for testing only</Text>
-      </Pressable>
-
       {!removedAdsSubscription && (
         <View className="absolute w-full items-center bottom-0">
           <Pressable onPress={() => router.push('/PurchaseScreen')} className="active:opacity-40">
