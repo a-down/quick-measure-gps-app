@@ -28,9 +28,9 @@ yarn-error.*
 .DS_Store
 *.pem
 
-# local env files
-.env*.local
+# local env file
 .env
+.env*.local
 
 # typescript
 *.tsbuildinfo
