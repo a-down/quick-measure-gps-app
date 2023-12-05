@@ -8,10 +8,9 @@ const HelpScreen = () => {
   const router = useRouter();
   const [ offerings, setOfferings ] = useState(null)
   const [ isPurchasing, setIsPurchasing ] = useState(false)
-  // console.log(offerings.availablePackages[0])
 
   useEffect(() => {
-    Purchases.configure({ apiKey: 'appl_pmyciWqwEhvyqdONNdqJmpItUzd' });
+    Purchases.configure({ apiKey: process.env.EXPO_PUBLIC_REVENUE_CAT_PUBLIC_API_KEY });
 
     const getOfferings = async () => {
       try {
@@ -31,7 +30,7 @@ const HelpScreen = () => {
     try {
       const { customerInfo } = await Purchases.purchasePackage(pack)
       console.log(customerInfo)
-      if (customerInfo.entitlements.active['remove_ads'] !== undefined) {
+      if (customerInfo.entitlements.active[process.env.EXPO_PUBLIC_REVENUE_CAT_AD_ENTITLEMENT] !== undefined) {
         router.back()
       }
 

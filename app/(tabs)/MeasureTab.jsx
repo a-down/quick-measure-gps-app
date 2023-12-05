@@ -42,9 +42,9 @@ export default function App() {
   }
 
   const getSubscriptions = async () => {
-    Purchases.configure({ apiKey: 'appl_pmyciWqwEhvyqdONNdqJmpItUzd'})
+    Purchases.configure({ apiKey: process.env.EXPO_PUBLIC_REVENUE_CAT_PUBLIC_API_KEY})
     const customerInfo = await Purchases.getCustomerInfo();
-    if (customerInfo.entitlements.active['remove_ads'] !== undefined) {
+    if (customerInfo.entitlements.active[process.env.EXPO_PUBLIC_REVENUE_CAT_AD_ENTITLEMENT] !== undefined) {
       setRemovedAdsSubscription(true)
     }
   }
