@@ -9,6 +9,7 @@ const HelpScreen = () => {
   const [ offerings, setOfferings ] = useState(null)
   const [ isPurchasing, setIsPurchasing ] = useState(false)
 
+  // configure RevenueCat and get offerings
   useEffect(() => {
     Purchases.configure({ apiKey: process.env.EXPO_PUBLIC_REVENUE_CAT_PUBLIC_API_KEY });
 
@@ -25,6 +26,7 @@ const HelpScreen = () => {
     getOfferings()
   }, [])
 
+  // purchase package
   const purchasePackage = async (pack) => {
     setIsPurchasing(true)
     try {

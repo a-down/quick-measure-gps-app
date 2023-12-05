@@ -104,8 +104,6 @@ const Saved = () => {
     )
   }
 
-  
-
   return (
     <View className=" bg-gray-1 flex-1 items-center">
       <StatusBar style="light" />
@@ -141,7 +139,6 @@ const Saved = () => {
             <Text className="text-green-5 underline" style={[regular]}>Want to Remove Ads?</Text>
           </Pressable>
 
-          {/* ca-app-pub-2810780842614584/4395046161 */}
           <BannerAd 
             unitId={TestIds.BANNER}
             size={BannerAdSize.BANNER}

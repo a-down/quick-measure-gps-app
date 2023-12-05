@@ -1,6 +1,6 @@
-import { Text, View, Pressable, useWindowDimensions, Image, ScrollView, SafeAreaView, Platform } from 'react-native';
+import { Text, View, Pressable, useWindowDimensions, Image, ScrollView, SafeAreaView } from 'react-native';
 import { useRouter, useFocusEffect } from 'expo-router';
-import { regular, semibold, bold, medium } from '../../hooks/useJostFont';
+import { regular, semibold, bold } from '../../hooks/useJostFont';
 import walkingIcon from '../../assets/walking-icon.png';
 import { MaterialCommunityIcons, FontAwesome5, Feather } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
@@ -74,7 +74,6 @@ export default function App() {
 
         <View className="bg-green-8 w-[1060px] aspect-square absolute -top-[640px] rounded-full"></View>
 
-        {/* ca-app-pub-2810780842614584/5093513184 */}
         {!removedAdsSubscription && (
           <BannerAd 
             unitId={TestIds.BANNER}
@@ -146,7 +145,6 @@ export default function App() {
               <Text className="text-green-5 underline" style={[regular]}>Want to Remove Ads?</Text>
             </Pressable>
             
-            {/* ca-app-pub-2810780842614584/7212781191 */}
             <BannerAd 
               unitId={TestIds.BANNER}
               size={BannerAdSize.BANNER}
