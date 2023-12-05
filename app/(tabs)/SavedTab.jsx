@@ -1,4 +1,4 @@
-import { View, Text, Pressable, FlatList, Alert, useWindowDimensions } from 'react-native';
+import { View, Text, Pressable, FlatList, Alert, useWindowDimensions, Button } from 'react-native';
 import { useState, useCallback } from 'react'
 import { getAreaOfPolygon, getPathLength, convertDistance } from 'geolib';
 import { useRouter, useFocusEffect } from 'expo-router';
@@ -48,7 +48,7 @@ const Saved = () => {
     }
   }
 
-  const Card2 = ({ item }) => {
+  const Card = ({ item }) => {
     const polygonArea = getAreaOfPolygon(item.polygonCoordinates)
     const polygonDistance = getPathLength(item.polygonCoordinates)
 
@@ -97,12 +97,14 @@ const Saved = () => {
         <FlatList
           contentContainerStyle={{paddingBottom: 16, paddingTop: 16, alignItems: 'center'}}
           data={savedMaps}
-          renderItem={({item}) => <Card2 item={item} />}
+          renderItem={({item}) => <Card item={item} />}
           keyExtractor={(item, index) => `${item.mapName}-${index}`}
           alwaysBounceVertical={false}f
           overScrollMode={'never'}
           />
       )}
+
+      <Button title="delete" onPress={() => useStorage('remove', 'savedMaps')} />
 
       {savedMaps.length === 0 && (
         <View className="h-full justify-center items-center " style={{gap: 16}}>

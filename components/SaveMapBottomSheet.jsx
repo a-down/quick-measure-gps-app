@@ -29,7 +29,10 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType, polygon
     if (!mapName) return Alert.alert("Please enter a name for the map")
 
     try {
+      const defaultMeasurements = { area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm' }
       const measurements = await useStorage('get', 'measurementPreferences');
+      const measurementsToSave = {...defaultMeasurements, ...measurements}
+
       const value = await useStorage('get', 'savedMaps')
 
       // create new array or add current map to existing array
@@ -42,8 +45,8 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType, polygon
             dateCreated: new Date(),
             mapName,
             mapType,
-            polygonCoordinates: polygonCoordinates,
-            measurements: measurements,
+            polygonCoordinates,
+            measurements: measurementsToSave,
             tool: tool
           }
         ] 
@@ -53,13 +56,8 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType, polygon
           dateCreated: new Date(),
           mapName,
           mapType,
-          polygonCoordinates: polygonCoordinates,
-          measurements: {
-            area: measurements.area || 'sq meters',
-            areaShort: measurements.areaShort || 'sqm',
-            distance: measurements.distance || 'meters',
-            distanceShort: measurements.distanceShort || 'm'
-          },
+          polygonCoordinates,
+          measurements: measurementsToSave,
           tool: tool
         }]
       }
