@@ -37,7 +37,7 @@ export default function App() {
       reversed.length < 3 ? numberOfMaps = reversed.length : numberOfMaps = 3
       setSavedMaps(reversed.slice(0, numberOfMaps))
     } else {
-      setSavedMaps(null)
+      setSavedMaps([])
     }
   }
 
