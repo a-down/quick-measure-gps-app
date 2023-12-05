@@ -21,7 +21,8 @@ export default function Map({ region, polygonCoordinates, mapType, addLocationTo
           mapType={mapType || "hybrid"}
           loadingEnabled={true}
           loadingBackgroundColor="#F7F7F7"
-          loadingIndicatorColor="#6DAB64">
+          loadingIndicatorColor="#6DAB64"
+          showsUserLocation={true}>
 
             {polygonCoordinates.length > 0 && markersVisible && (
               (polygonCoordinates.map((coordinate, index) => (
