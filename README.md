@@ -10,7 +10,7 @@ Quick Measure is for anyone who needs to find distance or area! Farmers, landsca
 
 Quick Measure is built with React Native, which is a cross-platform language. However, Quick Measure is currently only available for iOS devices.
 
-* Quick Measure should never be used for official or legal measurements. Contact a Professional Land Surveyor when an official measurement is required.
+* Quick Measure should never be used for official or legal measurements. Contact a professional land surveyor when an official measurement is required.
 * Quick Measure should never be used while operating machinery.
 * Quick Measure should never be used as a turn-based navigation app.
 
@@ -19,7 +19,6 @@ Quick Measure is built with React Native, which is a cross-platform language. Ho
   <img src="./assets/visuals/auto-measure-visual.png" alt="Visual of Quick Measure Auto Measure" width="200">
   <img src="./assets/visuals/tap-to-measure-visual.png" alt="Visual of Quick Measure Tap to Measure" width="200">
   <img src="./assets/visuals/save-bottom-sheet-visual.png" alt="Visual of Quick Measure Saving Bottom Sheet" width="200">
-  <img src="./assets/visuals/saved-measurements-visual.png" alt="Visual of Quick Measure Saved Measurements" width="200">
 </div>
 
 ## Features
