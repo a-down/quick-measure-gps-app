@@ -42,9 +42,9 @@ export default function App() {
   }
 
   const getSubscriptions = async () => {
-    Purchases.configure({ apiKey: process.env.EXPO_PUBLIC_REVENUE_CAT_PUBLIC_API_KEY })
+    Purchases.configure({ apiKey: 'appl_pmyciWqwEhvyqdONNdqJmpItUzd' })
     const customerInfo = await Purchases.getCustomerInfo();
-    if (customerInfo.entitlements.active[process.env.EXPO_PUBLIC_REVENUE_CAT_AD_ENTITLEMENT] !== undefined) {
+    if (customerInfo.entitlements.active['remove_ads'] !== undefined) {
       setRemovedAdsSubscription(true)
     }
   }
@@ -76,7 +76,7 @@ export default function App() {
 
         {!removedAdsSubscription && (
           <BannerAd 
-            unitId={process.env.EXPO_PUBLIC_ADMOB_HOME_TOP_BANNER}
+            unitId={TestIds.BANNER}
             size={BannerAdSize.BANNER}
             requestOptions={{
               requestNonPersonalizedAdsOnly: true,
@@ -146,7 +146,7 @@ export default function App() {
             </Pressable>
             
             <BannerAd 
-              unitId={process.env.EXPO_PUBLIC_ADMOB_HOME_BOTTOM_BANNER}
+              unitId={TestIds.BANNER}
               size={BannerAdSize.BANNER}
               requestOptions={{
                 requestNonPersonalizedAdsOnly: true,

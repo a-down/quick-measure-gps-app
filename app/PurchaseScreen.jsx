@@ -80,7 +80,7 @@ const HelpScreen = () => {
             ))}
 
             <Pressable onPress={restorePurchases} className="bg-white p-4 w-full rounded-md mt-12 active:shadow-md">
-              <Text className="text-gray-10 text-center" style={[regular]}>Restore previous purchases</Text>
+              <Text className="text-gray-10 text-center" style={[regular]}>Restore Purchases</Text>
             </Pressable>
           </>
         )}

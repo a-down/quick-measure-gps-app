@@ -34,9 +34,9 @@ const Saved = () => {
   );
 
   const getSubscriptions = async () => {
-    Purchases.configure({ apiKey: process.env.EXPO_PUBLIC_REVENUE_CAT_PUBLIC_API_KEY })
+    await Purchases.configure({ apiKey: 'appl_pmyciWqwEhvyqdONNdqJmpItUzd'})
     const customerInfo = await Purchases.getCustomerInfo();
-    if (customerInfo.entitlements.active[process.env.EXPO_PUBLIC_REVENUE_CAT_AD_ENTITLEMENT] !== undefined) {
+    if (customerInfo.entitlements.active['remove_ads'] !== undefined) {
       setRemovedAdsSubscription(true)
     }
   }
@@ -133,6 +133,10 @@ const Saved = () => {
         </View>
       )}  
 
+      <Pressable onPress={() => router.push('/PurchaseScreen')} className="active:opacity-40">
+        <Text>for testing only</Text>
+      </Pressable>
+
       {!removedAdsSubscription && (
         <View className="absolute w-full items-center bottom-0">
           <Pressable onPress={() => router.push('/PurchaseScreen')} className="active:opacity-40">
@@ -140,7 +144,7 @@ const Saved = () => {
           </Pressable>
 
           <BannerAd 
-            unitId={process.env.EXPO_PUBLIC_ADMOB_SAVED_BOTTOM_BANNER}
+            unitId={TestIds.BANNER}
             size={BannerAdSize.BANNER}
             requestOptions={{
               requestNonPersonalizedAdsOnly: true,
