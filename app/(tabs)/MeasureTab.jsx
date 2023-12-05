@@ -5,7 +5,7 @@ import walkingIcon from '../../assets/walking-icon.png';
 import { MaterialCommunityIcons, FontAwesome5, Feather } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { useStorage } from '../../hooks';
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState } from 'react';
 import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
 import Purchases from 'react-native-purchases';
 
@@ -14,7 +14,7 @@ export default function App() {
   const { width } = useWindowDimensions();
   const router = useRouter();
 
-  const [ savedMaps, setSavedMaps ] = useState(null)
+  const [ savedMaps, setSavedMaps ] = useState([])
   const [ removedAdsSubscription, setRemovedAdsSubscription ] = useState(false)
 
   useFocusEffect(
@@ -76,7 +76,7 @@ export default function App() {
 
         {!removedAdsSubscription && (
           <BannerAd 
-            unitId={TestIds.BANNER}
+            unitId={__DEV__ ? TestIds.BANNER : 'ca-app-pub-2810780842614584/5731645735'}
             size={BannerAdSize.BANNER}
             requestOptions={{
               requestNonPersonalizedAdsOnly: true,
@@ -106,7 +106,7 @@ export default function App() {
           ))}
           
           <View className="w-full mb-2" style={{marginTop: removedAdsSubscription ? 24 : 8}}>
-            {savedMaps && (
+            {savedMaps.length > 0 && (
               <>
                 <Text className="text-white mb-4" style={[bold, {fontSize: 20}]}>Recently Saved</Text>
                 
@@ -146,7 +146,7 @@ export default function App() {
             </Pressable>
             
             <BannerAd 
-              unitId={TestIds.BANNER}
+              unitId={__DEV__ ? TestIds.BANNER : 'ca-app-pub-2810780842614584/5261668603'}
               size={BannerAdSize.BANNER}
               requestOptions={{
                 requestNonPersonalizedAdsOnly: true,

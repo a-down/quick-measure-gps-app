@@ -138,9 +138,9 @@ const Saved = () => {
           <Pressable onPress={() => router.push('/PurchaseScreen')} className="active:opacity-40">
             <Text className="text-green-5 underline" style={[regular]}>Want to Remove Ads?</Text>
           </Pressable>
-
+          
           <BannerAd 
-            unitId={TestIds.BANNER}
+            unitId={__DEV__ ? TestIds.BANNER : 'ca-app-pub-2810780842614584/4638836162'}
             size={BannerAdSize.BANNER}
             requestOptions={{
               requestNonPersonalizedAdsOnly: true,
