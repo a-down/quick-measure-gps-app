@@ -76,7 +76,7 @@ export default function App() {
 
         {!removedAdsSubscription && (
           <BannerAd 
-            unitId={TestIds.BANNER}
+            unitId={process.env.EXPO_PUBLIC_ADMOB_HOME_TOP_BANNER}
             size={BannerAdSize.BANNER}
             requestOptions={{
               requestNonPersonalizedAdsOnly: true,
@@ -146,7 +146,7 @@ export default function App() {
             </Pressable>
             
             <BannerAd 
-              unitId={TestIds.BANNER}
+              unitId={process.env.EXPO_PUBLIC_ADMOB_HOME_BOTTOM_BANNER}
               size={BannerAdSize.BANNER}
               requestOptions={{
                 requestNonPersonalizedAdsOnly: true,

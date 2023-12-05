@@ -140,7 +140,7 @@ const Saved = () => {
           </Pressable>
 
           <BannerAd 
-            unitId={TestIds.BANNER}
+            unitId={process.env.EXPO_PUBLIC_ADMOB_SAVED_BOTTOM_BANNER}
             size={BannerAdSize.BANNER}
             requestOptions={{
               requestNonPersonalizedAdsOnly: true,
