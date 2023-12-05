@@ -7,22 +7,25 @@ import { StatusBar } from 'expo-status-bar';
 import { useStorage } from '../../hooks';
 import { useCallback, useState, useEffect } from 'react';
 import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
+import Purchases from 'react-native-purchases';
 
-import {requestPurchase, requestSubscription, useIAP} from 'react-native-iap';
-
-const APIKeys = {
-  apple: 'appl_pmyciWqwEhvyqdONNdqJmpItUzd'
-}
 
 export default function App() {
   const { width } = useWindowDimensions();
   const router = useRouter();
 
   const [ savedMaps, setSavedMaps ] = useState(null)
+  const [ removedAdsSubscription, setRemovedAdsSubscription ] = useState(false)
 
   useFocusEffect(
     useCallback(() => {
       getRecentlySaved()
+    }, [])
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      getSubscriptions()
     }, [])
   );
 
@@ -35,6 +38,14 @@ export default function App() {
       setSavedMaps(reversed.slice(0, numberOfMaps))
     } else {
       setSavedMaps(null)
+    }
+  }
+
+  const getSubscriptions = async () => {
+    Purchases.configure({ apiKey: 'appl_pmyciWqwEhvyqdONNdqJmpItUzd'})
+    const customerInfo = await Purchases.getCustomerInfo();
+    if (customerInfo.entitlements.active['remove_ads'] !== undefined) {
+      setRemovedAdsSubscription(true)
     }
   }
 
@@ -64,20 +75,22 @@ export default function App() {
         <View className="bg-green-8 w-[1060px] aspect-square absolute -top-[640px] rounded-full"></View>
 
         {/* ca-app-pub-2810780842614584/5093513184 */}
-        <BannerAd 
-          unitId={TestIds.BANNER}
-          size={BannerAdSize.BANNER}
-          requestOptions={{
-            requestNonPersonalizedAdsOnly: true,
-            keywords: ['outdoors', 'farming', 'sports']
-          }}/>
+        {!removedAdsSubscription && (
+          <BannerAd 
+            unitId={TestIds.BANNER}
+            size={BannerAdSize.BANNER}
+            requestOptions={{
+              requestNonPersonalizedAdsOnly: true,
+              keywords: ['outdoors', 'farming', 'sports', 'herbicide', 'corn', 'soybean', 'seed', 'truck', 'horse', 'tractor', 'hobby farm']
+            }}/>
+        )}
 
-        <View className="items-center justify-start mb-4 mt-4" style={{gap: 24}}>
+        <View className="items-center justify-start mb-4 mt-4" style={{gap: 24, paddingTop: removedAdsSubscription ? 24 : 0}}>
           <Image source={walkingIcon} style={{height: 115, width: 80, marginRight: 12}}/>
           <Text className="text-white text-center" style={[bold, {fontSize: 24, maxWidth: 200}]}>Easy Tools for a Quick Measure</Text>
         </View>
 
-        <View className="w-full items-center rounded-lg" style={{width: width-32}}>
+        <View className="w-full items-center rounded-lg" style={{width: width-32, marginTop: removedAdsSubscription ? 16 : 0}}>
           {pageLinks.map((item, index) => (
             <Pressable 
               className=" bg-gray-1 active:bg-gray-2 flex-row justify-between items-center p-4 w-full rounded-md"
@@ -93,7 +106,7 @@ export default function App() {
             </Pressable>
           ))}
           
-          <View className="w-full mt-2 mb-2">
+          <View className="w-full mb-2" style={{marginTop: removedAdsSubscription ? 24 : 8}}>
             {savedMaps && (
               <>
                 <Text className="text-white mb-4" style={[bold, {fontSize: 20}]}>Recently Saved</Text>
@@ -127,18 +140,22 @@ export default function App() {
           </View>
         </View>
 
-        <Pressable onPress={() => router.push('/PurchaseScreen')} className="active:opacity-40">
-          <Text className="text-green-5 underline" style={[regular]}>Want to Remove Ads?</Text>
-        </Pressable>
-        
-        {/* ca-app-pub-2810780842614584/7212781191 */}
-        <BannerAd 
-          unitId={TestIds.BANNER}
-          size={BannerAdSize.BANNER}
-          requestOptions={{
-            requestNonPersonalizedAdsOnly: true,
-            keywords: ['outdoors', 'farming', 'sports']
-          }}/>
+        {!removedAdsSubscription && (
+          <>
+            <Pressable onPress={() => router.push('/PurchaseScreen')} className="active:opacity-40">
+              <Text className="text-green-5 underline" style={[regular]}>Want to Remove Ads?</Text>
+            </Pressable>
+            
+            {/* ca-app-pub-2810780842614584/7212781191 */}
+            <BannerAd 
+              unitId={TestIds.BANNER}
+              size={BannerAdSize.BANNER}
+              requestOptions={{
+                requestNonPersonalizedAdsOnly: true,
+                keywords: ['outdoors', 'farming', 'sports', 'herbicide', 'corn', 'soybean', 'seed', 'truck', 'horse', 'tractor', 'hobby farm']
+              }}/>
+          </>
+        )}
       </ScrollView>
 
     </SafeAreaView>

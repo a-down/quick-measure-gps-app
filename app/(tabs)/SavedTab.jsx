@@ -1,4 +1,4 @@
-import { View, Text, Pressable, FlatList, Alert, useWindowDimensions, Button } from 'react-native';
+import { View, Text, Pressable, FlatList, Alert, useWindowDimensions } from 'react-native';
 import { useState, useCallback } from 'react'
 import { getAreaOfPolygon, getPathLength, convertDistance } from 'geolib';
 import { useRouter, useFocusEffect } from 'expo-router';
@@ -8,10 +8,12 @@ import { Feather } from '@expo/vector-icons';
 import { regular, semibold } from '../../hooks/useJostFont'
 import { StatusBar } from 'expo-status-bar';
 import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
+import Purchases from 'react-native-purchases'
 
 const Saved = () => {
   const router = useRouter();
   const [ savedMaps, setSavedMaps ] = useState([])
+  const [ removedAdsSubscription, setRemovedAdsSubscription ] = useState(false)
   const { width } = useWindowDimensions();
 
   const getMaps = async () => {
@@ -24,6 +26,20 @@ const Saved = () => {
       getMaps()
     }, [])
   );
+
+  useFocusEffect(
+    useCallback(() => {
+      getSubscriptions()
+    }, [])
+  );
+
+  const getSubscriptions = async () => {
+    Purchases.configure({ apiKey: 'appl_pmyciWqwEhvyqdONNdqJmpItUzd'})
+    const customerInfo = await Purchases.getCustomerInfo();
+    if (customerInfo.entitlements.active['remove_ads'] !== undefined) {
+      setRemovedAdsSubscription(true)
+    }
+  }
 
   const deleteMapAlert = ({mapName, id}) => {
     Alert.alert(
@@ -104,8 +120,6 @@ const Saved = () => {
           />
       )}
 
-      <Button title="delete" onPress={() => useStorage('remove', 'savedMaps')} />
-
       {savedMaps.length === 0 && (
         <View className="h-full justify-center items-center " style={{gap: 16}}>
           <Feather name="bookmark" size={64} color="#6DAB64" style={{marginBottom: 64}}/>
@@ -121,20 +135,22 @@ const Saved = () => {
         </View>
       )}  
 
-      <View className="absolute w-full items-center bottom-0">
-        <Pressable onPress={() => router.push('/PurchaseScreen')} className="active:opacity-40">
-          <Text className="text-green-5 underline" style={[regular]}>Want to Remove Ads?</Text>
-        </Pressable>
+      {!removedAdsSubscription && (
+        <View className="absolute w-full items-center bottom-0">
+          <Pressable onPress={() => router.push('/PurchaseScreen')} className="active:opacity-40">
+            <Text className="text-green-5 underline" style={[regular]}>Want to Remove Ads?</Text>
+          </Pressable>
 
-        {/* ca-app-pub-2810780842614584/4395046161 */}
-        <BannerAd 
-          unitId={TestIds.BANNER}
-          size={BannerAdSize.BANNER}
-          requestOptions={{
-            requestNonPersonalizedAdsOnly: true,
-            keywords: ['outdoors', 'farming', 'sports']
-          }}/> 
-      </View>
+          {/* ca-app-pub-2810780842614584/4395046161 */}
+          <BannerAd 
+            unitId={TestIds.BANNER}
+            size={BannerAdSize.BANNER}
+            requestOptions={{
+              requestNonPersonalizedAdsOnly: true,
+              keywords: ['outdoors', 'farming', 'sports', 'herbicide', 'corn', 'soybean', 'seed', 'truck', 'horse', 'tractor', 'hobby farm']
+            }}/> 
+        </View>
+      )}
     </View>
   )
 }
