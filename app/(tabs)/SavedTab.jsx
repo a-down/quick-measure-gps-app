@@ -7,7 +7,7 @@ import { useStorage } from '../../hooks';
 import { Feather } from '@expo/vector-icons';
 import { regular, semibold } from '../../hooks/useJostFont'
 import { StatusBar } from 'expo-status-bar';
-// import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
+import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
 
 const Saved = () => {
   const router = useRouter();
@@ -120,12 +120,18 @@ const Saved = () => {
       )}  
 
       <View className="absolute w-full items-center bottom-0">
-        {/* <BannerAd 
+        <Pressable onPress={() => router.push('/PurchaseScreen')} className="active:opacity-40">
+          <Text className="text-green-5 underline" style={[regular]}>Want to Remove Ads?</Text>
+        </Pressable>
+
+        {/* ca-app-pub-2810780842614584/4395046161 */}
+        <BannerAd 
           unitId={TestIds.BANNER}
           size={BannerAdSize.BANNER}
           requestOptions={{
             requestNonPersonalizedAdsOnly: true,
-          }}/>  */}
+            keywords: ['outdoors', 'farming', 'sports']
+          }}/> 
       </View>
     </View>
   )

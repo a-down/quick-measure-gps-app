@@ -54,7 +54,12 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType, polygon
           mapName,
           mapType,
           polygonCoordinates: polygonCoordinates,
-          measurements: measurements,
+          measurements: {
+            area: measurements.area || 'sq meters',
+            areaShort: measurements.areaShort || 'sqm',
+            distance: measurements.distance || 'meters',
+            distanceShort: measurements.distanceShort || 'm'
+          },
           tool: tool
         }]
       }

@@ -114,7 +114,7 @@ export default function AutoMeasure() {
   return (
     <>
       <View className="flex-1 items-center justify-center">
-        <StatusBar style="dark" />
+        <StatusBar barStyle="dark-content"/>
         {!currentLocation && (
           <ActivityIndicator size="small" color="#6DAB64" />
         )}

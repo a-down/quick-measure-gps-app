@@ -38,7 +38,8 @@
         {
           "username": "a-down"
         }
-      ]
+      ],
+      "react-native-iap"
     ],
     "extra": {
       "router": {

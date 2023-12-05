@@ -86,6 +86,9 @@ const Layout = () => {
             fontFamily: 'Jost_700Bold',
             fontSize: 18
           },
+          headerRight: () => (
+            <Feather name="help-circle" size={24} color="#fff" style={{marginRight: 16}} onPress={() => router.push('/HelpScreen')} />
+          ),
           tabBarIcon: ({ color, size }) => (
             <Feather name="bookmark" size={size} color={color} className="mt-4"/>
           ),

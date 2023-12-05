@@ -1,12 +1,18 @@
-import { Text, View, Pressable, useWindowDimensions, Image, ScrollView, SafeAreaView } from 'react-native';
+import { Text, View, Pressable, useWindowDimensions, Image, ScrollView, SafeAreaView, Platform } from 'react-native';
 import { useRouter, useFocusEffect } from 'expo-router';
 import { regular, semibold, bold, medium } from '../../hooks/useJostFont';
 import walkingIcon from '../../assets/walking-icon.png';
 import { MaterialCommunityIcons, FontAwesome5, Feather } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { useStorage } from '../../hooks';
-import { useCallback, useState } from 'react';
-// import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
+import { useCallback, useState, useEffect } from 'react';
+import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
+
+import {requestPurchase, requestSubscription, useIAP} from 'react-native-iap';
+
+const APIKeys = {
+  apple: 'appl_pmyciWqwEhvyqdONNdqJmpItUzd'
+}
 
 export default function App() {
   const { width } = useWindowDimensions();
@@ -57,12 +63,14 @@ export default function App() {
 
         <View className="bg-green-8 w-[1060px] aspect-square absolute -top-[640px] rounded-full"></View>
 
-        {/* <BannerAd 
+        {/* ca-app-pub-2810780842614584/5093513184 */}
+        <BannerAd 
           unitId={TestIds.BANNER}
           size={BannerAdSize.BANNER}
           requestOptions={{
             requestNonPersonalizedAdsOnly: true,
-          }}/> */}
+            keywords: ['outdoors', 'farming', 'sports']
+          }}/>
 
         <View className="items-center justify-start mb-4 mt-4" style={{gap: 24}}>
           <Image source={walkingIcon} style={{height: 115, width: 80, marginRight: 12}}/>
@@ -118,14 +126,19 @@ export default function App() {
             )}
           </View>
         </View>
+
+        <Pressable onPress={() => router.push('/PurchaseScreen')} className="active:opacity-40">
+          <Text className="text-green-5 underline" style={[regular]}>Want to Remove Ads?</Text>
+        </Pressable>
         
-        {/* <BannerAd 
+        {/* ca-app-pub-2810780842614584/7212781191 */}
+        <BannerAd 
           unitId={TestIds.BANNER}
           size={BannerAdSize.BANNER}
           requestOptions={{
             requestNonPersonalizedAdsOnly: true,
-          }}/> */}
-
+            keywords: ['outdoors', 'farming', 'sports']
+          }}/>
       </ScrollView>
 
     </SafeAreaView>
