@@ -71,7 +71,6 @@ export default function AutoMeasure() {
     if (currentLocation && isMeasuring) {
       setRegion(currentLocation)
       addLocationToPolygon(currentLocation)
-      useStorage('set', 'currentAutoCoordinates', polygonCoordinates)
     }
     if (polygonCoordinates.length > 1 && isMeasuring) {
       setPolygonDistance(getPathLength(polygonCoordinates))
@@ -82,6 +81,7 @@ export default function AutoMeasure() {
   // add a new location to the polygon
   const addLocationToPolygon = async (newLocation) => {
     await setPolygonCoordinates([{ latitude: newLocation.latitude, longitude: newLocation.longitude}, ...polygonCoordinates])
+    await useStorage('set', 'currentAutoCoordinates', [{ latitude: newLocation.latitude, longitude: newLocation.longitude}, ...polygonCoordinates])
   }
 
   // reset the polygon coordinates and measurements
