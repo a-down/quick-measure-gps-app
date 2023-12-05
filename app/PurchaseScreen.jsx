@@ -11,7 +11,7 @@ const HelpScreen = () => {
 
   // configure RevenueCat and get offerings
   useEffect(() => {
-    Purchases.configure({ apiKey: process.env.EXPO_PUBLIC_REVENUE_CAT_PUBLIC_API_KEY });
+    Purchases.configure({ apiKey: 'appl_pmyciWqwEhvyqdONNdqJmpItUzd' });
 
     const getOfferings = async () => {
       try {
@@ -31,8 +31,7 @@ const HelpScreen = () => {
     setIsPurchasing(true)
     try {
       const { customerInfo } = await Purchases.purchasePackage(pack)
-      console.log(customerInfo)
-      if (customerInfo.entitlements.active[process.env.EXPO_PUBLIC_REVENUE_CAT_AD_ENTITLEMENT] !== undefined) {
+      if (customerInfo.entitlements.active['remove_ads'] !== undefined) {
         router.back()
       }
 
@@ -44,6 +43,19 @@ const HelpScreen = () => {
     setIsPurchasing(false)
   }
 
+  const restorePurchases = async () => {
+    setIsPurchasing(true)
+    try {
+      const { entitlements } = await Purchases.restorePurchases()
+      if (entitlements.active['remove_ads'] !== undefined) {
+        router.back()
+      }
+    } catch (e) {
+      Alert.alert('Error restoring purchases', e.message)
+    }
+    setIsPurchasing(false)
+  }
+
   return (
     <SafeAreaView className="flex-1">
       <ScrollView className="flex-1 p-4">
@@ -51,21 +63,28 @@ const HelpScreen = () => {
           <ActivityIndicator size="small" color="#6DAB64" />
         )}
         {offerings !== null && (
-          offerings.availablePackages.map((pack, index) => (
-            <Pressable 
-              key={index} 
-              onPress={() => purchasePackage(pack)}
-              className="flex-row w-full justify-between items-center p-4 bg-white rounded-md active:shadow-md">
-              <View>
-                <Text style={[semibold, { fontSize: 20}]}>{pack.product.title}</Text>
-                <Text style={[regular, { fontSize: 16}]}>{pack.product.description}</Text>
-              </View>
-              <Pressable className="bg-green-5 p-3 rounded-md active:bg-green-4" onPress={() => purchasePackage(pack)}>
-                <Text className="text-white" style={[medium, {fontSize: 16}]}>{pack.product.priceString}</Text>
+          <>
+            {offerings.availablePackages.map((pack, index) => (
+              <Pressable 
+                key={index} 
+                onPress={() => purchasePackage(pack)}
+                className="flex-row w-full justify-between items-center p-4 bg-white rounded-md active:shadow-md">
+                <View>
+                  <Text style={[semibold, { fontSize: 20}]}>{pack.product.title}</Text>
+                  <Text style={[regular, { fontSize: 16}]}>{pack.product.description}</Text>
+                </View>
+                <Pressable className="bg-green-5 p-3 rounded-md active:bg-green-4" onPress={() => purchasePackage(pack)}>
+                  <Text className="text-white" style={[medium, {fontSize: 16}]}>{pack.product.priceString}</Text>
+                </Pressable>
               </Pressable>
+            ))}
+
+            <Pressable onPress={restorePurchases} className="bg-white p-4 w-full rounded-md mt-12 active:shadow-md">
+              <Text className="text-gray-10 text-center" style={[regular]}>Restore previous purchases</Text>
             </Pressable>
-          )
-        ))}
+          </>
+        )}
+
       </ScrollView>
 
       {isPurchasing && (
