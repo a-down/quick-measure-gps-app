@@ -18,7 +18,6 @@ export default () => {
         await Updates.reloadAsync();
       }
     } catch (error) {
-      Alert.alert('Error fetching latest Expo update', error);
       if (__DEV__) console.log(error)
     }
   }
