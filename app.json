@@ -18,7 +18,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.a-down.quick-measure-gps",
-      "buildNumber": "7"
+      "buildNumber": "8"
     },
     "android": {
       "adaptiveIcon": {
@@ -60,8 +60,8 @@
     "updates": {
       "url": "https://u.expo.dev/009cf2cd-1186-4e6a-86cd-4fd7cc58e2c7",
       "enabled": true,
-      "checkAutomatically": "WIFI_ONLY",
-      "fallbackToCacheTimeout": 20000
+      "checkAutomatically": "ON_LOAD",
+      "fallbackToCacheTimeout": 5000
     }
   },
   "react-native-google-mobile-ads": {
