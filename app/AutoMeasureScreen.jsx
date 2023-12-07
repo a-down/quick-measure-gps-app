@@ -97,7 +97,7 @@ export default function AutoMeasure() {
   // get preferences to display on SaveMapBottomSheet
   const getPreferencesForSave = async () => {
     const value = await useStorage('get', 'measurementPreferences')
-    if (value !== null) setCurrentPreferences(value)
+    value !== null ? setCurrentPreferences(value) : setCurrentPreferences({ area: 'sq meters', areaShort: 'sqm', distance: 'meters', distanceShort: 'm' })
   }
 
   return (
