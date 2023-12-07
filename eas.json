@@ -12,7 +12,8 @@
       "ios": {
         "buildConfiguration": "Debug",
         "simulator": true
-      }
+      },
+      "channel": "development"
     },
     "preview": {
       "distribution": "internal",
