@@ -37,7 +37,7 @@ const HelpScreen = () => {
 
     } catch (e) {
       if (!e.userCancelled) {
-        Alert.alert('Error purchasing package', e.message)
+        Alert.alert('Error purchasing', e.message)
       }
     }
     setIsPurchasing(false)
@@ -50,8 +50,9 @@ const HelpScreen = () => {
       if (entitlements.active['remove_ads'] !== undefined) {
         router.back()
       }
+      
     } catch (e) {
-      Alert.alert('Error restoring purchases', e.message)
+      Alert.alert('Error restoring purchase', e.message)
     }
     setIsPurchasing(false)
   }
