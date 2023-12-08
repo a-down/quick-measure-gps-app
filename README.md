@@ -1,6 +1,6 @@
 # [Quick Measure - GPS](https://apps.apple.com/us/app/quick-measure-gps/id6473677147)
 
-Quick Measure is a quick and simple tool to find GPS measurements. Use your GPS position to measure distance and area. It only takes two taps and feet to start measuring with your location!
+Quick Measure is a quick and simple mobile app to find GPS measurements. Use your GPS position to measure distance and area. It only takes two taps and feet to start measuring with your location!
 
 ## Who is it For?
 
