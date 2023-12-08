@@ -1,16 +1,17 @@
-# Quick Measure
+# [Quick Measure - GPS](https://apps.apple.com/us/app/quick-measure-gps/id6473677147)
 
-Quick Measure is a quick and simple tool to find GPS measurements. Use your GPS position to measure distance and area. The primary goal is quickness: it only takes two taps and feet to start measuring with your location!
+Quick Measure is a quick and simple tool to find GPS measurements. Use your GPS position to measure distance and area. It only takes two taps and feet to start measuring with your location!
 
 ## Who is it For?
 
 I created this app for my dad, a farmer. Traditional distance and area measurement tools involve clicking on a satellite map to add markers. My dad needed to find measurements for fields that change annually and undefined sections of land. He should not have to guess where to measure when he's back at the computer.
 
-Quick Measure is for anyone who needs to find distance or area! Farmers, landscapers, homeowners, hunters, runners, and dog walkers are only a few examples.  
+[Quick Measure - GPS](https://apps.apple.com/us/app/quick-measure-gps/id6473677147) is for anyone who needs to find distance or area! Farmers, landscapers, homeowners, hunters, runners, and dog walkers are only a few examples.  
 
-Quick Measure is built with React Native, which is a cross-platform language. However, Quick Measure is currently only available for iOS devices.
+[Quick Measure - GPS](https://apps.apple.com/us/app/quick-measure-gps/id6473677147) is built with React Native, which is a cross-platform language. However, [Quick Measure - GPS](https://apps.apple.com/us/app/quick-measure-gps/id6473677147) is currently only available for iOS devices.
 
 * Quick Measure should never be used for official or legal measurements. Contact a professional land surveyor when an official measurement is required.
+* Quick Measure should never be used in an emergency situation. Please call 911.
 * Quick Measure should never be used while operating machinery.
 * Quick Measure should never be used as a turn-based navigation app.
 
@@ -25,11 +26,11 @@ Quick Measure is built with React Native, which is a cross-platform language. Ho
 
 ### Auto Measure
 
-Automatically track your path with your phone's GPS as you walk or run around the space you want to measure. You can "Start Measuring," "Pause Measuring," and "Resume Measuring."
+Automatically track your path with your phone's GPS as you walk or run around the space you want to measure. You can `Start Measuring`, `Pause Measuring`, and `Resume Measuring`.
 
 ### Manual Measure
 
-Manually add markers to your path with your phone's GPS. Use "Manual Measure" to create straight line or when you cannot walk the line you wish to measure.
+Manually add markers to your path with your phone's GPS. Use `Manuel Measure` to create straight line or when you cannot walk the line you wish to measure.
 
 ### Tap to Measure
 
@@ -37,7 +38,7 @@ Tap on the map to add markers with this traditional measurement tool.
 
 ### Save Measurements
 
-Save a measurement from any tool to view later in the "Saved" tab. Saved measurements display a quick view with the measurement's name, creation date, distance, and area. Click on the measurement to view the map.
+Save a measurement from any tool to view later in the `Saved` tab. Saved measurements display a quick view with the measurement's name, creation date, distance, and area. Click on the measurement to view the map.
 
 ### Measurement Display
 
@@ -60,25 +61,33 @@ Units of measurement available: `feet`, `yards`, `miles`, `acres`, `meters`, and
 
 ## Tech Stack
 
-### React Native
+- [React Native](https://reactnative.dev/)
 
-### [Nativewind(Tailwind CSS)/OOCSS](https://www.nativewind.dev/)
-  - enables Tailwind CSS in React Native
-
-### [react-native-maps](https://github.com/react-native-maps/react-native-maps)
+- [react-native-maps](https://github.com/react-native-maps/react-native-maps)
   - app is built on react-native-maps to display measurements with Apple Maps
 
-### [Expo](https://expo.dev/)
+- [Expo](https://expo.dev/)
 
-### [expo-router](https://docs.expo.dev/router/introduction/)
+- [expo-router](https://docs.expo.dev/router/introduction/)
   - filed-based router for React Native
 
-### [react-native-bottom-sheet](https://gorhom.github.io/react-native-bottom-sheet/)
+- [Nativewind(Tailwind CSS)/OOCSS](https://www.nativewind.dev/)
+  - enables Tailwind CSS in React Native
 
-### [geolib](https://www.npmjs.com/package/geolib)
+- [Revenue Cat/react-native-purchases](https://www.revenuecat.com/)
+
+- [react-native-bottom-sheet](https://gorhom.github.io/react-native-bottom-sheet/)
+
+- [geolib](https://www.npmjs.com/package/geolib)
+
+- [react-native-async-storage/async-storage](https://www.npmjs.com/package/@react-native-async-storage/async-storage)
+
+- [react-native-google-mobile-ads](https://github.com/invertase/react-native-google-mobile-ads)
 
 ## Contact
 
 For issues, please create an issue on the [project repo](https://github.com/a-down/quick-measure-gps-app/issues).
 
-For questions or conversations, reach out on [LinkedIn](https://linkedin.com/in/alec-downing/).
+For requests, suggestions, and complaints reach out at [alec@alecdowning.com](mailto:alec@alecdowning.com).
+
+For conversations and connections, reach out on [LinkedIn](https://linkedin.com/in/alec-downing/).
