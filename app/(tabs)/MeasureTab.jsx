@@ -1,5 +1,5 @@
 import { Text, View, Pressable, useWindowDimensions, Image, ScrollView, SafeAreaView } from 'react-native';
-import { useRouter, useFocusEffect } from 'expo-router';
+import { useRouter, useFocusEffect, useNavigation } from 'expo-router';
 import { regular, semibold, bold } from '../../hooks/useJostFont';
 import walkingIcon from '../../assets/walking-icon.png';
 import { MaterialCommunityIcons, FontAwesome5, Feather } from '@expo/vector-icons';
@@ -8,14 +8,19 @@ import { useStorage } from '../../hooks';
 import { useCallback, useState } from 'react';
 import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
 import Purchases from 'react-native-purchases';
+import * as StoreReview from 'expo-store-review';
+import { getBuildNumber } from 'react-native-device-info';
+
 
 
 export default function App() {
   const { width } = useWindowDimensions();
   const router = useRouter();
+  const navigation = useNavigation();
 
   const [ savedMaps, setSavedMaps ] = useState([])
   const [ removedAdsSubscription, setRemovedAdsSubscription ] = useState(false)
+  const [ reviewStatus, setReviewStatus ] = useState(null)
 
   useFocusEffect(
     useCallback(() => {
@@ -28,6 +33,80 @@ export default function App() {
       getSubscriptions()
     }, [])
   );
+
+  useFocusEffect(
+    useCallback(() => {
+      checkReviewCriteria()
+    }, [])
+  );
+
+
+
+  const checkReviewCriteria = async () => {
+    const reviewObj = await useStorage('get', 'reviewStatus')
+    setReviewStatus(reviewObj)
+
+    if (reviewStatus !== null) {
+
+      const currentBuildNumber = await getBuildNumber()
+      if ( reviewStatus.buildNumber !== currentBuildNumber) {
+        const newStatus = { 
+          ...reviewStatus, 
+          buildNumber: currentBuildNumber, 
+          hasReviewedBuild: false,
+          requiredActions: {measured: false, saved: false, viewedSaved: false}
+        }
+        setReviewStatus(newStatus)
+        await useStorage('set', 'reviewStatus', newStatus)
+      }
+      
+      // if user has not reviewed current build, has completed the required actions in the current build, and has not been prompted to review in the last 30 days
+      if (!reviewStatus.hasReviewedBuild && reviewStatus.requiredActions.measured && reviewStatus.requiredActions.saved && reviewStatus.requiredActions.viewedSaved && reviewStatus.prevReqDate < Date.now() - 2592000000) {
+        
+        // add requirement for minimum number of significant events
+        // if previous review date is 0, then they review after 20 significant events
+        // if previous review date is not 0, then they review after 50 significant events
+
+        setTimeout(promptReview, 5000)
+      }
+
+    } else {
+      await useStorage('set', 'reviewStatus', {
+        buildNumber: await getBuildNumber(),
+        hasReviewedBuild: false,
+        requiredActions: {measured: false, saved: false, viewedSaved: false},
+        prevReqDate: 0,
+        significantEvents: 0
+      })
+    }
+  }
+
+
+  const promptReview = async () => {
+    const isAvailable = await StoreReview.isAvailableAsync()
+    if (isAvailable && navigation.isFocused()) {
+      StoreReview.requestReview()
+      const newStatus = { 
+        ...reviewStatus, 
+        hasReviewedBuild: true,
+        prevReqDate: Date.now()
+      }
+      setReviewStatus(newStatus)
+      await useStorage('set', 'reviewStatus', newStatus)
+    } else {
+      console.warn('not possible yet')
+    }
+  }
+
+
+
+
+
+
+
+
+
+
 
   const getRecentlySaved = async () => {
     const value = await useStorage('get', 'savedMaps')
