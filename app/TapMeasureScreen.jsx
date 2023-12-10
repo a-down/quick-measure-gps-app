@@ -77,6 +77,10 @@ export default function TapMeasure() {
   // add a new location to the polygon
   const addLocationToPolygon = async (location) => {
     if (polygonCoordinates.includes(location) === false) await setPolygonCoordinates([{ latitude: location.latitude, longitude: location.longitude}, ...polygonCoordinates])
+    // if ( polygonCoordinates.length === 0 ) {
+    //   const reviewStatus = await useStorage('get', 'reviewStatus')
+    //   await useStorage('set', 'reviewStatus', {...reviewStatus, significantEvents: reviewStatus.significantEvents + 1, requiredActions: {...reviewStatus.requiredActions, measured: true}})
+    // }
   }
 
   // reset the polygon coordinates and measurements

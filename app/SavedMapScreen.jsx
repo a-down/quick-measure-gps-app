@@ -5,6 +5,7 @@ import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from 'geolib';
 import { useState, useCallback } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { useStorage } from '../hooks';
 
 const SavedMap = () => {
   const router = useRouter()
@@ -20,8 +21,14 @@ const SavedMap = () => {
     useCallback(() => {
       setMapData(JSON.parse(map))
       setPolygonCenter(getCenterOfBounds(JSON.parse(map).polygonCoordinates))
+      // updateReviewStatus()
     }, [])
   );
+
+  // const updateReviewStatus = async () => {
+  //   const reviewStatus = await useStorage('get', 'reviewStatus')
+  //   await useStorage('set', 'reviewStatus', {...reviewStatus, significantEvents: reviewStatus.significantEvents + 1, requiredActions: {...reviewStatus.requiredActions, viewedSaved: true}})
+  // }
   
   return (
     <>

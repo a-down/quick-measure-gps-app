@@ -33,6 +33,12 @@ const Saved = () => {
     }, [])
   );
 
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     updateReviewStatus()
+  //   }, [])
+  // );
+
   const getSubscriptions = async () => {
     await Purchases.configure({ apiKey: 'appl_pmyciWqwEhvyqdONNdqJmpItUzd'})
     const customerInfo = await Purchases.getCustomerInfo();
@@ -40,6 +46,11 @@ const Saved = () => {
       setRemovedAdsSubscription(true)
     }
   }
+
+  // const updateReviewStatus = async () => {
+  //   const reviewStatus = await useStorage('get', 'reviewStatus')
+  //   if (reviewStatus.requiredActions.viewed) await useStorage('set', 'reviewStatus', {...reviewStatus, requiredActions: {...reviewStatus.requiredActions, measured: true}})
+  // }
 
   const deleteMapAlert = ({mapName, id}) => {
     Alert.alert(
