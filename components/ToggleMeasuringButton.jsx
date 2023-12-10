@@ -28,8 +28,8 @@ const ToggleMeasuringButton = ({ isMeasuring, setIsMeasuring, polygonCoordinates
     if (polygonCoordinates.length === 0) {
       let location = await Location.getCurrentPositionAsync({});
       setPolygonCoordinates([{latitude: location.coords.latitude, longitude: location.coords.longitude}])
-      // const reviewStatus = await useStorage('get', 'reviewStatus')
-      // await useStorage('set', 'reviewStatus', {...reviewStatus, significantEvents: reviewStatus.significantEvents + 1, requiredActions: {...reviewStatus.requiredActions, measured: true}})
+      const reviewStatus = await useStorage('get', 'reviewStatus')
+      await useStorage('set', 'reviewStatus', {...reviewStatus, significantEvents: reviewStatus.significantEvents + 1, requiredActions: {...reviewStatus.requiredActions, measured: true}})
     }
     // if the user is measuring when they press the button, Alert to confirm they want to stop
     if (isMeasuring) {

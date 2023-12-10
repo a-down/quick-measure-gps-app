@@ -33,12 +33,6 @@ const Saved = () => {
     }, [])
   );
 
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     updateReviewStatus()
-  //   }, [])
-  // );
-
   const getSubscriptions = async () => {
     await Purchases.configure({ apiKey: 'appl_pmyciWqwEhvyqdONNdqJmpItUzd'})
     const customerInfo = await Purchases.getCustomerInfo();
@@ -46,11 +40,6 @@ const Saved = () => {
       setRemovedAdsSubscription(true)
     }
   }
-
-  // const updateReviewStatus = async () => {
-  //   const reviewStatus = await useStorage('get', 'reviewStatus')
-  //   if (reviewStatus.requiredActions.viewed) await useStorage('set', 'reviewStatus', {...reviewStatus, requiredActions: {...reviewStatus.requiredActions, measured: true}})
-  // }
 
   const deleteMapAlert = ({mapName, id}) => {
     Alert.alert(
@@ -69,9 +58,9 @@ const Saved = () => {
       const data = value.filter(map => map.id !== id)
       await useStorage('set', 'savedMaps', data)
       setSavedMaps(data.reverse())
-      Alert.alert("Map deleted")
+
     } catch {
-      Alert.alert("Could not delete map")
+      Alert.alert("Error deleting map")
     }
   }
 

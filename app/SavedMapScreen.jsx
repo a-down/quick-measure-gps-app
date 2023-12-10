@@ -21,14 +21,14 @@ const SavedMap = () => {
     useCallback(() => {
       setMapData(JSON.parse(map))
       setPolygonCenter(getCenterOfBounds(JSON.parse(map).polygonCoordinates))
-      // updateReviewStatus()
+      updateReviewStatus()
     }, [])
   );
 
-  // const updateReviewStatus = async () => {
-  //   const reviewStatus = await useStorage('get', 'reviewStatus')
-  //   await useStorage('set', 'reviewStatus', {...reviewStatus, significantEvents: reviewStatus.significantEvents + 1, requiredActions: {...reviewStatus.requiredActions, viewedSaved: true}})
-  // }
+  const updateReviewStatus = async () => {
+    const reviewStatus = await useStorage('get', 'reviewStatus')
+    await useStorage('set', 'reviewStatus', {...reviewStatus, significantEvents: reviewStatus.significantEvents + 1, requiredActions: {...reviewStatus.requiredActions, viewedSaved: true}})
+  }
   
   return (
     <>

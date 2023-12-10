@@ -56,10 +56,10 @@ export default function AutoMeasure() {
   const updateLocation = async () => {
     let location = await Location.getCurrentPositionAsync({});
     await setCurrentLocation(location.coords);
-    // if (polygonCoordinates.length === 0) {
-    //   const reviewStatus = await useStorage('get', 'reviewStatus')
-    //   await useStorage('set', 'reviewStatus', {...reviewStatus, significantEvents: reviewStatus.significantEvents + 1, requiredActions: {...reviewStatus.requiredActions, measured: true}})
-    // }
+    if (polygonCoordinates.length === 0) {
+      const reviewStatus = await useStorage('get', 'reviewStatus')
+      await useStorage('set', 'reviewStatus', {...reviewStatus, significantEvents: reviewStatus.significantEvents + 1, requiredActions: {...reviewStatus.requiredActions, measured: true}})
+    }
   }
 
   // when location changes with updateLocation, add the new location to the polygon and generate measurements for the polygon

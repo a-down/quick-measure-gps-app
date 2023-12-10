@@ -66,8 +66,8 @@ function SaveMapBottomSheet({ polygonCoordinates, saveSheetRef, mapType, polygon
       Alert.alert(`${mapName} saved!`)
       saveSheetRef.current.close()
       Keyboard.dismiss()
-      // const reviewStatus = await useStorage('get', 'reviewStatus')
-      // await useStorage('set', 'reviewStatus', {...reviewStatus, significantEvents: reviewStatus.significantEvents + 1, requiredActions: {...reviewStatus.requiredActions, saved: true}})
+      const reviewStatus = await useStorage('get', 'reviewStatus')
+      await useStorage('set', 'reviewStatus', {...reviewStatus, significantEvents: reviewStatus.significantEvents + 1, requiredActions: {...reviewStatus.requiredActions, saved: true}})
 
     } catch (error) {
       Alert.alert('There was an error saving the map. Please try again.')
