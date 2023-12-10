@@ -12,7 +12,6 @@ import * as StoreReview from 'expo-store-review';
 import { getVersion } from 'react-native-device-info';
 
 
-
 export default function App() {
   const { width } = useWindowDimensions();
   const router = useRouter();
