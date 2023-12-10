@@ -58,9 +58,9 @@ const Saved = () => {
       const data = value.filter(map => map.id !== id)
       await useStorage('set', 'savedMaps', data)
       setSavedMaps(data.reverse())
-      Alert.alert("Map deleted")
+
     } catch {
-      Alert.alert("Could not delete map")
+      Alert.alert("Error deleting map")
     }
   }
 

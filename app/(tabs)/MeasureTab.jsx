@@ -9,8 +9,7 @@ import { useCallback, useState } from 'react';
 import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
 import Purchases from 'react-native-purchases';
 import * as StoreReview from 'expo-store-review';
-import { getBuildNumber } from 'react-native-device-info';
-
+import { getVersion } from 'react-native-device-info';
 
 
 export default function App() {
@@ -20,7 +19,6 @@ export default function App() {
 
   const [ savedMaps, setSavedMaps ] = useState([])
   const [ removedAdsSubscription, setRemovedAdsSubscription ] = useState(false)
-  const [ reviewStatus, setReviewStatus ] = useState(null)
 
   useFocusEffect(
     useCallback(() => {
@@ -34,79 +32,63 @@ export default function App() {
     }, [])
   );
 
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     checkReviewCriteria()
-  //   }, [])
-  // );
+  useFocusEffect(
+    useCallback(() => {
+      checkReviewCriteria()
+    }, [])
+  );
 
+  const checkReviewCriteria = async () => {
+    let reviewStatus = await useStorage('get', 'reviewStatus')
 
+    if (reviewStatus !== null) {
 
-  // const checkReviewCriteria = async () => {
-  //   const reviewObj = await useStorage('get', 'reviewStatus')
-  //   setReviewStatus(reviewObj)
-
-  //   if (reviewStatus !== null) {
-
-  //     const currentBuildNumber = await getBuildNumber()
-  //     if ( reviewStatus.buildNumber !== currentBuildNumber) {
-  //       const newStatus = { 
-  //         ...reviewStatus, 
-  //         buildNumber: currentBuildNumber, 
-  //         hasReviewedBuild: false,
-  //         requiredActions: {measured: false, saved: false, viewedSaved: false}
-  //       }
-  //       setReviewStatus(newStatus)
-  //       await useStorage('set', 'reviewStatus', newStatus)
-  //     }
+      const currentVersion = getVersion()
+      if ( reviewStatus.version !== currentVersion ) {
+        reviewStatus = { 
+          ...reviewStatus, 
+          version: currentVersion, 
+          hasReviewedVersion: false,
+          requiredActions: {measured: false, saved: false, viewedSaved: false}
+        }
+        await useStorage('set', 'reviewStatus', reviewStatus)
+      }
       
-  //     // if user has not reviewed current build, has completed the required actions in the current build, and has not been prompted to review in the last 30 days
-  //     if (!reviewStatus.hasReviewedBuild && reviewStatus.requiredActions.measured && reviewStatus.requiredActions.saved && reviewStatus.requiredActions.viewedSaved && reviewStatus.prevReqDate < Date.now() - 2592000000) {
-        
-  //       // add requirement for minimum number of significant events
-  //       // if previous review date is 0, then they review after 20 significant events
-  //       // if previous review date is not 0, then they review after 50 significant events
+      // if user has not reviewed current version, has completed the required actions in the current version, and has not been prompted to review in the last 30 days
+      if (!reviewStatus.hasReviewedVersion && reviewStatus.requiredActions.measured && reviewStatus.requiredActions.saved && reviewStatus.requiredActions.viewedSaved && reviewStatus.prevReqDate < Date.now() - 2592000000 && reviewStatus.significantEvents >= 20) {
+        setTimeout(() => {
+          promptReview(reviewStatus)
+        }, 5000)
+      }
 
-  //       setTimeout(promptReview, 5000)
-  //     }
+    } else {
+      await useStorage('set', 'reviewStatus', {
+        version: await getVersion(),
+        hasReviewedVersion: false,
+        requiredActions: {measured: false, saved: false, viewedSaved: false},
+        prevReqDate: 0,
+        significantEvents: 0
+      })
+    }
+  }
 
-  //   } else {
-  //     await useStorage('set', 'reviewStatus', {
-  //       buildNumber: await getBuildNumber(),
-  //       hasReviewedBuild: false,
-  //       requiredActions: {measured: false, saved: false, viewedSaved: false},
-  //       prevReqDate: 0,
-  //       significantEvents: 0
-  //     })
-  //   }
-  // }
+  const promptReview = async (reviewStatus) => {
+    const isAvailable = await StoreReview.isAvailableAsync()
+    if (isAvailable && navigation.isFocused()) {
+      await StoreReview.requestReview()
+      const newStatus = { 
+        ...reviewStatus, 
+        hasReviewedVersion: true,
+        prevReqDate: Date.now()
+      }
+      await useStorage('set', 'reviewStatus', newStatus)
+    }
+  }
 
-
-  // const promptReview = async () => {
-  //   const isAvailable = await StoreReview.isAvailableAsync()
-  //   if (isAvailable && navigation.isFocused()) {
-  //     StoreReview.requestReview()
-  //     const newStatus = { 
-  //       ...reviewStatus, 
-  //       hasReviewedBuild: true,
-  //       prevReqDate: Date.now()
-  //     }
-  //     setReviewStatus(newStatus)
-  //     await useStorage('set', 'reviewStatus', newStatus)
-  //   } else {
-  //     console.warn('not possible yet')
-  //   }
-  // }
-
-
-
-
-
-
-
-
-
-
+  const resetCriteria = async () => {
+    await useStorage('remove', 'reviewStatus')
+    console.log(await useStorage('get', 'reviewStatus'))
+  }
 
   const getRecentlySaved = async () => {
     const value = await useStorage('get', 'savedMaps')
@@ -166,6 +148,10 @@ export default function App() {
         <View className="items-center justify-start mb-4 mt-4" style={{gap: 24, paddingTop: removedAdsSubscription ? 24 : 0}}>
           <Image source={walkingIcon} style={{height: 115, width: 80, marginRight: 12}}/>
           <Text className="text-white text-center" style={[bold, {fontSize: 24, maxWidth: 200}]}>Easy Tools for a Quick Measure</Text>
+
+          {/* <Pressable onPress={resetCriteria}>
+            <Text className="text-green-5 underline" style={[regular]}>Reset Review Status</Text>
+          </Pressable> */}
         </View>
 
         <View className="w-full items-center rounded-lg" style={{width: width-32, marginTop: removedAdsSubscription ? 16 : 0}}>
