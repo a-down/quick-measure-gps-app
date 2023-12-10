@@ -4,7 +4,6 @@ import * as Updates from 'expo-updates';
 import { useEffect, useState } from 'react';
 
 export default () => {
-  const [ reviewStatus, setReviewStatus ] = useState(null)
 
   useEffect(() => {
     onFetchUpdateAsync()
