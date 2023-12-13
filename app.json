@@ -3,7 +3,7 @@
     "name": "Quick Measure",
     "slug": "quick-measure-gps",
     "scheme": "quick-measure-gps",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -18,7 +18,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.a-down.quick-measure-gps",
-      "buildNumber": "8"
+      "buildNumber": "9"
     },
     "android": {
       "adaptiveIcon": {
@@ -56,7 +56,9 @@
       }
     },
     "owner": "a-down",
-    "runtimeVersion": "1.0.0",
+    "runtimeVersion": {
+      "policy": "nativeVersion"
+    },
     "updates": {
       "url": "https://u.expo.dev/009cf2cd-1186-4e6a-86cd-4fd7cc58e2c7",
       "enabled": true,
