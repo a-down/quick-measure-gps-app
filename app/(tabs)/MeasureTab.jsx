@@ -55,7 +55,7 @@ export default function App() {
       }
       
       // if user has not reviewed current version, has completed the required actions in the current version, and has not been prompted to review in the last 30 days
-      if (!reviewStatus.hasReviewedVersion && reviewStatus.requiredActions.measured && reviewStatus.requiredActions.saved && reviewStatus.requiredActions.viewedSaved && reviewStatus.prevReqDate < Date.now() - 2592000000 && reviewStatus.significantEvents >= 20) {
+      if (!reviewStatus.hasReviewedVersion && reviewStatus.requiredActions.measured && reviewStatus.prevReqDate < Date.now() - 2592000000 && reviewStatus.significantEvents >= 5) {
         setTimeout(() => {
           promptReview(reviewStatus)
         }, 5000)
