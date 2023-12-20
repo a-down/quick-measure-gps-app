@@ -78,7 +78,7 @@ const HelpScreen = () => {
             </Pressable>
           </Text>
 
-          <Text style={[regular, {lineHeight: 28}]}>If you love the app, I'd love to hear from you too. Please rate and review, and thank you for using Quick Measure!</Text>
+          <Text style={[regular, {lineHeight: 28}]}>If you love the app, I'd love to hear from you too. Please rate and review, and thank you for using Quick Measure - GPS!</Text>
           <Text style={[semibold, {lineHeight: 28, textAlign: 'right', marginRight: 12}]}>- Alec</Text>
         </View>
       </ScrollView>
