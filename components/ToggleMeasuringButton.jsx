@@ -34,14 +34,14 @@ const ToggleMeasuringButton = ({ isMeasuring, setIsMeasuring, polygonCoordinates
     // if the user is measuring when they press the button, Alert to confirm they want to stop
     if (isMeasuring) {
       Alert.alert(
-        "Stop Measuring",
-        "Are you sure you want to stop measuring?",
+        "Pause Measuring",
+        "Are you sure you want to pause measuring?",
         [
           {
             text: "Cancel",
             style: "cancel"
           },
-          { text: "Stop Measuring", onPress: () => {
+          { text: "Pause Measuring", onPress: () => {
             setIsMeasuring(false)
             deactivateKeepAwake()
           } }
