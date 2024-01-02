@@ -18,7 +18,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.a-down.quick-measure-gps",
-      "buildNumber": "10"
+      "buildNumber": "11"
     },
     "android": {
       "adaptiveIcon": {
@@ -69,10 +69,5 @@
   "react-native-google-mobile-ads": {
     "ios_app_id": "ca-app-pub-2810780842614584~1331427803",
     "delay_app_measurement_init": true
-  },
-  "infoPlist": {
-    "SKAdNetworkItems": [
-      { "SKAdNetworkIdentifier": "cstr6suwn9.skadnetwork" }
-    ]
   }
 }
