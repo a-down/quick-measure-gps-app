@@ -3,7 +3,7 @@
     "name": "Quick Measure",
     "slug": "quick-measure-gps",
     "scheme": "quick-measure-gps",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -18,7 +18,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.a-down.quick-measure-gps",
-      "buildNumber": "12"
+      "buildNumber": "13"
     },
     "android": {
       "adaptiveIcon": {
@@ -68,6 +68,10 @@
   },
   "react-native-google-mobile-ads": {
     "ios_app_id": "ca-app-pub-2810780842614584~1331427803",
-    "delay_app_measurement_init": true
+    "delay_app_measurement_init": true,
+    "user_tracking_usage_description": "This identifier will be used to deliver ads to you that use your location information.",
+    "sk_ad_network_items": [
+      "cstr6suwn9.skadnetwork"
+    ]
   }
 }
