@@ -7,7 +7,7 @@ import { useStorage } from '../../hooks';
 import { Feather } from '@expo/vector-icons';
 import { regular, semibold } from '../../hooks/useJostFont'
 import { StatusBar } from 'expo-status-bar';
-import { BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
+import { AdsConsent, BannerAd, TestIds, BannerAdSize } from 'react-native-google-mobile-ads';
 import Purchases from 'react-native-purchases'
 
 const Saved = () => {
@@ -15,6 +15,17 @@ const Saved = () => {
   const [ savedMaps, setSavedMaps ] = useState([])
   const [ removedAdsSubscription, setRemovedAdsSubscription ] = useState(false)
   const { width } = useWindowDimensions();
+
+  const [ canRequestAds, setCanRequestAds ] = useState(false)
+
+  AdsConsent.requestInfoUpdate().then(() => {
+    AdsConsent.loadAndShowConsentFormIfRequired().then(adsConsentInfo => {
+      // Consent has been gathered.
+      if (adsConsentInfo.canRequestAds) {
+        setCanRequestAds(true)
+      }
+    })
+  })
 
   const getMaps = async () => {
     const value = await useStorage('get', 'savedMaps')
@@ -133,7 +144,7 @@ const Saved = () => {
         </View>
       )}  
 
-      {!removedAdsSubscription && (
+      {!removedAdsSubscription && canRequestAds && (
         <View className="absolute w-full items-center bottom-0">
           <Pressable onPress={() => router.push('/PurchaseScreen')} className="active:opacity-40">
             <Text className="text-green-5 underline" style={[regular]}>Want to Remove Ads?</Text>
