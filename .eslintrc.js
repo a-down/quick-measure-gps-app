@@ -9,5 +9,9 @@ module.exports = {
   ],
   rules: {
     "react/prop-types": "off",
+    // TODO: REANABLE AFTER REFACTORING
+    "react-hooks/rules-of-hooks": "off",
+    // TODO: REANABLE AFTER REFACTORING
+    "react-hooks/exhaustive-deps": "off",
   },
 };

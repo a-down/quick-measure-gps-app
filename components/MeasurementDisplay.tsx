@@ -12,13 +12,15 @@ import { Feather } from "@expo/vector-icons";
 import { useStorage } from "../hooks";
 import { regular } from "../hooks/useJostFont";
 
+type MapTypes = "satellite" | "hybrid" | "standard";
+
 interface MeasurementDisplayProps {
   areaVisible: boolean;
   setAreaVisible: (value: boolean) => void;
   getPreferencesForSave: () => void;
   polygonArea: number;
   polygonDistance: number;
-  setMapType?: (value: string) => void;
+  setMapType?: (value: MapTypes) => void;
   markersVisible: boolean;
   setMarkersVisible: (value: boolean) => void;
 

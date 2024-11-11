@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import * as Location from "expo-location";
 import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from "geolib";
 import { useRouter } from "expo-router";
+import BottomSheetMethods from "@gorhom/bottom-sheet";
 import {
   MeasurementDisplay,
   SaveMeasurementsButton,
@@ -15,23 +16,38 @@ import {
 } from "../components";
 import { useStorage } from "../hooks";
 
+type Coordinate = { latitude: number; longitude: number };
+// TODO: MAKE MORE SPECIFIC - maybe from geolib
+type Preferences = {
+  area: string;
+  areaShort: string;
+  distance: string;
+  distanceShort: string;
+};
+type MapTypes = "satellite" | "hybrid" | "standard";
+
 export default function TapMeasure() {
   const router = useRouter();
 
-  const deleteSheetRef = useRef();
+  const deleteSheetRef = useRef<BottomSheetMethods>();
   const saveSheetRef = useRef();
 
-  const [region, setRegion] = useState(null);
-  const [polygonCoordinates, setPolygonCoordinates] = useState([]);
-  const [polygonArea, setPolygonArea] = useState();
-  const [polygonDistance, setPolygonDistance] = useState();
-  const [mapType, setMapType] = useState("");
-  const [areaVisible, setAreaVisible] = useState(true);
-  const [markersVisible, setMarkersVisible] = useState(true);
-  const [deleteMode, setDeleteMode] = useState(false);
-  const [markersToDelete, setMarkersToDelete] = useState([]);
-  const [previousCoordinates, setPreviousCoordinates] = useState([]);
-  const [currentPreferences, setCurrentPreferences] = useState(null);
+  const [region, setRegion] = useState<Coordinate | null>(null);
+  const [polygonCoordinates, setPolygonCoordinates] = useState<Coordinate[]>(
+    []
+  );
+  const [polygonArea, setPolygonArea] = useState<number | null>();
+  const [polygonDistance, setPolygonDistance] = useState<number | null>();
+  const [mapType, setMapType] = useState<MapTypes | null>(null);
+  const [areaVisible, setAreaVisible] = useState<boolean>(true);
+  const [markersVisible, setMarkersVisible] = useState<boolean>(true);
+  const [deleteMode, setDeleteMode] = useState<boolean>(false);
+  const [markersToDelete, setMarkersToDelete] = useState<Coordinate[]>([]);
+  const [previousCoordinates, setPreviousCoordinates] = useState<Coordinate[]>(
+    []
+  );
+  const [currentPreferences, setCurrentPreferences] =
+    useState<Preferences | null>(null);
 
   // check if location permission is granted
   // if so, set initial region as current location
@@ -109,14 +125,16 @@ export default function TapMeasure() {
   // get preferences to display on SaveMapBottomSheet
   const getPreferencesForSave = async () => {
     const value = await useStorage("get", "measurementPreferences");
-    value !== null
-      ? setCurrentPreferences(value)
-      : setCurrentPreferences({
-          area: "sq meters",
-          areaShort: "sqm",
-          distance: "meters",
-          distanceShort: "m",
-        });
+    if (value !== null) {
+      setCurrentPreferences(value);
+      return;
+    }
+    setCurrentPreferences({
+      area: "sq meters",
+      areaShort: "sqm",
+      distance: "meters",
+      distanceShort: "m",
+    });
   };
 
   return (

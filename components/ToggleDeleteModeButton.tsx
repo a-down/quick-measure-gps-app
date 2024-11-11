@@ -2,12 +2,12 @@ import { Text, Pressable, View } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { medium } from "../hooks/useJostFont";
 
+type Coordinate = { latitude: number; longitude: number };
+
 interface ToggleDeleteModeButtonProps {
   deleteMode: boolean;
   setDeleteMode: (boolean) => void;
-  setMarkersToDelete: (
-    markers: { latitude: boolean; longitude: boolean }[]
-  ) => void;
+  setMarkersToDelete: (markers: Coordinate[]) => void;
   mapType: string;
 }
 
