@@ -2,6 +2,20 @@ import MapView, { Polygon, Marker, Polyline } from "react-native-maps";
 import { Image } from "react-native";
 import mapMarker from "../assets/map-marker.png";
 import mapMarkerRed from "../assets/map-marker-red.png";
+import { Coordinate, MapTypes } from "../types";
+
+interface MapProps {
+  region: Coordinate;
+  polygonCoordinates: Coordinate[];
+  mapType?: MapTypes;
+  addLocationToPolygon: (location: Coordinate) => Promise<void>;
+  tappable: boolean;
+  areaVisible: boolean;
+  deleteMode: boolean;
+  markersToDelete: Coordinate[];
+  setMarkersToDelete: (markers: Coordinate[]) => void;
+  markersVisible: boolean;
+}
 
 export default function Map({
   region,
@@ -14,7 +28,7 @@ export default function Map({
   markersToDelete,
   setMarkersToDelete,
   markersVisible,
-}) {
+}: MapProps) {
   return (
     <>
       {tappable === true ? (

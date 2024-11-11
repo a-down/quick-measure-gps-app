@@ -87,7 +87,7 @@ export default function TapMeasure() {
   };
 
   // add a new location to the polygon
-  const addLocationToPolygon = async (location) => {
+  const addLocationToPolygon = async (location: Coordinate) => {
     if (polygonCoordinates.includes(location) === false)
       await setPolygonCoordinates([
         { latitude: location.latitude, longitude: location.longitude },
