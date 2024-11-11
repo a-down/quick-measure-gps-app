@@ -19,6 +19,9 @@ import { useStorage } from "../hooks";
 export default function AutoMeasure() {
   const router = useRouter();
 
+  const deleteSheetRef = useRef();
+  const saveSheetRef = useRef();
+
   const [region, setRegion] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
   const [polygonCoordinates, setPolygonCoordinates] = useState([]);
@@ -33,18 +36,11 @@ export default function AutoMeasure() {
   const [previousCoordinates, setPreviousCoordinates] = useState([]);
   const [currentPreferences, setCurrentPreferences] = useState(null);
 
-  const deleteSheetRef = useRef();
-  const saveSheetRef = useRef();
-
-  const { getFromStorage: getMapPreference } = useStorage("mapPreferences");
-
   // check if location permission is granted
   // if so, set initial region as current location
   // if so, start locationSubscription for location updates
   useEffect(() => {
-    const mapType = getMapPreference<string>;
-    setMapType(mapType);
-
+    useStorage("get", "mapPreferences").then((value) => setMapType(value));
     useStorage("get", "currentAutoCoordinates").then((value) => {
       if (value) {
         setPolygonCoordinates(value);
