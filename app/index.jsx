@@ -1,13 +1,12 @@
-import { Redirect } from 'expo-router';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import * as Updates from 'expo-updates';
-import { useEffect, useState } from 'react';
+import { Redirect } from "expo-router";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import * as Updates from "expo-updates";
+import { useEffect, useState } from "react";
 
 export default () => {
-
   useEffect(() => {
-    onFetchUpdateAsync()
-  }, [])
+    onFetchUpdateAsync();
+  }, []);
 
   const onFetchUpdateAsync = async () => {
     try {
@@ -18,13 +17,13 @@ export default () => {
         await Updates.reloadAsync();
       }
     } catch (error) {
-      if (__DEV__) console.log(error)
+      if (__DEV__) console.log(error);
     }
-  }
+  };
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Redirect href="/MeasureTab" />
     </GestureHandlerRootView>
-  )
-}
+  );
+};
