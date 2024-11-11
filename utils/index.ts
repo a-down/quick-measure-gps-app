@@ -1,1 +1,1 @@
-export { convertToAcres, convertToSqMiles } from "./convertArea";
+export { handleConvertArea } from "./convertArea";

@@ -5,11 +5,9 @@ import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from "geolib";
 import { useRouter } from "expo-router";
 import {
   MeasurementDisplay,
-  ResetMeasurementsButton,
   SaveMeasurementsButton,
   Map,
   ToggleDeleteModeButton,
-  DeleteMarkersButton,
 } from "../components";
 import { useStorage } from "../hooks";
 
@@ -28,7 +26,6 @@ export default function TapMeasure() {
   const [markersVisible, setMarkersVisible] = useState(true);
   const [deleteMode, setDeleteMode] = useState(false);
   const [markersToDelete, setMarkersToDelete] = useState([]);
-  const [previousCoordinates, setPreviousCoordinates] = useState([]);
   const [currentPreferences, setCurrentPreferences] = useState(null);
 
   // check if location permission is granted

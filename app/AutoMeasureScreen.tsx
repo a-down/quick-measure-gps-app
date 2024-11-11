@@ -49,6 +49,7 @@ export default function AutoMeasure() {
       }
     });
     getPreferencesForSave();
+
     const getInitialLocation = async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
@@ -63,7 +64,7 @@ export default function AutoMeasure() {
       let location = await Location.getCurrentPositionAsync({});
       setRegion(location.coords);
 
-      const locationSubscription = await Location.watchPositionAsync(
+      await Location.watchPositionAsync(
         { accuracy: Location.Accuracy.Highest, distanceInterval: 1 },
         (loc) => {
           setCurrentLocation(loc.coords);

@@ -5,14 +5,19 @@ import { convertArea } from "geolib";
  * this hook adds support for acres and sq miles
  */
 const convertToAcres = (value) => {
-  const acres = value * 0.00024710538146717; // converts square meters to acres
-  return convertArea(acres, "a");
+  return value * 0.00024710538146717; // converts square meters to acres
 };
 
-const convertToSqMiles = (value) => {
+const convertToSqMi = (value) => {
   // converts square meters to square miles
-  const sqMiles = value * 0.000000386102159;
-  return convertArea(sqMiles, "sqmi");
+  return value * 0.000000386102159;
 };
 
-export { convertToAcres, convertToSqMiles };
+const handleConvertArea = (area, unit) => {
+  if (unit === "a") return convertToAcres(area);
+  if (unit === "sqmi") return convertToSqMi(area);
+  // if not acres or sq miles, use geolib convertArea()
+  return convertArea(area, unit);
+};
+
+export { handleConvertArea };
