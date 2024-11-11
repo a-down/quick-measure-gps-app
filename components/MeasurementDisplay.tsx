@@ -39,6 +39,7 @@ const MeasurementDisplay = ({
   polygonDistance,
   setMapType,
   // preferredMeasurements,
+  preferredMeasurements,
   areaVisible,
   setAreaVisible,
   markersVisible,

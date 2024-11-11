@@ -8,6 +8,10 @@ import {
   SaveMeasurementsButton,
   Map,
   ToggleDeleteModeButton,
+  DeleteOptionsBottomSheet,
+  DeleteMarkersButton,
+  ResetMeasurementsButton,
+  SaveMapBottomSheet,
 } from "../components";
 import { useStorage } from "../hooks";
 
@@ -26,6 +30,7 @@ export default function TapMeasure() {
   const [markersVisible, setMarkersVisible] = useState(true);
   const [deleteMode, setDeleteMode] = useState(false);
   const [markersToDelete, setMarkersToDelete] = useState([]);
+  const [previousCoordinates, setPreviousCoordinates] = useState([]);
   const [currentPreferences, setCurrentPreferences] = useState(null);
 
   // check if location permission is granted
@@ -164,7 +169,7 @@ export default function TapMeasure() {
         </View>
       </View>
 
-      {/* <DeleteOptionsBottomSheet
+      <DeleteOptionsBottomSheet
         deleteSheetRef={deleteSheetRef}
         deleteMode={deleteMode}
         setDeleteMode={setDeleteMode}
@@ -178,7 +183,6 @@ export default function TapMeasure() {
           setPolygonCoordinates={setPolygonCoordinates}
           markersToDelete={markersToDelete}
           setMarkersToDelete={setMarkersToDelete}
-          mapType={mapType}
           resetMeasurements={resetMeasurements}
           previousCoordinates={previousCoordinates}
           setPreviousCoordinates={setPreviousCoordinates}
@@ -186,8 +190,6 @@ export default function TapMeasure() {
 
         <ResetMeasurementsButton
           resetMeasurements={resetMeasurements}
-          mapType={mapType}
-          markersToDelete={markersToDelete}
           polygonCoordinatesLength={polygonCoordinates.length}
         />
       </DeleteOptionsBottomSheet>
@@ -200,7 +202,7 @@ export default function TapMeasure() {
         polygonDistance={polygonDistance}
         currentPreferences={currentPreferences}
         tool={"TapMeasure"}
-      /> */}
+      />
     </View>
   );
 }

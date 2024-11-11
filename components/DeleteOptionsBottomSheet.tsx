@@ -1,9 +1,27 @@
-import { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback } from "react";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { Text, Pressable, View } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { regular } from "../hooks/useJostFont";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+
+interface DeleteOptionsBottomSheetProps {
+  children: React.ReactNode;
+  // TODO: FIX
+  deleteSheetRef: any;
+  deleteMode: boolean;
+  setDeleteMode: (value: boolean) => void;
+  setPolygonCoordinates: (
+    coordinates: { latitude: number; longitude: number }[]
+  ) => void;
+  previousCoordinates: { latitude: number; longitude: number }[];
+  setPreviousCoordinates: (
+    coordinates: { latitude: number; longitude: number }[]
+  ) => void;
+  setMarkersToDelete: (
+    markers: { latitude: number; longitude: number }[]
+  ) => void;
+}
 
 function DeleteOptionsBottomSheet({
   children,
@@ -14,7 +32,7 @@ function DeleteOptionsBottomSheet({
   previousCoordinates,
   setPreviousCoordinates,
   setMarkersToDelete,
-}) {
+}: DeleteOptionsBottomSheetProps) {
   const snapPoints = useMemo(() => [200], []);
   const handleSheetChanges = useCallback((index) => {
     if (index === -1) {
