@@ -138,7 +138,6 @@ export default function TapMeasure() {
         polygonArea={polygonArea}
         polygonDistance={polygonDistance}
         setMapType={setMapType}
-        distanceAround={true}
         areaVisible={areaVisible}
         setAreaVisible={setAreaVisible}
         markersVisible={markersVisible}
