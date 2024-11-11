@@ -8,13 +8,13 @@ interface MapProps {
   region: Coordinate;
   polygonCoordinates: Coordinate[];
   mapType?: MapTypes;
-  addLocationToPolygon: (location: Coordinate) => Promise<void>;
-  tappable: boolean;
   areaVisible: boolean;
   deleteMode: boolean;
   markersToDelete: Coordinate[];
   setMarkersToDelete: (markers: Coordinate[]) => void;
   markersVisible: boolean;
+  addLocationToPolygon?: (location: Coordinate) => Promise<void>;
+  tappable?: boolean;
 }
 
 export default function Map({

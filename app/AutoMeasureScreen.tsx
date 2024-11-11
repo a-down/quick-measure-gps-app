@@ -147,8 +147,6 @@ export default function AutoMeasure() {
           markersToDelete={markersToDelete}
           setMarkersToDelete={setMarkersToDelete}
           markersVisible={markersVisible}
-          addLocationToPolygon={undefined}
-          tappable={false}
         />
       )}
 
