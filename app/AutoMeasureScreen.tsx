@@ -15,26 +15,35 @@ import {
   SaveMapBottomSheet,
 } from "../components";
 import { useStorage } from "../hooks";
+import BottomSheetMethods from "@gorhom/bottom-sheet";
+import { Coordinate, MapTypes, Preferences } from "../types";
 
 export default function AutoMeasure() {
   const router = useRouter();
 
-  const deleteSheetRef = useRef();
+  const deleteSheetRef = useRef<BottomSheetMethods>();
   const saveSheetRef = useRef();
 
-  const [region, setRegion] = useState(null);
-  const [currentLocation, setCurrentLocation] = useState(null);
-  const [polygonCoordinates, setPolygonCoordinates] = useState([]);
-  const [polygonArea, setPolygonArea] = useState();
-  const [polygonDistance, setPolygonDistance] = useState();
+  const [region, setRegion] = useState<Coordinate | null>(null);
+  const [currentLocation, setCurrentLocation] = useState<Coordinate | null>(
+    null
+  );
+  const [polygonCoordinates, setPolygonCoordinates] = useState<Coordinate[]>(
+    []
+  );
+  const [polygonArea, setPolygonArea] = useState<number>();
+  const [polygonDistance, setPolygonDistance] = useState<number>();
   const [isMeasuring, setIsMeasuring] = useState(false);
-  const [mapType, setMapType] = useState("");
+  const [mapType, setMapType] = useState<MapTypes | null>(null);
   const [areaVisible, setAreaVisible] = useState(true);
   const [markersVisible, setMarkersVisible] = useState(true);
   const [deleteMode, setDeleteMode] = useState(false);
-  const [markersToDelete, setMarkersToDelete] = useState([]);
-  const [previousCoordinates, setPreviousCoordinates] = useState([]);
-  const [currentPreferences, setCurrentPreferences] = useState(null);
+  const [markersToDelete, setMarkersToDelete] = useState<Coordinate[]>([]);
+  const [previousCoordinates, setPreviousCoordinates] = useState<Coordinate[]>(
+    []
+  );
+  const [currentPreferences, setCurrentPreferences] =
+    useState<Preferences | null>(null);
 
   // check if location permission is granted
   // if so, set initial region as current location
@@ -111,14 +120,16 @@ export default function AutoMeasure() {
   // get preferences to display on SaveMapBottomSheet
   const getPreferencesForSave = async () => {
     const value = await useStorage("get", "measurementPreferences");
-    value !== null
-      ? setCurrentPreferences(value)
-      : setCurrentPreferences({
-          area: "sq meters",
-          areaShort: "sqm",
-          distance: "meters",
-          distanceShort: "m",
-        });
+    if (value !== null) {
+      setCurrentPreferences(value);
+      return;
+    }
+    setCurrentPreferences({
+      area: "sq meters",
+      areaShort: "sqm",
+      distance: "meters",
+      distanceShort: "m",
+    });
   };
 
   return (
@@ -136,6 +147,8 @@ export default function AutoMeasure() {
           markersToDelete={markersToDelete}
           setMarkersToDelete={setMarkersToDelete}
           markersVisible={markersVisible}
+          addLocationToPolygon={undefined}
+          tappable={false}
         />
       )}
 
@@ -145,9 +158,6 @@ export default function AutoMeasure() {
         setMapType={setMapType}
         areaVisible={areaVisible}
         setAreaVisible={setAreaVisible}
-        deleteMode={deleteMode}
-        markersToDelete={markersToDelete}
-        setMarkersToDelete={setMarkersToDelete}
         markersVisible={markersVisible}
         setMarkersVisible={setMarkersVisible}
         getPreferencesForSave={getPreferencesForSave}
@@ -193,17 +203,13 @@ export default function AutoMeasure() {
           setPolygonCoordinates={setPolygonCoordinates}
           markersToDelete={markersToDelete}
           setMarkersToDelete={setMarkersToDelete}
-          mapType={mapType}
           resetMeasurements={resetMeasurements}
           previousCoordinates={previousCoordinates}
           setPreviousCoordinates={setPreviousCoordinates}
-          polygonCoordinatesLength={polygonCoordinates.length}
         />
 
         <ResetMeasurementsButton
           resetMeasurements={resetMeasurements}
-          mapType={mapType}
-          markersToDelete={markersToDelete}
           polygonCoordinatesLength={polygonCoordinates.length}
         />
       </DeleteOptionsBottomSheet>

@@ -11,8 +11,7 @@ import { handleConvertArea } from "../utils";
 import { Feather } from "@expo/vector-icons";
 import { useStorage } from "../hooks";
 import { regular } from "../hooks/useJostFont";
-
-type MapTypes = "satellite" | "hybrid" | "standard";
+import { MapTypes, Preferences } from "../types";
 
 interface MeasurementDisplayProps {
   areaVisible: boolean;
@@ -23,9 +22,7 @@ interface MeasurementDisplayProps {
   setMapType?: (value: MapTypes) => void;
   markersVisible: boolean;
   setMarkersVisible: (value: boolean) => void;
-
-  // TODO: Do I need?
-  // preferredMeasurements:
+  preferredMeasurements?: Preferences;
 }
 
 // preferences default to sq meters and meters
@@ -40,7 +37,6 @@ const MeasurementDisplay = ({
   polygonArea,
   polygonDistance,
   setMapType,
-  // preferredMeasurements,
   preferredMeasurements,
   areaVisible,
   setAreaVisible,

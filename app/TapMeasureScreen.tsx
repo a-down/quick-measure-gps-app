@@ -15,16 +15,7 @@ import {
   SaveMapBottomSheet,
 } from "../components";
 import { useStorage } from "../hooks";
-
-type Coordinate = { latitude: number; longitude: number };
-// TODO: MAKE MORE SPECIFIC - maybe from geolib
-type Preferences = {
-  area: string;
-  areaShort: string;
-  distance: string;
-  distanceShort: string;
-};
-type MapTypes = "satellite" | "hybrid" | "standard";
+import { Coordinate, MapTypes, Preferences } from "../types";
 
 export default function TapMeasure() {
   const router = useRouter();
@@ -39,9 +30,9 @@ export default function TapMeasure() {
   const [polygonArea, setPolygonArea] = useState<number | null>();
   const [polygonDistance, setPolygonDistance] = useState<number | null>();
   const [mapType, setMapType] = useState<MapTypes | null>(null);
-  const [areaVisible, setAreaVisible] = useState<boolean>(true);
-  const [markersVisible, setMarkersVisible] = useState<boolean>(true);
-  const [deleteMode, setDeleteMode] = useState<boolean>(false);
+  const [areaVisible, setAreaVisible] = useState(true);
+  const [markersVisible, setMarkersVisible] = useState(true);
+  const [deleteMode, setDeleteMode] = useState(false);
   const [markersToDelete, setMarkersToDelete] = useState<Coordinate[]>([]);
   const [previousCoordinates, setPreviousCoordinates] = useState<Coordinate[]>(
     []
