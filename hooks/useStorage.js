@@ -1,29 +1,48 @@
-import AsyncStorage from "@react-native-async-storage/async-storage"
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// This hook is used to access AsyncStorage. It takes three arguments:
-export default useStorage = async (method, itemName, data) => {
-  if (method !== "set" && method !== "get" && method !== "remove") console.warn(`"${method}" is not a valid argument for useStorage. Please use "get", "set", or "remove" as the first argument.`)
+const useStorage = (itemName) => {
+  const getFromStorage = async () => {
+    try {
+      const value = await AsyncStorage.getItem(itemName);
+      if (!value) return null;
 
-  if (!method) console.warn(`useStorage requires a method and item name as arguments. Please use "get", "set", or "remove" as the first argument and an item name as the second.`)
-
-  if (!itemName) console.warn(`useStorage requires an itemName. Please include the key of the item you wish to access as the second argument.`)
-
-  try {
-    switch (method) {
-      case ('get'):
-        const value = await AsyncStorage.getItem(itemName)
-        return JSON.parse(value)
-        break;
-      case ('set'):
-        if (!data) console.warn(`useStorage requires data as the third argument when using "set" as the first argument.`)
-        return await AsyncStorage.setItem(itemName, JSON.stringify(data))
-        break;
-      case ('remove'):
-        return await AsyncStorage.removeItem(itemName)
-        break;
+      return JSON.parse(value);
+    } catch (error) {
+      if (__DEV__) console.log(error);
+      return null;
     }
+  };
 
-  } catch (error) {
-    return null;
-  }
-}
+  const setToStorage = async (data) => {
+    try {
+      await AsyncStorage.setItem(itemName, JSON.stringify(data));
+      const value = await AsyncStorage.getItem(itemName);
+      if (!value) {
+        if (__DEV__) console.log("Error setting data to storage");
+        return null;
+      }
+
+      return JSON.parse(value);
+    } catch (error) {
+      if (__DEV__) console.log(error);
+      return null;
+    }
+  };
+
+  const removeFromStorage = async () => {
+    try {
+      const removed = await AsyncStorage.getItem(itemName);
+      await AsyncStorage.removeItem(itemName);
+      if (!removed) return null;
+
+      return JSON.parse(removed);
+    } catch (error) {
+      if (__DEV__) console.log(error);
+      return null;
+    }
+  };
+
+  return { getFromStorage, setToStorage, removeFromStorage };
+};
+
+export { useStorage };
