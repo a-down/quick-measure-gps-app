@@ -55,6 +55,7 @@
     "eslint": "^8.57.0",
     "eslint-config-expo": "~7.1.2",
     "eslint-plugin-jsdoc": "^50.4.3",
+    "eslint-plugin-react": "^7.37.2",
     "jsdoc": "^4.0.4",
     "tailwindcss": "3.3.2"
   },
