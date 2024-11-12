@@ -13,8 +13,9 @@ import { useStorage } from "../hooks";
 import uuid from "react-native-uuid";
 import { Feather } from "@expo/vector-icons";
 import { regular, medium, semibold } from "../hooks/useJostFont";
-import { handleConvertArea } from "../hooks";
+import { handleConvertArea } from "../utils";
 import { convertDistance } from "geolib";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 interface SaveMapBottomSheetProps {
   polygonCoordinates: { latitude: number; longitude: number }[];
