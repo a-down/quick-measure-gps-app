@@ -29,7 +29,6 @@ import {
 import Purchases from "react-native-purchases";
 import * as StoreReview from "expo-store-review";
 import { getVersion } from "react-native-device-info";
-// TODO: Does this work?????
 
 export default function App() {
   const { width } = useWindowDimensions();
