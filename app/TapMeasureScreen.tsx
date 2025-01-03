@@ -1,107 +1,113 @@
 import { View, Alert, ActivityIndicator, StatusBar } from "react-native";
 import { useEffect, useState, useRef } from "react";
 import * as Location from "expo-location";
-import { getAreaOfPolygon, getPathLength } from "geolib";
+import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from "geolib";
 import { useRouter } from "expo-router";
+import BottomSheetMethods from "@gorhom/bottom-sheet";
 import {
   MeasurementDisplay,
-  ToggleMeasuringButton,
-  ResetMeasurementsButton,
   SaveMeasurementsButton,
   Map,
   ToggleDeleteModeButton,
   DeleteOptionsBottomSheet,
   DeleteMarkersButton,
+  ResetMeasurementsButton,
   SaveMapBottomSheet,
 } from "../components";
 import { useStorage } from "../hooks";
+import { Coordinate, MapTypes, Preferences } from "../types";
 
-export default function AutoMeasure() {
+export default function TapMeasure() {
   const router = useRouter();
 
-  const deleteSheetRef = useRef();
+  const deleteSheetRef = useRef<BottomSheetMethods>();
   const saveSheetRef = useRef();
 
-  const [region, setRegion] = useState(null);
-  const [currentLocation, setCurrentLocation] = useState(null);
-  const [polygonCoordinates, setPolygonCoordinates] = useState([]);
-  const [polygonArea, setPolygonArea] = useState();
-  const [polygonDistance, setPolygonDistance] = useState();
-  const [isMeasuring, setIsMeasuring] = useState(false);
-  const [mapType, setMapType] = useState("");
+  const [region, setRegion] = useState<Coordinate | null>(null);
+  const [polygonCoordinates, setPolygonCoordinates] = useState<Coordinate[]>(
+    []
+  );
+  const [polygonArea, setPolygonArea] = useState<number | null>();
+  const [polygonDistance, setPolygonDistance] = useState<number | null>();
+  const [mapType, setMapType] = useState<MapTypes | null>(null);
   const [areaVisible, setAreaVisible] = useState(true);
   const [markersVisible, setMarkersVisible] = useState(true);
   const [deleteMode, setDeleteMode] = useState(false);
-  const [markersToDelete, setMarkersToDelete] = useState([]);
-  const [previousCoordinates, setPreviousCoordinates] = useState([]);
-  const [currentPreferences, setCurrentPreferences] = useState(null);
+  const [markersToDelete, setMarkersToDelete] = useState<Coordinate[]>([]);
+  const [previousCoordinates, setPreviousCoordinates] = useState<Coordinate[]>(
+    []
+  );
+  const [currentPreferences, setCurrentPreferences] =
+    useState<Preferences | null>(null);
 
   // check if location permission is granted
   // if so, set initial region as current location
-  // if so, start locationSubscription for location updates
   useEffect(() => {
     useStorage("get", "mapPreferences").then((value) => setMapType(value));
-    useStorage("get", "currentAutoCoordinates").then((value) => {
-      if (value) {
-        setPolygonCoordinates(value);
-        setPolygonDistance(getPathLength(value));
-        setPolygonArea(getAreaOfPolygon(value));
-      }
-    });
-    getPreferencesForSave();
-    const getInitialLocation = async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        Alert.alert(
-          "Location Permission Required",
-          "Please enable location services in your phone settings to use this feature.",
-          [{ text: "Go Back", style: "cancel", onPress: () => router.back() }]
-        );
-        return;
-      }
-
-      let location = await Location.getCurrentPositionAsync({});
-      setRegion(location.coords);
-
-      const locationSubscription = await Location.watchPositionAsync(
-        { accuracy: Location.Accuracy.Highest, distanceInterval: 1 },
-        (loc) => {
-          setCurrentLocation(loc.coords);
-        }
-      );
-    };
-    getInitialLocation();
+    start();
   }, []);
 
-  // when location changes and the user is measuring, add the new location to the polygon and generate measurements for the polygon
-  useEffect(() => {
-    if (currentLocation && isMeasuring) {
-      setRegion(currentLocation);
-      addLocationToPolygon(currentLocation);
+  const start = async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== "granted") {
+      Alert.alert(
+        "Location Permission Required",
+        "Please enable location services in your phone settings to use this feature.",
+        [{ text: "Go Back", style: "cancel", onPress: () => router.back() }]
+      );
+      return;
     }
-    if (polygonCoordinates.length > 1 && isMeasuring) {
+    await getCurrentMap();
+    await getPreferencesForSave();
+  };
+
+  // when a coordinate is added to polygonCoordinates, generate measurements and store the current polygon to storage
+  useEffect(() => {
+    if (polygonCoordinates.length > 1) {
       setPolygonDistance(getPathLength(polygonCoordinates));
       setPolygonArea(getAreaOfPolygon(polygonCoordinates));
+      useStorage("set", "currentTapCoordinates", polygonCoordinates);
     }
-  }, [currentLocation]);
+  }, [polygonCoordinates]);
+
+  // get the current map from storage or set the map to the user's current location
+  const getCurrentMap = async () => {
+    const value = await useStorage("get", "currentTapCoordinates");
+
+    if (value !== null) {
+      setPolygonCoordinates(value);
+      setRegion(getCenterOfBounds(value));
+    } else {
+      let location = await Location.getCurrentPositionAsync({});
+      setRegion({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      });
+    }
+  };
 
   // add a new location to the polygon
-  const addLocationToPolygon = async (newLocation) => {
-    await setPolygonCoordinates([
-      { latitude: newLocation.latitude, longitude: newLocation.longitude },
-      ...polygonCoordinates,
-    ]);
-    await useStorage("set", "currentAutoCoordinates", [
-      { latitude: newLocation.latitude, longitude: newLocation.longitude },
-      ...polygonCoordinates,
-    ]);
+  const addLocationToPolygon = async (location: Coordinate) => {
+    if (polygonCoordinates.includes(location) === false)
+      await setPolygonCoordinates([
+        { latitude: location.latitude, longitude: location.longitude },
+        ...polygonCoordinates,
+      ]);
+    if (polygonCoordinates.length === 0) {
+      const reviewStatus = await useStorage("get", "reviewStatus");
+      await useStorage("set", "reviewStatus", {
+        ...reviewStatus,
+        significantEvents: reviewStatus.significantEvents + 1,
+        requiredActions: { ...reviewStatus.requiredActions, measured: true },
+      });
+    }
   };
 
   // reset the polygon coordinates and measurements
   const resetMeasurements = () => {
     deleteSheetRef.current.close();
     setMarkersToDelete([]);
-    useStorage("remove", "currentAutoCoordinates");
+    useStorage("remove", "currentTapCoordinates");
     setPolygonCoordinates([]);
     setPolygonArea(null);
     setPolygonDistance(null);
@@ -110,26 +116,30 @@ export default function AutoMeasure() {
   // get preferences to display on SaveMapBottomSheet
   const getPreferencesForSave = async () => {
     const value = await useStorage("get", "measurementPreferences");
-    value !== null
-      ? setCurrentPreferences(value)
-      : setCurrentPreferences({
-          area: "sq meters",
-          areaShort: "sqm",
-          distance: "meters",
-          distanceShort: "m",
-        });
+    if (value !== null) {
+      setCurrentPreferences(value);
+      return;
+    }
+    setCurrentPreferences({
+      area: "sq meters",
+      areaShort: "sqm",
+      distance: "meters",
+      distanceShort: "m",
+    });
   };
 
   return (
-    <View className="flex-1 items-center justify-center">
+    <View className="flex-1 items-center">
       <StatusBar barStyle="dark-content" />
-      {!currentLocation && <ActivityIndicator size="small" color="#6DAB64" />}
+      {!region && <ActivityIndicator size="small" color="#6DAB64" />}
 
-      {currentLocation && (
+      {region && (
         <Map
           region={region}
           polygonCoordinates={polygonCoordinates}
           mapType={mapType}
+          tappable={true}
+          addLocationToPolygon={addLocationToPolygon}
           areaVisible={areaVisible}
           deleteMode={deleteMode}
           markersToDelete={markersToDelete}
@@ -144,19 +154,16 @@ export default function AutoMeasure() {
         setMapType={setMapType}
         areaVisible={areaVisible}
         setAreaVisible={setAreaVisible}
-        deleteMode={deleteMode}
-        markersToDelete={markersToDelete}
-        setMarkersToDelete={setMarkersToDelete}
         markersVisible={markersVisible}
         setMarkersVisible={setMarkersVisible}
         getPreferencesForSave={getPreferencesForSave}
       />
 
       <View
-        className="absolute bottom-10 py-4 px-2 w-full mb-2"
+        className="absolute bottom-0 w-full items-center"
         style={{ gap: 8 }}
       >
-        <View className="w-full flex-row justify-between absolute bottom-24 left-2">
+        <View className="w-full flex flex-row justify-between mb-14 p-4 rounded-lg">
           <ToggleDeleteModeButton
             setDeleteMode={setDeleteMode}
             setMarkersToDelete={setMarkersToDelete}
@@ -165,17 +172,10 @@ export default function AutoMeasure() {
           />
 
           <SaveMeasurementsButton
-            mapType={mapType}
             saveSheetRef={saveSheetRef}
+            mapType={mapType}
           />
         </View>
-
-        <ToggleMeasuringButton
-          isMeasuring={isMeasuring}
-          setIsMeasuring={setIsMeasuring}
-          polygonCoordinates={polygonCoordinates}
-          setPolygonCoordinates={setPolygonCoordinates}
-        />
       </View>
 
       <DeleteOptionsBottomSheet
@@ -192,17 +192,13 @@ export default function AutoMeasure() {
           setPolygonCoordinates={setPolygonCoordinates}
           markersToDelete={markersToDelete}
           setMarkersToDelete={setMarkersToDelete}
-          mapType={mapType}
           resetMeasurements={resetMeasurements}
           previousCoordinates={previousCoordinates}
           setPreviousCoordinates={setPreviousCoordinates}
-          polygonCoordinatesLength={polygonCoordinates.length}
         />
 
         <ResetMeasurementsButton
           resetMeasurements={resetMeasurements}
-          mapType={mapType}
-          markersToDelete={markersToDelete}
           polygonCoordinatesLength={polygonCoordinates.length}
         />
       </DeleteOptionsBottomSheet>
@@ -214,7 +210,7 @@ export default function AutoMeasure() {
         polygonArea={polygonArea}
         polygonDistance={polygonDistance}
         currentPreferences={currentPreferences}
-        tool={"AutoMeasure"}
+        tool={"TapMeasure"}
       />
     </View>
   );

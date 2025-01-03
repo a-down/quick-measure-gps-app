@@ -1,8 +1,8 @@
 import { Redirect } from "expo-router";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import * as Updates from "expo-updates";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
+// eslint-disable-next-line react/display-name
 export default () => {
   useEffect(() => {
     onFetchUpdateAsync();
@@ -21,9 +21,5 @@ export default () => {
     }
   };
 
-  return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <Redirect href="/MeasureTab" />
-    </GestureHandlerRootView>
-  );
+  return <Redirect href="/MeasureTab" />;
 };

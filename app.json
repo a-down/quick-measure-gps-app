@@ -12,9 +12,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#3A7032"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.a-down.quick-measure-gps",
@@ -45,7 +43,8 @@
           "locationWhenInUsePermission": "$(PRODUCT_NAME) requires access to your location to measure area and distance."
         }
       ],
-      "react-native-iap"
+      "react-native-iap",
+      "expo-font"
     ],
     "extra": {
       "router": {
@@ -70,8 +69,6 @@
     "ios_app_id": "ca-app-pub-2810780842614584~1331427803",
     "delay_app_measurement_init": true,
     "user_tracking_usage_description": "This identifier will be used to deliver ads to you that use your location information.",
-    "sk_ad_network_items": [
-      "cstr6suwn9.skadnetwork"
-    ]
+    "sk_ad_network_items": ["cstr6suwn9.skadnetwork"]
   }
 }

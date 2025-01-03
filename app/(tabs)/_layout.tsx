@@ -1,16 +1,22 @@
-import { Tabs } from 'expo-router';
-import { Feather } from '@expo/vector-icons';
-import { useFonts, Jost_400Regular, Jost_500Medium, Jost_600SemiBold, Jost_700Bold } from '@expo-google-fonts/jost';
-import { useRouter } from 'expo-router';
+import { Tabs } from "expo-router";
+import { Feather } from "@expo/vector-icons";
+import {
+  useFonts,
+  Jost_400Regular,
+  Jost_500Medium,
+  Jost_600SemiBold,
+  Jost_700Bold,
+} from "@expo-google-fonts/jost";
+import { useRouter } from "expo-router";
 
 const Layout = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   let [fontsLoaded] = useFonts({
     Jost_400Regular,
     Jost_500Medium,
     Jost_600SemiBold,
-    Jost_700Bold
+    Jost_700Bold,
   });
 
   if (!fontsLoaded) {
@@ -19,22 +25,28 @@ const Layout = () => {
 
   return (
     <Tabs>
-      <Tabs.Screen 
+      <Tabs.Screen
         name="MeasureTab"
         options={{
           tabBarLabel: "Measure",
           title: "Quick Measure",
-          headerBackTitleVisible: false,
+          headerBackButtonDisplayMode: "minimal",
           headerStyle: {
-            backgroundColor: '#6DAB64',
+            backgroundColor: "#6DAB64",
           },
           headerTitleStyle: {
-            color: '#fff',
-            fontFamily: 'Jost_700Bold',
-            fontSize: 18
+            color: "#fff",
+            fontFamily: "Jost_700Bold",
+            fontSize: 18,
           },
           headerRight: () => (
-            <Feather name="help-circle" size={24} color="#fff" style={{marginRight: 16}} onPress={() => router.push('/HelpScreen')} />
+            <Feather
+              name="help-circle"
+              size={24}
+              color="#fff"
+              style={{ marginRight: 16 }}
+              onPress={() => router.push("/HelpScreen")}
+            />
           ),
           tabBarIcon: ({ color, size }) => (
             <Feather name="map" size={size} color={color} />
@@ -48,37 +60,48 @@ const Layout = () => {
           },
           tabBarLabelStyle: {
             fontWeight: "bold",
-            fontFamily: 'Jost_500Medium', 
-            fontSize: 13
-          }
+            fontFamily: "Jost_500Medium",
+            fontSize: 13,
+          },
         }}
       />
-      
-      <Tabs.Screen 
+
+      <Tabs.Screen
         name="SavedTab"
         options={{
           tabBarLabel: "Saved",
           title: "Saved Measurements",
-          headerBackTitleVisible: false,
+          headerBackButtonDisplayMode: "minimal",
           headerStyle: {
-            backgroundColor: '#6DAB64',
+            backgroundColor: "#6DAB64",
           },
           headerTitleStyle: {
-            color: '#fff',
-            fontFamily: 'Jost_700Bold',
-            fontSize: 18
+            color: "#fff",
+            fontFamily: "Jost_700Bold",
+            fontSize: 18,
           },
           headerRight: () => (
-            <Feather name="help-circle" size={24} color="#fff" style={{marginRight: 16}} onPress={() => router.push('/HelpScreen')} />
+            <Feather
+              name="help-circle"
+              size={24}
+              color="#fff"
+              style={{ marginRight: 16 }}
+              onPress={() => router.push("/HelpScreen")}
+            />
           ),
           tabBarIcon: ({ color, size }) => (
-            <Feather name="bookmark" size={size} color={color} className="mt-4"/>
+            <Feather
+              name="bookmark"
+              size={size}
+              color={color}
+              className="mt-4"
+            />
           ),
           tabBarInactiveTintColor: "#B1B1B1",
           tabBarActiveTintColor: "#2B561F",
           tabBarLabelStyle: {
-            fontFamily: 'Jost_500Medium',
-            fontSize: 13
+            fontFamily: "Jost_500Medium",
+            fontSize: 13,
           },
           tabBarStyle: {
             paddingTop: 4,
@@ -87,9 +110,8 @@ const Layout = () => {
           },
         }}
       />
-      
     </Tabs>
-  )
-}
+  );
+};
 
 export default Layout;

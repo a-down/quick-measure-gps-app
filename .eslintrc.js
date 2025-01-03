@@ -2,18 +2,18 @@
 module.exports = {
   extends: [
     "expo",
-    "plugin:jsdoc/recommended",
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:react/jsx-runtime",
   ],
-  plugins: ["jsdoc"],
   rules: {
-    "jsdoc/require-property-description": "off",
-    "jsdoc/require-param-description": "off",
-    "jsdoc/require-returns-description": "off",
-    "jsdoc/tag-lines": "off",
+    "no-console": ["error", { allow: ["error"] }],
     "react/prop-types": "off",
+    // TODO: REANABLE AFTER REFACTORING
+    "react-hooks/rules-of-hooks": "off",
+    // TODO: REANABLE AFTER REFACTORING
+    "react-hooks/exhaustive-deps": "off",
   },
+  plugins: ["react", "react-native"],
 };
