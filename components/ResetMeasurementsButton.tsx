@@ -31,7 +31,7 @@ export const ResetMeasurementsButton = (
   };
 
   return (
-    <View className="flex-grow">
+    <View className="flex-grow pb-16">
       <Pressable
         className={`flex-row justify-center rounded-full items-center active:opacity-40 ${
           polygonCoordinatesLength > 0 ? "" : "opacity-50"
