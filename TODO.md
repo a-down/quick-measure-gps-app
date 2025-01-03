@@ -5,6 +5,7 @@ Now that I have the code base configured with the latest versions, I can finally
 ## Maintenance Tasks
 
 - Test App (on phone) to make sure everything is working as expected
+- Write Tests before Refactoring
 - Refactor Components
 - Refactor Hooks and Utils
 - Reenable `rules-of-hooks` and deal with issues

@@ -1,11 +1,14 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // This hook is used to access AsyncStorage. It takes three arguments:
-export const useStorage = async (method, itemName, data) => {
-  if (method !== "set" && method !== "get" && method !== "remove")
-    console.warn(
-      `"${method}" is not a valid argument for useStorage. Please use "get", "set", or "remove" as the first argument.`
-    );
+export const useStorage = async (
+  method: "set" | "get" | "remove",
+  itemName: string,
+  data?: any
+) => {
+  console.warn(
+    `"${method}" is not a valid argument for useStorage. Please use "get", "set", or "remove" as the first argument.`
+  );
 
   if (!method)
     console.warn(
