@@ -1,3 +1,4 @@
+import React, { useCallback, useState } from "react";
 import {
   Text,
   View,
@@ -9,6 +10,8 @@ import {
 } from "react-native";
 import { useRouter, useFocusEffect, useNavigation } from "expo-router";
 import { regular, semibold, bold } from "../../hooks/useJostFont";
+// TODO: Fix this import
+// eslint-disable-next-line import/no-unresolved
 import walkingIcon from "../../assets/walking-icon.png";
 import {
   MaterialCommunityIcons,
@@ -17,7 +20,6 @@ import {
 } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import { useStorage } from "../../hooks";
-import { useCallback, useState } from "react";
 import {
   AdsConsent,
   BannerAd,
@@ -27,6 +29,7 @@ import {
 import Purchases from "react-native-purchases";
 import * as StoreReview from "expo-store-review";
 import { getVersion } from "react-native-device-info";
+// TODO: Does this work?????
 
 export default function App() {
   const { width } = useWindowDimensions();
@@ -122,10 +125,7 @@ export default function App() {
     const value = await useStorage("get", "savedMaps");
     if (value !== null) {
       const reversed = value.reverse();
-      let numberOfMaps;
-      reversed.length < 3
-        ? (numberOfMaps = reversed.length)
-        : (numberOfMaps = 3);
+      const numberOfMaps = reversed.length < 3 ? reversed.length : 3;
       setSavedMaps(reversed.slice(0, numberOfMaps));
     } else {
       setSavedMaps([]);
@@ -343,7 +343,7 @@ export default function App() {
         </View>
 
         {!removedAdsSubscription && canRequestAds && (
-          <>
+          <React.Fragment>
             <Pressable
               onPress={() => router.push("/PurchaseScreen")}
               className="active:opacity-40"
@@ -377,7 +377,7 @@ export default function App() {
                 ],
               }}
             />
-          </>
+          </React.Fragment>
         )}
       </ScrollView>
     </SafeAreaView>

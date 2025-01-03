@@ -15,7 +15,6 @@ import { Feather } from "@expo/vector-icons";
 import { regular, medium, semibold } from "../hooks/useJostFont";
 import { handleConvertArea } from "../utils";
 import { convertDistance } from "geolib";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 interface SaveMapBottomSheetProps {
   polygonCoordinates: { latitude: number; longitude: number }[];
@@ -44,10 +43,11 @@ function SaveMapBottomSheet({
     if (index !== 0) Keyboard.dismiss();
   }, []);
 
-  const keyboardDismiss = () => {
-    Keyboard.dismiss();
-    saveSheetRef.current.snapToIndex(0);
-  };
+  // TODO: Is this still needed?
+  // const keyboardDismiss = () => {
+  //   Keyboard.dismiss();
+  //   saveSheetRef.current.snapToIndex(0);
+  // };
 
   // save the map to storage
   // view in saved maps screen
@@ -105,7 +105,7 @@ function SaveMapBottomSheet({
         significantEvents: reviewStatus.significantEvents + 1,
         requiredActions: { ...reviewStatus.requiredActions, saved: true },
       });
-    } catch (error) {
+    } catch {
       Alert.alert("There was an error saving the map. Please try again.");
     }
   };
@@ -119,7 +119,6 @@ function SaveMapBottomSheet({
       snapPoints={snapPoints}
       enablePanDownToClose={true}
       onChange={handleSheetChanges}
-      onPress={keyboardDismiss}
     >
       <BottomSheetView style={{ gap: 8 }}>
         <View style={{ gap: 8 }} className="px-6">
@@ -138,8 +137,8 @@ function SaveMapBottomSheet({
         </View>
 
         <Text className="text-gray-6 text-center px-6" style={regular}>
-          You cannot change this map's preferences after saving. Preview below{" "}
-          <Feather name="chevron-down" size={16} color="#7E7E7E" />
+          You cannot change this map&apos;s preferences after saving. Preview
+          below <Feather name="chevron-down" size={16} color="#7E7E7E" />
         </Text>
 
         <Pressable

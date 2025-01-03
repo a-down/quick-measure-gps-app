@@ -33,7 +33,7 @@ const DeleteMarkersButton = ({
     );
 
     if (newPolygonCoordinates.length > 0) {
-      setPreviousCoordinates([polygonCoordinates, ...previousCoordinates]);
+      setPreviousCoordinates([...polygonCoordinates, ...previousCoordinates]);
       setPolygonCoordinates(newPolygonCoordinates);
       setMarkersToDelete([]);
     } else {

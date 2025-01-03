@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -5,7 +6,6 @@ import {
   useWindowDimensions,
   Alert,
 } from "react-native";
-import { useState, useEffect } from "react";
 import { convertDistance } from "geolib";
 import { handleConvertArea } from "../utils";
 import { Feather } from "@expo/vector-icons";
@@ -16,7 +16,7 @@ import { MapTypes, Preferences } from "../types";
 interface MeasurementDisplayProps {
   areaVisible: boolean;
   setAreaVisible: (value: boolean) => void;
-  getPreferencesForSave: () => void;
+  getPreferencesForSave?: () => void;
   polygonArea: number;
   polygonDistance: number;
   setMapType?: (value: MapTypes) => void;
@@ -50,9 +50,11 @@ const MeasurementDisplay = ({
 
   // set preferences
   useEffect(() => {
-    preferredMeasurements
-      ? setMeasurementPreferences(preferredMeasurements)
-      : getPreferences();
+    if (preferredMeasurements) {
+      setMeasurementPreferences(preferredMeasurements);
+    } else {
+      getPreferences();
+    }
   }, []);
 
   // get preferrences from storage
@@ -215,12 +217,12 @@ const MeasurementDisplay = ({
   };
 
   return (
-    <>
+    <React.Fragment>
       <View
         className="bg-gray-1 p-3 py-2 top-0 rounded-b-sm shadow-lg absolute flex-row justify-between"
         style={{ width: width, gap: 8 }}
       >
-        <View className=" justify-between flex-wrap" style={{ gapY: 8 }}>
+        <View className=" justify-between flex-wrap">
           {areaVisible && (
             <View className="flex-row items-center " style={{ gap: 8 }}>
               <Text className=" text-gray-9" style={regular}>
@@ -314,7 +316,7 @@ const MeasurementDisplay = ({
           </Pressable>
         )}
       </View>
-    </>
+    </React.Fragment>
   );
 };
 

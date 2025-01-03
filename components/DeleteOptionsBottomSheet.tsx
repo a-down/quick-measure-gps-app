@@ -1,9 +1,8 @@
 import React, { useMemo, useCallback } from "react";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
-import { Text, Pressable, View } from "react-native";
+import { Text, Pressable } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { regular } from "../hooks/useJostFont";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 interface DeleteOptionsBottomSheetProps {
   children: React.ReactNode;
@@ -69,10 +68,12 @@ function DeleteOptionsBottomSheet({
             className="absolute left-4 py-2 px-3 bg-[#fee2e2] text-[#7f1d1d] rounded-full flex-row items-center active:opacity-80"
             style={{ gap: 4 }}
             onPress={() => {
-              setPolygonCoordinates(previousCoordinates[0]);
-              previousCoordinates.length > 1
-                ? setPreviousCoordinates(previousCoordinates.slice(1))
-                : setPreviousCoordinates([]);
+              setPolygonCoordinates([previousCoordinates[0]]);
+              if (previousCoordinates.length > 1) {
+                setPreviousCoordinates(previousCoordinates.slice(1));
+              } else {
+                setPreviousCoordinates([]);
+              }
             }}
           >
             <Feather name="rotate-ccw" size={16} color="#7f1d1d" />

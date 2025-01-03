@@ -1,3 +1,4 @@
+import React from "react";
 import MapView, { Polygon, Marker, Polyline } from "react-native-maps";
 import { Image } from "react-native";
 import mapMarker from "../assets/map-marker.png";
@@ -9,10 +10,10 @@ interface MapProps {
   polygonCoordinates: Coordinate[];
   mapType?: MapTypes;
   areaVisible: boolean;
-  deleteMode: boolean;
-  markersToDelete: Coordinate[];
-  setMarkersToDelete: (markers: Coordinate[]) => void;
   markersVisible: boolean;
+  deleteMode?: boolean;
+  markersToDelete?: Coordinate[];
+  setMarkersToDelete?: (markers: Coordinate[]) => void;
   addLocationToPolygon?: (location: Coordinate) => Promise<void>;
   tappable?: boolean;
 }
@@ -30,7 +31,7 @@ export default function Map({
   markersVisible,
 }: MapProps) {
   return (
-    <>
+    <React.Fragment>
       {tappable === true ? (
         <MapView
           style={{ flex: 1, width: "100%" }}
@@ -164,6 +165,6 @@ export default function Map({
           )}
         </MapView>
       )}
-    </>
+    </React.Fragment>
   );
 }

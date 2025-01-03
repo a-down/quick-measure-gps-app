@@ -1,5 +1,5 @@
-import { View, Alert, ActivityIndicator, StatusBar } from "react-native";
 import { useEffect, useState, useRef } from "react";
+import { View, Alert, ActivityIndicator, StatusBar } from "react-native";
 import * as Location from "expo-location";
 import { getAreaOfPolygon, getPathLength, getCenterOfBounds } from "geolib";
 import { useRouter } from "expo-router";
@@ -150,91 +150,89 @@ export default function AutoMeasure() {
   };
 
   return (
-    <>
-      <View className="flex-1 items-center justify-center">
-        <StatusBar barStyle="dark-content" />
-        {!currentLocation && <ActivityIndicator size="small" color="#6DAB64" />}
+    <View className="flex-1 items-center justify-center">
+      <StatusBar barStyle="dark-content" />
+      {!currentLocation && <ActivityIndicator size="small" color="#6DAB64" />}
 
-        {region && polygonCoordinates && (
-          <Map
-            region={region}
-            polygonCoordinates={polygonCoordinates}
-            mapType={mapType}
-            areaVisible={areaVisible}
-            deleteMode={deleteMode}
-            markersToDelete={markersToDelete}
-            setMarkersToDelete={setMarkersToDelete}
-            markersVisible={markersVisible}
-          />
-        )}
-
-        <MeasurementDisplay
-          polygonArea={polygonArea}
-          polygonDistance={polygonDistance}
-          setMapType={setMapType}
+      {region && polygonCoordinates && (
+        <Map
+          region={region}
+          polygonCoordinates={polygonCoordinates}
+          mapType={mapType}
           areaVisible={areaVisible}
-          setAreaVisible={setAreaVisible}
+          deleteMode={deleteMode}
+          markersToDelete={markersToDelete}
+          setMarkersToDelete={setMarkersToDelete}
           markersVisible={markersVisible}
-          setMarkersVisible={setMarkersVisible}
-          getPreferencesForSave={getPreferencesForSave}
         />
+      )}
 
-        <View
-          className="absolute bottom-10 py-4 px-2 w-full mb-2"
-          style={{ gap: 8 }}
-        >
-          <View className="w-full flex-row justify-between absolute bottom-24 left-2">
-            <ToggleDeleteModeButton
-              setDeleteMode={setDeleteMode}
-              setMarkersToDelete={setMarkersToDelete}
-              deleteMode={deleteMode}
-              mapType={mapType}
-            />
+      <MeasurementDisplay
+        polygonArea={polygonArea}
+        polygonDistance={polygonDistance}
+        setMapType={setMapType}
+        areaVisible={areaVisible}
+        setAreaVisible={setAreaVisible}
+        markersVisible={markersVisible}
+        setMarkersVisible={setMarkersVisible}
+        getPreferencesForSave={getPreferencesForSave}
+      />
 
-            <SaveMeasurementsButton
-              mapType={mapType}
-              saveSheetRef={saveSheetRef}
-            />
-          </View>
+      <View
+        className="absolute bottom-10 py-4 px-2 w-full mb-2"
+        style={{ gap: 8 }}
+      >
+        <View className="w-full flex-row justify-between absolute bottom-24 left-2">
+          <ToggleDeleteModeButton
+            setDeleteMode={setDeleteMode}
+            setMarkersToDelete={setMarkersToDelete}
+            deleteMode={deleteMode}
+            mapType={mapType}
+          />
 
-          <AddMarkerButton updateLocation={updateLocation} />
+          <SaveMeasurementsButton
+            mapType={mapType}
+            saveSheetRef={saveSheetRef}
+          />
         </View>
 
-        <DeleteOptionsBottomSheet
-          deleteSheetRef={deleteSheetRef}
-          deleteMode={deleteMode}
-          setDeleteMode={setDeleteMode}
+        <AddMarkerButton updateLocation={updateLocation} />
+      </View>
+
+      <DeleteOptionsBottomSheet
+        deleteSheetRef={deleteSheetRef}
+        deleteMode={deleteMode}
+        setDeleteMode={setDeleteMode}
+        setPolygonCoordinates={setPolygonCoordinates}
+        previousCoordinates={previousCoordinates}
+        setPreviousCoordinates={setPreviousCoordinates}
+        setMarkersToDelete={setMarkersToDelete}
+      >
+        <DeleteMarkersButton
+          polygonCoordinates={polygonCoordinates}
           setPolygonCoordinates={setPolygonCoordinates}
+          markersToDelete={markersToDelete}
+          setMarkersToDelete={setMarkersToDelete}
+          resetMeasurements={resetMeasurements}
           previousCoordinates={previousCoordinates}
           setPreviousCoordinates={setPreviousCoordinates}
-          setMarkersToDelete={setMarkersToDelete}
-        >
-          <DeleteMarkersButton
-            polygonCoordinates={polygonCoordinates}
-            setPolygonCoordinates={setPolygonCoordinates}
-            markersToDelete={markersToDelete}
-            setMarkersToDelete={setMarkersToDelete}
-            resetMeasurements={resetMeasurements}
-            previousCoordinates={previousCoordinates}
-            setPreviousCoordinates={setPreviousCoordinates}
-          />
-
-          <ResetMeasurementsButton
-            resetMeasurements={resetMeasurements}
-            polygonCoordinatesLength={polygonCoordinates.length}
-          />
-        </DeleteOptionsBottomSheet>
-
-        <SaveMapBottomSheet
-          polygonCoordinates={polygonCoordinates}
-          saveSheetRef={saveSheetRef}
-          mapType={mapType}
-          polygonArea={polygonArea}
-          polygonDistance={polygonDistance}
-          currentPreferences={currentPreferences}
-          tool={"ManualMeasure"}
         />
-      </View>
-    </>
+
+        <ResetMeasurementsButton
+          resetMeasurements={resetMeasurements}
+          polygonCoordinatesLength={polygonCoordinates.length}
+        />
+      </DeleteOptionsBottomSheet>
+
+      <SaveMapBottomSheet
+        polygonCoordinates={polygonCoordinates}
+        saveSheetRef={saveSheetRef}
+        mapType={mapType}
+        polygonArea={polygonArea}
+        polygonDistance={polygonDistance}
+        currentPreferences={currentPreferences}
+        tool={"ManualMeasure"}
+      />
+    </View>
   );
 }

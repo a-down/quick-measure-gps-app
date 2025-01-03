@@ -23,7 +23,6 @@ const ToggleDeleteModeButton = ({
         className="flex-row justify-center rounded-full items-center active:opacity-40"
         style={{ gap: 8 }}
         onPress={() => {
-          console.log("Delete Mode Toggled");
           setDeleteMode((prev) => !prev);
           if (deleteMode) setMarkersToDelete([]);
         }}

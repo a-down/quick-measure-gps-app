@@ -30,7 +30,7 @@ const Layout = () => {
         options={{
           tabBarLabel: "Measure",
           title: "Quick Measure",
-          headerBackTitleVisible: false,
+          headerBackButtonDisplayMode: "minimal",
           headerStyle: {
             backgroundColor: "#6DAB64",
           },
@@ -71,7 +71,7 @@ const Layout = () => {
         options={{
           tabBarLabel: "Saved",
           title: "Saved Measurements",
-          headerBackTitleVisible: false,
+          headerBackButtonDisplayMode: "minimal",
           headerStyle: {
             backgroundColor: "#6DAB64",
           },
