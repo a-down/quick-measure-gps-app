@@ -129,7 +129,7 @@ export default function TapMeasure() {
   };
 
   return (
-    <View className="flex-1 items-center justify-center">
+    <View className="flex-1 items-center">
       <StatusBar barStyle="dark-content" />
       {!region && <ActivityIndicator size="small" color="#6DAB64" />}
 

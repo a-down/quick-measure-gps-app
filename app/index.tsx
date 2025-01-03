@@ -1,5 +1,4 @@
 import { Redirect } from "expo-router";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import * as Updates from "expo-updates";
 import { useEffect } from "react";
 
@@ -22,9 +21,5 @@ export default () => {
     }
   };
 
-  return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <Redirect href="/MeasureTab" />
-    </GestureHandlerRootView>
-  );
+  return <Redirect href="/MeasureTab" />;
 };

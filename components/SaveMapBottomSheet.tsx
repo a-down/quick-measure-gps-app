@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import BottomSheet from "@gorhom/bottom-sheet";
+import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import {
   Text,
   Pressable,
@@ -121,8 +121,8 @@ function SaveMapBottomSheet({
       onChange={handleSheetChanges}
       onPress={keyboardDismiss}
     >
-      <View className="flex-1 px-6 justify-start relative" style={{ gap: 8 }}>
-        <View style={{ gap: 8 }}>
+      <BottomSheetView style={{ gap: 8 }}>
+        <View style={{ gap: 8 }} className="px-6">
           <Text style={[medium, { fontSize: 20 }]}>
             Enter a name for the map
           </Text>
@@ -137,13 +137,13 @@ function SaveMapBottomSheet({
           />
         </View>
 
-        <Text className="text-gray-6 text-center" style={regular}>
+        <Text className="text-gray-6 text-center px-6" style={regular}>
           You cannot change this map's preferences after saving. Preview below{" "}
           <Feather name="chevron-down" size={16} color="#7E7E7E" />
         </Text>
 
         <Pressable
-          className=" p-4 rounded-2xl shadow-sm flex-row justify-center items-center bg-green-5 active:bg-green-4 mb-8"
+          className="mx-4 p-4 rounded-2xl shadow-sm flex-row justify-center items-center bg-green-5 active:bg-green-4 mb-8"
           style={{ gap: 8 }}
           onPress={saveMap}
         >
@@ -157,7 +157,7 @@ function SaveMapBottomSheet({
         </Pressable>
 
         {currentPreferences && (
-          <View>
+          <View className="px-6">
             <Text style={medium}>Measurements and Preferences to Save:</Text>
 
             <Text style={regular}>
@@ -188,7 +188,7 @@ function SaveMapBottomSheet({
             </Text>
           </View>
         )}
-      </View>
+      </BottomSheetView>
     </BottomSheet>
   );
 }

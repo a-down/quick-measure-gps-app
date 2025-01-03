@@ -136,7 +136,6 @@ export default function AutoMeasure() {
     <View className="flex-1 items-center justify-center">
       <StatusBar barStyle="dark-content" />
       {!currentLocation && <ActivityIndicator size="small" color="#6DAB64" />}
-
       {currentLocation && (
         <Map
           region={region}
@@ -149,7 +148,6 @@ export default function AutoMeasure() {
           markersVisible={markersVisible}
         />
       )}
-
       <MeasurementDisplay
         polygonArea={polygonArea}
         polygonDistance={polygonDistance}
@@ -160,7 +158,6 @@ export default function AutoMeasure() {
         setMarkersVisible={setMarkersVisible}
         getPreferencesForSave={getPreferencesForSave}
       />
-
       <View
         className="absolute bottom-10 py-4 px-2 w-full mb-2"
         style={{ gap: 8 }}
@@ -186,7 +183,6 @@ export default function AutoMeasure() {
           setPolygonCoordinates={setPolygonCoordinates}
         />
       </View>
-
       <DeleteOptionsBottomSheet
         deleteSheetRef={deleteSheetRef}
         deleteMode={deleteMode}
@@ -211,7 +207,6 @@ export default function AutoMeasure() {
           polygonCoordinatesLength={polygonCoordinates.length}
         />
       </DeleteOptionsBottomSheet>
-
       <SaveMapBottomSheet
         polygonCoordinates={polygonCoordinates}
         saveSheetRef={saveSheetRef}
