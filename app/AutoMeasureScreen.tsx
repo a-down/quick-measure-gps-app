@@ -21,8 +21,8 @@ import { Coordinate, MapTypes, Preferences } from "../types";
 export default function AutoMeasure() {
   const router = useRouter();
 
-  const deleteSheetRef = useRef<BottomSheetMethods>();
-  const saveSheetRef = useRef();
+  const deleteSheetRef = useRef<BottomSheetMethods>(null);
+  const saveSheetRef = useRef(null);
 
   const [region, setRegion] = useState<Coordinate | null>(null);
   const [currentLocation, setCurrentLocation] = useState<Coordinate | null>(
@@ -82,6 +82,8 @@ export default function AutoMeasure() {
     };
     getInitialLocation();
   }, []);
+
+  console.log({ currentLocation });
 
   // when location changes and the user is measuring, add the new location to the polygon and generate measurements for the polygon
   useEffect(() => {

@@ -36,6 +36,8 @@ const SavedMap = () => {
     });
   };
 
+  console.log({ polygonCenter, mapData });
+
   return (
     <React.Fragment>
       <Stack.Screen
